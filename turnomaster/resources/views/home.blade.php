@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Home Page')
+@section('title', 'TurnoMaster - home')
 
 @section('content')
-    <h1>Welcome to the Home Page</h1>
-    {{-- ...existing code... --}}
+    <p>Work in progress</p>
 @endsection
