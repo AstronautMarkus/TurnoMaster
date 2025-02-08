@@ -4,17 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
-    {{-- ...existing code... --}}
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">    
 </head>
 <body>
-    <header>
-        {{-- ...existing code... --}}
-    </header>
-    <main>
+    <div>
         @yield('content')
-    </main>
-    <footer>
-        {{-- ...existing code... --}}
-    </footer>
+    </div>
 </body>
+<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 </html>
