@@ -5,30 +5,30 @@
         <div class="row">
             <div class="col-md-3">
                 <h5>TurnoMaster</h5>
-                <p>Providing the best scheduling solutions for your business.</p>
+                <p>Proporcionando soluciones sencillas y eficientes para su negocio.</p>
             </div>
             <div class="col-md-3">
-                <h5>Resources</h5>
+                <h5>Recursos</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-white">Documentation</a></li>
-                    <li><a href="#" class="text-white">API Reference</a></li>
-                    <li><a href="#" class="text-white">Support</a></li>
+                    <li><a href="#" class="text-white">Documentación</a></li>
+                    <li><a href="#" class="text-white">Referencia API</a></li>
+                    <li><a href="#" class="text-white">Soporte</a></li>
                 </ul>
             </div>
             <div class="col-md-3">
-                <h5>Quick Access</h5>
+                <h5>Acceso Rápido</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-white">Home</a></li>
-                    <li><a href="#" class="text-white">About Us</a></li>
-                    <li><a href="#" class="text-white">Services</a></li>
-                    <li><a href="#" class="text-white">Contact</a></li>
+                    <li><a href="#" class="text-white">Inicio</a></li>
+                    <li><a href="#" class="text-white">Precios</a></li>
+                    <li><a href="#" class="text-white">Acerca de</a></li>
+                    <li><a href="#" class="text-white">Contacto</a></li>
                 </ul>
             </div>
             <div class="col-md-3">
-                <h5>Contact Us</h5>
+                <h5>Contáctenos</h5>
                 <p>Email: info@turnomaster.com</p>
-                <p>Phone: +123 456 7890</p>
-                <h5>Follow Us</h5>
+                <p>Teléfono: +123 456 7890</p>
+                <h5>Síguenos</h5>
                 <div class="social-icons">
                     <a href="#" class="text-white me-2"><i class="fab fa-facebook"></i></a>
                     <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="text-center py-3">
-            <p>&copy; <?php echo date('Y'); ?> TurnoMaster. All rights reserved.</p>
+            <p>&copy; <?php echo date('Y'); ?> TurnoMaster. Todos los derechos reservados.</p>
         </div>
     </div>
 </footer>
