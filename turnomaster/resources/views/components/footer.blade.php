@@ -10,9 +10,9 @@
             <div class="col-md-3">
                 <h5>Recursos</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-white">Documentación</a></li>
-                    <li><a href="#" class="text-white">Referencia API</a></li>
-                    <li><a href="#" class="text-white">Soporte</a></li>
+                    <li><a class="text-white disabled">Documentación</a></li>
+                    <li><a class="text-white disabled">Referencia API</a></li>
+                    <li><a class="text-white disabled">Soporte</a></li>
                 </ul>
             </div>
             <div class="col-md-3">
