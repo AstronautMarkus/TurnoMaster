@@ -11,6 +11,7 @@
 <body>
     <x-navbar />
     @yield('content')
+    <x-footer />
 </body>
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 </html>
