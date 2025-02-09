@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div class="navbar navbar-expand-lg navbar-dark" style="background-color:rgb(20, 110, 200);">
     <a class="navbar-brand" href="/">TurnoMaster</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

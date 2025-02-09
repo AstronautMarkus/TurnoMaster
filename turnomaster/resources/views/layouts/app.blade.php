@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/app-blade.css') }}">
 </head>
 <body>
-    <x-header />
+    <x-navbar />
     @yield('content')
 </body>
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
