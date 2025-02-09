@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="text-center py-3">
-            <p>&copy; 2025 TurnoMaster. All rights reserved.</p>
+            <p>&copy; <?php echo date('Y'); ?> TurnoMaster. All rights reserved.</p>
         </div>
     </div>
 </footer>
