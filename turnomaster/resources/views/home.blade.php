@@ -5,8 +5,7 @@
 <link rel="stylesheet" href="{{ asset('css/home-blade.css') }}">
 
 @section('content')
-    <div class="hero">
-        
+    <div class="hero mb-5">
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-5">
                     <div class="intro-text">
@@ -22,6 +21,16 @@
                     </div>
                 </div>
             </div>
-        
     </div>
+
+    <div class="container random-content my-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Lorem Ipsum</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo nec orci varius, nec tincidunt ligula facilisis. Integer nec odio nec nulla fermentum tincidunt. Sed sit amet sapien nec risus vehicula fermentum. Curabitur a felis nec erat fermentum bibendum.</p>
+                <p>Phasellus vel turpis non nulla tincidunt tincidunt. Donec ut felis ut libero tincidunt tincidunt. Sed sit amet sapien nec risus vehicula fermentum. Curabitur a felis nec erat fermentum bibendum.</p>
+            </div>
+        </div>
+    </div>
+
 @endsection

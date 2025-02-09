@@ -30,9 +30,8 @@ body {
 
 .hero {
     background: #f0f0f0;
-    color: #343a40;
     padding: 60px 0;
-    text-align: center;
+    border: 1px solid #e0e0e0;
 }
 
 .hero h1 {
