@@ -1,5 +1,9 @@
 <div class="navbar navbar-expand-lg navbar-dark" style="background-color:rgb(20, 110, 200);">
-    <a class="navbar-brand" href="/">TurnoMaster</a>
+    @auth
+        <a class="navbar-brand" href="/dashboard">TurnoMaster</a>
+    @else
+        <a class="navbar-brand" href="/">TurnoMaster</a>
+    @endauth
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -16,12 +20,23 @@
             </li>
         </ul>
         <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="/login">Iniciar sesión</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/register">Registrarse</a>
-            </li>
+            @auth
+                <li class="nav-item">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="nav-link btn btn-link" style="display: inline; padding: 0; margin: 0; border: none; background: none;">
+                            Cerrar sesión
+                        </button>
+                    </form>
+                </li>
+            @else
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Iniciar sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Registrarse</a>
+                </li>
+            @endauth
         </ul>
     </div>
 </div>
