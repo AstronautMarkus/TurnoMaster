@@ -30,3 +30,11 @@ Route::middleware(['auth'])->group(function () {
         return view('dashboard');
     });
 });
+
+Route::get('/features', function () {
+    return view('features');
+});
+
+Route::get('/pricing', function () {
+    return view('pricing');
+});
