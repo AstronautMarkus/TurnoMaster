@@ -10,6 +10,7 @@
                 <div class="card-header">{{ __('Registrarse') }}</div>
 
                 <div class="card-body">
+
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
@@ -50,6 +51,16 @@
                                 <button type="button" class="btn btn-outline-secondary mb-3" onclick="togglePasswordVisibility()">Mostrar/Ocultar Contraseñas</button>
                             </div>
                         </div>
+
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
