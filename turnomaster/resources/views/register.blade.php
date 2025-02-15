@@ -46,9 +46,15 @@
                         </div>
 
                         <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="button" class="btn btn-outline-secondary mb-3" onclick="togglePasswordVisibility()">Mostrar/Ocultar Contraseñas</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('Registrarse') }}
                                 </button>
                             </div>
                         </div>
@@ -58,4 +64,18 @@
         </div>
     </div>
 </div>
+
+<script>
+function togglePasswordVisibility() {
+    var passwordFields = ['password', 'password-confirm'];
+    passwordFields.forEach(function(id) {
+        var input = document.getElementById(id);
+        if (input.type === "password") {
+            input.type = "text";
+        } else {
+            input.type = "password";
+        }
+    });
+}
+</script>
 @endsection
