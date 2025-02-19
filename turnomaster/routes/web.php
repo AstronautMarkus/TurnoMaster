@@ -8,18 +8,18 @@ Route::get('/', function () {
     if (Auth::check()) {
         return redirect('/dashboard');
     }
-    return view('home');
+    return view('home.home');
 });
 
 Route::get('/login', function () {
-    return view('login');
+    return view('auth.login');
 })->name('login');
 
-Route::post('/login', [AuthController::class, 'login']);
-
 Route::get('/register', function () {
-    return view('register');
+    return view('auth.register');
 })->name('register');
+
+Route::post('/login', [AuthController::class, 'login']);
 
 Route::post('/register', [AuthController::class, 'register']);
 
@@ -27,14 +27,14 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('dashboard.home');
     });
 });
 
 Route::get('/features', function () {
-    return view('features');
+    return view('home.features');
 });
 
 Route::get('/pricing', function () {
-    return view('pricing');
+    return view('home.pricing');
 });
