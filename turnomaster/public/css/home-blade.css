@@ -1,0 +1,48 @@
+body {
+    overflow-x: hidden;
+}
+
+.intro-text {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.intro-text h1 {
+    font-size: 2.5rem;
+    color: #ffffff;
+}
+
+.intro-text p {
+    font-size: 1.2rem;
+    color: #dcdcdc;
+}
+
+.intro-image {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.intro-image img {
+    width: 500px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.hero {
+    background: #f0f0f0;
+    padding: 60px 0;
+    border: 1px solid #e0e0e0;
+}
+
+.hero h1 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: #343a40;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #6c757d;
+}
+
