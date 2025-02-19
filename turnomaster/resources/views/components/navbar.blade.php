@@ -22,6 +22,9 @@
         <ul class="navbar-nav">
             @auth
                 <li class="nav-item">
+                    <span class="navbar-text">Hola, {{ ucfirst(Auth::user()->name) }}!</span>
+                </li>
+                <li class="nav-item">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="nav-link btn btn-link" style="display: inline; padding: 0; margin: 0; border: none; background: none;">
