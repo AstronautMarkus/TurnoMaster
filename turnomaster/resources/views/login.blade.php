@@ -26,7 +26,14 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required autocomplete="current-password">
+                                <div class="input-group">
+                                    <input id="password" type="password" class="form-control" name="password" required autocomplete="current-password">
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-primary" id="togglePassword">
+                                            <i class="bi bi-eye-fill"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -69,4 +76,18 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        var passwordField = document.getElementById('password');
+        var passwordFieldType = passwordField.getAttribute('type');
+        if (passwordFieldType === 'password') {
+            passwordField.setAttribute('type', 'text');
+            this.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
+        } else {
+            passwordField.setAttribute('type', 'password');
+            this.innerHTML = '<i class="bi bi-eye-fill"></i>';
+        }
+    });
+</script>
 @endsection
