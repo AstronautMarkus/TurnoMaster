@@ -26,9 +26,8 @@
     <div class="container random-content my-5">
         <div class="row">
             <div class="col-md-12">
-                <h2>Lorem Ipsum</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo nec orci varius, nec tincidunt ligula facilisis. Integer nec odio nec nulla fermentum tincidunt. Sed sit amet sapien nec risus vehicula fermentum. Curabitur a felis nec erat fermentum bibendum.</p>
-                <p>Phasellus vel turpis non nulla tincidunt tincidunt. Donec ut felis ut libero tincidunt tincidunt. Sed sit amet sapien nec risus vehicula fermentum. Curabitur a felis nec erat fermentum bibendum.</p>
+                <h2>Menos complicaciones, <strong>más control</strong></h2>
+                <p>En el ámbito empresarial, <strong>"poco es mucho"</strong>.<br>TurnoMaster elimina la complejidad innecesarias y te ofrece una herramienta simple, pero eficiente.<br>Gestiona los horarios de tus empleados sin dolores de cabeza.</p>
             </div>
         </div>
     </div>
