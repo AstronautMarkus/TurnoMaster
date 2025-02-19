@@ -38,3 +38,5 @@ Route::get('/features', function () {
 Route::get('/pricing', function () {
     return view('home.pricing');
 });
+
+Route::get('/about', function () {return view('home.about');});
