@@ -21,16 +21,16 @@
         </ul>
         <ul class="navbar-nav">
             @auth
-                <li class="nav-item">
-                    <span class="navbar-text">Hola, {{ ucfirst(Auth::user()->name) }}!</span>
-                </li>
-                <li class="nav-item">
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="nav-link btn btn-link" style="display: inline; padding: 0; margin: 0; border: none; background: none;">
-                            Cerrar sesión
-                        </button>
-                    </form>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Hola, {{ ucfirst(Auth::user()->name) }}!
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="dropdown-item">Cerrar sesión</button>
+                        </form>
+                    </div>
                 </li>
             @else
                 <li class="nav-item">
