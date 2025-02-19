@@ -51,7 +51,11 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if (! $user || ! Hash::check($request->password, $user->password)) {
+        if (! $user) {
+            return redirect()->back()->withInput($request->only('email'))->withErrors(['email' => 'No se encontró una cuenta con esta dirección de correo.']);
+        }
+
+        if (! Hash::check($request->password, $user->password)) {
             return redirect()->back()->withInput($request->only('email'))->withErrors(['email' => 'Usuario o contraseña incorrectos.']);
         }
 
