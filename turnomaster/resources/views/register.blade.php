@@ -34,7 +34,14 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required autocomplete="new-password">
+                                <div class="input-group">
+                                    <input id="password" type="password" class="form-control" name="password" required autocomplete="new-password">
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-primary" id="togglePassword">
+                                            <i class="bi bi-eye-fill"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -42,13 +49,14 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirmar contraseña') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="button" class="btn btn-outline-secondary mb-3" onclick="togglePasswordVisibility()">Mostrar/Ocultar Contraseñas</button>
+                                <div class="input-group">
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-primary" id="togglePasswordConfirm">
+                                            <i class="bi bi-eye-fill"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -77,16 +85,28 @@
 </div>
 
 <script>
-function togglePasswordVisibility() {
-    var passwordFields = ['password', 'password-confirm'];
-    passwordFields.forEach(function(id) {
-        var input = document.getElementById(id);
-        if (input.type === "password") {
-            input.type = "text";
-        } else {
-            input.type = "password";
-        }
-    });
-}
+document.getElementById('togglePassword').addEventListener('click', function () {
+    var passwordField = document.getElementById('password');
+    var passwordFieldType = passwordField.getAttribute('type');
+    if (passwordFieldType === 'password') {
+        passwordField.setAttribute('type', 'text');
+        this.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
+    } else {
+        passwordField.setAttribute('type', 'password');
+        this.innerHTML = '<i class="bi bi-eye-fill"></i>';
+    }
+});
+
+document.getElementById('togglePasswordConfirm').addEventListener('click', function () {
+    var passwordField = document.getElementById('password-confirm');
+    var passwordFieldType = passwordField.getAttribute('type');
+    if (passwordFieldType === 'password') {
+        passwordField.setAttribute('type', 'text');
+        this.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
+    } else {
+        passwordField.setAttribute('type', 'password');
+        this.innerHTML = '<i class="bi bi-eye-fill"></i>';
+    }
+});
 </script>
 @endsection
