@@ -31,10 +31,10 @@
                 </li>
             @else
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Iniciar sesión</a>
+                    <a class="nav-link" style="color: black;" href="/login">Iniciar sesión</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/register">Registrarse</a>
+                    <a class="nav-link" style="color: black;" href="/register">Registrarse</a>
                 </li>
             @endauth
         </ul>

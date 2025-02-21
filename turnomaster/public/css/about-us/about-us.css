@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+
 .about_us-container {
     margin-top: 50px;
 }
@@ -15,7 +18,15 @@
     display: flex;
     flex-direction: column;
     flex: 1;
+    font-family: 'Poppins', sans-serif;
     overflow: hidden; /* Ensure text does not overflow */
+    height: 100%; /* Ensure cards have the same height */
+}
+
+.about_us-card .card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .about_us-card-title {
@@ -30,6 +41,8 @@
 
 .about_us-social-links {
     margin-top: 10px;
+    display: flex;
+    justify-content: center; /* Center the icons horizontally */
 }
 
 .about_us-social-links a {
