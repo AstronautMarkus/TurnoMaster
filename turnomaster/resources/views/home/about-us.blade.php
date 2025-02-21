@@ -2,7 +2,7 @@
 
 @section('title', 'TurnoMaster - Sobre Nosotros')
 
-<link rel="stylesheet" href="{{ asset('css/about-us/about-us.css') }}">
+<link rel="stylesheet" href="{{ asset('css/index/about-us/about-us.css') }}">
 
 @section('content')
 <div>
