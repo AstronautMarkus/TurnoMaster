@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.index_app')
 <link rel="stylesheet" href="{{ asset('css/about/about.css')}}">
 @section('title', 'TurnoMaster - características')
 
