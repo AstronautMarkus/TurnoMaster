@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="card">
+            <div class="card about_us-card">
                 <img src="https://github.com/Ki4ra1109.png" class="card-img-top" alt="Ki4ra1109">
                 <div class="card-body">
                     <h5 class="card-title about_us-card-title">Ki4ra1109 (Kiara Rubio)</h5>
