@@ -1,4 +1,4 @@
-@extends('layouts.admin_app')
+@extends('layouts.dashboard_app')
 
 @section('title', 'TurnoMaster - dashboard')
 
