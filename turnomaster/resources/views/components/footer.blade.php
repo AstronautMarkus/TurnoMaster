@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{ asset('css/footer-blade.css') }}">
+<link rel="stylesheet" href="{{ asset('css/index/components/footer/footer-blade.css') }}">
 
 <footer class="bg-dark text-white pt-4">
     <div class="container">
