@@ -2,7 +2,7 @@
 
 @section('title', 'TurnoMaster - home')
 
-<link rel="stylesheet" href="{{ asset('css/home-blade.css') }}">
+<link rel="stylesheet" href="{{ asset('css/index/home/home-blade.css') }}">
 
 @section('content')
     <div class="hero mb-5">
