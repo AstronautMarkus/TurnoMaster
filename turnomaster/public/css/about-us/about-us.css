@@ -1,12 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+
 .about_us-container {
     margin-top: 50px;
+}
+
+.about_us-container .row {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .about_us-card {
     margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden; /* Ensure text does not overflow */
+    height: 100%; /* Ensure cards have the same height */
+}
+
+.about_us-card .card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .about_us-card-title {
@@ -19,14 +39,15 @@
     color: #555;
 }
 
-
 .about_us-social-links {
     margin-top: 10px;
+    display: flex;
+    justify-content: center; /* Center the icons horizontally */
 }
 
 .about_us-social-links a {
     margin-right: 10px;
-    color: #555;
+    color: #4169E1;
     font-size: 1.2rem;
 }
 

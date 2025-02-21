@@ -1,8 +1,8 @@
-<div class="navbar navbar-expand-lg navbar-dark" style="background-color:rgb(20, 110, 200);">
+<div class="navbar navbar-expand-lg navbar-dark" style="background-color:rgb(240, 181, 87); box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);">
     @auth
-        <a class="navbar-brand" href="/dashboard">TurnoMaster</a>
+        <a class="navbar-brand" style="color: black;" href="/dashboard">TurnoMaster</a>
     @else
-        <a class="navbar-brand" href="/">TurnoMaster</a>
+        <a class="navbar-brand" style="color: black;" href="/">TurnoMaster</a>
     @endauth
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -10,13 +10,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/features">Características</a>
+                <a class="nav-link" style="color: black;" href="/features">Características</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/pricing">Precios</a>
+                <a class="nav-link" style="color: black;" href="/pricing">Precios</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/about-us">Sobre nosotros</a>
+                <a class="nav-link"  style="color: black;"href="/about-us">Sobre nosotros</a>
             </li>
         </ul>
         <ul class="navbar-nav">
@@ -31,10 +31,10 @@
                 </li>
             @else
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Iniciar sesión</a>
+                    <a class="nav-link" style="color: black;" href="/login">Iniciar sesión</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/register">Registrarse</a>
+                    <a class="nav-link" style="color: black;" href="/register">Registrarse</a>
                 </li>
             @endauth
         </ul>
