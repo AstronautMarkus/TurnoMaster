@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>@yield('title')</title>
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/app-blade.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/index/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/index/index-app-blade.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
     @include('components.navbar')
 
-    <main class="">
+    <main>
         @yield('content')
     </main>
 
