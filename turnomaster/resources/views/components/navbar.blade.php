@@ -16,7 +16,7 @@
                 <a class="nav-link" href="/pricing">Precios</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/about-project">Acerca de</a>
+                <a class="nav-link" href="/about-us">Sobre nosotros</a>
             </li>
         </ul>
         <ul class="navbar-nav">
