@@ -1,27 +1,36 @@
 <link rel="stylesheet" href="{{ asset('css/dashboard/components/right-sidebar/right-sidebar.css') }}">
 
-<style>
-    .modal-backdrop {
-        display: none;
-    }
-</style>
-
 <div id="rightSidebar" class="right-sidebar">
+
+    <div class="sidebar-header">
+        <img src="{{ asset('img/headers/header01.png') }}" alt="Fondo" class="background-img">
+        <div class="profile-bg">
+            <img src="{{ asset('img/utils/cat.webp') }}" alt="Foto de usuario" class="profile-img">
+        </div>
+        <h3>{{ ucfirst(Auth::user()->name) }}</h3>
+    </div>
+
     <div class="right-sidebar-content">
-        <button id="closeRightSidebar" class="close-btn"></button>
-        <h3>Opciones</h3>
+
         <ul class="sidebar-options">
-            <li><a href="#">Configuración</a></li>
-            <li><a href="#">Notificaciones</a></li>
-            <li><a href="#">Preferencias</a></li>
+            <li>
+                <a href="#">Opción 1 interesante</a>
+            </li>
+            <li>
+                <a href="#">Opción 2 interesante</a>
+            </li>
+            <li>
+                <a href="#">Opción 3 interesante</a>
+            </li>
         </ul>
+
         <div class="logout-btn">
             <button type="button" class="text-danger" data-toggle="modal" data-target="#logoutModal">Cerrar sesión</button>
         </div>
-    </div>
-</div>
 
-<div id="overlay" class="overlay"></div>
+    </div>
+
+</div>
 
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

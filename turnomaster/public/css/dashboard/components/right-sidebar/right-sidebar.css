@@ -7,46 +7,73 @@
     background-color: #fff;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
     transition: right 0.3s ease-in-out;
-    z-index: 1050;
+    z-index: 1000;
     padding: 15px;
 }
 
-.right-sidebar-content {
-    display: flex;
-    flex-direction: column;
+.sidebar-header {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.7);
 }
 
-.close-btn {
-    background: none;
-    border: none;
-    font-size: 20px;
-    align-self: flex-end;
-    cursor: pointer;
+.sidebar-header .background-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(50%);
+}
+
+
+.profile-bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.profile-bg, h3 {
+    position: relative;
+    z-index: 2;
+}
+
+.profile-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 .sidebar-options {
     list-style: none;
     padding: 0;
+    margin-top: 20px;
 }
 
 .sidebar-options li {
-    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.sidebar-options .icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 5px;
 }
 
 .sidebar-options a {
     text-decoration: none;
     color: #333;
-}
-
-.overlay {
-    position: fixed;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    height: calc(100vh - 60px);
-    background: rgba(0, 0, 0, 0.5);
-    display: none;
-    z-index: 1000;
 }
 
 .logout-btn {
@@ -67,5 +94,5 @@
 }
 
 .logout-btn button:hover {
-    color:rgb(150, 25, 25)!important;
+    color: rgb(150, 25, 25) !important;
 }
