@@ -1,0 +1,50 @@
+.right-sidebar {
+    position: fixed;
+    top: 60px;
+    right: -300px;
+    width: 300px;
+    height: calc(100vh - 60px);
+    background-color: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease-in-out;
+    z-index: 1050;
+    padding: 15px;
+}
+
+.right-sidebar-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    align-self: flex-end;
+    cursor: pointer;
+}
+
+.sidebar-options {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-options li {
+    padding: 10px 0;
+}
+
+.sidebar-options a {
+    text-decoration: none;
+    color: #333;
+}
+
+.overlay {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 60px);
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 1000;
+}

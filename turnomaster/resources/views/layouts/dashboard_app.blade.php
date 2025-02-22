@@ -24,10 +24,12 @@
             </main>
         </div>
     </div>
+
+    @include('components.dashboard_right-sidebar')
 </body>
 
 <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
 <script src="{{ asset('js/popper.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-
+<script src="{{ asset('js/dashboard/sidebar-right.js') }}"></script>
 </html>

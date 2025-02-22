@@ -1,6 +1,7 @@
 .sidebar {
     height: 100vh;
     background-color: #222937;
+    z-index: 1200;
 }
 .sidebar a {
     color: white;

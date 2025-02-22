@@ -7,7 +7,7 @@
                 ¡Hola, {usuario}!
             </span>
             <div class="dropdown">
-                <a class="dropdown-toggle" href="/" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="dropdown-toggle" role="button" id="toggleRightSidebar" data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="navbar-toggler-icon"></span>
                 </a>    
             </div>
