@@ -15,8 +15,10 @@
         <div class="d-flex flex-column flex-grow-1 w-100">
             @include('components.dashboard_navbar')
             <main class="flex-grow-1 d-flex justify-content-center align-items-center ">
-                <div class="container shadow rounded bg-white mt-4 mb-4">
-                    @yield('content')
+                <div class="container shadow rounded bg-white mt-4 mb-4" style="width: 100%; max-width: 1200px;">
+                    <div>
+                        @yield('content')
+                    </div>   
                 </div>
             </main>
         </div>
