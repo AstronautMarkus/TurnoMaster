@@ -6,9 +6,8 @@
 .navbar-custom {
     height: 60px; 
 }
-.navbar a {
-    color: white;
-}
-.navbar a:hover {
-    color: #d1ecf1; 
+.navbar .navbar-collapse {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
