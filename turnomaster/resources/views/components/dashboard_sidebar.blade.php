@@ -1,39 +1,33 @@
 <link rel="stylesheet" href="{{ asset('css/dashboard/components/sidebar/sidebar.css') }}">
 
 <div class="d-flex flex-column flex-shrink-0 p-3 text-white vh-100 sidebar" style="width: 280px;">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-        <h2 class="fs-4 turnomaster-logo">TurnoMaster</h2>
+    <a href="/" class="turnomaster-logo d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+        <h2>TurnoMaster</h2>
     </a>
     <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
+    <ul class="nav nav-pills flex-column mb-auto separator">
         <li class="nav-item">
-            <a href="#" class="nav-link active" aria-current="page">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
-                Home
+            <a href="/" class="nav-link" aria-current="page">
+                <i class="fas fa-home me-2"></i>
+                Opción interesante 1
             </a>
         </li>
-        <li>
-            <a href="#" class="nav-link link-dark">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-                Dashboard
+        <li class="nav-item">
+            <a href="/" class="nav-link">
+                <i class="fas fa-user me-2"></i>
+                Opción interesante 2
             </a>
         </li>
-        <li>
-            <a href="#" class="nav-link link-dark">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-                Orders
+        <li class="nav-item">
+            <a href="/" class="nav-link">
+                <i class="fas fa-cog me-2"></i>
+                Opción interesante 3
             </a>
         </li>
-        <li>
-            <a href="#" class="nav-link link-dark">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-                Products
-            </a>
-        </li>
-        <li>
-            <a href="#" class="nav-link link-dark">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-                Customers
+        <li class="nav-item">
+            <a href="/" class="nav-link">
+                <i class="fas fa-sign-out-alt me-2"></i>
+                Opción interesante 4
             </a>
         </li>
     </ul>

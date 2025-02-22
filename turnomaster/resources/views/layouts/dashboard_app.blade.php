@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/dashboard/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard-app-blade.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
     <div class="d-flex flex-grow-1 w-100" style="overflow: hidden;">
