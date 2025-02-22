@@ -3,9 +3,9 @@
 <div id="rightSidebar" class="right-sidebar">
 
     <div class="sidebar-header">
-        <img src="{{ asset('img/headers/header01.png') }}" alt="Fondo" class="background-img">
+        <img src="{{ asset('img/headers/header01.png') }}" alt="cabecera" class="background-img" oncontextmenu="return false;">
         <div class="profile-bg">
-            <img src="{{ asset('img/utils/cat.webp') }}" alt="Foto de usuario" class="profile-img">
+            <img src="{{ asset('img/utils/profile-picture.png') }}" alt="perfil" class="profile-img" oncontextmenu="return false;">
         </div>
         <h3>{{ ucfirst(Auth::user()->name) }}</h3>
     </div>
