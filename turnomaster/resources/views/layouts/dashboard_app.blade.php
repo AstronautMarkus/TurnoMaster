@@ -14,7 +14,7 @@
         @include('components.dashboard_sidebar')
         <div class="d-flex flex-column flex-grow-1 w-100">
             @include('components.dashboard_navbar')
-            <main class="flex-grow-1">
+            <main class="flex-grow-1 mt-4 mb-4">
                 @yield('content')
             </main>
         </div>
