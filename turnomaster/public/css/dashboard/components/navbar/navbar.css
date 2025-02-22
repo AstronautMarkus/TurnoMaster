@@ -10,3 +10,22 @@
     justify-content: flex-end;
     align-items: center;
 }
+
+.navbar-text {
+    font-size: 1.2rem;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.dropdown-menu {
+    right: 0;
+    left: auto;
+}
+
+.navbar .dropdown .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M8 11l-6-6h12z'/%3E%3C/svg%3E");
+    width: 24px;
+    height: 24px;
+}
