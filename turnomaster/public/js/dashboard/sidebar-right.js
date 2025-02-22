@@ -4,17 +4,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeBtn = document.getElementById("closeRightSidebar");
     const overlay = document.getElementById("overlay");
 
-    function openSidebar() {
-        rightSidebar.style.right = "0";
-        overlay.style.display = "block";
+    function toggleSidebar() {
+        if (rightSidebar.style.right === "0px") {
+            rightSidebar.style.right = "-300px";
+            overlay.style.display = "none";
+            toggleBtn.classList.remove('clicked');
+        } else {
+            rightSidebar.style.right = "0";
+            overlay.style.display = "block";
+            toggleBtn.classList.add('clicked');
+        }
     }
 
-    function closeSidebar() {
-        rightSidebar.style.right = "-300px";
-        overlay.style.display = "none";
-    }
-
-    toggleBtn.addEventListener("click", openSidebar);
-    closeBtn.addEventListener("click", closeSidebar);
-    overlay.addEventListener("click", closeSidebar);
+    toggleBtn.addEventListener("click", toggleSidebar);
+    closeBtn.addEventListener("click", toggleSidebar);
+    overlay.addEventListener("click", toggleSidebar);
 });
