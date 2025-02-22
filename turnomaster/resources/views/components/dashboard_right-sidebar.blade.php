@@ -11,6 +11,12 @@
             <li><a href="#">Notificaciones</a></li>
             <li><a href="#">Preferencias</a></li>
         </ul>
+        <div class="logout-btn">
+            <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="text-danger">Cerrar sesión</button>
+            </form>
+        </div>
     </div>
 </div>
 <div id="overlay" class="overlay"></div>
