@@ -10,13 +10,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
-    @include('components.dashboard_navbar')
-    @include('components.dashboard_sidebar')
-
-    <main >
-        @yield('content')
-    </main>
-
+    <div class="d-flex flex-grow-1 w-100">
+        @include('components.dashboard_sidebar')
+        <div class="d-flex flex-column flex-grow-1 w-100">
+            @include('components.dashboard_navbar')
+            <main class="flex-grow-1">
+                @yield('content')
+            </main>
+        </div>
+    </div>
 </body>
 
 <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
