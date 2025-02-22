@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <span class="navbar-text text-white mx-2">
-                ¡Hola, {usuario}!
+                ¡Hola, {{ ucfirst(Auth::user()->name) }}!
             </span>
             <div class="dropdown">
                 <a class="dropdown-toggle" role="button" id="toggleRightSidebar" data-bs-toggle="dropdown" aria-expanded="false">
