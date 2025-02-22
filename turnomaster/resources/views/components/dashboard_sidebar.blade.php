@@ -1,9 +1,8 @@
 <link rel="stylesheet" href="{{ asset('css/dashboard/components/sidebar/sidebar.css') }}">
 
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-dark text-white vh-100 sidebar" style="width: 280px;">
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white vh-100 sidebar" style="width: 280px;">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-        <span class="fs-4">Sidebar</span>
+        <h2 class="fs-4 turnomaster-logo">TurnoMaster</h2>
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">

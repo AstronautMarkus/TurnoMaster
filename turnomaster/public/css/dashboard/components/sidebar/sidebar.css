@@ -1,11 +1,10 @@
 .sidebar {
     height: 100vh;
-    background-color: #343a40; /* Dark background */
-    color: white; /* White text */
+    background-color: #222937;
 }
 .sidebar a {
-    color: white; /* White links */
+    color: white;
 }
 .sidebar a:hover {
-    color: #adb5bd; /* Light gray on hover */
+    color: #adb5bd;
 }

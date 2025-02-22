@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ asset('css/dashboard/components/navbar/navbar.css') }}">
 
-<nav class="navbar navbar-expand-lg navbar-light bg-primary text-white w-100 navbar-custom">
+<nav class="navbar navbar-expand-lg navbar-light text-white w-100 navbar-custom">
     <div class="container-fluid">
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <span class="navbar-text me-3">
