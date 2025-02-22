@@ -3,11 +3,5 @@
 @section('title', 'TurnoMaster - dashboard')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>Dashboard</h1>
-            </div>
-        </div>
-    </div>
+    <div style="background-color: gray; height: 100vh; width: 100vw;"><p>soy un contenido centralizado</p></div>
 @endsection
