@@ -14,8 +14,8 @@
         @include('components.dashboard_sidebar')
         <div class="d-flex flex-column flex-grow-1 w-100">
             @include('components.dashboard_navbar')
-            <main class="flex-grow-1 mt-4 mb-4" style="overflow-y: auto; overflow-x: hidden;">
-                <div class="container h-100 d-flex justify-content-center align-items-center">
+            <main class="flex-grow-1 d-flex justify-content-center align-items-center ">
+                <div class="container shadow rounded bg-white mt-4 mb-4">
                     @yield('content')
                 </div>
             </main>

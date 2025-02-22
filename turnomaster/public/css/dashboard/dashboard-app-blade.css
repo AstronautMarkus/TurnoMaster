@@ -5,18 +5,21 @@ body {
     overflow: hidden;
 }
 
-.main-content {
+main {
     display: flex;
     flex-grow: 1;
-    width: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
+    height: calc(100vh - 50px);
+    overflow: hidden;
 }
 
 .container {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-grow: 1;
+    width: 90%;
+    max-width: 1200px;
+    border-radius: 10px;
+    padding: 20px;
     overflow-y: auto;
+    max-height: 100%;
 }
+
+
