@@ -4,9 +4,15 @@
 }
 
 .text-black {
-    color: black;
+    color: white;
+    transition: color 0.3s ease;
 }
 
 .text-black:hover {
-    color: rgb(100, 100, 100);
+    color: black;
+}
+
+.navbar .nav-link.separator {
+    color: white;
+    pointer-events: none;
 }

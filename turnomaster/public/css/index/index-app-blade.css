@@ -24,6 +24,7 @@ main {
     text-decoration: none;
     display: inline-block;
     font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
 }
 
 .btn-custom:hover {

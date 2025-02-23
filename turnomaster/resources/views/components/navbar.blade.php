@@ -12,10 +12,19 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
+                <span class="nav-link separator">|</span>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link text-black" href="/features">Características</a>
             </li>
             <li class="nav-item">
+                <span class="nav-link separator">|</span>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link text-black" href="/pricing">Precios</a>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link separator">|</span>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-black" href="/about-us">Sobre nosotros</a>
