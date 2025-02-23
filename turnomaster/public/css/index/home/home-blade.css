@@ -106,3 +106,19 @@ body {
     margin-bottom: 10px;
 }
 
+.btn-custom {
+    background-color: #965AA0;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 2rem;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+}
+
+.btn-custom:hover {
+    background-color: #7D4686;
+    color:#ffffff
+}
