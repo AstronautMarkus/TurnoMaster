@@ -5,20 +5,6 @@
 <link rel="stylesheet" href="{{ asset('css/index/home/home-blade.css') }}">
 
 @section('content')
-    <style>
-        p {
-            font-family: 'Roboto', sans-serif;
-        }
-        h1, h2 {
-            font-family: 'Poppins', sans-serif;
-        }
-        .btn-custom {
-            font-family: 'Poppins', sans-serif;
-        }
-        .navbar {
-            font-family: 'Poppins', sans-serif;
-        }
-    </style>
     <div class="hero mb-5">
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-5">
@@ -38,32 +24,42 @@
     </div>
 
     <div class="container random-content my-5">
+
         <div class="row">
             <div class="col-md-12">
                 <h2>Menos complicaciones, <strong>más control</strong></h2>
                 <p>En el ámbito empresarial, <strong>"poco es mucho"</strong>.<br>TurnoMaster elimina la complejidad innecesarias y te ofrece una herramienta simple, pero eficiente.<br>Gestiona los horarios de tus empleados sin dolores de cabeza.</p>
             </div>
         </div>
+        
         <div class="row mt-5">
             <div class="col-md-12">
                 <div class="info-box p-4 rounded bg-light">
                     <ul class="info-list d-flex">
                         <li class="info-item flex-fill text-center">
                             <span class="info-title">Usuarios registrados</span>
-                            <span class="info-value" id="users-count">10,000+</span>
+                            <span class="info-value" id="users-count"></span>
                         </li>
                         <li class="info-item flex-fill text-center">
                             <span class="info-title">Empresas que usan TurnoMaster</span>
-                            <span class="info-value" id="companies-count">500+</span>
+                            <span class="info-value" id="companies-count"></span>
                         </li>
                         <li class="info-item flex-fill text-center">
                             <span class="info-title">Horas gestionadas</span>
-                            <span class="info-value" id="hours-count">1,000,000+</span>
+                            <span class="info-value" id="hours-count"></span>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
+
+        <div class="row mt-5">
+            <div class="col-md-12 text-right">
+            <h2>Empleados satisfechos, <strong>empresa exitosa</strong></h2>
+            <p>Con TurnoMaster, no solo gestionas horarios, también mejoras la comunicación interna y aumentas la productividad de tu equipo. <br>Descubre cómo nuestra herramienta puede transformar la forma en que administras tu negocio.</p>
+            </div>
+        </div>
+
     </div>
 
     <script>
@@ -85,9 +81,10 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            animateCount('users-count', 0, 10000, 2000);
-            animateCount('companies-count', 0, 500, 2000);
-            animateCount('hours-count', 0, 1000000, 2000);
+            animateCount('users-count', 0, 100, 1000);
+            animateCount('companies-count', 0, 100, 1000);
+            animateCount('hours-count', 0, 100, 1000);
         });
+
     </script>
 @endsection
