@@ -1,3 +1,28 @@
+.project-container {
+    background-color: #f5f5f5;
+    border-radius: 15px;
+    padding: 40px;
+    width: 80%;
+    max-width: 900px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.project-container h1 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.project-container p {
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+.project-meta p {
+    font-weight: bold;
+    color: #666;
+}
+
 .about_us-container {
     padding: 30px 14% 70px;
     display: flex;
@@ -46,10 +71,6 @@
     font-size: 1rem;
     letter-spacing: 1px;
     transition: all 0.5s ease;
-}
-
-.about_us-card-text:hover {
-    color: #007bff;
 }
 
 .about_us-social-links {
