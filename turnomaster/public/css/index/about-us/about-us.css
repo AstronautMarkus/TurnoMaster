@@ -48,10 +48,6 @@
     transition: all 0.5s ease;
 }
 
-.about_us-card-text:hover {
-    color: #007bff;
-}
-
 .about_us-social-links {
     margin-top: 10px;
     display: flex;
