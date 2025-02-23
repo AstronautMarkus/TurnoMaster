@@ -1,0 +1,15 @@
+.sidebar {
+    height: 100vh;
+    background-color: #222937;
+    z-index: 1000;
+}
+.sidebar a {
+    color: white;
+}
+.sidebar a:hover {
+    color: #adb5bd;
+    text-decoration: none;
+}
+.sidebar .nav-item + .nav-item {
+    border-top: 1px solid #adb5bd;
+}
