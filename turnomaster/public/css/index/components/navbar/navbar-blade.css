@@ -6,12 +6,12 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.text-black {
+.navbar-text {
     color: white;
     transition: color 0.3s ease;
 }
 
-.text-black:hover {
+.navbar-text:hover {
     color: black;
 }
 
@@ -28,21 +28,15 @@
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
-.btn-custom {
-    background-color: #965AA0;
-    color: #ffffff;
-    padding: 10px 20px;
-    border-radius: 2rem;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 1rem;
-    font-family: 'Poppins', sans-serif;
-    transition: background-color 0.5s ease, color 0.5s ease;
+.nav-btn-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.btn-custom:hover {
-    background-color: #7D4686;
-    color: #ffffff;
+@media (max-width: 768px) {
+    .nav-btn-center {
+        width: 100%;
+        margin-top: 10px;
+    }
 }

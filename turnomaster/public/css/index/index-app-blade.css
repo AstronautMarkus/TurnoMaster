@@ -24,10 +24,21 @@ main {
     text-decoration: none;
     display: inline-block;
     font-size: 1rem;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 .btn-custom:hover {
     background-color: #7D4686;
-    color:#ffffff
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .btn-custom {
+        padding: 8px 16px;
+        border-radius: 1rem;
+        font-size: 0.875rem;
+        width: 90%;
+        font-family: 'Poppins', sans-serif;
+    }
 }
