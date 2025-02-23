@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="{{ asset('css/index/components/navbar/navbar.css') }}">
 
 <div class="navbar navbar-expand-lg navbar-color">
-    <a class="navbar-brand navbar-text font-weight-bold" href="/dashboard">TurnoMaster</a>
+    <a class="navbar-brand navbar-text font-weight-bold" href="/">TurnoMaster</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -14,7 +14,7 @@
                 <a class="nav-link navbar-text font-weight-normal" href="/pricing">Precios</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link navbar-text font-weight-normal" href="/about-us">Sobre nosotros</a>
+                <a class="nav-link navbar-text font-weight-normal" href="/about-us">Sobre el proyecto</a>
             </li>
         </ul>
         <ul class="navbar-nav">
