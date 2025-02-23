@@ -36,13 +36,12 @@
                     <a class="nav-link text-black font-weight-normal" href="/register">Registrarse</a>
                 </li>
                 <li class="nav-item ml-auto">
-                    <a class="nav-link text-black font-weight-normal" href="/login">Iniciar sesión</a>
+                    <a class="nav-link btn-custom mx-2" href="/login">Iniciar sesión</a>
                 </li>
             @endauth
         </ul>
     </div>
 </div>
-
 
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

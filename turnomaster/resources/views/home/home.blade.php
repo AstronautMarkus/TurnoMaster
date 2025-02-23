@@ -13,6 +13,12 @@
         h1, h2 {
             font-family: 'Poppins', sans-serif;
         }
+        .btn-custom {
+            font-family: 'Poppins', sans-serif;
+        }
+        .navbar {
+            font-family: 'Poppins', sans-serif;
+        }
     </style>
     <div class="hero mb-5">
             <div class="row justify-content-center align-items-center">
