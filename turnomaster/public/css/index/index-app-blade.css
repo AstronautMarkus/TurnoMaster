@@ -53,6 +53,9 @@ p, a, span, label, input, strong, button, textarea, select {
     font-family: 'Roboto', sans-serif;
 }
 
+a:hover{
+    text-decoration: none;
+}
 
 .btn-custom {
     background-color: #965AA0;
@@ -70,8 +73,9 @@ p, a, span, label, input, strong, button, textarea, select {
 
 .btn-custom:hover {
     background-color: #7D4686;
-    color: #ffffff;
+    color: #000000;
 }
+
 
 @media (max-width: 768px) {
     .btn-custom {

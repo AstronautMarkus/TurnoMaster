@@ -16,12 +16,15 @@
             <li class="nav-item">
                 <a class="nav-link navbar-text font-weight-normal" href="/about-us">Sobre el proyecto</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link navbar-text font-weight-normal" href="/contact">Contacto</a>
+            </li>
         </ul>
         <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link navbar-text font-weight-normal" href="/register">Registrarse</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mx-2">
                     <a class="nav-link navbar-text font-weight-normal btn-custom nav-btn-center" href="/login">Iniciar sesión</a>
                 </li>
         </ul>
