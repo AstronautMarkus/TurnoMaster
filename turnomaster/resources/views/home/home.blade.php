@@ -3,8 +3,23 @@
 @section('title', 'TurnoMaster - home')
 
 <link rel="stylesheet" href="{{ asset('css/index/home/home-blade.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 
 @section('content')
+    <style>
+        p {
+            font-family: 'Roboto', sans-serif;
+        }
+        h1, h2 {
+            font-family: 'Poppins', sans-serif;
+        }
+        .btn-custom {
+            font-family: 'Poppins', sans-serif;
+        }
+        .navbar {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
     <div class="hero mb-5">
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-5">
@@ -12,7 +27,7 @@
                         <h1>¿Estás listo para optimizar la gestión de horarios de tus empleados?</h1>
                         <p>TurnoMaster es el software ideal para gestionar las entradas y salidas de tu negocio, 
                         permitiéndote conectar mejor con tus empleados y optimizar la administración de tu empresa.</p>
-                        <a href="/" class="btn btn-primary">Comenzar ahora</a>
+                        <a href="/" class="btn-custom">Comenzar ahora</a>
                     </div>
                 </div>
                 <div class="col-md-5">
