@@ -3,7 +3,6 @@
 @section('title', 'TurnoMaster - home')
 
 <link rel="stylesheet" href="{{ asset('css/index/home/home-blade.css') }}">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 
 @section('content')
     <style>
