@@ -1,40 +1,31 @@
-@extends('layouts.index_app')
+@extends('layouts.auth_app')
+
+<link rel="stylesheet" href="{{ asset('css/auth/login/login.css') }}">
 
 @section('title', 'TurnoMaster - Confirmar Cuenta')
 
 @section('content')
-<div class="container mt-5 mb-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Confirmar Cuenta') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('verification.verify') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="code" class="col-md-4 col-form-label text-md-right">{{ __('Código de Verificación') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="code" type="text" class="form-control" name="code" required autofocus>
-                                @error('code')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Confirmar') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+<div>
+    <div class="login-container">
+        <div class="login-header">
+            <img src="{{ asset('img/logo/TurnoMaster_lines.svg') }}" alt="TurnoMaster - confirm account" class="login-image">
+            <div class="login-title">
+                <h2>{{ __('Confirmar Cuenta') }}</h2>
+                <p>Introduce el código de verificación para continuar</p>
             </div>
         </div>
+        <form method="POST" action="{{ route('verification.verify') }}">
+            @csrf
+            <div class="input-group">
+                <label for="code">{{ __('Código de Verificación') }}</label>
+                <input id="code" type="text" name="code" required autofocus placeholder="Introduce el código">
+                @error('code')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+            <button type="submit" class="login-button">{{ __('Confirmar') }}</button>
+        </form>
     </div>
 </div>
 @endsection
