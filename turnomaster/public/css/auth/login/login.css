@@ -123,3 +123,7 @@ a:hover{
 .forgot-password:hover {
     text-decoration: underline;
 }
+
+.text-danger{
+    color: red;
+}
