@@ -5,6 +5,9 @@
 @section('title', 'TurnoMaster - Login')
 
 @section('content')
+<a href="{{ url('/') }}" class="home-button">
+    <i class="bi bi-house-door-fill"></i>{{ __('Inicio') }}
+</a>
 <div>
     <div class="login-container">
         <div class="login-header">
@@ -58,7 +61,7 @@
             this.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
         } else {
             passwordField.setAttribute('type', 'password');
-            this.innerHTML = '<i class="bi bi-eye-fill"></i>';
+            this.innerHTML = '<i class="bi bi-eye-fill'></i>';
         }
     });
 </script>

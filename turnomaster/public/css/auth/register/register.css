@@ -151,3 +151,28 @@ a:hover{
 .text-danger{
     color: red;
 }
+
+
+.home-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #965AA0;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    align-items: center;
+}
+
+.home-button i {
+    margin-right: 8px;
+}
+
+.home-button:hover {
+    background-color: #7D4686;
+    color: #000000;
+}
