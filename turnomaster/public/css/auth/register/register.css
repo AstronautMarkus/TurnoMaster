@@ -124,6 +124,15 @@ a:hover{
     text-decoration: underline;
 }
 
+.login-text {
+    color: #965AA0;
+    text-decoration: none;
+}
+
+.login-text:hover {
+    text-decoration: underline;
+}
+
 .text-danger{
     color: red;
 }

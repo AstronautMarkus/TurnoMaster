@@ -52,6 +52,9 @@
                 @enderror
             </div>
             <button type="submit" class="login-button">{{ __('Registrarse') }}</button>
+            <div class="login-footer">
+                <p>¿Ya tienes una cuenta? <a class="login-text" href="{{ route('login') }}">Inicia sesión</a></p>
+            </div>
         </form>
     </div>
 </div>
