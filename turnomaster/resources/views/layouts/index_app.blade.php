@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/index/index-app-blade.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" href="{{ asset('img/logo/TurnoMaster_lines.svg') }}" type="image/x-icon">
 </head>
 <body class="d-flex flex-column min-vh-100">
     @include('components.navbar')
