@@ -15,14 +15,14 @@
             @csrf
             <div class="input-group">
                 <label for="name">{{ __('Nombre') }}</label>
-                <input id="name" type="text" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                <input id="name" type="text" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Ej: Kiara Morgan">
                 @error('name')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
             <div class="input-group">
                 <label for="email">{{ __('Correo electrónico') }}</label>
-                <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email">
+                <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="ejemplo@correo.com">
                 @error('email')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -30,7 +30,7 @@
             <div class="input-group">
                 <label for="password">{{ __('Contraseña') }}</label>
                 <div class="password-container">
-                    <input id="password" type="password" name="password" required autocomplete="new-password">
+                    <input id="password" type="password" name="password" required autocomplete="new-password" placeholder="********">
                     <button type="button" id="togglePassword">
                         <i class="bi bi-eye-fill"></i>
                     </button>
@@ -42,7 +42,7 @@
             <div class="input-group">
                 <label for="password-confirm">{{ __('Confirmar contraseña') }}</label>
                 <div class="password-container">
-                    <input id="password-confirm" type="password" name="password_confirmation" required autocomplete="new-password">
+                    <input id="password-confirm" type="password" name="password_confirmation" required autocomplete="new-password" placeholder="********">
                     <button type="button" id="togglePasswordConfirm">
                         <i class="bi bi-eye-fill"></i>
                     </button>
