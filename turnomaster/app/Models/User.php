@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\VerificationCodeMail;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -49,8 +50,13 @@ class User extends Authenticatable
     public function sendVerificationCode()
     {
         $code = rand(100000, 999999);
-        $this->verificationCodes()->create(['code' => $code]);
-        Mail::to($this->email)->send(new VerificationCodeMail($code));
+        $verificationCode = VerificationCode::create([
+            'user_id' => $this->id,
+            'code' => $code,
+            'expires_at' => Carbon::now()->addMinutes(10),
+        ]);
+
+        Mail::to($this->email)->send(new VerificationCodeMail($code, $this));
         
         Log::info('Verification email sent to ' . $this->email . ' with code: ' . $code);
     }

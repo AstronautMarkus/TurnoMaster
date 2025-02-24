@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -79,9 +80,11 @@ class AuthController extends Controller
             'code' => 'required|numeric',
         ]);
 
-        $verificationCode = VerificationCode::where('code', $request->code)->where('user_id', Auth::id())->first();
+        $verificationCode = VerificationCode::where('code', $request->code)
+            ->where('user_id', Auth::id())
+            ->first();
 
-        if ($verificationCode) {
+        if ($verificationCode && !$verificationCode->isExpired()) {
             $user = Auth::user();
             $user->email_verified_at = now();
             $user->save();
@@ -90,6 +93,6 @@ class AuthController extends Controller
             return redirect('/dashboard');
         }
 
-        return redirect()->back()->withErrors(['code' => 'El código de verificación es incorrecto.']);
+        return redirect()->back()->withErrors(['code' => 'El código de verificación es incorrecto o ha expirado.']);
     }
 }
