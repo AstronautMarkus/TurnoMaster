@@ -25,6 +25,12 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('/email/verify', function () {
+    return view('auth.confirm_account');
+})->name('verification.notice');
+
+Route::post('/email/verify', [AuthController::class, 'verify'])->name('verification.verify');
+
 Route::middleware(['auth'])->group(function () {
     
     Route::get('/dashboard', function () {

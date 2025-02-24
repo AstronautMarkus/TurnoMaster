@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\VerificationCodeMail;
+use Illuminate\Support\Facades\Log;
 
 class User extends Authenticatable
 {
@@ -42,4 +45,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function sendVerificationCode()
+    {
+        $code = rand(100000, 999999);
+        $this->verificationCodes()->create(['code' => $code]);
+        Mail::to($this->email)->send(new VerificationCodeMail($code));
+        
+        Log::info('Verification email sent to ' . $this->email . ' with code: ' . $code);
+    }
+
+    public function verificationCodes()
+    {
+        return $this->hasMany(VerificationCode::class);
+    }
 }

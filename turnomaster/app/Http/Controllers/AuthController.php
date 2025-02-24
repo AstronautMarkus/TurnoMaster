@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\VerificationCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -39,7 +40,9 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect('/dashboard');
+        $user->sendVerificationCode();
+
+        return redirect()->route('verification.notice');
     }
 
     public function login(Request $request)
@@ -68,5 +71,25 @@ class AuthController extends Controller
     {
         Auth::logout();
         return redirect('/');
+    }
+
+    public function verify(Request $request)
+    {
+        $request->validate([
+            'code' => 'required|numeric',
+        ]);
+
+        $verificationCode = VerificationCode::where('code', $request->code)->where('user_id', Auth::id())->first();
+
+        if ($verificationCode) {
+            $user = Auth::user();
+            $user->email_verified_at = now();
+            $user->save();
+            $verificationCode->delete();
+
+            return redirect('/dashboard');
+        }
+
+        return redirect()->back()->withErrors(['code' => 'El código de verificación es incorrecto.']);
     }
 }
