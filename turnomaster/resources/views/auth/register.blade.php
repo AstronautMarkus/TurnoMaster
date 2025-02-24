@@ -5,8 +5,8 @@
 @section('title', 'TurnoMaster - Register')
 
 @section('content')
-<div class="d-flex justify-content-center align-items-center vh-100">
-    <div class="login-container">
+
+<div class="login-container">
         <div class="login-header d-flex align-items-center">
             <img src="{{ asset('img/logo/TurnoMaster_lines.svg') }}" alt="Login Image" class="login-image">
             <div class="login-title">
@@ -59,8 +59,8 @@
                 <p>¿Ya tienes una cuenta? <a class="login-text" href="{{ route('login') }}">Inicia sesión</a></p>
             </div>
         </form>
-    </div>
 </div>
+
 <script>
     document.getElementById('togglePassword').addEventListener('click', function () {
         var passwordField = document.getElementById('password');
