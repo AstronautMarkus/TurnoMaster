@@ -86,7 +86,7 @@
             this.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
         } else {
             passwordField.setAttribute('type', 'password');
-            this.innerHTML = '<i class="bi bi-eye-fill'></i>';
+            this.innerHTML = '<i class="bi bi-eye-fill"></i>';
         }
     });
 </script>
