@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\VerificationController;
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -24,6 +25,16 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('register-message', function () {
+    return view('auth.register_message');
+})->name('register.message');
+
+Route::get('verify-account/{code}', [VerificationController::class, 'verify'])->name('verify.account');
+
+Route::get('email-handler', function () {
+    return view('handlers.email_handler');
+})->name('email.handler');
 
 Route::middleware(['auth'])->group(function () {
     

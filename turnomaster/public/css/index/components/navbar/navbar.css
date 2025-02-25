@@ -32,6 +32,22 @@
     align-items: center;
 }
 
+.navbar-brand {
+    position: relative;
+    overflow: hidden;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo {
+    height: 100px;
+    width: auto;
+}
+
+
+
+
 @media (max-width: 768px) {
     .nav-btn-center {
         width: 100%;

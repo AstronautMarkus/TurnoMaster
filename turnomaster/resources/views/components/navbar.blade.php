@@ -1,10 +1,15 @@
 <link rel="stylesheet" href="{{ asset('css/index/components/navbar/navbar.css') }}">
 
 <div class="navbar navbar-expand-lg navbar-color">
-    <a class="navbar-brand navbar-text font-weight-bold" href="/">TurnoMaster</a>
+
+    <a class="navbar-brand navbar-text font-weight-bold" href="/">
+        <img src="{{ asset('img/logo/TurnoMaster.svg') }}" alt="TurnoMaster Logo" class="navbar-logo" id="navbar-logo">
+    </a>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
             <li class="nav-item">
@@ -30,3 +35,16 @@
         </ul>
     </div>
 </div>
+
+<script>
+    const logo = document.getElementById('navbar-logo');
+    document.querySelector('.navbar-brand').addEventListener('mouseover', function() {
+        logo.style.transition = '0.3s ease';
+        logo.src = "{{ asset('img/logo/TurnoMaster_black.svg') }}";
+    });
+
+    document.querySelector('.navbar-brand').addEventListener('mouseout', function() {
+        logo.style.transition = '0.3s ease';
+        logo.src = "{{ asset('img/logo/TurnoMaster.svg') }}";
+    });
+</script>
