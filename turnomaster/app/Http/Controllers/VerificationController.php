@@ -27,6 +27,8 @@ class VerificationController extends Controller
 
         $verificationCode->delete();
 
-        return redirect('/')->with('success', 'Su cuenta ha sido verificada exitosamente.');
+        $userName = ucwords(strtolower($user->name));
+
+        return redirect('/')->with('success', 'Su cuenta ha sido verificada exitosamente.')->with('verified', true)->with('userName', $userName);
     }
 }

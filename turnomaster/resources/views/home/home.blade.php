@@ -4,6 +4,8 @@
 
 <link rel="stylesheet" href="{{ asset('css/index/home/home-blade.css') }}">
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 @section('content')
     <div class="hero mb-5">
             <div class="row justify-content-center align-items-center">
@@ -84,6 +86,15 @@
             animateCount('users-count', 0, 100, 1000);
             animateCount('companies-count', 0, 100, 1000);
             animateCount('hours-count', 0, 100, 1000);
+
+            @if(session('verified'))
+                Swal.fire({
+                    title: '¡Hola {{ session('userName') }} te damos la bienvenida a TurnoMaster!',
+                    text: 'Tu cuenta ha sido verificada exitosamente. ¡Ya puedes iniciar sesión!',
+                    icon: 'success',
+                    confirmButtonText: 'De acuerdo'
+                });
+            @endif
         });
 
     </script>
