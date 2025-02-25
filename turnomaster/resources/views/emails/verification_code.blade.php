@@ -11,5 +11,6 @@
     <p>Hola {{ $user->name }},</p>
     <p>Su código de verificación es: {{ $code }}</p>
     <p>Este código es válido por 10 minutos.</p>
+    <p><a href="{{ url('verify-account/' . $code) }}" style="background-color: #4CAF50; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block;">Verificar Cuenta</a></p>
 </body>
 </html>

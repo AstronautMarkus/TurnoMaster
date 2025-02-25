@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\VerificationCode;
+use App\Mail\VerificationCodeMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 use Carbon\Carbon;
 
@@ -39,11 +41,15 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        Auth::login($user);
+        $code = rand(100000, 999999);
+        VerificationCode::create([
+            'user_id' => $user->id,
+            'code' => $code,
+        ]);
 
-        $user->sendVerificationCode();
+        Mail::to($user->email)->send(new VerificationCodeMail($code, $user));
 
-        return redirect()->route('verification.notice');
+        return redirect()->route('register.message');
     }
 
     public function login(Request $request)
