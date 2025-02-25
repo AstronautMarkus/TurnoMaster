@@ -5,9 +5,7 @@
 @section('title', 'TurnoMaster - Error de Verificación')
 
 @section('content')
-<a href="{{ url('/') }}" class="home-button">
-    <i class="bi bi-house-door-fill"></i>{{ __('Inicio') }}
-</a>
+
 <div>
     <div class="login-container">
         <div class="login-header d-flex align-items-center">
@@ -20,6 +18,9 @@
         @if (session('error'))
             <p class="text-danger">{{ session('error') }}</p>
         @endif
+        <a href="{{ url('/') }}" class="home-button">
+        <i class="bi bi-house-door-fill"></i>{{ __('Inicio') }}
+        </a>
     </div>
 </div>
 @endsection

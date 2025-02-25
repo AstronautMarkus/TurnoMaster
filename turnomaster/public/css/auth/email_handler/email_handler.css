@@ -154,9 +154,6 @@ a:hover{
 
 
 .home-button {
-    position: absolute;
-    top: 20px;
-    left: 20px;
     background-color: #965AA0;
     color: white;
     padding: 10px 20px;
@@ -166,6 +163,9 @@ a:hover{
     font-family: 'Roboto', sans-serif;
     display: flex;
     align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    transition: color 0.3s ease;
 }
 
 .home-button i {
