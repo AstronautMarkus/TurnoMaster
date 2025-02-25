@@ -95,6 +95,16 @@
                     confirmButtonText: 'De acuerdo'
                 });
             @endif
+            
+            @if(session('logout_success'))
+                Swal.fire({
+                    title: '¡Hasta luego!',
+                    text: '{{ session('logout_success') }}',
+                    icon: 'success',
+                    confirmButtonText: 'De acuerdo'
+                });
+            @endif
+
         });
 
     </script>

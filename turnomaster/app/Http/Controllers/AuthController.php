@@ -77,6 +77,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
+        $request->session()->flash('logout_success', 'Has cerrado sesión exitosamente.');
         return redirect('/');
     }
 
