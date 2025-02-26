@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VerificationController;
+use App\Http\Controllers\PasswordController;
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -23,6 +24,17 @@ Route::get('/register', function () {
 Route::get('/forgot-password', function () {
     return view('auth.forgot_password');
 })->name('forgot.password');
+
+Route::post('/forgot-password', [PasswordController::class, 'requestReset'])->name('password.request');
+
+Route::get('/reset-password/{token}', [PasswordController::class, 'resetForm'])->name('password.reset.form');
+
+Route::get('/reset-password', [PasswordController::class, 'resetForm'])->name('password.reset.form');
+Route::post('/reset-password', [PasswordController::class, 'resetPassword'])->name('password.reset');
+
+Route::get('/password-reset-message', function () {
+    return view('auth.password_reset_message');
+})->name('password.reset.message');
 
 Route::post('/login', [AuthController::class, 'login']);
 

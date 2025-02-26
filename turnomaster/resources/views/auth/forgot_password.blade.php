@@ -17,7 +17,7 @@
                 <p>Ingresa tu correo electrónico para recuperar tu contraseña</p>
             </div>
         </div>
-        <form method="POST" action="#">
+        <form method="POST" action="{{ route('password.request') }}">
             @csrf
             <div class="input-group">
                 <label for="email">{{ __('Correo electrónico') }}</label>

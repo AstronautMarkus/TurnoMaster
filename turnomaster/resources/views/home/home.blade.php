@@ -1,12 +1,28 @@
-@extends('layouts.index_app')
+@extends('layouts.app')
 
-@section('title', 'TurnoMaster - home')
+@section('title', 'TurnoMaster - Home')
 
 <link rel="stylesheet" href="{{ asset('css/index/home/home-blade.css') }}">
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 @section('content')
+@if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
+
+<!-- Swagger UI -->
+<div id="swagger-ui"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.52.5/swagger-ui-bundle.js"></script>
+<script>
+    const ui = SwaggerUIBundle({
+        url: "/swagger.yaml",
+        dom_id: '#swagger-ui',
+    });
+</script>
+
     <div class="hero mb-5">
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-5">
