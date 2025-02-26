@@ -22,8 +22,8 @@ class PasswordController extends Controller
         );
 
         return $status === Password::RESET_LINK_SENT
-                    ? redirect()->route('password.reset.message')->with(['status' => __($status)])
-                    : back()->withErrors(['email' => __($status)]);
+                    ? redirect()->route('password.reset.message')->with(['status' => 'Se ha enviado un enlace para restablecer su contraseña.'])
+                    : back()->withErrors(['email' => 'No se pudo enviar el enlace para restablecer la contraseña.']);
     }
 
     public function resetForm(Request $request)
@@ -49,6 +49,6 @@ class PasswordController extends Controller
 
         return $status === Password::PASSWORD_RESET
                     ? redirect('/')->with('status', 'Contraseña cambiada exitosamente.')
-                    : back()->withErrors(['email' => [__($status)]]);
+                    : back()->withErrors(['email' => ['Este formulario de cambiar contraseña ya no es válido, por favor solicite uno nuevo.']]);
     }
 }
