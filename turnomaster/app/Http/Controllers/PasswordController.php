@@ -17,13 +17,20 @@ class PasswordController extends Controller
     {
         $request->validate(['email' => 'required|email']);
 
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
+        $user = User::where('email', $request->email)->first();
 
-        return $status === Password::RESET_LINK_SENT
-                    ? redirect()->route('password.reset.message')->with(['status' => 'Se ha enviado un enlace para restablecer su contraseña.'])
-                    : back()->withErrors(['email' => 'No se pudo enviar el enlace para restablecer la contraseña.']);
+        if (!$user) {
+            return back()->withErrors(['email' => 'No se pudo enviar el enlace para restablecer la contraseña.']);
+        }
+
+        $token = Password::createToken($user);
+
+        Mail::send('emails.change_code', ['user' => $user, 'token' => $token], function ($message) use ($user) {
+            $message->to($user->email);
+            $message->subject('Restablecimiento de Contraseña');
+        });
+
+        return redirect()->route('password.reset.message')->with(['status' => 'Se ha enviado un enlace para restablecer su contraseña.']);
     }
 
     public function resetForm(Request $request)
