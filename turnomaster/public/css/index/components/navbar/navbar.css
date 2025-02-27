@@ -41,12 +41,16 @@
 }
 
 .navbar-logo {
-    height: 100px;
+    height: 70px;
     width: auto;
+    margin-right: 5px;
 }
 
-
-
+.navbar-brand h5 {
+    margin: 0;
+    line-height: 50px;
+    
+}
 
 @media (max-width: 768px) {
     .nav-btn-center {
