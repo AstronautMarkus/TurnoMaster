@@ -6,7 +6,7 @@
 <div class="container mt-5">
     <h1 class="text-center" style="font-family: 'Poppins', sans-serif;">Características de TurnoMaster</h1>
     <div class="row mt-4" style="font-family: 'Roboto', sans-serif;">
-        <div class="col-md-4 d-flex align-items-stretch">
+        <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-stretch">
             <div class="card_features">
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title about_us-card-title">Gestión de Turnos</h5>
@@ -14,7 +14,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 d-flex align-items-stretch">
+        <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-stretch">
             <div class="card_features">
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title about_us-card-title">Notificaciones en Tiempo Real</h5>
@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 d-flex align-items-stretch">
+        <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-stretch">
             <div class="card_features">
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title about_us-card-title">Reportes Detallados</h5>
@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="row mt-4 justify-content-center" style="font-family: 'Roboto', sans-serif;">
-        <div class="col-md-4 d-flex align-items-stretch">
+        <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-stretch">
             <div class="card_features">
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title about_us-card-title">Panel de Control</h5>
@@ -40,7 +40,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 d-flex align-items-stretch">
+        <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-stretch">
             <div class="card_features">
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title about_us-card-title">Soporte 24/7</h5>
