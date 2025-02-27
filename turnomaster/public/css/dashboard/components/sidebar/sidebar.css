@@ -2,7 +2,19 @@
     height: 100vh;
     background-color: #222937;
     z-index: 1000;
+    display: flex;
+    flex-direction: column;
 }
+
+.sidebar-header {
+    flex-shrink: 0;
+}
+
+.sidebar-content {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
 .sidebar a {
     color: white;
 }
@@ -27,4 +39,17 @@
     height: 100px;
     width: auto;
     margin: 0 auto;
+}
+
+.expandable-menu {
+    cursor: pointer;
+}
+
+.expandable-menu-content {
+    display: none;
+    flex-direction: column;
+}
+
+.expandable-menu-content.show {
+    display: flex;
 }
