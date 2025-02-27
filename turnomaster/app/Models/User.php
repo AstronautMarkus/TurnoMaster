@@ -25,6 +25,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'activated_account',
     ];
 
     /**
@@ -64,5 +65,10 @@ class User extends Authenticatable
     public function verificationCodes()
     {
         return $this->hasMany(VerificationCode::class);
+    }
+
+    public function oldPasswords()
+    {
+        return $this->hasMany(OldPassword::class);
     }
 }

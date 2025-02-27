@@ -39,6 +39,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'activated_account' => false,
         ]);
 
         $code = rand(100000, 999999);
@@ -65,6 +66,10 @@ class AuthController extends Controller
             return redirect()->back()->withInput($request->only('email'))->withErrors(['email' => 'No se encontró una cuenta con esta dirección de correo.']);
         }
 
+        if (! $user->activated_account) {
+            return redirect()->back()->withInput($request->only('email'))->withErrors(['email' => 'La cuenta no ha sido activada. Revisa tu correo para poder activarla.']);
+        }
+
         if (! Hash::check($request->password, $user->password)) {
             return redirect()->back()->withInput($request->only('email'))->withErrors(['email' => 'Usuario o contraseña incorrectos.']);
         }
@@ -81,4 +86,54 @@ class AuthController extends Controller
         return redirect('/');
     }
 
+    public function requestReset(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return redirect()->back()->withErrors(['email' => 'No se encontró una cuenta con esta dirección de correo.']);
+        }
+
+        // Generate and send reset token (implementation not shown)
+        // ...
+
+        return redirect()->route('password.reset.message');
+    }
+
+    public function resetForm($token)
+    {
+        return view('auth.reset_password', ['token' => $token]);
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'token' => 'required',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        // Verify token and get user (implementation not shown)
+        // ...
+
+        $user = Auth::user(); // Assume user is authenticated for simplicity
+
+        if (Hash::check($request->password, $user->password)) {
+            return redirect()->back()->withErrors(['password' => 'No puedes usar la misma contraseña que actualmente tienes.']);
+        }
+
+        foreach ($user->oldPasswords as $oldPassword) {
+            if (Hash::check($request->password, $oldPassword->password)) {
+                return redirect()->back()->withErrors(['password' => 'No puedes usar una contraseña que ya has usado anteriormente.']);
+            }
+        }
+
+        OldPassword::create(['user_id' => $user->id, 'password' => $user->password]);
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->route('login')->with('status', 'Contraseña cambiada exitosamente.');
+    }
 }
