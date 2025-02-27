@@ -1,10 +1,27 @@
 body {
-    background-color: #e0e0e0;
+    background-image: url('/img/backgrounds/login_keyboard.jpg');
+    background-size: cover;
+    background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     font-family: Arial, sans-serif;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: inherit;
+    background-size: inherit;
+    background-position: inherit;
+    filter: blur(5px);
+    z-index: -1;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -115,7 +132,7 @@ a:hover{
     width: 100%;
     padding: 12px;
     border-radius: 8px;
-    background-color: #965AA0;
+    background-color: #3a39a3;
     border: none;
     color: white;
     font-size: 16px;
@@ -124,7 +141,7 @@ a:hover{
 }
 
 .login-button:hover {
-    background-color: #7D4686;
+    background-color: #2a28ce;
     color: #000000;
 }
 
@@ -177,4 +194,9 @@ a:hover{
 .home-button:hover {
     background-color: #7D4686;
     color: #000000;
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 10px;
 }
