@@ -141,7 +141,7 @@ a:hover{
 }
 
 .login-button:hover {
-    background-color: #7D4686;
+    background-color: #2a28ce;
     color: #000000;
 }
 
@@ -193,4 +193,9 @@ a:hover{
 .home-button:hover {
     background-color: #7D4686;
     color: #000000;
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 10px;
 }
