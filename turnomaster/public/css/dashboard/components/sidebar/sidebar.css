@@ -48,8 +48,15 @@
 .expandable-menu-content {
     display: none;
     flex-direction: column;
+    list-style: none!important;
 }
 
 .expandable-menu-content.show {
     display: flex;
+}
+
+.expandable-menu-content a:hover {
+    background-color: #ffffffab;
+    border-radius: 5px;
+    color: #222937;
 }
