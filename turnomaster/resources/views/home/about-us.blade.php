@@ -10,7 +10,7 @@
     <div class="project-container text-center p-4 rounded">
         <h1 class="text-dark">Sobre el Proyecto: TurnoMaster</h1>
         <p class="mt-3">
-            Todo comenzó cuando un grupo de jóvenes, durante su práctica <strong>laboral/profesional</strong>, se dio cuenta de lo ineficiente que era el sistema de registro de horarios: datos perdidos, justificaciones caóticas y una gestión deficiente.  
+            Todo comenzó cuando un grupo de jóvenes, durante su práctica <strong>laboral/profesional</strong>, se dieron cuenta de lo ineficiente que era el sistema de registro de horarios: datos perdidos, justificaciones caóticas y una gestión deficiente.  
             <br><br>
             Cansados de lidiar con este desorden, decidieron crear <strong>TurnoMaster</strong>, una herramienta diseñada para optimizar la administración de horarios y asistencia. Con la capacidad de gestionar múltiples empresas, mejorar el registro de entradas, colaciones y salidas, su objetivo es simple: hacerle la vida más fácil a todos.  
             <br><br>
