@@ -1,8 +1,9 @@
 <link rel="stylesheet" href="{{ asset('css/dashboard/components/sidebar/sidebar.css') }}">
 
 <div class="d-flex flex-column flex-shrink-0 p-3 text-white vh-100 sidebar" style="width: 280px;">
-    <a href="/" class="turnomaster-logo d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-        <h2>TurnoMaster</h2>
+    
+<a class="navbar-brand navbar-text font-weight-bold" href="/">
+        <img src="{{ asset('img/logo/TurnoMaster.svg') }}" alt="TurnoMaster Logo" class="navbar-logo" id="navbar-logo">
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto separator">

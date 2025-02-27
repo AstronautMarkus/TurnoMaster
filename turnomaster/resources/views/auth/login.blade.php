@@ -44,7 +44,7 @@
                 <label for="remember">{{ __('Recuérdame') }}</label>
             </div>
             <button type="submit" class="login-button">{{ __('Iniciar sesión') }}</button>
-            <a class="forgot-password" href="#">{{ __('¿Olvidaste tu contraseña?') }}</a>
+            <a class="forgot-password" href="{{ route('forgot.password') }}">{{ __('¿Olvidaste tu contraseña?') }}</a>
             <div class="login-footer">
                 <p>¿No tienes una cuenta? <a class="login-text" href="{{ route('register') }}">Regístrate</a></p>
             </div>

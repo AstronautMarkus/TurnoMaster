@@ -1,28 +1,39 @@
 @extends('layouts.index_app')
 
-@section('title', 'TurnoMaster - home')
+@section('title', 'TurnoMaster - Home')
 
 <link rel="stylesheet" href="{{ asset('css/index/home/home-blade.css') }}">
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 @section('content')
-    <div class="hero mb-5">
-            <div class="row justify-content-center align-items-center">
-                <div class="col-md-5">
-                    <div class="intro-text">
-                        <h1>¿Estás listo para optimizar la gestión de horarios de tus empleados?</h1>
-                        <p>TurnoMaster es el software ideal para gestionar las entradas y salidas de tu negocio, 
-                        permitiéndote conectar mejor con tus empleados y optimizar la administración de tu empresa.</p>
-                        <a href="/" class="btn-custom">Comenzar ahora</a>
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="intro-image">
-                        <img src="{{ asset('img/home/example-home.png') }}" alt="TurnoMaster" class="img-fluid">
-                    </div>
+
+<!-- Swagger UI -->
+<div id="swagger-ui"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.52.5/swagger-ui-bundle.js"></script>
+<script>
+    const ui = SwaggerUIBundle({
+        url: "/swagger.yaml",
+        dom_id: '#swagger-ui',
+    });
+</script>
+
+<div class="hero mb-5">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-5">
+                <div class="intro-text">
+                    <h1>¿Estás listo para optimizar la gestión de horarios de tus empleados?</h1>
+                    <p>TurnoMaster es el software ideal para gestionar las entradas y salidas de tu negocio, 
+                    permitiéndote conectar mejor con tus empleados y optimizar la administración de tu empresa.</p>
+                    <a href="/" class="btn-custom">Comenzar ahora</a>
                 </div>
             </div>
+            <div class="col-md-5">
+                <div class="intro-image">
+                    <img src="{{ asset('img/home/example-home.png') }}" alt="TurnoMaster" class="img-fluid">
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="container random-content my-5">
@@ -62,7 +73,7 @@
             </div>
         </div>
 
-    </div>
+</div>
 
     <script>
         function animateCount(id, start, end, duration) {
@@ -100,6 +111,15 @@
                 Swal.fire({
                     title: '¡Hasta luego!',
                     text: '{{ session('logout_success') }}',
+                    icon: 'success',
+                    confirmButtonText: 'De acuerdo'
+                });
+            @endif
+
+            @if (session('status'))
+                Swal.fire({
+                    title: '¡Éxito!',
+                    text: '{{ session('status') }}',
                     icon: 'success',
                     confirmButtonText: 'De acuerdo'
                 });

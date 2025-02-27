@@ -65,4 +65,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(VerificationCode::class);
     }
+
+    public function oldPasswords()
+    {
+        return $this->hasMany(OldPassword::class);
+    }
 }
