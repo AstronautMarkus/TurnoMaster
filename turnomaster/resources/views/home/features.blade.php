@@ -1,32 +1,50 @@
 @extends('layouts.index_app')
-
+<link rel="stylesheet" href="{{ asset('css/index/features/features-blade.css') }}">
 @section('title', 'TurnoMaster - características')
 
 @section('content')
 <div class="container mt-5">
-    <h1 class="text-center">Características de TurnoMaster</h1>
-    <div class="row mt-4">
-        <div class="col-md-4">
-            <div class="card">
+    <h1 class="text-center" style="font-family: 'Poppins', sans-serif;">Características de TurnoMaster</h1>
+    <div class="row mt-4" style="font-family: 'Roboto', sans-serif;">
+        <div class="col-md-4 d-flex align-items-stretch">
+            <div class="card text-center shadow-sm">
                 <div class="card-body">
                     <h5 class="card-title">Gestión de Turnos</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    <p class="card-text">Organiza y administra los turnos de tus empleados de manera eficiente. Crea, edita y elimina turnos con facilidad.</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card">
+        <div class="col-md-4 d-flex align-items-stretch">
+            <div class="card text-center shadow-sm">
                 <div class="card-body">
                     <h5 class="card-title">Notificaciones en Tiempo Real</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    <p class="card-text">Recibe notificaciones instantáneas sobre cambios en los turnos, solicitudes de permisos y más, directamente en tu correo electrónico.</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card">
+        <div class="col-md-4 d-flex align-items-stretch">
+            <div class="card text-center shadow-sm">
                 <div class="card-body">
                     <h5 class="card-title">Reportes Detallados</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    <p class="card-text">Genera reportes detallados sobre la asistencia, horas trabajadas y rendimiento de tus empleados para una mejor toma de decisiones.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4 justify-content-center" style="font-family: 'Roboto', sans-serif;">
+        <div class="col-md-4 d-flex align-items-stretch">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Panel de Control</h5>
+                    <p class="card-text">Revisa y administra todos los datos de entrada y salida de los trabajadores desde un panel de control centralizado en tu PC.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 d-flex align-items-stretch">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Soporte 24/7</h5>
+                    <p class="card-text">Nuestro equipo de soporte está disponible las 24 horas del día, los 7 días de la semana, para ayudarte con cualquier problema o consulta.</p>
                 </div>
             </div>
         </div>

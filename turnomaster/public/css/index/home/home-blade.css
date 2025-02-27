@@ -27,6 +27,7 @@ body {
     width: 500px;
     height: auto;
     border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .hero {
@@ -48,9 +49,16 @@ body {
 }
 
 .info-box {
-    background-color: #f8f9fa;
-    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
+    border: 3px solid #5c5ad6;
     border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.info-box:hover {
+    transform: translateY(-10px);
 }
 
 .info-grid {
@@ -70,11 +78,16 @@ body {
     display: flex;
     flex-direction: column;
     font-size: 1.2rem;
-    color: #6c757d;
-    padding: 10px;
+    color: #343a40;
+    padding: 20px;
     border-right: 1px solid #e0e0e0;
     text-align: center;
     flex: 1;
+    transition: background-color 0.3s ease;
+}
+
+.info-item:hover {
+    background-color: #f8f9fa;
 }
 
 .info-item:last-child {
@@ -83,10 +96,13 @@ body {
 
 .info-title {
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
 }
 
 .info-value {
+    font-size: 1.5rem;
+    color: #965AA0;
     text-align: center;
 }
 
