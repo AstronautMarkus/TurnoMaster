@@ -8,16 +8,6 @@
 
 @section('content')
 
-<!-- Swagger UI -->
-<div id="swagger-ui"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.52.5/swagger-ui-bundle.js"></script>
-<script>
-    const ui = SwaggerUIBundle({
-        url: "/swagger.yaml",
-        dom_id: '#swagger-ui',
-    });
-</script>
-
 <div class="hero mb-5">
         <div class="row justify-content-center align-items-center">
             <div class="col-md-5">

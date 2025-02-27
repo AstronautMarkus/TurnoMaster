@@ -3,7 +3,8 @@
 <div class="navbar navbar-expand-lg navbar-color">
 
     <a class="navbar-brand navbar-text font-weight-bold" href="/">
-        <img src="{{ asset('img/logo/TurnoMaster.svg') }}" alt="TurnoMaster Logo" class="navbar-logo" id="navbar-logo">
+        <img src="{{ asset('img/logo/TurnoMaster_lines.svg') }}" alt="TurnoMaster Logo" class="navbar-logo" id="navbar-logo">
+        <h5>TurnoMaster</h5>
     </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,16 +36,3 @@
         </ul>
     </div>
 </div>
-
-<script>
-    const logo = document.getElementById('navbar-logo');
-    document.querySelector('.navbar-brand').addEventListener('mouseover', function() {
-        logo.style.transition = '0.3s ease';
-        logo.src = "{{ asset('img/logo/TurnoMaster_black.svg') }}";
-    });
-
-    document.querySelector('.navbar-brand').addEventListener('mouseout', function() {
-        logo.style.transition = '0.3s ease';
-        logo.src = "{{ asset('img/logo/TurnoMaster.svg') }}";
-    });
-</script>
