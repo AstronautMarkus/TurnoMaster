@@ -39,6 +39,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'activated_account' => false,
         ]);
 
         $code = rand(100000, 999999);
@@ -63,6 +64,10 @@ class AuthController extends Controller
 
         if (! $user) {
             return redirect()->back()->withInput($request->only('email'))->withErrors(['email' => 'No se encontró una cuenta con esta dirección de correo.']);
+        }
+
+        if (! $user->activated_account) {
+            return redirect()->back()->withInput($request->only('email'))->withErrors(['email' => 'La cuenta no ha sido activada. Revisa tu correo para poder activarla.']);
         }
 
         if (! Hash::check($request->password, $user->password)) {

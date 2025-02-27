@@ -22,6 +22,7 @@ class VerificationController extends Controller
         }
 
         $user = $verificationCode->user;
+        $user->activated_account = true;
         $user->email_verified_at = Carbon::now();
         $user->save();
 
