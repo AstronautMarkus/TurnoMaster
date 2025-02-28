@@ -31,7 +31,7 @@
             </div>
             @endif
             <button type="submit" class="login-button">{{ __('Enviar enlace de recuperación') }}</button>
-            <div class="login-footer">
+            <div class="login-footer text-center">
                 <p>¿Recordaste tu contraseña? <a class="login-text" href="{{ route('login') }}">Iniciar sesión</a></p>
             </div>
         </form>
