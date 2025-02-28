@@ -5,9 +5,6 @@
 @section('title', 'TurnoMaster - ¡Cuenta Creada!')
 
 @section('content')
-<a href="{{ url('/') }}" class="home-button">
-    <i class="bi bi-house-door-fill"></i>{{ __('Inicio') }}
-</a>
 <div>
     <div class="login-container">
         <div class="login-header">
@@ -17,10 +14,10 @@
             </div>
             <div class="login-title">
                 <p>{{ __('¡Su cuenta ha sido creada con éxito! Por favor, revise su correo electrónico para activar su cuenta y comenzar a disfrutar de nuestra demo gratuita.') }}</p>
-                <p>{{ __('Si no ha recibido el correo, revise su carpeta de spam o haga clic en el botón de abajo para reenviar el correo de verificación.') }}</p>
+                <p>{{ __('Si no encuentra el correo en su bandeja de entrada, por favor revise su carpeta de spam o inténtelo de nuevo más tarde.') }}</p>
             </div>
 
-            <a class="btn-resend">Reenviar correo</a>
+            <a href="{{ url('/') }}" class="login-button">Volver a inicio</a>
             
         </div>
     </div>
