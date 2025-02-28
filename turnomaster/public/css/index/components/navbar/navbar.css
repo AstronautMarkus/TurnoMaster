@@ -1,6 +1,10 @@
 .navbar-color{
     background-color: #5c5ad6; 
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1030; /* Ensure the navbar is above other content */
 }
 
 .navbar-text {
@@ -50,6 +54,42 @@
     margin: 0;
     line-height: 50px;
     
+}
+
+.btn-free-trial{
+    background-color: #f57424;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 2rem;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-free-trial:hover {
+    color: #000000;
+}
+
+.btn-login {
+    background-color: #377ce4;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 2rem;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-login:hover {
+    color: #000000;
 }
 
 @media (max-width: 768px) {
