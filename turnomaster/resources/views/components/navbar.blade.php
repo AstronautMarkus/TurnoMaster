@@ -28,10 +28,14 @@
         </ul>
         <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link navbar-text font-weight-normal" href="/register">Registrarse</a>
+                    <a class="nav-link font-weight-normal btn-free-trial nav-btn-center" href="/register">
+                        <i class="bi bi-gift-fill"></i>  Prueba Gratis
+                    </a>
                 </li>
                 <li class="nav-item mx-2">
-                    <a class="nav-link navbar-text font-weight-normal btn-custom nav-btn-center" href="/login">Iniciar sesión</a>
+                    <a class="nav-link navbar-text font-weight-normal btn-login nav-btn-center" href="/login">
+                        Iniciar sesión
+                    </a>
                 </li>
         </ul>
     </div>

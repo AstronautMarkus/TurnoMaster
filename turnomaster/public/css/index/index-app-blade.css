@@ -67,7 +67,7 @@ a:hover{
     display: inline-block;
     font-size: 1rem;
     font-family: 'Poppins', sans-serif;
-    transition: background-color 0.5s ease, color 0.5s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .btn-custom:hover {

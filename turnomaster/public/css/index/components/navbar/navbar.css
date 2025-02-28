@@ -52,6 +52,42 @@
     
 }
 
+.btn-free-trial{
+    background-color: #f57424;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 2rem;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-free-trial:hover {
+    color: #000000;
+}
+
+.btn-login {
+    background-color: #377ce4;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 2rem;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-login:hover {
+    color: #000000;
+}
+
 @media (max-width: 768px) {
     .nav-btn-center {
         width: 100%;
