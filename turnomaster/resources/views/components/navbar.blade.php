@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ asset('css/index/components/navbar/navbar.css') }}">
 
-<div class="navbar navbar-expand-lg navbar-color">
+<div class="navbar navbar-expand-lg navbar-color fixed-top">
 
     <a class="navbar-brand navbar-text font-weight-bold" href="/">
         <img src="{{ asset('img/logo/TurnoMaster_lines.svg') }}" alt="TurnoMaster Logo" class="navbar-logo" id="navbar-logo">
