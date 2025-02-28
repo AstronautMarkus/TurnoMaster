@@ -46,7 +46,7 @@ Route::get('register-message', function () {
     return view('auth.register_message');
 })->name('register.message');
 
-Route::get('verify-account/{code}', [VerificationController::class, 'verify'])->name('verify.account');
+Route::get('verify-account/{code}', [AuthController::class, 'verify'])->name('verify.account');
 
 Route::get('email-handler', function () {
     return view('handlers.email_handler');
