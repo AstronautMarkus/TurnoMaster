@@ -17,7 +17,7 @@
                     permitiéndote conectar mejor con tus empleados y optimizar la administración de tu empresa.</p>
                 </div>
                 <div class="d-flex justify-content-center">
-                        <a href="/" class="btn-custom btn-acquire mr-2">
+                        <a href="/acquire" class="btn-custom btn-acquire mr-2">
                             <i class="bi bi-cart-fill"></i> Adquiere TurnoMaster </i>
                         </a>
                         <a href="https://youtube.com" target="_blank" class="btn-custom btn-video">

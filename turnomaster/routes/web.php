@@ -75,3 +75,7 @@ Route::get('/pricing', function () {
 Route::get('/about-us', function () {
     return view('home.about-us');
 });
+
+Route::get('/acquire', function () {
+    return view('home.acquire');
+});
