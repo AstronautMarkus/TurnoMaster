@@ -100,6 +100,23 @@
     color: #000000;
 }
 
+/* Dropdown menu */
+.dropdown-menu {
+    background-color: white;
+    border: 1px solid #5c5ad6;
+}
+
+.dropdown-item {
+    color: #5c5ad6;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #5c5ad6;
+    color: white;
+}
+
 /* Media queries */
 
 @media (max-width: 768px) {

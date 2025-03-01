@@ -15,10 +15,17 @@
         <ul class="navbar-nav mx-auto">
             <li class="nav-item">
                 <a class="nav-link navbar-text font-weight-normal" href="/pricing">Precios</a>
-                
             </li>
-            <li class="nav-item">
-                <a class="nav-link navbar-text font-weight-normal" href="/features">Características</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link navbar-text font-weight-normal dropdown-toggle" href="#" id="featuresDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Características
+                </a>
+                <div class="dropdown-menu" aria-labelledby="featuresDropdown">
+                    <a class="dropdown-item" href="/features">Características Generales</a>
+                    <a class="dropdown-item" href="/features/option1">Opción 1</a>
+                    <a class="dropdown-item" href="/features/option2">Opción 2</a>
+                    <a class="dropdown-item" href="/features/option3">Opción 3</a>
+                </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link navbar-text font-weight-normal" href="/clients">Clientes</a>
