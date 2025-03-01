@@ -48,15 +48,15 @@
                     <ul class="info-list d-flex">
                         <li class="info-item flex-fill text-center">
                             <span class="info-title">Usuarios registrados</span>
-                            <span class="info-value" id="users-count"></span>
+                            <strong class="info-value" id="users-count"></strong>
                         </li>
                         <li class="info-item flex-fill text-center">
                             <span class="info-title">Empresas que usan TurnoMaster</span>
-                            <span class="info-value" id="companies-count"></span>
+                            <strong class="info-value" id="companies-count"></strong>
                         </li>
                         <li class="info-item flex-fill text-center">
                             <span class="info-title">Horas gestionadas</span>
-                            <span class="info-value" id="hours-count"></span>
+                            <strong class="info-value" id="hours-count"></strong>
                         </li>
                     </ul>
                 </div>
