@@ -13,7 +13,6 @@ body {
 .intro-text h1 {
     font-size: 3rem;
     font-weight: 700;
-    color: #ffffff;
 }
 
 .intro-text p {
@@ -147,6 +146,12 @@ body {
     background-color: #7D4686;
     color: #ffffff;
 }
+
+.connect-employees h1 {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
 
 @media (max-width: 768px) {
     .info-list {

@@ -20,7 +20,7 @@
             </div>
             <div class="col-md-5">
                 <div class="intro-image">
-                    <img src="{{ asset('img/home/example-home.png') }}" alt="TurnoMaster" class="img-fluid">
+                    <img src="{{ asset('img/home/redd-francisco-5U_28ojjgms-unsplash.jpg') }}" alt="TurnoMaster" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -59,6 +59,13 @@
         <div class="row mt-5">
             <div class="col-md-12 text-right">
             <h2>Empleados satisfechos, <strong>empresa exitosa</strong></h2>
+            <p>Con TurnoMaster, no solo gestionas horarios, también mejoras la comunicación interna y aumentas la productividad de tu equipo. <br>Descubre cómo nuestra herramienta puede transformar la forma en que administras tu negocio.</p>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-12 text-center connect-employees">
+            <h1>Conecta con tus empleados</h1>
             <p>Con TurnoMaster, no solo gestionas horarios, también mejoras la comunicación interna y aumentas la productividad de tu equipo. <br>Descubre cómo nuestra herramienta puede transformar la forma en que administras tu negocio.</p>
             </div>
         </div>
