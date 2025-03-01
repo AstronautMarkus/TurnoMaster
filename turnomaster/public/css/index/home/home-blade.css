@@ -128,29 +128,19 @@ body {
     margin-bottom: 10px;
 }
 
-.btn-custom {
-    background-color: #965AA0;
-    color: #ffffff;
-    padding: 10px 20px;
-    border-radius: 2rem;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 1rem;
-    font-family: 'Roboto', sans-serif;
-    transition: background-color 0.5s ease, color 0.5s ease;
-}
-
-.btn-custom:hover {
-    background-color: #7D4686;
-    color: #ffffff;
-}
-
 .connect-employees h1 {
     font-size: 3rem;
     font-weight: 700;
 }
+
+.btn-acquire{
+    background-color:#f57424!important;
+}
+
+.btn-video{
+    background-color:#377ce4!important;
+}
+
 
 
 @media (max-width: 768px) {

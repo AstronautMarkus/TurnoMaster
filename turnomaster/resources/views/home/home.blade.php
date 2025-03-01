@@ -15,7 +15,14 @@
                     <h1>¿Estás listo para optimizar la gestión de horarios de tus empleados?</h1>
                     <p>TurnoMaster es el software ideal para gestionar las entradas y salidas de tu negocio, 
                     permitiéndote conectar mejor con tus empleados y optimizar la administración de tu empresa.</p>
-                    <a href="/" class="btn-custom">Comenzar ahora</a>
+                </div>
+                <div class="d-flex justify-content-center">
+                        <a href="/" class="btn-custom btn-acquire mr-2">
+                            <i class="bi bi-cart-fill"></i> Adquiere TurnoMaster </i>
+                        </a>
+                        <a href="https://youtube.com" target="_blank" class="btn-custom btn-video">
+                            <i class="bi bi-play-circle"></i> Demostración </i>
+                        </a>
                 </div>
             </div>
             <div class="col-md-5">
@@ -71,6 +78,8 @@
         </div>
 
 </div>
+
+
 
     <script>
         function animateCount(id, start, end, duration) {
