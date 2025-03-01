@@ -28,7 +28,7 @@
                 <p>Crea una cuenta para poder utilizar nuestra demo gratuita.</p>
             </div>
         </div>
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register') }}" id="register-form">
             @csrf
             <div class="input-group">
                 <label for="name">{{ __('Nombre') }}</label>
@@ -68,6 +68,9 @@
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
+            <div class="input-group d-flex justify-content-center">
+                <div class="cf-turnstile" data-sitekey="{{ env('TURNSTILE_SITE_KEY') }}"></div>
+            </div>
             <button type="submit" class="login-button">{{ __('Registrarse') }}</button>
             <div class="login-footer">
                 <p>¿Ya tienes una cuenta? <a class="login-text" href="{{ route('login') }}">Inicia sesión</a></p>
@@ -76,6 +79,7 @@
     </div>
 </div>
 
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script>
     document.getElementById('togglePassword').addEventListener('click', function () {
         var passwordField = document.getElementById('password');
@@ -99,6 +103,29 @@
             passwordField.setAttribute('type', 'password');
             this.innerHTML = '<i class="bi bi-eye-fill"></i>';
         }
+    });
+
+    document.getElementById('register-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var form = this;
+        var turnstileResponse = document.querySelector('.cf-turnstile input[name="cf-turnstile-response"]').value;
+
+        fetch('{{ route('turnstile.verify') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({ 'cf-turnstile-response': turnstileResponse })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                form.submit();
+            } else {
+                alert('La verificación de Turnstile falló. Por favor, inténtalo de nuevo.');
+            }
+        });
     });
 </script>
 @endsection

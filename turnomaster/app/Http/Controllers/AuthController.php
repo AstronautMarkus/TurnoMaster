@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 
 class AuthController extends Controller
 {
@@ -108,6 +109,23 @@ class AuthController extends Controller
         $userName = ucwords(strtolower($user->name));
 
         return redirect('/')->with('success', 'Su cuenta ha sido verificada exitosamente.')->with('verified', true)->with('userName', $userName);
+    }
+
+    public function verifyTurnstile(Request $request)
+    {
+        $response = Http::asForm()->post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
+            'secret' => env('TURNSTILE_SECRET_KEY'),
+            'response' => $request->input('cf-turnstile-response'),
+            'remoteip' => $request->ip(),
+        ]);
+
+        $data = $response->json();
+
+        if ($data['success']) {
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false, 'error' => $data['error-codes']]);
+        }
     }
 
 }

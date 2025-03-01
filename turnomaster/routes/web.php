@@ -52,6 +52,8 @@ Route::get('email-handler', function () {
     return view('handlers.email_handler');
 })->name('email.handler');
 
+Route::post('/turnstile-verify', [AuthController::class, 'verifyTurnstile'])->name('turnstile.verify');
+
 Route::middleware(['auth'])->group(function () {
     
     Route::get('/dashboard', function () {

@@ -181,6 +181,12 @@ a:hover{
     color: red;
 }
 
+.input-group.d-flex.justify-content-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
 
 .home-button {
     position: absolute;
