@@ -63,10 +63,15 @@
             </div>
         </div>
 
-        <div class="row mt-5">
-            <div class="col-md-12 text-right">
-            <h2>Empleados satisfechos, <strong>empresa exitosa</strong></h2>
-            <p>Con TurnoMaster, no solo gestionas horarios, también mejoras la comunicación interna y aumentas la productividad de tu equipo. <br>Descubre cómo nuestra herramienta puede transformar la forma en que administras tu negocio.</p>
+        <div class="row mt-5 align-items-center">
+            <div class="col-md-6">
+                <div class="intro-image">
+                    <img src="{{ asset('img/home/markus-winkler-IrRbSND5EUc-unsplash.jpg') }}" alt="TurnoMaster" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h2>Empleados satisfechos, <strong>empresa exitosa</strong></h2>
+                <p>Con TurnoMaster, no solo gestionas horarios, también mejoras la comunicación interna y aumentas la productividad de tu equipo. <br>Descubre cómo nuestra herramienta puede transformar la forma en que administras tu negocio.</p>
             </div>
         </div>
 
