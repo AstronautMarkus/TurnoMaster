@@ -147,3 +147,18 @@ body {
     background-color: #7D4686;
     color: #ffffff;
 }
+
+@media (max-width: 768px) {
+    .info-list {
+        flex-direction: column;
+    }
+
+    .info-item {
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .info-item:last-child {
+        border-bottom: none;
+    }
+}
