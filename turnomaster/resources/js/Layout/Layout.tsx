@@ -5,7 +5,6 @@ import "./Layout.css";
 import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
 
-
 interface LayoutProps {
   children: ReactNode;
 }
@@ -13,13 +12,6 @@ interface LayoutProps {
 function Layout({ children }: LayoutProps) {
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
   }, []);
 
   return (
