@@ -1,86 +1,23 @@
-@font-face {
-  font-family: 'Poppins';
-  src: url('/fonts/Poppins/Poppins-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Poppins';
-  src: url('/fonts/Poppins/Poppins-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: url('/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: url('/fonts/Roboto/Roboto-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-}
-
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
 body {
   display: flex;
   flex-direction: column;
-  padding-top: 60px;
+  min-height: 100vh;
+  overflow: hidden;
 }
 
 main {
-  flex: 1;
+  display: flex;
+  flex-grow: 1;
+  height: calc(100vh - 50px);
+  overflow: hidden;
 }
 
-/* texts and titles */
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Poppins', sans-serif;
-}
-
-p, a, span, label, input, strong, button, textarea, select {
-  font-family: 'Roboto', sans-serif;
-}
-
-a:hover{
-  text-decoration: none;
-}
-
-.btn-custom {
-  background-color: #965AA0;
-  color: #ffffff;
-  padding: 10px 20px;
-  border-radius: 2rem;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 1rem;
-  font-family: 'Poppins', sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.btn-custom:hover {
-  color: #000000;
-}
-
-
-@media (max-width: 768px) {
-  .btn-custom {
-      padding: 8px 16px;
-      border-radius: 1rem;
-      font-size: 0.875rem;
-      width: 90%;
-  }
+.container {
+  flex-grow: 1;
+  width: 100%;
+  max-width: 1200px;
+  border-radius: 10px;
+  padding: 20px;
+  overflow-y: auto;
+  max-height: 100%;
 }
