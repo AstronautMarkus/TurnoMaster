@@ -21,38 +21,38 @@ class Sidebar extends React.Component {
         return (
             <div className="d-flex flex-column flex-shrink-0 text-white vh-100 sidebar" style={{ width: '280px' }}>
                 <div className="sidebar-header p-3">
-                    <Link className="navbar-brand navbar-text font-weight-bold" to="/">
+                    <Link className="navbar-brand navbar-text font-weight-bold" to="/dashboard/">
                         <img src="/img/logo/TurnoMaster_dashboard.svg" alt="TurnoMaster Logo" className="navbar-logo" id="navbar-logo"/>
                     </Link>
                 </div>
                 <div className="sidebar-content p-3" style={{ overflowY: 'auto' }}>
                     <ul className="nav nav-pills flex-column mb-auto separator">
                         <li className="nav-item">
-                            <Link to="/" className="nav-link" aria-current="page">
+                            <Link to="/dashboard/test1" className="nav-link" aria-current="page">
                                 <BsHouse />
-                                Lorem Ipsum
+                                Test 1
                             </Link>
                         </li>
                         <li className="nav-item expandable-menu">
                             <Link to="#" className="nav-link">
                                 <BsFolder />
-                                Lorem Ipsum
+                                Open folder
                             </Link>
                             <ul className="expandable-menu-content">
                                 <li className="nav-item">
-                                    <Link to="/" className="nav-link">
+                                    <Link to="/dashboard/test2" className="nav-link">
                                     1. Lorem Ipsum
                                     </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/" className="nav-link">
+                                    <Link to="/dashboard/test3" className="nav-link">
                                     2. Lorem Ipsum
                                     </Link>
                                 </li>
                             </ul>
                         </li>
                         <li className="nav-item">
-                            <Link to="/" className="nav-link">
+                            <Link to="/dashboard/example" className="nav-link">
                                 <BsPerson />
                                 Lorem Ipsum
                             </Link>
