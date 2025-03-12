@@ -6,6 +6,18 @@
     <title>Laravel con React</title>
     @viteReactRefresh
     @vite(['resources/js/Main.tsx'])
+
+    <script>
+        window.onload = function () {
+            @if(Auth::check())
+                const user = {
+                    name: "{{ Auth::user()->name }}",
+                    email: "{{ Auth::user()->email }}",
+                };
+                sessionStorage.setItem('user', JSON.stringify(user));
+            @endif
+        };
+    </script>
 </head>
 <body>
     <div id="app"></div>

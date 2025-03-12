@@ -64,21 +64,31 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (! $user) {
-            return redirect()->back()->withInput($request->only('email'))->withErrors(['email' => 'No se encontró una cuenta con esta dirección de correo.']);
+            return response()->json(['error' => 'No se encontró una cuenta con esta dirección de correo.'], 401);
         }
 
         if (! $user->activated_account) {
-            return redirect()->back()->withInput($request->only('email'))->withErrors(['email' => 'La cuenta no ha sido activada. Revisa tu correo para poder activarla.']);
+            return response()->json(['error' => 'La cuenta no ha sido activada. Revisa tu correo para poder activarla.'], 403);
         }
 
         if (! Hash::check($request->password, $user->password)) {
-            return redirect()->back()->withInput($request->only('email'))->withErrors(['email' => 'Usuario o contraseña incorrectos.']);
+            return response()->json(['error' => 'Usuario o contraseña incorrectos.'], 401);
         }
 
         Auth::login($user);
 
-        return redirect('/dashboard');
+        return response()->json([
+            'success' => true,
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'email_verified_at' => $user->email_verified_at,
+            ]
+        ]);
     }
+
+    
 
     public function logout(Request $request)
     {
