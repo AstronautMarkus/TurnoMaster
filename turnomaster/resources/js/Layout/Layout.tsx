@@ -13,24 +13,14 @@ interface LayoutProps {
 function Layout({ children }: LayoutProps) {
   const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false);
   const [isRightSidebarVisible, setIsRightSidebarVisible] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
 
   const toggleRightSidebar = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-
     if (isRightSidebarOpen) {
       setIsRightSidebarOpen(false);
-      setTimeout(() => {
-        setIsRightSidebarVisible(false);
-        setIsAnimating(false);
-      }, 300);
+      setIsRightSidebarVisible(false);
     } else {
       setIsRightSidebarVisible(true);
-      setTimeout(() => {
-        setIsRightSidebarOpen(true);
-        setIsAnimating(false);
-      }, 10);
+      setIsRightSidebarOpen(true);
     }
   };
 
