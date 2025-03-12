@@ -8,6 +8,14 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ toggleRightSidebar }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [userName, setUserName] = useState("");
+
+    useEffect(() => {
+        const user = JSON.parse(sessionStorage.getItem("user") || "{}");
+        if (user.name) {
+            setUserName(user.name.split(' ').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' '));
+        }
+    }, []);
 
     const handleToggle = () => {
         if (isSidebarOpen) {
@@ -24,7 +32,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleRightSidebar }) => {
             <div className="container-fluid">
                 <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <span className="navbar-text text-white mx-2">
-                        ¡Hola, "user"!
+                        ¡Hola, {userName}!
                     </span>
                     <div>
                         <div className="toggle-dropdown" onClick={handleToggle}> <FaAngleDown /> </div>                 
