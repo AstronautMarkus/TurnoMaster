@@ -1,6 +1,7 @@
 import React from 'react';
 import { BsHouse, BsFolder, BsPerson } from "react-icons/bs";
 import "./Sidebar.css";
+import { Link } from 'react-router-dom';
 
 class Sidebar extends React.Component {
     componentDidMount() {
@@ -20,41 +21,41 @@ class Sidebar extends React.Component {
         return (
             <div className="d-flex flex-column flex-shrink-0 text-white vh-100 sidebar" style={{ width: '280px' }}>
                 <div className="sidebar-header p-3">
-                    <a className="navbar-brand navbar-text font-weight-bold" href="/">
+                    <Link className="navbar-brand navbar-text font-weight-bold" to="/">
                         <img src="/img/logo/TurnoMaster_dashboard.svg" alt="TurnoMaster Logo" className="navbar-logo" id="navbar-logo"/>
-                    </a>
+                    </Link>
                 </div>
                 <div className="sidebar-content p-3" style={{ overflowY: 'auto' }}>
                     <ul className="nav nav-pills flex-column mb-auto separator">
                         <li className="nav-item">
-                            <a href="/" className="nav-link" aria-current="page">
+                            <Link to="/" className="nav-link" aria-current="page">
                                 <BsHouse />
                                 Lorem Ipsum
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item expandable-menu">
-                            <a href="#" className="nav-link">
+                            <Link to="#" className="nav-link">
                                 <BsFolder />
                                 Lorem Ipsum
-                            </a>
+                            </Link>
                             <ul className="expandable-menu-content">
                                 <li className="nav-item">
-                                    <a href="/" className="nav-link">
+                                    <Link to="/" className="nav-link">
                                     1. Lorem Ipsum
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a href="/" className="nav-link">
+                                    <Link to="/" className="nav-link">
                                     2. Lorem Ipsum
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </li>
                         <li className="nav-item">
-                            <a href="/" className="nav-link">
+                            <Link to="/" className="nav-link">
                                 <BsPerson />
                                 Lorem Ipsum
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                     <hr/>
