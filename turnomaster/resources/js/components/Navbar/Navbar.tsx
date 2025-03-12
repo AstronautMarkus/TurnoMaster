@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from "./DashboardNavbar.module.css"
+import "./Navbar.css"
 
-class DashboardNavbar {
+class Navbar {
     render() {
         return (
             <nav class="navbar navbar-expand-lg navbar-light text-white w-100 navbar-custom">
@@ -22,4 +22,4 @@ class DashboardNavbar {
     }
 }
 
-export default DashboardNavbar;
+export default Navbar;
