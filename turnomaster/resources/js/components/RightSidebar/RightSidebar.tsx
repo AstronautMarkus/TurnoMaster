@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import "./RightSidebar.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button } from 'react-bootstrap';
@@ -22,6 +22,19 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ isOpen }) => {
         }
     };
 
+    const [userName, setUserName] = useState("");
+    const [userEmail, setUserEmail] = useState("");
+
+    useEffect(() => {
+        const user = JSON.parse(sessionStorage.getItem("user") || "{}");
+        if (user.name) {
+            setUserName(user.name.split(' ').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' '));
+        }
+        if (user.email) {
+            setUserEmail(user.email);
+        }
+    }, []);
+
     return (
         <div id="rightSidebar" className={`right-sidebar ${isOpen ? 'open' : ''}`}>
             <div className="sidebar-header">
@@ -29,7 +42,8 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ isOpen }) => {
                 <div className="profile-bg">
                     <img src="/img/utils/profile-picture.png" alt="perfil" className="profile-img" onContextMenu={(e) => e.preventDefault()}/>
                 </div>
-                <h3>Your name</h3>
+                <h3>{userName}</h3>
+                <p>{userEmail}</p>
             </div>
             <div className="right-sidebar-content">
                 <ul className="sidebar-options">

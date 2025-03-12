@@ -47,7 +47,7 @@
     padding: 15px;
 }
 
-.profile-bg, h3 {
+.profile-bg, h3, p {
     position: relative;
     z-index: 2;
 }
