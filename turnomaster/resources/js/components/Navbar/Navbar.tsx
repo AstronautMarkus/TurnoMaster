@@ -1,11 +1,7 @@
 import React from 'react';
 import "./Navbar.css"
 
-interface NavbarProps {
-    toggleRightSidebar: () => void;
-}
-
-const Navbar: React.FC<NavbarProps> = ({ toggleRightSidebar }) => {
+const Navbar: React.FC = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light text-white w-100 navbar-custom">
             <div className="container-fluid">
@@ -18,9 +14,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleRightSidebar }) => {
                             <span className="navbar-toggler-icon"></span>
                         </a>    
                     </div>
-                    <button onClick={toggleRightSidebar} className="btn btn-link text-white">
-                        <i className="fas fa-bars"></i> Toggle Right Sidebar
-                    </button>
+
                 </div>
             </div>
         </nav>
