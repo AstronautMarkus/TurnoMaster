@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "./Layout.module.css";
+import "./Layout.css";
 
 
 interface LayoutProps {
