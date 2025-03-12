@@ -11,9 +11,9 @@ const RightSidebar: React.FC = () => {
         <div id="rightSidebar" className={`right-sidebar ${isVisible ? 'visible' : ''}`}>
 
         <div className="sidebar-header">
-            <img src="{{ asset('img/headers/header01.png') }}" alt="cabecera" class="background-img" oncontextmenu="return false;"/>
+            <img src="/img/headers/header01.png" alt="cabecera" class="background-img" oncontextmenu="return false;"/>
             <div className="profile-bg">
-                <img src="{{ asset('img/utils/profile-picture.png') }}" alt="perfil" class="profile-img" oncontextmenu="return false;"/>
+                <img src="/img/utils/profile-picture.png" alt="perfil" class="profile-img" oncontextmenu="return false;"/>
             </div>
             <h3>Your name</h3>
         </div>
