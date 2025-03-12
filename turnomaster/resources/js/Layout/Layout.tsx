@@ -34,27 +34,6 @@ function Layout({ children }: LayoutProps) {
     }
   };
 
-  const handleClickOutside = (event: MouseEvent) => {
-    const rightSidebar = document.getElementById('rightSidebar');
-    if (rightSidebar && !rightSidebar.contains(event.target as Node)) {
-      if (isRightSidebarOpen && !isAnimating) {
-        setIsAnimating(true);
-        setIsRightSidebarOpen(false);
-        setTimeout(() => {
-          setIsRightSidebarVisible(false);
-          setIsAnimating(false);
-        }, 300);
-      }
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isRightSidebarOpen, isAnimating]);
-
   return (
     <div className="d-flex flex-column min-vh-100">
       <div className="d-flex flex-grow-1 w-100" style={{ overflow: 'hidden' }}>
