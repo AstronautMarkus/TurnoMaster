@@ -1,7 +1,21 @@
 import React from 'react';
+import { BsHouse, BsFolder, BsPerson } from "react-icons/bs";
 import "./Sidebar.css";
 
 class Sidebar extends React.Component {
+    componentDidMount() {
+        const expandableMenus = document.querySelectorAll('.expandable-menu > a');
+        expandableMenus.forEach(menu => {
+            menu.addEventListener('click', (e) => {
+                e.preventDefault();
+                const content = menu.nextElementSibling;
+                if (content) {
+                    content.classList.toggle('show');
+                }
+            });
+        });
+    }
+
     render() {
         return (
             <div className="d-flex flex-column flex-shrink-0 text-white vh-100 sidebar" style={{ width: '280px' }}>
@@ -14,13 +28,13 @@ class Sidebar extends React.Component {
                     <ul className="nav nav-pills flex-column mb-auto separator">
                         <li className="nav-item">
                             <a href="/" className="nav-link" aria-current="page">
-                                <i className="fas fa-home me-2"></i>
+                                <BsHouse />
                                 Lorem Ipsum
                             </a>
                         </li>
                         <li className="nav-item expandable-menu">
                             <a href="#" className="nav-link">
-                                <i className="fas fa-folder me-2"></i>
+                                <BsFolder />
                                 Lorem Ipsum
                             </a>
                             <ul className="expandable-menu-content">
@@ -38,7 +52,7 @@ class Sidebar extends React.Component {
                         </li>
                         <li className="nav-item">
                             <a href="/" className="nav-link">
-                                <i className="fas fa-user me-2"></i>
+                                <BsPerson />
                                 Lorem Ipsum
                             </a>
                         </li>
