@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const RightSidebar: React.FC = () => {
+    const [isVisible, setIsVisible] = useState(false);
+
+    const toggleSidebar = () => {
+        setIsVisible(!isVisible);
+    };
+
     return (
-        <div id="rightSidebar" className="right-sidebar">
+        <div id="rightSidebar" className={`right-sidebar ${isVisible ? 'visible' : ''}`}>
 
         <div className="sidebar-header">
             <img src="{{ asset('img/headers/header01.png') }}" alt="cabecera" class="background-img" oncontextmenu="return false;"/>

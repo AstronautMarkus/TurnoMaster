@@ -7,7 +7,7 @@ class Sidebar extends React.Component {
             <div className="d-flex flex-column flex-shrink-0 text-white vh-100 sidebar" style={{ width: '280px' }}>
                 <div className="sidebar-header p-3">
                     <a className="navbar-brand navbar-text font-weight-bold" href="/">
-                        <img src="{{ asset('img/logo/TurnoMaster_dashboard.svg') }}" alt="TurnoMaster Logo" className="navbar-logo" id="navbar-logo"/>
+                        <img src="/img/logo/TurnoMaster_dashboard.svg" alt="TurnoMaster Logo" className="navbar-logo" id="navbar-logo"/>
                     </a>
                 </div>
                 <div className="sidebar-content p-3" style={{ overflowY: 'auto' }}>

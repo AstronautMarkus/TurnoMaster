@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useRef } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./Layout.css";
 
@@ -11,12 +11,20 @@ interface LayoutProps {
 }
 
 function Layout({ children }: LayoutProps) {
+  const rightSidebarRef = useRef(null);
+
+  const toggleRightSidebar = () => {
+    if (rightSidebarRef.current) {
+      rightSidebarRef.current.toggleSidebar();
+    }
+  };
+
   return (
     <body className="d-flex flex-column min-vh-100">
       <div className="d-flex flex-grow-1 w-100" style={{ overflow: 'hidden' }}>
         <Sidebar />
         <div className="d-flex flex-column flex-grow-1 w-100">
-          <Navbar />
+          <Navbar toggleRightSidebar={toggleRightSidebar} />
           <main className="flex-grow-1 d-flex justify-content-center align-items-center">
             <div className="container shadow rounded bg-white mt-4 mb-4" style={{ width: '100%', maxWidth: '1200px' }}>
               <div>
@@ -26,7 +34,7 @@ function Layout({ children }: LayoutProps) {
           </main>
         </div>
       </div>
-      <RightSidebar />
+      <RightSidebar ref={rightSidebarRef} />
     </body>
   );
 }
