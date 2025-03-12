@@ -1,4 +1,4 @@
-import React, { ReactNode, useRef } from "react";
+import React, { ReactNode, useRef, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./Layout.css";
 
@@ -19,8 +19,21 @@ function Layout({ children }: LayoutProps) {
     }
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (rightSidebarRef.current && !rightSidebarRef.current.contains(event.target as Node)) {
+        rightSidebarRef.current.closeSidebar();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <body className="d-flex flex-column min-vh-100">
+    <div className="d-flex flex-column min-vh-100">
       <div className="d-flex flex-grow-1 w-100" style={{ overflow: 'hidden' }}>
         <Sidebar />
         <div className="d-flex flex-column flex-grow-1 w-100">
@@ -35,7 +48,7 @@ function Layout({ children }: LayoutProps) {
         </div>
       </div>
       <RightSidebar ref={rightSidebarRef} />
-    </body>
+    </div>
   );
 }
 
