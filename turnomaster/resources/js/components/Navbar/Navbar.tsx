@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FaAngleDown } from "react-icons/fa6";
 import "./Navbar.css"
 
 interface NavbarProps {
@@ -33,10 +34,8 @@ const Navbar: React.FC<NavbarProps> = ({ toggleRightSidebar }) => {
                     <span className="navbar-text text-white mx-2">
                         ¡Hola, "user"!
                     </span>
-                    <div className="dropdown">
-                        <a className={`dropdown-toggle ${isSidebarOpen ? 'clicked' : ''}`} role="button" id="toggleRightSidebar" data-bs-toggle="dropdown" aria-expanded="false" onClick={handleToggle}>
-                            <span className="navbar-toggler-icon"></span>
-                        </a>    
+                    <div>
+                        <div className="toggle-dropdown" onClick={handleToggle}> <FaAngleDown /> </div>                 
                     </div>
                 </div>
             </div>
