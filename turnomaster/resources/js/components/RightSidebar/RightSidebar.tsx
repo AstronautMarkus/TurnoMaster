@@ -1,32 +1,19 @@
-import React, { useState, forwardRef, useImperativeHandle } from 'react';
+import React from 'react';
+import "./RightSidebar.css";
 
-const RightSidebar = forwardRef((props, ref) => {
-    const [isVisible, setIsVisible] = useState(false);
+interface RightSidebarProps {
+    isOpen: boolean;
+}
 
-    const toggleSidebar = () => {
-        setIsVisible(!isVisible);
-    };
-
-    const closeSidebar = () => {
-        setIsVisible(false);
-    };
-
-    useImperativeHandle(ref, () => ({
-        toggleSidebar,
-        closeSidebar
-    }));
-
+const RightSidebar: React.FC<RightSidebarProps> = ({ isOpen }) => {
     return (
-        <div id="rightSidebar" className={`right-sidebar ${isVisible ? 'visible' : ''}`}>
+        <div id="rightSidebar" className={`right-sidebar ${isOpen ? 'open' : ''}`}>
             <div className="sidebar-header">
                 <img src="/img/headers/header01.png" alt="cabecera" className="background-img" onContextMenu={(e) => e.preventDefault()}/>
                 <div className="profile-bg">
                     <img src="/img/utils/profile-picture.png" alt="perfil" className="profile-img" onContextMenu={(e) => e.preventDefault()}/>
                 </div>
                 <h3>Your name</h3>
-                <button onClick={toggleSidebar} className="btn btn-link">
-                    <i className="fas fa-bars"></i>
-                </button>
             </div>
             <div className="right-sidebar-content">
                 <ul className="sidebar-options">
@@ -46,6 +33,6 @@ const RightSidebar = forwardRef((props, ref) => {
             </div>
         </div>
     );
-});
+};
 
 export default RightSidebar;

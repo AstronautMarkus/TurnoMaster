@@ -30,6 +30,7 @@
 
 .dropdown-toggle.clicked .navbar-toggler-icon {
     transform: rotate(180deg);
+    transition: transform 0.3s ease-in-out;
 }
 
 .navbar .dropdown .navbar-toggler-icon {
