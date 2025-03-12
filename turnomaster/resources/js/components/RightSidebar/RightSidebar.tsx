@@ -1,11 +1,27 @@
 import React from 'react';
 import "./RightSidebar.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Modal, Button } from 'react-bootstrap';
 
 interface RightSidebarProps {
     isOpen: boolean;
 }
 
 const RightSidebar: React.FC<RightSidebarProps> = ({ isOpen }) => {
+    const [showModal, setShowModal] = React.useState(false);
+
+    const handleLogout = async () => {
+        const response = await fetch('/api/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (response.ok) {
+            window.location.href = '/';
+        }
+    };
+
     return (
         <div id="rightSidebar" className={`right-sidebar ${isOpen ? 'open' : ''}`}>
             <div className="sidebar-header">
@@ -28,8 +44,22 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ isOpen }) => {
                     </li>
                 </ul>
                 <div className="logout-btn">
-                    <button type="button" className="text-danger" data-toggle="modal" data-target="#logoutModal">Cerrar sesión</button>
+                    <button type="button" className="text-danger" onClick={() => setShowModal(true)}>Cerrar sesión</button>
                 </div>
+                <Modal show={showModal} onHide={() => setShowModal(false)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Confirmar Cerrar Sesión</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>¿Estás seguro de que quieres cerrar sesión?</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => setShowModal(false)}>
+                            Cancelar
+                        </Button>
+                        <Button variant="danger" onClick={handleLogout}>
+                            Cerrar sesión
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         </div>
     );
