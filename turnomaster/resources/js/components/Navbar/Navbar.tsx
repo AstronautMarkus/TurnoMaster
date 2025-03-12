@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./Navbar.css"
 
 interface NavbarProps {
@@ -7,10 +7,23 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ toggleRightSidebar }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isAnimating, setIsAnimating] = useState(false);
 
     const handleToggle = () => {
-        toggleRightSidebar();
-        setIsSidebarOpen(!isSidebarOpen);
+        if (isAnimating) return;
+        setIsAnimating(true);
+
+        if (isSidebarOpen) {
+            setTimeout(() => {
+                toggleRightSidebar();
+                setIsSidebarOpen(false);
+                setIsAnimating(false);
+            }, 300);
+        } else {
+            toggleRightSidebar();
+            setIsSidebarOpen(true);
+            setIsAnimating(false);
+        }
     };
 
     return (

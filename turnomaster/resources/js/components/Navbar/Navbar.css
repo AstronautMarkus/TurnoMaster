@@ -33,6 +33,11 @@
     transition: transform 0.3s ease-in-out;
 }
 
+.dropdown-toggle:not(.clicked) .navbar-toggler-icon {
+    transform: rotate(0deg);
+    transition: transform 0.3s ease-in-out;
+}
+
 .navbar .dropdown .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M8 11l-6-6h12z'/%3E%3C/svg%3E");
     width: 24px;
