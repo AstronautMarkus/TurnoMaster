@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from "./DashboardNavbar"
+import styles from "./DashboardNavbar.module.css"
 
-class DashboardNavbar extends React.Component {
+class DashboardNavbar {
     render() {
         return (
             <nav class="navbar navbar-expand-lg navbar-light text-white w-100 navbar-custom">

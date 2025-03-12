@@ -56,14 +56,10 @@ Route::post('/turnstile-verify', [AuthController::class, 'verifyTurnstile'])->na
 
 Route::middleware(['auth'])->group(function () {
     
-    Route::get('/dashboard', function () {
+    Route::get('/dashboard/{any?}', function () {
         return view('dashboard.dashboard_home');
-    });
-
-    Route::get('/dashboard/profile', function () {
-        return view('dashboard.dashboard_profile');
-    });
-
+    })->where('any', '.*');
+    
 });
 
 Route::get('/features', function () {

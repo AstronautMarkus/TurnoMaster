@@ -13,4 +13,9 @@ export default defineConfig({
         }),
         react(),
     ],
+    css: {
+        modules: {
+            localsConvention: 'camelCase',
+        },
+    },
 });

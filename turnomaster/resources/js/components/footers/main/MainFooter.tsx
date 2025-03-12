@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "./MainFooter"
+import "./MainFooter.module.css"
 
 class MainFooter extends React.Component {
     getCurrentYear(): number {
