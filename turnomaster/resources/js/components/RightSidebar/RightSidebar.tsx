@@ -11,12 +11,8 @@ interface RightSidebarProps {
 const RightSidebar: React.FC<RightSidebarProps> = ({ isOpen }) => {
     const [showModal, setShowModal] = React.useState(false);
 
-    const handleLogout = async () => {
-        try {
-            const response = await axios.get('/logout-success');
-        } catch (error) {
-            console.error('Error al cerrar sesión:', error);
-        }
+    const handleLogout = () => {
+        window.location.href = '/logout-success';
     };
 
     const [userName, setUserName] = useState("");
