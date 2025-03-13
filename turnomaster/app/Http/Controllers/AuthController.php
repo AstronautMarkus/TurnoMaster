@@ -64,15 +64,15 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (! $user) {
-            return response()->json(['error' => 'No se encontró una cuenta con esta dirección de correo.'], 401);
+            return back()->withErrors(['email' => 'No se encontró una cuenta con esta dirección de correo.']);
         }
 
         if (! $user->activated_account) {
-            return response()->json(['error' => 'La cuenta no ha sido activada. Revisa tu correo para poder activarla.'], 403);
+            return back()->withErrors(['email' => 'La cuenta no ha sido activada. Revisa tu correo para poder activarla.']);
         }
 
         if (! Hash::check($request->password, $user->password)) {
-            return response()->json(['error' => 'Usuario o contraseña incorrectos.'], 401);
+            return back()->withErrors(['password' => 'Usuario o contraseña incorrectos.']);
         }
 
         Auth::login($user);
