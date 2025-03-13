@@ -36,7 +36,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ isOpen }) => {
                     <img src="/img/utils/profile-picture.png" alt="perfil" className="profile-img" onContextMenu={(e) => e.preventDefault()}/>
                 </div>
                 <h3>{userName}</h3>
-                <p>{userEmail}</p>
+                <p className={userEmail.length > 20 ? 'long-email' : ''}>{userEmail}</p>
             </div>
             <div className="right-sidebar-content">
                 <ul className="sidebar-options">

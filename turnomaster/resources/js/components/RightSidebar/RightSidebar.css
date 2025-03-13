@@ -105,3 +105,8 @@
 .logout-btn button:hover {
     color: rgb(150, 25, 25) !important;
 }
+
+.long-email {
+    font-size: 0.8em;
+    word-break: break-all;
+}
