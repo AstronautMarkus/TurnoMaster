@@ -1,18 +1,23 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cerrando sesión...</title>
-    <script>
-        window.onload = function () {
-            alert("{{ session('logout_success') }}"); // Muestra el mensaje flash
-            sessionStorage.clear(); // Limpia el almacenamiento en el navegador
-            window.location.href = "/"; // Redirige al inicio
-        };
-    </script>
-</head>
-<body>
-    <p>Cerrando sesión...</p>
-</body>
-</html>
+@extends('layouts.auth_app')
+
+<link rel="stylesheet" href="{{ asset('css/auth/logout-success/logout-success.css') }}">
+
+@section('title', 'TurnoMaster - Sesión cerrada')
+
+@section('content')
+<div>
+    <div class="login-container">
+        <div class="login-header">
+            <div class="login-content">
+                <img src="{{ asset('img/logo/TurnoMaster_black.svg') }}" alt="Logout Image" class="login-image">
+                <h2>{{ __('Has cerrado sesión') }}</h2>
+            </div>
+            <div class="login-title">
+                <p>{{ __('Has cerrado sesión correctamente. Gracias por usar TurnoMaster.') }}</p>
+                <p>{{ __('Serás redirigido automáticamente en un instante.') }}</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+@endsection
