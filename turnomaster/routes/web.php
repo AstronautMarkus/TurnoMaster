@@ -42,6 +42,15 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('/logout-success', function () {
+
+    Auth::logout();
+    session()->invalidate();
+    session()->regenerateToken();
+
+    return view('auth.logout-success');
+});
+
 Route::get('register-message', function () {
     return view('auth.register_message');
 })->name('register.message');

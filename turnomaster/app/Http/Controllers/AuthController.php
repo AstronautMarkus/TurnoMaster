@@ -80,15 +80,6 @@ class AuthController extends Controller
         return redirect('/dashboard');
     }
 
-    
-
-    public function logout(Request $request)
-    {
-        Auth::logout();
-        $request->session()->flash('logout_success', 'Has cerrado sesión exitosamente.');
-        return redirect('/');
-    }
-    
     public function verify($code)
     {
         $verificationCode = VerificationCode::where('code', $code)->first();

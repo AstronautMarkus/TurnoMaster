@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import "./RightSidebar.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button } from 'react-bootstrap';
+import axios from 'axios';
 
 interface RightSidebarProps {
     isOpen: boolean;
@@ -11,14 +12,10 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ isOpen }) => {
     const [showModal, setShowModal] = React.useState(false);
 
     const handleLogout = async () => {
-        const response = await fetch('/api/logout', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        if (response.ok) {
-            window.location.href = '/';
+        try {
+            const response = await axios.get('/logout-success');
+        } catch (error) {
+            console.error('Error al cerrar sesión:', error);
         }
     };
 
