@@ -16,8 +16,12 @@
                 <p>{{ __('Has cerrado sesión correctamente. Gracias por usar TurnoMaster.') }}</p>
                 <p>{{ __('Serás redirigido automáticamente en un instante.') }}</p>
             </div>
-
         </div>
     </div>
 </div>
+<script>
+    setTimeout(function() {
+        window.location.href = '/';
+    }, 3000);
+</script>
 @endsection
