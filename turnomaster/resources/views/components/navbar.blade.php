@@ -14,16 +14,25 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
             <li class="nav-item">
-                <a class="nav-link navbar-text font-weight-normal" href="/features">Características</a>
+                <a class="nav-link navbar-text font-weight-normal" href="/pricing">Precios</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link navbar-text font-weight-normal dropdown-toggle" href="#" id="featuresDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Características
+                </a>
+                <div class="dropdown-menu" aria-labelledby="featuresDropdown">
+                    <a class="dropdown-item" href="/features">Características generales</a>
+                    <a class="dropdown-item" href="/">Para quién es TurnoMaster</a>
+                    <a class="dropdown-item" href="/">Comparativa de planes</a>
+                    <a class="dropdown-item" href="/">Seguridad y privacidad</a>
+                    <a class="dropdown-item" href="/">Integraciones disponibles</a>
+                </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link navbar-text font-weight-normal" href="/pricing">Precios</a>
+                <a class="nav-link navbar-text font-weight-normal" href="/clients">Clientes</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link navbar-text font-weight-normal" href="/about-us">Sobre el proyecto</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link navbar-text font-weight-normal" href="/contact">Contacto</a>
             </li>
         </ul>
         <ul class="navbar-nav">

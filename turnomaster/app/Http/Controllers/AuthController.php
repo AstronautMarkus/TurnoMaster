@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 
 class AuthController extends Controller
 {
@@ -63,15 +64,15 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (! $user) {
-            return redirect()->back()->withInput($request->only('email'))->withErrors(['email' => 'No se encontró una cuenta con esta dirección de correo.']);
+            return back()->withErrors(['email' => 'No se encontró una cuenta con esta dirección de correo.']);
         }
 
         if (! $user->activated_account) {
-            return redirect()->back()->withInput($request->only('email'))->withErrors(['email' => 'La cuenta no ha sido activada. Revisa tu correo para poder activarla.']);
+            return back()->withErrors(['email' => 'La cuenta no ha sido activada. Revisa tu correo para poder activarla.']);
         }
 
         if (! Hash::check($request->password, $user->password)) {
-            return redirect()->back()->withInput($request->only('email'))->withErrors(['email' => 'Usuario o contraseña incorrectos.']);
+            return back()->withErrors(['password' => 'Usuario o contraseña incorrectos.']);
         }
 
         Auth::login($user);
@@ -79,61 +80,45 @@ class AuthController extends Controller
         return redirect('/dashboard');
     }
 
-    public function logout(Request $request)
+    public function verify($code)
     {
-        Auth::logout();
-        $request->session()->flash('logout_success', 'Has cerrado sesión exitosamente.');
-        return redirect('/');
-    }
+        $verificationCode = VerificationCode::where('code', $code)->first();
 
-    public function requestReset(Request $request)
-    {
-        $request->validate(['email' => 'required|email']);
-
-        $user = User::where('email', $request->email)->first();
-
-        if (!$user) {
-            return redirect()->back()->withErrors(['email' => 'No se encontró una cuenta con esta dirección de correo.']);
+        if (!$verificationCode) {
+            return redirect()->route('email.handler')->with('error', 'El código de verificación es inválido o ya ha sido utilizado.');
         }
 
-        // Generate and send reset token (implementation not shown)
-        // ...
-
-        return redirect()->route('password.reset.message');
-    }
-
-    public function resetForm($token)
-    {
-        return view('auth.reset_password', ['token' => $token]);
-    }
-
-    public function resetPassword(Request $request)
-    {
-        $request->validate([
-            'token' => 'required',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
-
-        // Verify token and get user (implementation not shown)
-        // ...
-
-        $user = Auth::user(); // Assume user is authenticated for simplicity
-
-        if (Hash::check($request->password, $user->password)) {
-            return redirect()->back()->withErrors(['password' => 'No puedes usar la misma contraseña que actualmente tienes.']);
+        if ($verificationCode->isExpired()) {
+            return redirect()->route('email.handler')->with('error', 'El código de verificación ha expirado.');
         }
 
-        foreach ($user->oldPasswords as $oldPassword) {
-            if (Hash::check($request->password, $oldPassword->password)) {
-                return redirect()->back()->withErrors(['password' => 'No puedes usar una contraseña que ya has usado anteriormente.']);
-            }
-        }
-
-        OldPassword::create(['user_id' => $user->id, 'password' => $user->password]);
-
-        $user->password = Hash::make($request->password);
+        $user = $verificationCode->user;
+        $user->activated_account = true;
+        $user->email_verified_at = Carbon::now();
         $user->save();
 
-        return redirect()->route('login')->with('status', 'Contraseña cambiada exitosamente.');
+        $verificationCode->delete();
+
+        $userName = ucwords(strtolower($user->name));
+
+        return redirect('/')->with('success', 'Su cuenta ha sido verificada exitosamente.')->with('verified', true)->with('userName', $userName);
     }
+
+    public function verifyTurnstile(Request $request)
+    {
+        $response = Http::asForm()->post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
+            'secret' => env('TURNSTILE_SECRET_KEY'),
+            'response' => $request->input('cf-turnstile-response'),
+            'remoteip' => $request->ip(),
+        ]);
+
+        $data = $response->json();
+
+        if ($data['success']) {
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false, 'error' => $data['error-codes']]);
+        }
+    }
+
 }

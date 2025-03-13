@@ -42,26 +42,33 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('/logout-success', function () {
+
+    Auth::logout();
+    session()->invalidate();
+    session()->regenerateToken();
+
+    return view('auth.logout-success');
+});
+
 Route::get('register-message', function () {
     return view('auth.register_message');
 })->name('register.message');
 
-Route::get('verify-account/{code}', [VerificationController::class, 'verify'])->name('verify.account');
+Route::get('verify-account/{code}', [AuthController::class, 'verify'])->name('verify.account');
 
 Route::get('email-handler', function () {
     return view('handlers.email_handler');
 })->name('email.handler');
 
+Route::post('/turnstile-verify', [AuthController::class, 'verifyTurnstile'])->name('turnstile.verify');
+
 Route::middleware(['auth'])->group(function () {
     
-    Route::get('/dashboard', function () {
+    Route::get('/dashboard/{any?}', function () {
         return view('dashboard.dashboard_home');
-    });
-
-    Route::get('/dashboard/profile', function () {
-        return view('dashboard.dashboard_profile');
-    });
-
+    })->where('any', '.*');
+    
 });
 
 Route::get('/features', function () {
@@ -74,4 +81,8 @@ Route::get('/pricing', function () {
 
 Route::get('/about-us', function () {
     return view('home.about-us');
+});
+
+Route::get('/acquire', function () {
+    return view('home.acquire');
 });

@@ -1,10 +1,10 @@
 .navbar-color{
     background-color: #5c5ad6; 
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0,0.3);
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1030; /* Ensure the navbar is above other content */
+    z-index: 1030;
 }
 
 .navbar-text {
@@ -14,7 +14,7 @@
 }
 
 .navbar-text:hover {
-    color: rgb(8, 7, 8);
+    color: black;
 }
 
 .navbar .nav-link.separator {
@@ -22,12 +22,16 @@
     pointer-events: none;
 }
 
-.navbar-toggler {
-    border-color: white;
-}
+/* Navbar responsive open button */
 
 .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active {
+    outline: none;
+    box-shadow: none;
 }
 
 .nav-btn-center {
@@ -35,6 +39,8 @@
     justify-content: center;
     align-items: center;
 }
+
+/* TurnoMaster container & Logo */
 
 .navbar-brand {
     position: relative;
@@ -55,6 +61,8 @@
     line-height: 50px;
     
 }
+
+/* Right buttons */
 
 .btn-free-trial{
     background-color: #f57424;
@@ -91,6 +99,25 @@
 .btn-login:hover {
     color: #000000;
 }
+
+/* Dropdown menu */
+.dropdown-menu {
+    background-color: white;
+    border: 1px solid #5c5ad6;
+}
+
+.dropdown-item {
+    color: #5c5ad6;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #5c5ad6;
+    color: white;
+}
+
+/* Media queries */
 
 @media (max-width: 768px) {
     .nav-btn-center {
