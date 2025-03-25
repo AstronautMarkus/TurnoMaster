@@ -71,6 +71,11 @@ Route::middleware(['auth'])->group(function () {
     
 });
 
+Route::get('/clients', function () {
+    return view('home.clients');
+});
+
+
 # Features routes
 
 Route::get('/features', function () {
