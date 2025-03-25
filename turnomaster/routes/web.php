@@ -71,9 +71,29 @@ Route::middleware(['auth'])->group(function () {
     
 });
 
+# Features routes
+
 Route::get('/features', function () {
     return view('home.features');
 });
+
+Route::get('/features/compare-plan', function () {
+    return view('features.compare-plan');
+});
+
+Route::get('/features/integrations', function () {
+    return view('features.integrations');
+});
+
+Route::get('/features/public-expected', function () {
+    return view('features.public-turnomaster');
+});
+
+Route::get('/features/security-privacy', function () {
+    return view('features.security-privacy');
+});
+
+
 
 Route::get('/pricing', function () {
     return view('home.pricing');

@@ -22,10 +22,10 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="featuresDropdown">
                     <a class="dropdown-item" href="/features">Características generales</a>
-                    <a class="dropdown-item" href="/">Para quién es TurnoMaster</a>
-                    <a class="dropdown-item" href="/">Comparativa de planes</a>
-                    <a class="dropdown-item" href="/">Seguridad y privacidad</a>
-                    <a class="dropdown-item" href="/">Integraciones disponibles</a>
+                    <a class="dropdown-item" href="/features/public-expected">Para quién es TurnoMaster</a>
+                    <a class="dropdown-item" href="/features/compare-plan">Comparativa de planes</a>
+                    <a class="dropdown-item" href="/features/security-privacy">Seguridad y privacidad</a>
+                    <a class="dropdown-item" href="/features/integrations">Integraciones disponibles</a>
                 </div>
             </li>
             <li class="nav-item">
