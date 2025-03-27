@@ -35,5 +35,33 @@
             @yield('centered_content')
         </div>
     </div>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const loginBox = document.querySelector('.login-box');
+    if (!loginBox) return;
+    
+    const cubeCount = 15;
+    
+    for (let i = 0; i < cubeCount; i++) {
+        const cube = document.createElement('div');
+        cube.className = 'cube';
+        
+        const size = Math.random() * 40 + 10;
+        cube.style.width = `${size}px`;
+        cube.style.height = `${size}px`;
+        
+        cube.style.left = `${Math.random() * 100}%`;
+        cube.style.top = `${Math.random() * 100}%`;
+        
+        cube.style.transform = `rotate(${Math.random() * 360}deg)`;
+        
+        cube.style.opacity = `${Math.random() * 0.3 + 0.1}`;
+        
+        loginBox.appendChild(cube);
+    }
+});
+</script>
+
 </body>
 </html>
