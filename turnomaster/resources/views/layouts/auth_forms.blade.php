@@ -10,26 +10,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="icon" href="{{ asset('img/logo/TurnoMaster_lines.svg') }}" type="image/x-icon">
 </head>
-        <div class="container">
-            <div class="login-box">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="logo">
-                            <img src="{{ asset('img/logo/TurnoMaster.svg') }}" style="width: 300px;">
-                        </div>
+<body>
+    <a href="{{ url('/') }}" class="home-button">
+        <i class="bi bi-house-fill"></i>
+    </a>
+    <div class="container">
+        <div class="login-box">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="logo">
+                        <img src="{{ asset('img/logo/TurnoMaster.svg') }}" style="width: 300px;">
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <br>
-                        @yield('content')
-                    </div>
-                    <div class="col-sm-6">
-                        @yield('additional_info')
-                    </div>
-                </div>
-                @yield('centered_content')
             </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <br>
+                    @yield('content')
+                </div>
+                <div class="col-sm-6">
+                    @yield('additional_info')
+                </div>
+            </div>
+            @yield('centered_content')
         </div>
+    </div>
 </body>
 </html>

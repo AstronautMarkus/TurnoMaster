@@ -110,3 +110,25 @@ body {
     color: #ff0000;
     text-align: center;
 }
+
+.home-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #2055bf;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    z-index: 1000;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.home-button:hover {
+    background-color: #1a4aaf;
+    color: #ffffff;
+}
