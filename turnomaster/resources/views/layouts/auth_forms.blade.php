@@ -23,16 +23,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <br>
-                    @yield('content')
-                </div>
-                <div class="col-sm-6">
-                    @yield('additional_info')
-                </div>
-            </div>
-            @yield('centered_content')
+            @yield('content')
         </div>
     </div>
 

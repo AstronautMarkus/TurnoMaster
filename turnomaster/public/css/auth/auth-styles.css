@@ -1,5 +1,6 @@
 body {
     background: #d7d7d7;
+    background-image: linear-gradient(135deg, #1b3165 0%, #142592 100%);
 }
 @media only screen and (max-width: 767px) {
     .hide-on-mobile {
@@ -8,13 +9,13 @@ body {
 }
 
 .login-box {
-    background-image: linear-gradient(135deg, #1b3165 0%, #142592 100%);
     padding: 50px;
-    margin: 50px auto;
-    min-height: 720px;
-    max-height: 720px;
-    -webkit-box-shadow: 0 2px 60px -5px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 2px 60px -5px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     position: relative;
     overflow: hidden;
 }

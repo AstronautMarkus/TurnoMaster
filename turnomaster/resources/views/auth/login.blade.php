@@ -2,7 +2,7 @@
 
 @section('title', 'Iniciar Sesión')
 
-@section('centered_content')
+@section('content')
 
 @if ($errors->any())
     <div>
