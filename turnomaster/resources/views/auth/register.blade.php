@@ -1,13 +1,8 @@
 @extends('layouts.auth_app')
 
-<link rel="stylesheet" href="{{ asset('css/auth/register/register.css') }}">
-
 @section('title', 'TurnoMaster - Register')
 
 @section('content')
-<a href="{{ url('/') }}" class="home-button">
-    <i class="bi bi-house-door-fill"></i>{{ __('Inicio') }}
-</a>
 <div class="container d-flex justify-content-center">
     <div class="info-container">
         
@@ -20,10 +15,10 @@
             <li><i class="bi bi-check-circle-fill"></i>{{ __('Acceso a reportes detallados') }}</li>
         </ul>
     </div>
-    <div class="login-container">
-        <div class="login-header d-flex align-items-center">
-            <img src="{{ asset('img/logo/TurnoMaster_lines.svg') }}" alt="Login Image" class="login-image">
-            <div class="login-title">
+    <div class="auth-container">
+        <div class="auth-header d-flex align-items-center">
+            <img src="{{ asset('img/logo/TurnoMaster_lines.svg') }}" alt="auth Image" class="auth-image">
+            <div class="auth-title">
                 <h2>{{ __('Registrarse') }}</h2>
                 <p>Crea una cuenta para poder utilizar nuestra demo gratuita.</p>
             </div>
@@ -71,9 +66,9 @@
             <div class="input-group d-flex justify-content-center">
                 <div class="cf-turnstile" data-sitekey="{{ env('TURNSTILE_SITE_KEY') }}"></div>
             </div>
-            <button type="submit" class="login-button">{{ __('Registrarse') }}</button>
-            <div class="login-footer">
-                <p>¿Ya tienes una cuenta? <a class="login-text" href="{{ route('login') }}">Inicia sesión</a></p>
+            <button type="submit" class="auth-button">{{ __('Registrarse') }}</button>
+            <div class="auth-footer">
+                <p>¿Ya tienes una cuenta? <a class="auth-text" href="{{ route('login') }}">Inicia sesión</a></p>
             </div>
         </form>
     </div>
