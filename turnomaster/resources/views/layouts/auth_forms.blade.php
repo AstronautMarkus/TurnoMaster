@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="icon" href="{{ asset('img/logo/TurnoMaster_lines.svg') }}" type="image/x-icon">
 </head>
-    <section class="body">
         <div class="container">
             <div class="login-box">
                 <div class="row">
@@ -26,9 +25,11 @@
                         <h3 class="header-title text-white">@yield('form_title','formulario')</h3>
                         @yield('content')
                     </div>
+                    <div class="col-sm-6">
+                        @yield('additional_info')
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
 </body>
 </html>

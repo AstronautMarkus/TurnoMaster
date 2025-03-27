@@ -1,5 +1,5 @@
 body {
-    background: #f5f5f5;
+    background: #d7d7d7;
 }
 @media only screen and (max-width: 767px) {
     .hide-on-mobile {
@@ -16,6 +16,7 @@ body {
     min-height: 700px;
     -webkit-box-shadow: 0 2px 60px -5px rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 60px -5px rgba(0, 0, 0, 0.1);
+    pointer-events: none;
 }
 
 .logo {
@@ -104,4 +105,9 @@ body {
 
 .carousel-indicators li {
     cursor: pointer;
+}
+
+.error_message {
+    color: #ff0000;
+    text-align: center;
 }

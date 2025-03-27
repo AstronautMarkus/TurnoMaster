@@ -8,7 +8,7 @@
 @if ($errors->any())
     <div>
         @foreach ($errors->all() as $error)
-            <p>{{ $error }}</p>
+            <p class="error_message">{{ $error }}</p>
         @endforeach
     </div>
 @endif
