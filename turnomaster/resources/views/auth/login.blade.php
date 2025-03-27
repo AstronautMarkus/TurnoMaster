@@ -2,9 +2,8 @@
 
 @section('title', 'Iniciar Sesión')
 
-@section('form_title', 'Iniciar Sesión')
+@section('centered_content')
 
-@section('content')
 @if ($errors->any())
     <div>
         @foreach ($errors->all() as $error)
@@ -12,6 +11,9 @@
         @endforeach
     </div>
 @endif
+
+<h3 class="header-title text-white">Iniciar Sesión</h3>
+<p class="text-white text-center">Por favor, ingresa tus credenciales para acceder a tu cuenta.</p>
 <form action="{{ route('login') }}" method="POST" class="login-form">
     @csrf
     <div class="form-group">

@@ -22,13 +22,13 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <br>
-                        <h3 class="header-title text-white">@yield('form_title','formulario')</h3>
                         @yield('content')
                     </div>
                     <div class="col-sm-6">
                         @yield('additional_info')
                     </div>
                 </div>
+                @yield('centered_content')
             </div>
         </div>
 </body>
