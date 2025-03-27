@@ -2,30 +2,30 @@
 
 @section('title', 'Iniciar Sesión')
 
-@section('header', 'Iniciar Sesión')
+@section('form_title', 'Iniciar Sesión')
 
 @section('content')
 @if ($errors->any())
-    <div class="error-messages mb-3">
+    <div>
         @foreach ($errors->all() as $error)
-            <p class="text-danger">{{ $error }}</p>
+            <p>{{ $error }}</p>
         @endforeach
     </div>
 @endif
-
-<form action="{{ route('login') }}" method="POST">
+<form action="{{ route('login') }}" method="POST" class="login-form">
     @csrf
-    <div class="mb-3">
-        <label for="email" class="form-label">Correo Electrónico</label>
-        <input type="email" class="form-control" id="email" name="email" required>
+    <div class="form-group">
+        <input type="email" id="email" name="email" class="form-control" placeholder="Correo Electrónico" required>
     </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" id="password" name="password" required>
+    <div class="form-group">
+        <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required>
     </div>
-    <button type="submit" class="btn btn-primary w-100">Ingresar</button>
-    <div class="mt-3">
-        <a href="{{ route('password.request') }}">¿Olvidaste tu contraseña?</a>
+    <a href="{{ route('password.request') }}">¿Olvidaste tu contraseña?</a>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
+    </div>
+    <div class="form-group">
+        <div class="text-center">¿Nuevo miembro? <a href="{{ route('register') }}">Regístrate ahora</a></div>
     </div>
 </form>
 @endsection
