@@ -12,7 +12,11 @@
     </div>
 @endif
 
-<h3 class="header-title text-white">Iniciar Sesión</h3>
+
+<div class="text-white text-center mb-4">
+                <h2 class="display-4">{{ __('Iniciar sesión') }}</h2>
+</div>
+
 <form action="{{ route('login') }}" method="POST" class="login-form">
     @csrf
     <div class="form-group">
