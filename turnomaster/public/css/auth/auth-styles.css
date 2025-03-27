@@ -1,0 +1,59 @@
+html, body {
+    height: 100%;
+}
+
+.login-container {
+    height: 100vh;
+    background-color: #f8f0ff;
+}
+
+.login-container .col-md-6:first-child {
+    background-image: url('/img/backgrounds/login_keyboard.jpg');
+    background-size: cover;
+    background-position: center;    
+}
+
+.login-form {
+    max-width: 400px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.login-form h2 {
+    color: #6a0dad;
+    font-weight: bold;
+}
+
+.login-form img {
+    margin-bottom: 20px;
+}
+
+.login-form button {
+    background-color: #6a0dad;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+    background-color: #5a0ca0;
+}
+
+.login-form a {
+    color: #6a0dad;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-form a:hover {
+    text-decoration: underline;
+}
+
+.object-fit-cover {
+    object-fit: cover;
+}
