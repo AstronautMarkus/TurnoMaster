@@ -1,6 +1,6 @@
 @extends('layouts.auth_forms')
 
-@section('title', 'Iniciar Sesión')
+@section('title', 'TurnoMaster - Iniciar Sesión')
 
 @section('content')
 

@@ -1,6 +1,6 @@
-    @extends('layouts.auth_forms')
+@extends('layouts.auth_forms')
 
-@section('title', 'TurnoMaster - Forgot Password')
+@section('title', 'TurnoMaster - Recuperar contraseña')
 
 @section('content')
 
