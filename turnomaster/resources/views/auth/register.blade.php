@@ -1,5 +1,4 @@
 @extends('layouts.auth_app')
-
 @section('title', 'TurnoMaster - Register')
 
 @section('content')

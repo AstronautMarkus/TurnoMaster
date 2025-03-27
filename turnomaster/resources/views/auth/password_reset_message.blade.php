@@ -1,5 +1,4 @@
 @extends('layouts.auth_forms')
-
 @section('title', 'TurnoMaster - Solicitud de Restablecimiento de Contraseña')
 
 @section('content')

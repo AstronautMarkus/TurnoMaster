@@ -1,5 +1,4 @@
 @extends('layouts.auth_forms')
-
 @section('title', 'TurnoMaster - Recuperar contraseña')
 
 @section('content')
