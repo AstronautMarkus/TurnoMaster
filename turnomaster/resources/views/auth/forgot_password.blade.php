@@ -4,8 +4,10 @@
 
 @section('content')
 
-        <h2 class="text-white text-center">{{ __('Recuperar contraseña') }}</h2>
-        <p class="text-white text-center">Ingresa tu correo electrónico para recuperar tu contraseña</p>
+        <div class="text-white text-center mb-4">
+            <h2 class="display-4">{{ __('Recuperar contraseña') }}</h2>
+            <p class="lead">Introduce tu correo electrónico para recibir un enlace de recuperación de contraseña.</p>
+        </div>
 
         <form method="POST" action="{{ route('password.request') }}" class="login-form">
             @csrf
