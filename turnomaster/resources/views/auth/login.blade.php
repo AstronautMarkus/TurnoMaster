@@ -21,7 +21,9 @@
         <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required>
         <i class="bi bi-eye-slash toggle-password" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer;"></i>
     </div>
-    <a href="{{ route('password.request') }}">¿Olvidaste tu contraseña?</a>
+    <div class="form-group">
+        <div class="text-center"><a href="{{ route('password.request') }}">¿Olvidaste tu contraseña?</a></div>
+    </div>
     <div class="form-group">
         <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
     </div>
