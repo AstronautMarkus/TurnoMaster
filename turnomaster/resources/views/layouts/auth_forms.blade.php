@@ -25,6 +25,9 @@
             </div>
             @yield('content')
         </div>
+        <footer style="text-align: center; margin-bottom: 20px; font-size: 14px;">
+            <a href="https://reyesandfriends.cl" style="color: white; text-decoration: none;" target="_blank">TurnoMaster by Reyes&Friends.cl</a>
+        </footer>
     </div>
 
     <script>
