@@ -1,10 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { FaGift, FaUser, FaAngleUp, FaAngleDown } from "react-icons/fa6";
+import { useNavbarFeatures } from "./useNavbarFeatures";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const features = useNavbarFeatures();
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav className="bg-[#6c5ce7] shadow-lg py-4 px-6">
@@ -17,37 +32,37 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center space-x-8">
-          <Link to="/precios" className="text-white hover:text-neutral-400 transition-colors duration-300">
+          <Link to="/prices" className="text-white hover:text-neutral-400 transition-colors duration-300">
             Precios
           </Link>
-          <div className="relative">
+          <div className="relative" ref={dropdownRef}>
             <button
               className="flex items-center text-white hover:text-neutral-400 transition-colors duration-300"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
-              Características
+              Características <FaAngleDown className="ml-2" />
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg">
+              <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg border-2 border-purple-800">
                 <div className="py-1">
-                  <Link to="/feature1" className="block px-4 py-2 text-gray-800 hover:bg-purple-100 transition-colors duration-300">
-                    Característica 1
-                  </Link>
-                  <Link to="/feature2" className="block px-4 py-2 text-gray-800 hover:bg-purple-100 transition-colors duration-300">
-                    Característica 2
-                  </Link>
-                  <Link to="/feature3" className="block px-4 py-2 text-gray-800 hover:bg-purple-100 transition-colors duration-300">
-                    Característica 3
-                  </Link>
+                  {features.map((feature) => (
+                    <Link
+                      key={feature.path}
+                      to={feature.path}
+                      className="block px-4 py-2 text-gray-800 hover:bg-purple-800 hover:text-white transition-colors duration-300"
+                    >
+                      {feature.name}
+                    </Link>
+                  ))}
                 </div>
               </div>
             )}
           </div>
-          <Link to="/clientes" className="text-white hover:text-neutral-400 transition-colors duration-300">
+          <Link to="/clients" className="text-white hover:text-neutral-400 transition-colors duration-300">
             Clientes
           </Link>
-          <Link to="/proyecto" className="text-white hover:text-neutral-400 transition-colors duration-300">
+          <Link to="/about-project" className="text-white hover:text-neutral-400 transition-colors duration-300">
             Sobre el proyecto
           </Link>
         </div>
@@ -70,42 +85,44 @@ export default function Navbar() {
 
       {isOpen && (
         <div className="md:hidden mt-4">
-          <Link to="/precios" className="block py-2 text-white hover:text-neutral-400 transition-colors duration-300">
+          <Link to="/prices" className="block py-2 text-white hover:text-neutral-400 transition-colors duration-300">
             Precios
           </Link>
-          <button
-            className="flex items-center w-full py-2 text-white hover:text-neutral-400 transition-colors duration-300"
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          >
-            Características
-          </button>
-          {isDropdownOpen && (
-            <div className="mt-2 bg-white rounded-md shadow-lg">
-              <div className="py-1">
-                <Link to="/feature1" className="block px-4 py-2 text-gray-800 hover:bg-purple-100 transition-colors duration-300">
-                  Característica 1
-                </Link>
-                <Link to="/feature2" className="block px-4 py-2 text-gray-800 hover:bg-purple-100 transition-colors duration-300">
-                  Característica 2
-                </Link>
-                <Link to="/feature3" className="block px-4 py-2 text-gray-800 hover:bg-purple-100 transition-colors duration-300">
-                  Característica 3
-                </Link>
+          <div className="relative" ref={dropdownRef}>
+            <button
+              className="flex items-center w-full py-2 text-white hover:text-neutral-400 transition-colors duration-300"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              Características <FaAngleDown className="ml-2" />
+            </button>
+            {isDropdownOpen && (
+              <div className="mt-2 bg-white rounded-md shadow-lg border-2 border-purple-800">
+                <div className="py-1">
+                  {features.map((feature) => (
+                    <Link
+                      key={feature.path}
+                      to={feature.path}
+                      className="block px-4 py-2 text-gray-800 hover:bg-purple-100 transition-colors duration-300"
+                    >
+                      {feature.name}
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
-          <Link to="/clientes" className="block py-2 text-white hover:text-neutral-400 transition-colors duration-300">
+            )}
+          </div>
+          <Link to="/clients" className="block py-2 text-white hover:text-neutral-400 transition-colors duration-300">
             Clientes
           </Link>
-          <Link to="/proyecto" className="block py-2 text-white hover:text-neutral-400 transition-colors duration-300">
+          <Link to="/about-project" className="block py-2 text-white hover:text-neutral-400 transition-colors duration-300">
             Sobre el proyecto
           </Link>
           <div className="mt-4 flex flex-col space-y-2">
-          <button className="flex items-center bg-[#ff7f50] hover:bg-[#ff6b3d] text-white px-4 py-2 rounded-full transition-colors duration-300">
-            <FaGift className="mr-2" /> <span>Prueba Gratis</span>
+            <button className="flex items-center bg-[#ff7f50] hover:bg-[#ff6b3d] text-white px-4 py-2 rounded-full transition-colors duration-300">
+              <FaGift className="mr-2" /> <span>Prueba Gratis</span>
             </button>
             <button className="flex items-center bg-[#3498db] hover:bg-[#2980b9] text-white px-4 py-2 rounded-full transition-colors duration-300">
-                <FaUser className="mr-2" /> <span>Iniciar sesión</span>
+              <FaUser className="mr-2" /> <span>Iniciar sesión</span>
             </button>
           </div>
         </div>
