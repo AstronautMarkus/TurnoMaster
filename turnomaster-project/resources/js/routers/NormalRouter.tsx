@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import IndexPage from '../Pages/Default/Index/Index';
 import DefaultLayout from '../Layouts/Default/DefaultLayout';
 import PricingComparison from '../Pages/Default/Prices/Prices';
+import AboutProject from '../Pages/Default/AboutProject/AboutProject';
 
 function NormalRouter() {
     return (
@@ -11,7 +12,7 @@ function NormalRouter() {
                 <Route path="/*" element={<IndexPage />} />
                 <Route path="/prices" element={<PricingComparison />} />
                 <Route path="/clients" element={<h1>Clients Page</h1>} />
-                <Route path="/about-project" element={<h1>About Project Page</h1>} />
+                <Route path="/about-project" element={<AboutProject />} />
                 <Route path="/features" element={<h1>Features Page</h1>} />
                 <Route path="/turnomaster-audience" element={<h1>TurnoMaster Audience Page</h1>} />
                 <Route path="/integrations" element={<h1>Integrations Page</h1>} />
