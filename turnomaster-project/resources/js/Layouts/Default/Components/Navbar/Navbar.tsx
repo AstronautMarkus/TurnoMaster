@@ -22,35 +22,35 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="bg-[#6c5ce7] shadow-lg py-4 px-6">
+    <nav className="bg-[#5C5AD6] shadow-lg py-4 px-6">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <img src="/img/logo/TurnoMaster.svg" alt="" className="h-10 w-auto" />
-          <Link to="/" className="text-white text-2xl font-semibold hover:text-neutral-400 transition-colors duration-300">
+          <img src="/img/logo/TurnoMaster.svg" alt="" className="h-auto w-14" />
+          <Link to="/" className="text-white text-3xl font-semibold hover:text-neutral-400 transition-colors duration-300">
             TurnoMaster
           </Link>
         </div>
 
         <div className="hidden md:flex items-center space-x-8">
-          <Link to="/prices" className="text-white hover:text-neutral-400 transition-colors duration-300">
+          <Link to="/prices" className="text-white text-lg hover:text-neutral-400 transition-colors duration-300">
             Precios
           </Link>
           <div className="relative" ref={dropdownRef}>
             <button
-              className="flex items-center text-white hover:text-neutral-400 transition-colors duration-300"
+              className="flex items-center text-white text-lg hover:text-neutral-400 transition-colors duration-300"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
               Características <FaAngleDown className="ml-2" />
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg border-2 border-purple-800">
+              <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg border-2 border-[#5C5AD6]">
                 <div className="py-1">
                   {features.map((feature) => (
                     <Link
                       key={feature.path}
                       to={feature.path}
-                      className="block px-4 py-2 text-gray-800 hover:bg-purple-800 hover:text-white transition-colors duration-300"
+                      className="block px-4 py-2 text-gray-800 hover:bg-[#5C5AD6] hover:text-white transition-colors duration-300"
                     >
                       {feature.name}
                     </Link>
@@ -59,19 +59,19 @@ export default function Navbar() {
               </div>
             )}
           </div>
-          <Link to="/clients" className="text-white hover:text-neutral-400 transition-colors duration-300">
+          <Link to="/clients" className="text-white text-lg hover:text-neutral-400 transition-colors duration-300">
             Clientes
           </Link>
-          <Link to="/about-project" className="text-white hover:text-neutral-400 transition-colors duration-300">
+          <Link to="/about-project" className="text-white text-lg hover:text-neutral-400 transition-colors duration-300">
             Sobre el proyecto
           </Link>
         </div>
 
         <div className="hidden md:flex items-center space-x-4">
-          <button className="flex items-center bg-[#ff7f50] hover:bg-[#ff6b3d] text-white px-4 py-2 rounded-full transition-colors duration-300">
+          <button className="flex items-center bg-[#F57424] hover:bg-[#db6821] text-white text-lg px-4 py-2 rounded-full transition-colors duration-300">
             <FaGift className="mr-2" /> <span>Prueba Gratis</span>
           </button>
-          <button className="flex items-center bg-[#3498db] hover:bg-[#2980b9] text-white px-4 py-2 rounded-full transition-colors duration-300">
+          <button className="flex items-center bg-[#377CE4] hover:bg-[#326fc9] text-white text-lg px-4 py-2 rounded-full transition-colors duration-300">
             <FaUser className="mr-2" /> <span>Iniciar sesión</span>
           </button>
         </div>
@@ -85,12 +85,12 @@ export default function Navbar() {
 
       {isOpen && (
         <div className="md:hidden mt-4">
-          <Link to="/prices" className="block py-2 text-white hover:text-neutral-400 transition-colors duration-300">
+          <Link to="/prices" className="block py-2 text-white text-lg hover:text-neutral-400 transition-colors duration-300">
             Precios
           </Link>
           <div className="relative" ref={dropdownRef}>
             <button
-              className="flex items-center w-full py-2 text-white hover:text-neutral-400 transition-colors duration-300"
+              className="flex items-center w-full py-2 text-white text-lg hover:text-neutral-400 transition-colors duration-300"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
               Características <FaAngleDown className="ml-2" />
@@ -111,17 +111,17 @@ export default function Navbar() {
               </div>
             )}
           </div>
-          <Link to="/clients" className="block py-2 text-white hover:text-neutral-400 transition-colors duration-300">
+          <Link to="/clients" className="block py-2 text-white text-lg hover:text-neutral-400 transition-colors duration-300">
             Clientes
           </Link>
-          <Link to="/about-project" className="block py-2 text-white hover:text-neutral-400 transition-colors duration-300">
+          <Link to="/about-project" className="block py-2 text-white text-lg hover:text-neutral-400 transition-colors duration-300">
             Sobre el proyecto
           </Link>
           <div className="mt-4 flex flex-col space-y-2">
-            <button className="flex items-center bg-[#ff7f50] hover:bg-[#ff6b3d] text-white px-4 py-2 rounded-full transition-colors duration-300">
+            <button className="flex items-center bg-[#F57424] hover:bg-[#db6821] text-white text-lg px-4 py-2 rounded-full transition-colors duration-300">
               <FaGift className="mr-2" /> <span>Prueba Gratis</span>
             </button>
-            <button className="flex items-center bg-[#3498db] hover:bg-[#2980b9] text-white px-4 py-2 rounded-full transition-colors duration-300">
+            <button className="flex items-center bg-[#377CE4] hover:bg-[#326fc9] text-white text-lg px-4 py-2 rounded-full transition-colors duration-300">
               <FaUser className="mr-2" /> <span>Iniciar sesión</span>
             </button>
           </div>
