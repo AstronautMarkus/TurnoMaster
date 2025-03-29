@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { FaGift, FaUser, FaAngleUp, FaAngleDown } from "react-icons/fa6";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,16 +54,16 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center space-x-4">
           <button className="flex items-center bg-[#ff7f50] hover:bg-[#ff6b3d] text-white px-4 py-2 rounded-full transition-colors duration-300">
-            Prueba Gratis
+            <FaGift className="mr-2" /> <span>Prueba Gratis</span>
           </button>
-          <button className="bg-[#3498db] hover:bg-[#2980b9] text-white px-4 py-2 rounded-full transition-colors duration-300">
-            Iniciar sesión
+          <button className="flex items-center bg-[#3498db] hover:bg-[#2980b9] text-white px-4 py-2 rounded-full transition-colors duration-300">
+            <FaUser className="mr-2" /> <span>Iniciar sesión</span>
           </button>
         </div>
 
         <div className="md:hidden">
           <button onClick={() => setIsOpen(!isOpen)} className="text-white focus:outline-none">
-            {isOpen ? "Cerrar" : "Menú"}
+            {isOpen ? <FaAngleUp size={24} /> : <FaAngleDown size={24} />}
           </button>
         </div>
       </div>
@@ -100,11 +101,11 @@ export default function Navbar() {
             Sobre el proyecto
           </Link>
           <div className="mt-4 flex flex-col space-y-2">
-            <button className="flex items-center justify-center bg-[#ff7f50] hover:bg-[#ff6b3d] text-white px-4 py-2 rounded-full transition-colors duration-300">
-              Prueba Gratis
+          <button className="flex items-center bg-[#ff7f50] hover:bg-[#ff6b3d] text-white px-4 py-2 rounded-full transition-colors duration-300">
+            <FaGift className="mr-2" /> <span>Prueba Gratis</span>
             </button>
-            <button className="bg-[#3498db] hover:bg-[#2980b9] text-white px-4 py-2 rounded-full transition-colors duration-300">
-              Iniciar sesión
+            <button className="flex items-center bg-[#3498db] hover:bg-[#2980b9] text-white px-4 py-2 rounded-full transition-colors duration-300">
+                <FaUser className="mr-2" /> <span>Iniciar sesión</span>
             </button>
           </div>
         </div>
