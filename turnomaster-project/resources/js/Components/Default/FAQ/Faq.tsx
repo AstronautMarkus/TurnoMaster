@@ -6,7 +6,6 @@ const Faq = () => {
 
   return (
     <div className="w-4/5 mx-auto p-6">
-      <h2 className="text-2xl font-bold text-center mb-6">Preguntas frecuentes</h2>
       <div className="space-y-4">
         {faqs.map((faq:any, index:any) => (
           <div

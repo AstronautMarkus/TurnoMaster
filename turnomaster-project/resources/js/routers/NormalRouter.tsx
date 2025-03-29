@@ -6,6 +6,7 @@ import DefaultLayout from '../Layouts/Default/DefaultLayout';
 import PricingComparison from '../Pages/Default/Prices/Prices';
 import AboutProject from '../Pages/Default/AboutProject/AboutProject';
 import Features from '../Pages/Default/Features/Features';
+import FaqPage from '../Pages/Default/Faq/Faq';
 
 function NormalRouter() {
     const location = useLocation();
@@ -29,7 +30,7 @@ function NormalRouter() {
                         <Route path="/features" element={<Features />} />
                         <Route path="/turnomaster-audience" element={<h1>TurnoMaster Audience Page</h1>} />
                         <Route path="/integrations" element={<h1>Integrations Page</h1>} />
-                        <Route path="/faq" element={<h1>FAQ Page</h1>} />
+                        <Route path="/faq" element={<FaqPage />} />
                         <Route path="/security-privacy" element={<h1>Security & Privacy Page</h1>} />
                     </Routes>
                 </motion.div>
