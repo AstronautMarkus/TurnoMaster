@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { FaRegCircleCheck, FaRegCircleXmark } from "react-icons/fa6";
+import AuthLoadingScreen from "../../../Components/Auth/LoadingScreen/AuthLoadingScreen";
 
 const RegisterDemo: React.FC = () => {
   const [formData, setFormData] = useState({ name: "", email: "", company_name: "" });
@@ -55,7 +56,7 @@ const RegisterDemo: React.FC = () => {
         </p>
       </div>
       {isLoading ? (
-        <div className="text-center text-gray-700">Loading...</div>
+        <AuthLoadingScreen />
       ) : (
         <div className="flex flex-col items-center">
           {apiMessage && !errors.name && !errors.email && !errors.company_name && (
