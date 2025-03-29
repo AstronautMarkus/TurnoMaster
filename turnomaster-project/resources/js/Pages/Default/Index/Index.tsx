@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import StatsGetter from '../../../Layouts/Default/Components/StatsGetter/StatsGetter';
+
 const IndexPage: React.FC = () => {
     return (
         <div className="flex flex-col w-full h-full">
@@ -44,6 +46,32 @@ const IndexPage: React.FC = () => {
                         </div>
                     </div>
                 </section>
+
+                <section className="w-full py-12 md:py-24 lg:py-32">
+                    <div className="container mx-auto px-4 md:px-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                            <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] bg-gray-200 rounded-lg overflow-hidden">
+                                <img
+                                    src="/img/persons/krakenimages-376KN_ISplE-unsplash.jpg"
+                                    alt="Simple tool illustration"
+                                    className="object-cover object-center w-full h-full"
+                                />
+                            </div>
+                            <div className="text-center md:text-left">
+                                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
+                                    Menos complicaciones
+                                </h2>
+                                <p className="text-lg text-gray-500 md:text-xl mt-4 max-w-[600px]">
+                                    En el ámbito empresarial, <strong>"poco es mucho"</strong>.<br />
+                                    TurnoMaster elimina la complejidad innecesaria y te ofrece una herramienta simple, pero eficiente.<br />
+                                    Gestiona los horarios de tus empleados sin dolores de cabeza.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <StatsGetter />
         </div>
     );
 };
