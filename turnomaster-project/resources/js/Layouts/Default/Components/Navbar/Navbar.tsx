@@ -68,10 +68,16 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center space-x-4">
-          <button className="flex items-center bg-[#F57424] hover:bg-[#db6821] text-white text-lg px-4 py-2 rounded-full transition-colors duration-300">
+          <button
+            className="flex items-center bg-[#F57424] hover:bg-[#db6821] text-white text-lg px-4 py-2 rounded-full transition-colors duration-300"
+            onClick={() => (window.location.href = '/auth/register-demo')}
+          >
             <FaGift className="mr-2" /> <span>Prueba Gratis</span>
           </button>
-          <button className="flex items-center bg-[#377CE4] hover:bg-[#326fc9] text-white text-lg px-4 py-2 rounded-full transition-colors duration-300">
+          <button
+            className="flex items-center bg-[#377CE4] hover:bg-[#326fc9] text-white text-lg px-4 py-2 rounded-full transition-colors duration-300"
+            onClick={() => (window.location.href = '/auth/login')}
+          >
             <FaUser className="mr-2" /> <span>Iniciar sesión</span>
           </button>
         </div>
@@ -118,10 +124,16 @@ export default function Navbar() {
             Sobre el proyecto
           </Link>
           <div className="mt-4 flex flex-col space-y-2">
-            <button className="flex items-center bg-[#F57424] hover:bg-[#db6821] text-white text-lg px-4 py-2 rounded-full transition-colors duration-300">
+            <button
+              className="flex items-center bg-[#F57424] hover:bg-[#db6821] text-white text-lg px-4 py-2 rounded-full transition-colors duration-300"
+              onClick={() => (window.location.href = '/auth/register-demo')}
+            >
               <FaGift className="mr-2" /> <span>Prueba Gratis</span>
             </button>
-            <button className="flex items-center bg-[#377CE4] hover:bg-[#326fc9] text-white text-lg px-4 py-2 rounded-full transition-colors duration-300">
+            <button
+              className="flex items-center bg-[#377CE4] hover:bg-[#326fc9] text-white text-lg px-4 py-2 rounded-full transition-colors duration-300"
+              onClick={() => (window.location.href = '/auth/login')}
+            >
               <FaUser className="mr-2" /> <span>Iniciar sesión</span>
             </button>
           </div>

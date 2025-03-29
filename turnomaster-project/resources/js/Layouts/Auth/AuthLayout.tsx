@@ -1,12 +1,25 @@
-import type React from "react"
+import type React from "react";
 
-const AuthLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const AuthLayout: React.FC<{ children: React.ReactNode; title: string }> = ({ children, title }) => {
   return (
-    <div className="flex flex-col min-h-screen items-center justify-center bg-gray-100">
-      <main className="w-full max-w-md p-6 bg-white rounded shadow-md">{children}</main>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "100vh",
+        backgroundColor: "#1E3A8A",
+        backgroundImage: `
+          linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)
+        `,
+        backgroundSize: "40px 40px",
+      }}
+    >
+      {children}
     </div>
-  )
-}
+  );
+};
 
-export default AuthLayout
+export default AuthLayout;
 
