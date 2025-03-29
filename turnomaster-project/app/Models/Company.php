@@ -11,6 +11,7 @@ class Company extends Model
 
     protected $fillable = ['name', 'owner_id'];
 
+
     public function owner()
     {
         return $this->belongsTo(User::class, 'owner_id');
@@ -21,4 +22,3 @@ class Company extends Model
         return $this->hasMany(User::class);
     }
 }
-

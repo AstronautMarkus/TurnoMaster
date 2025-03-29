@@ -12,7 +12,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password', 'role', 'company_id', 'is_trial', 'expires_at', 'temporary_password'
+        'name', 'email', 'password', 'role_id', 'company_id', 'is_trial', 'expires_at', 'temporary_password'
     ];
 
     protected $hidden = ['password', 'remember_token'];
@@ -22,9 +22,15 @@ class User extends Authenticatable
         'expires_at' => 'datetime',
     ];
 
+
     public function company()
     {
         return $this->belongsTo(Company::class);
     }
-}
 
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+}
