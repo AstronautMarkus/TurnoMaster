@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import StatsGetter from '../../../Layouts/Default/Components/StatsGetter/StatsGetter';
+import StatsGetter from '../../../Components/Default/StatsGetter/StatsGetter';
 
 const IndexPage: React.FC = () => {
     return (
