@@ -14,7 +14,7 @@ class Company extends Model
 
     public function owner()
     {
-        return $this->belongsTo(User::class, 'owner_id');
+        return $this->belongsTo(User::class, 'owner_id')->withDefault(); // Handle nullable owner
     }
 
     public function employees()

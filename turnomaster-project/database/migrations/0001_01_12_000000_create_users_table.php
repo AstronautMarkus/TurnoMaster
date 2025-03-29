@@ -14,7 +14,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('company_id')->nullable();
             $table->unsignedBigInteger('role_id');
             $table->boolean('is_trial')->default(true);
             $table->timestamp('expires_at')->nullable();
