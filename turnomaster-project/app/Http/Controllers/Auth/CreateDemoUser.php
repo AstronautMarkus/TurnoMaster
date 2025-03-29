@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class CreateDemoUser extends Controller
 {
@@ -15,7 +16,6 @@ class CreateDemoUser extends Controller
         $validator = \Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8',
             'company_name' => 'required|string|max:255',
         ]);
 
@@ -34,26 +34,38 @@ class CreateDemoUser extends Controller
             ], 400);
         }
 
+        
+        $temporaryPassword = \Str::random(10);
 
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password')),
-            'role_id' => 1, 
-            'company_id' => null, 
+            'password' => Hash::make($temporaryPassword),
+            'role_id' => 1,
+            'company_id' => null,
             'is_trial' => true,
-            'expires_at' => now()->addDays(7), 
-            'temporary_password' => $request->input('password'),
+            'expires_at' => now()->addDays(7),
+            'temporary_password' => $temporaryPassword,
         ]);
-
 
         $company = Company::create([
             'name' => $request->input('company_name'),
             'owner_id' => $user->id,
         ]);
 
-
         $user->update(['company_id' => $company->id]);
+
+        
+        $activationUrl = url('/activate-account/' . $user->id); 
+        Mail::send('emails.demo_user', [
+            'name' => $user->name,
+            'email' => $user->email,
+            'password' => $temporaryPassword,
+            'activationUrl' => $activationUrl,
+        ], function ($message) use ($user) {
+            $message->to($user->email)
+                    ->subject('Your Demo Account Details');
+        });
 
         return response()->json([
             'message' => 'Demo user and company created successfully.',
