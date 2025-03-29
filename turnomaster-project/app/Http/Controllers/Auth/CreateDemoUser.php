@@ -17,6 +17,8 @@ class CreateDemoUser extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'company_name' => 'required|string|max:255',
+        ], [
+            'email.unique' => 'El correo electrónico ya ha sido registrado.',
         ]);
 
         if ($validator->fails()) {
@@ -29,7 +31,7 @@ class CreateDemoUser extends Controller
         $existingCompany = Company::where('name', $request->input('company_name'))->first();
         if ($existingCompany) {
             return response()->json([
-                'message' => 'A demo user cannot be created for an existing company.',
+                'message' => 'Ya existe una cuenta de Demostración para esta empresa.',
                 'company' => $existingCompany,
             ], 400);
         }
@@ -68,7 +70,7 @@ class CreateDemoUser extends Controller
         });
 
         return response()->json([
-            'message' => 'Demo user and company created successfully.',
+            'message' => 'Cuenta de demostración y empresa creados exitosamente. Se ha enviado un correo electrónico para activarla.',
             'user' => $user,
             'company' => $company,
         ]);
