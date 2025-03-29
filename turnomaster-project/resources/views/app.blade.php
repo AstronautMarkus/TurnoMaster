@@ -10,7 +10,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         @viteReactRefresh
-        @vite(['resources/js/app.tsx'])
+        @vite(['resources/js/main.tsx'])
     </head>
     <body class="font-sans antialiased">
         <div id="app"></div>

@@ -1,13 +1,21 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import '../css/app.css';
 
-import IndexPage from './Pages/index';
+import NormalRouter from './routers/NormalRouter';
+import AuthRouter from './routers/AuthRouter';
+import DashboardRouter from './routers/DashboardRouter';
 
 function App() {
     return (
-        <IndexPage />
+        <BrowserRouter>
+            <Routes>
+                <Route path="/*" element={<NormalRouter />} />
+                <Route path="/auth/*" element={<AuthRouter />} />
+                <Route path="/dashboard/*" element={<DashboardRouter />} />
+            </Routes>
+        </BrowserRouter>
     );
 }
 
-ReactDOM.createRoot(document.getElementById('app')!).render(<App />);
+export default App;
