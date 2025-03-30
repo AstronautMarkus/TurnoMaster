@@ -7,6 +7,7 @@ import PricingComparison from '../Pages/Default/Prices/Prices';
 import AboutProject from '../Pages/Default/AboutProject/AboutProject';
 import Features from '../Pages/Default/Features/Features';
 import FaqPage from '../Pages/Default/Faq/Faq';
+import Clients from '../Pages/Default/Clients/Clients';
 
 function NormalRouter() {
     const location = useLocation();
@@ -25,7 +26,7 @@ function NormalRouter() {
                     <Routes location={location} key={location.pathname}>
                         <Route path="/*" element={<IndexPage />} />
                         <Route path="/prices" element={<PricingComparison />} />
-                        <Route path="/clients" element={<h1>Clients Page</h1>} />
+                        <Route path="/clients" element={<Clients />} />
                         <Route path="/about-project" element={<AboutProject />} />
                         <Route path="/features" element={<Features />} />
                         <Route path="/turnomaster-audience" element={<h1>TurnoMaster Audience Page</h1>} />
