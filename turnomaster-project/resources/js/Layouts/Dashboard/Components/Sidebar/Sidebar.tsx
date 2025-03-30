@@ -123,7 +123,7 @@ function SidebarContent({
           }}
         >
           <img
-            src="/images/TurnoMaster-3dJAA1ieFVkIx8nU4Y1lmbMKcdqafh.svg"
+            src="/img/logo/TurnoMaster.svg"
             alt="TurnoMaster Logo"
             className="h-8 w-auto"
           />

@@ -23,7 +23,7 @@ export function Navbar(){
         </button>
       </div>
 
-      <div className="hidden flex-1 md:flex">
+      <div className="flex-1">
         <div className="relative w-full max-w-sm">
           <FiSearch className="absolute left-2.5 top-2.5 h-4 w-4 text-slate-400" />
           <input
@@ -38,7 +38,7 @@ export function Navbar(){
 
       <div className="ml-auto flex items-center gap-2">
         <button
-          className="relative inline-flex items-center justify-center rounded-md border border-slate-600 bg-slate-700 p-2 text-white hover:bg-slate-600 hover:text-white md:hidden"
+          className="relative inline-flex items-center justify-center rounded-md border border-slate-600 bg-slate-700 p-2 text-white hover:bg-slate-600 hover:text-white"
         >
           <FiBell className="h-4 w-4" />
           <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-purple-600 text-[10px] text-white">
