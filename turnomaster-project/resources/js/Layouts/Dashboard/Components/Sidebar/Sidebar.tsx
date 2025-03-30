@@ -84,7 +84,7 @@ export function Sidebar(){
         </div>
       )}
 
-      <div className={`hidden md:block w-64 bg-slate-700 text-white border-r border-slate-600 min-h-screen ${isOpen ? "block" : "hidden"}`}>
+      <div className="hidden md:block w-64 bg-slate-700 text-white border-r border-slate-600 h-screen sticky top-0">
         <SidebarContent 
           activeItem={activeItem} 
           expandedItems={expandedItems} 
