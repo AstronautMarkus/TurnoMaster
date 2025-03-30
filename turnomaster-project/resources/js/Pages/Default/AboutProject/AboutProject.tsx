@@ -15,7 +15,7 @@ const AboutProject = () => {
         </div>
       </section>
 
-      <section className="py-16 px-8 bg-gray-50">
+      <section className="py-16 px-8">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-8 text-indigo-700">Nuestro Equipo</h2>
           <div className="space-y-12">
