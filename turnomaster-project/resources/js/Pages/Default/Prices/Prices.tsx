@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { usePricesFeatures } from "./usePricesFeatures";
 import { FaCheck, FaXmark } from "react-icons/fa6";
 import { FiMessageCircle } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const PricingComparison: React.FC = () => {
     const prices = usePricesFeatures();
@@ -77,10 +78,9 @@ const PricingComparison: React.FC = () => {
                         Nuestro equipo está aquí para ayudarte a encontrar el plan perfecto para ti.
                     </p>
                     <div className="flex justify-center">
-                        <button className="bg-[#6c5ce7] text-white py-2 px-6 rounded hover:bg-[#5b4acb] flex items-center justify-center space-x-2">
-                            <FiMessageCircle />
-                            <span>Contáctanos</span>
-                        </button>
+                        <Link to='/contact' className='bg-[#6c5ce7] text-white px-6 py-3 rounded-lg shadow-lg hover:bg-[#5b4acb] transition duration-300 transform hover:scale-105'>
+                            Contactar Soporte
+                        </Link>
                     </div>
                 </div>
             </div>
