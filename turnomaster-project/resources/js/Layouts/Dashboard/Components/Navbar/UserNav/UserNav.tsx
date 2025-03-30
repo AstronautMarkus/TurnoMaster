@@ -54,7 +54,7 @@ export function UserNav() {
                 onClick={(e: React.MouseEvent) => e.preventDefault()}
               >
                 <FiUser className="mr-2 h-4 w-4 text-gray-500" />
-                <span>Profile</span>
+                <span>Perfil</span>
               </a>
               <a
                 href="#"
@@ -62,7 +62,7 @@ export function UserNav() {
                 onClick={(e: React.MouseEvent) => e.preventDefault()}
               >
                 <FiSettings className="mr-2 h-4 w-4 text-gray-500" />
-                <span>Settings</span>
+                <span>Ajustes</span>
               </a>
             </div>
             
@@ -75,7 +75,7 @@ export function UserNav() {
                 onClick={(e: React.MouseEvent) => e.preventDefault()}
               >
                 <FiLogOut className="mr-2 h-4 w-4 text-gray-500" />
-                <span>Log out</span>
+                <span>Cerrar sesión</span>
               </a>
             </div>
           </div>
