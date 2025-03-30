@@ -91,14 +91,15 @@ export default function PS4Background({
       {particles.map((particle) => (
         <div
           key={particle.id}
-          className="absolute rounded-full bg-blue-500"
+          className="absolute rounded-full"
           style={{
+            backgroundColor: "rgba(255, 255, 255, 0.8)", // Make particles whiter
             left: `${particle.x}%`,
             top: `${particle.y}%`,
             width: `${particle.size}px`,
             height: `${particle.size}px`,
             opacity: particle.opacity,
-            boxShadow: `0 0 ${particle.size * 2}px ${particle.size}px rgba(59, 130, 246, 0.5)`,
+            boxShadow: `0 0 ${particle.size * 2}px ${particle.size}px rgba(255, 255, 255, 0.5)`, // Adjust shadow to white
           }}
         />
       ))}
