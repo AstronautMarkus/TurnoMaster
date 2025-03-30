@@ -10,7 +10,7 @@ const Faq = () => {
         {faqs.map((faq:any, index:any) => (
           <div
             key={index}
-            className="border rounded-lg p-4 cursor-pointer hover:shadow-md transition"
+            className="border rounded-lg p-4 bg-white cursor-pointer hover:shadow-md transition"
             onClick={() => toggleFaq(index)}
           >
             <div className="flex justify-between items-center">
