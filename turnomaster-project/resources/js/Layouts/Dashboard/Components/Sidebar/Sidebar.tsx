@@ -7,7 +7,6 @@ import {
   FiUsers, 
   FiClock, 
   FiBarChart2, 
-  FiMenu 
 } from "react-icons/fi";
 
 interface ExpandedItems {
@@ -66,14 +65,6 @@ export function Sidebar(){
 
   return (
     <>
-      
-      <button 
-        className="md:hidden fixed top-4 left-4 z-50 bg-slate-700 text-white p-2 rounded-md"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <FiMenu className="h-6 w-6" />
-      </button>
-
       {isOpen && (
         <div 
           className="md:hidden fixed inset-0 bg-black/50 z-40" 
