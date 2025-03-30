@@ -51,6 +51,7 @@ export default function Navbar() {
                       key={feature.path}
                       to={feature.path}
                       className="block px-4 py-2 text-gray-800 hover:bg-[#5C5AD6] hover:text-white transition-colors duration-300"
+                      onClick={() => setIsDropdownOpen(false)}
                     >
                       {feature.name}
                     </Link>
@@ -109,6 +110,7 @@ export default function Navbar() {
                       key={feature.path}
                       to={feature.path}
                       className="block px-4 py-2 text-gray-800 hover:bg-purple-100 transition-colors duration-300"
+                      onClick={() => setIsDropdownOpen(false)}
                     >
                       {feature.name}
                     </Link>
