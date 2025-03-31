@@ -23,7 +23,7 @@ class ContactFormsController extends Controller
                 'name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
                 'email' => 'required|email|max:255',
-                'cellphone' => 'nullable|regex:/^[\d\+\-\s\(\)]+$/|max:20',
+                'cellphone' => 'required|regex:/^[\d\+\-\s\(\)]+$/|max:20', // Changed 'nullable' to 'required'
                 'company' => 'nullable|string|max:255',
                 'message_category_id' => 'required|exists:contact_form_categories,id',
                 'message' => 'required|string|min:20',
