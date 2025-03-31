@@ -66,6 +66,9 @@ export default function Navbar() {
           <Link to="/about-project" className="text-white text-lg hover:text-neutral-400 transition-colors duration-300">
             Sobre el proyecto
           </Link>
+          <Link to="/contact" className="text-white text-lg hover:text-neutral-400 transition-colors duration-300">
+            Contacto
+          </Link>
         </div>
 
         <div className="hidden md:flex items-center space-x-4">
@@ -124,6 +127,9 @@ export default function Navbar() {
           </Link>
           <Link to="/about-project" className="block py-2 text-white text-lg hover:text-neutral-400 transition-colors duration-300">
             Sobre el proyecto
+          </Link>
+          <Link to="/contact" className="text-white text-lg hover:text-neutral-400 transition-colors duration-300">
+            Contacto
           </Link>
           <div className="mt-4 flex flex-col space-y-2">
             <Link

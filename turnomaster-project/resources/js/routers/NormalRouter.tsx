@@ -8,6 +8,7 @@ import AboutProject from '../Pages/Default/AboutProject/AboutProject';
 import Features from '../Pages/Default/Features/Features';
 import FaqPage from '../Pages/Default/Faq/Faq';
 import Clients from '../Pages/Default/Clients/Clients';
+import Contact from '../Pages/Default/Contact/Contact';
 
 function NormalRouter() {
     const location = useLocation();
@@ -33,6 +34,7 @@ function NormalRouter() {
                         <Route path="/integrations" element={<h1>Integrations Page</h1>} />
                         <Route path="/faq" element={<FaqPage />} />
                         <Route path="/security-privacy" element={<h1>Security & Privacy Page</h1>} />
+                        <Route path="/contact" element={<Contact />} />
                     </Routes>
                 </motion.div>
             </AnimatePresence>
