@@ -18,7 +18,11 @@ class CreateDemoUser extends Controller
             'email' => 'required|email|unique:users,email',
             'company_name' => 'required|string|max:255',
         ], [
+            'name.required' => 'El nombre es obligatorio.',
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.email' => 'El correo electrónico debe ser una dirección válida.',
             'email.unique' => 'El correo electrónico ya ha sido registrado.',
+            'company_name.required' => 'El nombre de la empresa es obligatorio.',
         ]);
 
         if ($validator->fails()) {
