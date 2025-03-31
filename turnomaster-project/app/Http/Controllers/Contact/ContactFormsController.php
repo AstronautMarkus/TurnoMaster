@@ -23,16 +23,20 @@ class ContactFormsController extends Controller
                 'name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
                 'email' => 'required|email|max:255',
-                'cellphone' => 'nullable|string|max:20',
+                'cellphone' => 'nullable|regex:/^[\d\+\-\s\(\)]+$/|max:20',
                 'company' => 'nullable|string|max:255',
                 'message_category_id' => 'required|exists:contact_form_categories,id',
-                'message' => 'required|string',
+                'message' => 'required|string|min:20',
+                'terms_accepted' => 'accepted',
+                'honeypot' => 'max:0',
             ]);
+
+            unset($validatedData['terms_accepted']);
 
             $contactForm = ContactForms::create($validatedData);
 
             return response()->json([
-                'message' => 'Gracias por contactar a TurnoMaster, en unos momentos le llegará un correo electrónico.',
+                'message' => 'Gracias por contactar a TurnoMaster. En breve nos comunicaremos con usted.',
                 'data' => $contactForm,
             ], 201);
         } catch (ValidationException $e) {
@@ -41,8 +45,11 @@ class ContactFormsController extends Controller
                     'name' => 'El campo nombre es obligatorio.',
                     'last_name' => 'El campo apellido es obligatorio.',
                     'email' => 'El campo correo electrónico es obligatorio.',
-                    'message_category_id' => 'El campo categoría del mensaje es obligatorio.',
-                    'message' => 'El campo mensaje es obligatorio.',
+                    'cellphone' => 'El campo teléfono tiene un formato inválido.',
+                    'message_category_id' => 'Debe seleccionar una categoría válida.',
+                    'message' => 'El mensaje debe tener al menos 20 caracteres.',
+                    'terms_accepted' => 'Debe aceptar los términos y condiciones.',
+                    'honeypot' => 'Campo inválido detectado.',
                 ];
 
                 return [$field => $translations[$field] ?? implode(', ', $messages)];
