@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Contact;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Mail;
 
 use App\Models\ContactFormCategories;
 use App\Models\ContactForms;
@@ -23,7 +24,7 @@ class ContactFormsController extends Controller
                 'name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
                 'email' => 'required|email|max:255',
-                'cellphone' => 'required|regex:/^[\d\+\-\s\(\)]+$/|max:20', // Changed 'nullable' to 'required'
+                'cellphone' => 'required|regex:/^[\d\+\-\s\(\)]+$/|max:20',
                 'company' => 'nullable|string|max:255',
                 'message_category_id' => 'required|exists:contact_form_categories,id',
                 'message' => 'required|string|min:20',
@@ -34,6 +35,14 @@ class ContactFormsController extends Controller
             unset($validatedData['terms_accepted']);
 
             $contactForm = ContactForms::create($validatedData);
+
+            Mail::send('emails.contact_success', [
+                'name' => $contactForm->name,
+                'last_name' => $contactForm->last_name,
+            ], function ($message) use ($contactForm) {
+                $message->to($contactForm->email)
+                        ->subject('Solicitud de contacto recibida | TurnoMaster');
+            });
 
             return response()->json([
                 'message' => 'Gracias por contactar a TurnoMaster. En breve nos comunicaremos con usted.',
