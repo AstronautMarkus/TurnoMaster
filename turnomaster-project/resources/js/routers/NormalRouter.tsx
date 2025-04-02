@@ -9,6 +9,7 @@ import Features from '../Pages/Default/Features/Features';
 import FaqPage from '../Pages/Default/Faq/Faq';
 import Clients from '../Pages/Default/Clients/Clients';
 import Contact from '../Pages/Default/Contact/Contact';
+import Audience from '../Pages/Default/Audience/Audience';
 
 function NormalRouter() {
     const location = useLocation();
@@ -30,7 +31,7 @@ function NormalRouter() {
                         <Route path="/clients" element={<Clients />} />
                         <Route path="/about-project" element={<AboutProject />} />
                         <Route path="/features" element={<Features />} />
-                        <Route path="/turnomaster-audience" element={<h1>TurnoMaster Audience Page</h1>} />
+                        <Route path="/turnomaster-audience" element={<Audience />} />
                         <Route path="/integrations" element={<h1>Integrations Page</h1>} />
                         <Route path="/faq" element={<FaqPage />} />
                         <Route path="/security-privacy" element={<h1>Security & Privacy Page</h1>} />
