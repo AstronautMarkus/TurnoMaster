@@ -81,12 +81,12 @@ const Contact: React.FC = () => {
                 isError={modal.isError}
                 onClose={() => setModal({ isOpen: false, message: "", isError: false })}
             />
-            <div className="max-w-3xl mx-auto px-4 py-10">
+            <div className="max-w-3xl mx-auto py-10 px-6">
                 {loading ? (
                     <AuthLoadingScreen />
                 ) : (
                     <>
-                        <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Contáctanos</h2>
+                        <h2 className="text-3xl font-bold mb-6 text-center text-indigo-700">Contáctanos</h2>
                         <p className="text-center text-gray-600 mb-6">
                             Si tienes alguna pregunta o necesitas más información, no dudes en enviarnos un mensaje. Estamos aquí para ayudarte.
                         </p>

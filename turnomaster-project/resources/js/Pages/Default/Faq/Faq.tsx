@@ -6,9 +6,9 @@ import Faq from '../../../Components/Default/FAQ/Faq';
 const FaqPage: React.FC = () => {
     return(
         <div className='min-h-screen'>
-            <section className='container mx-auto py-8'>
+            <section className='container mx-auto py-10 px-6'>
                 <div className='mb-6'>
-                    <h1 className='text-4xl font-extrabold text-gray-900 text-center'>Preguntas Frecuentes</h1>
+                    <h1 className='text-4xl font-extrabold text-indigo-700 text-center'>Preguntas Frecuentes</h1>
                     <p className='text-2xl text-center text-gray-600'>Aquí puedes encontrar respuestas a las preguntas más comunes sobre nuestro servicio.</p>
                 </div>
                 <div className='space-y-4'>

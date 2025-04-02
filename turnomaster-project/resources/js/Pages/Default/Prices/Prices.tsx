@@ -12,9 +12,9 @@ const PricingComparison: React.FC = () => {
 
     return (
         <div className="flex flex-col w-full h-full">
-            <div className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto py-10 px-6 sm:px-6 lg:px-8">
                 <div className="flex flex-col items-center mb-8 space-y-4">
-                    <h1 className="text-4xl font-extrabold text-gray-900 text-center">
+                    <h1 className="text-4xl font-extrabold text-indigo-700 text-center">
                         🧾 Planes de TurnoMaster
                     </h1>
                     <p className="text-gray-600 text-center max-w-2xl">

@@ -28,7 +28,7 @@ const Audience: React.FC = () => {
             <div className="max-w-6xl mx-auto">
 
                 <div className="text-center mb-10">
-                    <h1 className="text-4xl font-bold mb-4 text-gray-800">¿Para quién es TurnoMaster?</h1>
+                    <h1 className="py-10 px-6 text-4xl font-bold mb-4 text-indigo-700">¿Para quién es TurnoMaster?</h1>
                     <p className="text-lg text-gray-600">
                         Diseñado para adaptarse a distintos tipos de empresas, sin importar su tamaño ni su rubro.
                     </p>

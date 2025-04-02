@@ -10,7 +10,7 @@ import {
 
 const SecurityPrivacy: React.FC = () => {
     return (
-        <section className="min-h-screen py-20 px-6">
+        <section className="min-h-screen py-10 px-6">
             <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-12">
                     <h1 className="text-4xl font-bold text-indigo-700 mb-4">Seguridad y Privacidad</h1>
