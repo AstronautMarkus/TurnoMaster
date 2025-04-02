@@ -10,7 +10,7 @@ import {
   FaEnvelope,
   FaMapMarkerAlt,
   FaPhone,
-  FaEnvelopeOpen,
+  FaGlobeAmericas,
 } from "react-icons/fa";
 
 const Footer: React.FC = () => {
@@ -65,25 +65,25 @@ const Footer: React.FC = () => {
             <h3 className="text-xl font-semibold text-white">Acceso rápido</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="#" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+                <Link to="/" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
                   <FaHome className="text-sm" />
                   <span>Inicio</span>
                 </Link>
               </li>
               <li>
-                <Link to="#" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+                <Link to="/prices" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
                   <FaTag className="text-sm" />
                   <span>Precios</span>
                 </Link>
               </li>
               <li>
-                <Link to="#" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+                <Link to="/about-project" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
                   <FaInfoCircle className="text-sm" />
-                  <span>Acerca de</span>
+                  <span>Sobre el proyecto</span>
                 </Link>
               </li>
               <li>
-                <Link to="#" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+                <Link to="/contact" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
                   <FaEnvelope className="text-sm" />
                   <span>Contacto</span>
                 </Link>
@@ -93,30 +93,23 @@ const Footer: React.FC = () => {
 
 
           <div className="space-y-4">
-            <h3 className="text-xl font-semibold text-white">Contáctenos</h3>
+            <h3 className="text-xl font-semibold text-white">Conexiones y aliados</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="#" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
-                  <FaEnvelopeOpen className="text-sm" />
-                  <span>Url 1</span>
+                <Link to="https://reyesandfrieds.cl" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+                  <FaGlobeAmericas className="text-sm" />
+                  <span>Reyes&Friends.cl</span>
                 </Link>
               </li>
               <li>
-                <Link to="#" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
-                  <FaEnvelopeOpen className="text-sm" />
-                  <span>Url 2</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="#" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
-                  <FaEnvelopeOpen className="text-sm" />
-                  <span>Url 3</span>
+                <Link to="https://abbybotproject.com" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+                  <FaGlobeAmericas className="text-sm" />
+                  <span>AbbyBot Project</span>
                 </Link>
               </li>
             </ul>
           </div>
         </div>
-
 
         <div className="border-t border-gray-700 my-8"></div>
 
