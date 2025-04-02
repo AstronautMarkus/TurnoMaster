@@ -138,6 +138,12 @@ const RegisterDemo: React.FC = () => {
                   </p>
                 )}
               </div>
+                <p
+                  onClick={toggleModal}
+                  className="text-blue-600 text-s font-semibold cursor-pointer text-center mt-4 mb-4 lg:hidden"
+                >
+                  Más información
+                </p>
               <button
                 type="submit"
                 className="w-full px-4 py-2 text-white bg-blue-800 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -175,15 +181,6 @@ const RegisterDemo: React.FC = () => {
             </div>
 
         </div>
-      </div>
-
-      <div className="flex justify-center mt-6">
-        <button
-          onClick={toggleModal}
-          className="px-4 py-2 text-white bg-[#F57424] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          Más Información
-        </button>
       </div>
 
 
