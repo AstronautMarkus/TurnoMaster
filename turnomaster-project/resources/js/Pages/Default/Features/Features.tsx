@@ -43,7 +43,7 @@ const features = [
 
 const Features: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-50 py-16 px-6">
+    <div className="min-h-screen py-16 px-6">
       <div className="max-w-6xl mx-auto text-center">
         <h1 className="text-4xl font-bold text-indigo-700 mb-4">Características del Proyecto</h1>
         <p className="text-lg text-gray-600 mb-12">

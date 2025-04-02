@@ -11,8 +11,8 @@ const PricingComparison: React.FC = () => {
     const togglePricing = () => setIsYearly(!isYearly);
 
     return (
-        <div className="flex flex-col w-full h-full">
-            <div className="max-w-7xl mx-auto py-10 px-6 sm:px-6 lg:px-8">
+        <div className="min-h-screen py-16 px-6">
+            <div className="max-w-6xl mx-auto text-center">
                 <div className="flex flex-col items-center mb-8 space-y-4">
                     <h1 className="text-4xl font-extrabold text-indigo-700 text-center">
                         🧾 Planes de TurnoMaster
