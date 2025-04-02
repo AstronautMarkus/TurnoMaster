@@ -10,6 +10,7 @@ import FaqPage from '../Pages/Default/Faq/Faq';
 import Clients from '../Pages/Default/Clients/Clients';
 import Contact from '../Pages/Default/Contact/Contact';
 import Audience from '../Pages/Default/Audience/Audience';
+import SecurityPrivacy from '../Pages/Default/SecurityPrivacy/SecurityPrivacy';
 
 function NormalRouter() {
     const location = useLocation();
@@ -34,7 +35,7 @@ function NormalRouter() {
                         <Route path="/turnomaster-audience" element={<Audience />} />
                         <Route path="/integrations" element={<h1>Integrations Page</h1>} />
                         <Route path="/faq" element={<FaqPage />} />
-                        <Route path="/security-privacy" element={<h1>Security & Privacy Page</h1>} />
+                        <Route path="/security-privacy" element={<SecurityPrivacy />} />
                         <Route path="/contact" element={<Contact />} />
                     </Routes>
                 </motion.div>
