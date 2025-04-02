@@ -11,6 +11,11 @@ const RegisterDemo: React.FC = () => {
   const [errors, setErrors] = useState<{ [key: string]: string[] }>({})
   const [apiMessage, setApiMessage] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen)
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -172,18 +177,37 @@ const RegisterDemo: React.FC = () => {
         </div>
       </div>
 
-      <div className="lg:hidden mt-6">
-        <div className="mt-4 bg-gray-100 p-4 rounded-lg">
-          <h3 className="text-sm font-semibold text-gray-800 mb-2">Compruebe todo el poder de TurnoMaster en una prueba gratuita de 7 días.</h3>
-          <ul className="text-gray-600 text-xs list-disc list-inside">
-            <li>No necesitas agregar datos de una tarjeta para su uso.</li>
-            <li>Prueba gratuita de 7 días.</li>
-            <li>A diferencia de nuestro <strong>Modelo Fremium</strong>, aquí puedes probar todas las funciones del sistema sin limitaciones.</li>
-            <li>Prueba el acceso total de las funciones de TurnoMaster por tiempo limitado.</li>
-            <li>La prueba gratis no es funcional para entornos de producción.</li>
+      <div className="flex justify-center mt-6">
+        <button
+          onClick={toggleModal}
+          className="px-4 py-2 text-white bg-[#F57424] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          Más Información
+        </button>
+      </div>
+
+
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg w-11/12 max-w-md">
+            <button
+              onClick={toggleModal}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-lg"
+            >
+              ✕
+            </button>
+            <h3 className="text-sm font-semibold text-gray-800 mb-4">
+              Compruebe todo el poder de TurnoMaster en una prueba gratuita de 7 días.
+            </h3>
+            <ul className="text-gray-600 text-xs list-disc list-inside space-y-2">
+              <li>No necesitas agregar datos de una tarjeta para su uso.</li>
+              <li>Prueba gratuita de 7 días.</li>
+              <li>A diferencia de nuestro <strong>Modelo Fremium</strong>, aquí puedes probar todas las funciones del sistema sin limitaciones.</li>
+              <li>Prueba el acceso total de las funciones de TurnoMaster por tiempo limitado.</li>
+              <li>La prueba gratis no es funcional para entornos de producción.</li>
             </ul>
             <div className="mt-6 border-t border-gray-300 pt-6">
-              <div className="flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:space-x-4">
+              <div className="flex flex-col space-y-6">
                 <div className="flex-1 text-center">
                   <h4 className="text-sm font-semibold text-gray-800 mb-2">Paso 1</h4>
                   <p className="text-gray-600 text-xs">Rellena el formulario con tus datos personales y de tu empresa.</p>
@@ -198,8 +222,9 @@ const RegisterDemo: React.FC = () => {
                 </div>
               </div>
             </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }
