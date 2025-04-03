@@ -1,11 +1,21 @@
 import React, { useState, useRef, useEffect, MouseEvent } from "react";
 import { FiLogOut, FiSettings, FiUser } from "react-icons/fi";
+import { Link, useNavigate } from "react-router-dom";
+import { LogoutModal } from "./LogoutModal";
 
 export function UserNav() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [showLogoutModal, setShowLogoutModal] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-  
+  const navigate = useNavigate();
+
+  const handleLogout = (): void => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/auth/login");
+  };
+
   useEffect(() => {
     function handleClickOutside(event: MouseEvent): void {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -72,7 +82,10 @@ export function UserNav() {
               <a
                 href="#"
                 className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                onClick={(e: React.MouseEvent) => e.preventDefault()}
+                onClick={(e: React.MouseEvent) => {
+                  e.preventDefault();
+                  setShowLogoutModal(true);
+                }}
               >
                 <FiLogOut className="mr-2 h-4 w-4 text-gray-500" />
                 <span>Cerrar sesión</span>
@@ -81,6 +94,11 @@ export function UserNav() {
           </div>
         </div>
       )}
+      <LogoutModal
+        isOpen={showLogoutModal}
+        onClose={() => setShowLogoutModal(false)}
+        onConfirm={handleLogout}
+      />
     </div>
   );
 }
