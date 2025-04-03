@@ -8,9 +8,6 @@ use App\Http\Controllers\Contact\ContactFormsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\CreateUserController;
 
-Route::get('/test', function () {
-    return response()->json(['message' => 'This is a test']);
-});
 
 Route::post('/create-demo-user', [CreateDemoUser::class, 'createDemoUser']);
 
@@ -19,3 +16,11 @@ Route::post('/contact-form', [ContactFormsController::class, 'sendMessage']);
 
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/create-user', [CreateUserController::class, 'createUser']);
+
+Route::middleware(['jwt.auth'])->group(function () {
+    Route::get('/me', function (Request $request) {
+        return response()->json([
+            'user' => $request->auth_user,
+        ]);
+    });
+});

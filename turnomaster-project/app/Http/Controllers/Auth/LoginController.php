@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 class LoginController extends Controller
 {
@@ -17,16 +19,38 @@ class LoginController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if (!$user || !$user->validatePassword($request->password)) {
-            return response()->json(['message' => 'Invalid credentials'], 401);
+        if (!$user || !\Hash::check($request->password, $user->password)) {
+            return response()->json(['message' => 'Credenciales inválidas'], 401);
         }
 
-        $token = $user->createToken('auth_token')->plainTextToken;
+        $payload = [
+            'iss' => config('app.url'),
+            'sub' => $user->id,
+            'iat' => time(),
+            'exp' => time() + 3600,
+            'nbf' => time(),
+        ];
+
+        try {
+            $jwt = JWT::encode($payload, env('JWT_SECRET'), 'HS256');
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error generando el token'], 500);
+        }
 
         return response()->json([
-            'message' => 'Login successful',
-            'token' => $token,
-            'user' => $user,
+            'message' => 'Iniciado sesión correctamente.',
+            'token' => $jwt,
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'company_id' => $user->company_id,
+                'role_id' => $user->role_id,
+                'is_trial' => $user->is_trial,
+                'expires_at' => $user->expires_at,
+                'created_at' => $user->created_at,
+                'updated_at' => $user->updated_at,
+            ],
         ]);
     }
 }
