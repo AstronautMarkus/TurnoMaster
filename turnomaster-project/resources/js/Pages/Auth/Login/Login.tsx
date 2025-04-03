@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { FaEye, FaEyeLowVision, FaGift, FaGhost } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import AuthLoadingScreen from "../../../Components/Auth/LoadingScreen/AuthLoadingScreen";
 
 const Login: React.FC = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -22,15 +24,14 @@ const Login: React.FC = () => {
     e.preventDefault();
     setErrorMessage(null);
     setSuccessMessage(null);
+    setIsLoading(true);
     try {
       const response = await axios.post("/api/login", {
         email: formData.username,
         password: formData.password,
       });
-      console.log("Login successful:", response.data);
       setSuccessMessage(response.data.message);
 
-      
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
 
@@ -38,24 +39,26 @@ const Login: React.FC = () => {
         window.location.href = "/dashboard";
       }, 2000);
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.status === 401) {
-        setErrorMessage("Credenciales inválidas");
+      if (axios.isAxiosError(error)) {
+        setErrorMessage(error.response?.data?.message || "Ocurrió un error inesperado");
       } else {
-        if (axios.isAxiosError(error)) {
-          console.error("Login failed:", error.response?.data || error.message);
-        } else {
-          console.error("An unexpected error occurred:", error);
-        }
+        setErrorMessage("Ocurrió un error inesperado");
       }
     }
+    setIsLoading(false);
   };
 
   return (
-      <div className="bg-white rounded-xl p-8 shadow-2xl w-full max-w-sm">
-        <div className="flex items-center justify-center mb-6">
-          <img src="/img/logo/TurnoMaster.svg" alt="Logo" className="w-12 h-12 mr-3" />
-          <h2 className="text-2xl font-bold text-gray-800">Iniciar sesión</h2>
+    <div className="bg-white rounded-xl p-8 shadow-2xl w-full max-w-sm">
+      <div className="flex items-center justify-center mb-6">
+        <img src="/img/logo/TurnoMaster.svg" alt="Logo" className="w-12 h-12 mr-3" />
+        <h2 className="text-2xl font-bold text-gray-800">Iniciar sesión</h2>
+      </div>
+      {isLoading ? (
+        <div className="flex items-center justify-center h-40">
+          <AuthLoadingScreen />
         </div>
+      ) : (
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-700">
@@ -96,7 +99,7 @@ const Login: React.FC = () => {
               </button>
             </div>
           </div>
-          {errorMessage && ( 
+          {errorMessage && (
             <div className="mb-4 text-sm text-red-600 text-center">
               {errorMessage}
             </div>
@@ -122,7 +125,8 @@ const Login: React.FC = () => {
             </Link>
           </div>
         </form>
-      </div>
+      )}
+    </div>
   );
 };
 
