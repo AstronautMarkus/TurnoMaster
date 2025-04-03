@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { FaEye, FaEyeLowVision, FaGift, FaGhost } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Login: React.FC = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -15,9 +18,36 @@ const Login: React.FC = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
+    setErrorMessage(null);
+    setSuccessMessage(null);
+    try {
+      const response = await axios.post("/api/login", {
+        email: formData.username,
+        password: formData.password,
+      });
+      console.log("Login successful:", response.data);
+      setSuccessMessage(response.data.message);
+
+      
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+
+      setTimeout(() => {
+        window.location.href = "/dashboard";
+      }, 2000);
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.status === 401) {
+        setErrorMessage("Credenciales inválidas");
+      } else {
+        if (axios.isAxiosError(error)) {
+          console.error("Login failed:", error.response?.data || error.message);
+        } else {
+          console.error("An unexpected error occurred:", error);
+        }
+      }
+    }
   };
 
   return (
@@ -66,21 +96,31 @@ const Login: React.FC = () => {
               </button>
             </div>
           </div>
+          {errorMessage && ( 
+            <div className="mb-4 text-sm text-red-600 text-center">
+              {errorMessage}
+            </div>
+          )}
+          {successMessage && (
+            <div className="mb-4 text-sm text-green-600 text-center">
+              {successMessage}
+            </div>
+          )}
           <button type="submit" className="w-full px-4 py-2 text-white bg-blue-800 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
             Iniciar sesión
           </button>
-            <div className="mt-4 text-center flex items-center justify-center gap-2">
+          <div className="mt-4 text-center flex items-center justify-center gap-2">
             <Link rel="stylesheet" to="/auth/forgot-password" className="text-sm text-red-600 hover:underline flex items-center gap-1">
               <FaGhost />
               Olvidé mi contraseña
             </Link>
-            </div>
-            <div className="mt-4 text-center flex items-center justify-center gap-2">
+          </div>
+          <div className="mt-4 text-center flex items-center justify-center gap-2">
             <Link rel="stylesheet" to="/prices" className="text-sm text-green-600 hover:underline flex items-center gap-1">
               <FaGift />
               Prueba TurnoMaster gratis
             </Link>
-            </div>
+          </div>
         </form>
       </div>
   );
