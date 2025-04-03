@@ -12,6 +12,20 @@ class LoginController extends Controller
 {
     public function login(Request $request)
     {
+        $errors = [];
+
+        if (!$request->has('email')) {
+            $errors['email'] = 'El campo "email" es obligatorio.';
+        }
+
+        if (!$request->has('password')) {
+            $errors['password'] = 'El campo "password" es obligatorio.';
+        }
+
+        if (!empty($errors)) {
+            return response()->json(['errors' => $errors], 422);
+        }
+
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
