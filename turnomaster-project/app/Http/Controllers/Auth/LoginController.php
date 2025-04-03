@@ -34,7 +34,7 @@ class LoginController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (!$user || !\Hash::check($request->password, $user->password)) {
-            return response()->json(['message' => 'Credenciales inválidas'], 401);
+            return response()->json(['message' => 'Usuario o contraseña incorrectos.'], 401);
         }
 
         $payload = [
@@ -43,6 +43,9 @@ class LoginController extends Controller
             'iat' => time(),
             'exp' => time() + 3600,
             'nbf' => time(),
+            'role_id' => $user->role_id,
+            'is_trial' => $user->is_trial,
+            'company_id' => $user->company_id,
         ];
 
         try {
@@ -55,12 +58,8 @@ class LoginController extends Controller
             'message' => 'Iniciado sesión correctamente.',
             'token' => $jwt,
             'user' => [
-                'id' => $user->id,
                 'name' => $user->name,
                 'email' => $user->email,
-                'company_id' => $user->company_id,
-                'role_id' => $user->role_id,
-                'is_trial' => $user->is_trial,
                 'expires_at' => $user->expires_at,
                 'created_at' => $user->created_at,
                 'updated_at' => $user->updated_at,
