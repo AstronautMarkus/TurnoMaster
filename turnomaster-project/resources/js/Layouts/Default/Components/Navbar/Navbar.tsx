@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaGift, FaUser, FaAngleUp, FaAngleDown } from "react-icons/fa6";
 import { useNavbarFeatures } from "./useNavbarFeatures";
 import { LogoutModal } from "../../../Dashboard/Components/Navbar/UserNav/LogoutModal";
+import { useHandleLogout } from "../../../../hooks/useHandleLogout";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,12 +39,7 @@ export default function Navbar() {
     };
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setIsLogoutModalOpen(false);
-    navigate("/");
-  };
+  const handleLogout = useHandleLogout();
 
   return (
     <nav className="bg-[#5C5AD6] shadow-lg py-4 px-6">
@@ -277,7 +273,7 @@ export default function Navbar() {
       <LogoutModal
         isOpen={isLogoutModalOpen}
         onClose={() => setIsLogoutModalOpen(false)}
-        onConfirm={handleLogout}
+        onConfirm={() => handleLogout(() => setIsLogoutModalOpen(false))}
       />
     </nav>
   );

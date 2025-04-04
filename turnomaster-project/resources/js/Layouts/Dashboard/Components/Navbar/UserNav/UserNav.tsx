@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, MouseEvent } from "react";
 import { FiLogOut, FiSettings, FiUser } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import { LogoutModal } from "./LogoutModal";
+import { useHandleLogout } from "../../../../../hooks/useHandleLogout";
 
 export function UserNav() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -10,11 +11,7 @@ export function UserNav() {
 
   const navigate = useNavigate();
 
-  const handleLogout = (): void => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    navigate("/");
-  };
+  const handleLogout = useHandleLogout();
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent): void {
