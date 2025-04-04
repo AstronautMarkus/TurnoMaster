@@ -10,8 +10,11 @@ export function UserNav() {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const navigate = useNavigate();
-
   const handleLogout = useHandleLogout();
+
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const userName = user.name || "Usuario";
+  const userEmail = user.email || "email@ejemplo.com";
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent): void {
@@ -40,7 +43,7 @@ export function UserNav() {
           />
         </div>
         <span className="hidden text-sm font-medium md:inline-block">
-          Kasane Teto
+          {userName}
         </span>
       </button>
 
@@ -48,8 +51,8 @@ export function UserNav() {
         <div className="absolute right-0 mt-2 w-56 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-50">
           <div className="p-2">
             <div className="px-4 py-3">
-              <p className="text-sm font-medium text-gray-900">Kasane Teto</p>
-              <p className="text-xs text-gray-500">kasane@turnomaster.com</p>
+              <p className="text-sm font-medium text-gray-900">{userName}</p>
+              <p className="text-xs text-gray-500">{userEmail}</p>
             </div>
             
             <div className="border-t border-gray-200"></div>
@@ -94,7 +97,7 @@ export function UserNav() {
       <LogoutModal
         isOpen={showLogoutModal}
         onClose={() => setShowLogoutModal(false)}
-        onConfirm={handleLogout}
+        onConfirm={() => handleLogout()}
       />
     </div>
   );
