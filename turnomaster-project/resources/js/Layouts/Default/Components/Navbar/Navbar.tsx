@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaGift, FaUser, FaAngleUp, FaAngleDown } from "react-icons/fa6";
 import { useNavbarFeatures } from "./useNavbarFeatures";
 import { LogoutModal } from "../../../Dashboard/Components/Navbar/UserNav/LogoutModal";
@@ -13,7 +13,6 @@ export default function Navbar() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const userDropdownRef = useRef<HTMLDivElement>(null);
   const features = useNavbarFeatures();
-  const navigate = useNavigate();
 
   const userData = JSON.parse(localStorage.getItem("user") || "null");
   const isAuthenticated = !!userData;
