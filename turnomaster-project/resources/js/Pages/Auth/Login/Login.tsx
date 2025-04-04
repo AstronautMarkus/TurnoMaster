@@ -49,7 +49,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl p-12 px-28 shadow-2xl w-full max-w-lg">
+    <div className="bg-white rounded-xl p-12 px-6 md:px-28 shadow-2xl w-full max-w-sm md:max-w-lg">
       <div className="flex items-center justify-center mb-6">
         <img src="/img/logo/TurnoMaster.svg" alt="Logo" className="w-14 h-14 mr-4" />
         <h2 className="text-3xl font-bold text-gray-800">Iniciar sesión</h2>
