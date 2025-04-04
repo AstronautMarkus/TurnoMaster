@@ -13,7 +13,7 @@ export function UserNav() {
   const handleLogout = (): void => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    navigate("/auth/login");
+    navigate("/");
   };
 
   useEffect(() => {
