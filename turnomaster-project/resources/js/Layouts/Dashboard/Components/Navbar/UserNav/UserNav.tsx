@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, MouseEvent } from "react";
-import { FiLogOut, FiSettings, FiUser } from "react-icons/fi";
+import { FiLogOut, FiSettings, FiUser,  FiMenu} from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import { LogoutModal } from "./LogoutModal";
 import { useHandleLogout } from "../../../../../hooks/useHandleLogout";
@@ -58,37 +58,22 @@ export function UserNav() {
             <div className="border-t border-gray-200"></div>
             
             <div className="py-1">
-              <a
-                href="#"
-                className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                onClick={(e: React.MouseEvent) => e.preventDefault()}
-              >
-                <FiUser className="mr-2 h-4 w-4 text-gray-500" />
-                <span>Perfil</span>
+              <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={(e) => e.preventDefault()}>
+                <FiUser className="mr-2 h-4 w-4 text-gray-500" /> Perfil
               </a>
-              <a
-                href="#"
-                className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                onClick={(e: React.MouseEvent) => e.preventDefault()}
-              >
-                <FiSettings className="mr-2 h-4 w-4 text-gray-500" />
-                <span>Ajustes</span>
+              <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={(e) => e.preventDefault()}>
+                <FiSettings className="mr-2 h-4 w-4 text-gray-500" /> Ajustes
               </a>
+              <Link to="/" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <FiMenu className="mr-2 h-4 w-4 text-gray-500" /> Volver a inicio
+              </Link>
             </div>
             
             <div className="border-t border-gray-200"></div>
             
             <div className="py-1">
-              <a
-                href="#"
-                className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                onClick={(e: React.MouseEvent) => {
-                  e.preventDefault();
-                  setShowLogoutModal(true);
-                }}
-              >
-                <FiLogOut className="mr-2 h-4 w-4 text-gray-500" />
-                <span>Cerrar sesión</span>
+              <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={(e) => { e.preventDefault(); setShowLogoutModal(true); }}>
+                <FiLogOut className="mr-2 h-4 w-4 text-gray-500" /> Cerrar sesión
               </a>
             </div>
           </div>
