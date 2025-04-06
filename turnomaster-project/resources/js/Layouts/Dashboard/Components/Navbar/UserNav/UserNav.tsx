@@ -58,12 +58,12 @@ export function UserNav() {
             <div className="border-t border-gray-200"></div>
             
             <div className="py-1">
-              <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={(e) => e.preventDefault()}>
+              <Link to="/dashboard/profile" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                 <FiUser className="mr-2 h-4 w-4 text-gray-500" /> Perfil
-              </a>
-              <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={(e) => e.preventDefault()}>
+              </Link>
+              <Link to="/dashboard/settings" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                 <FiSettings className="mr-2 h-4 w-4 text-gray-500" /> Ajustes
-              </a>
+              </Link>
               <Link to="/" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                 <FiMenu className="mr-2 h-4 w-4 text-gray-500" /> Volver a inicio
               </Link>

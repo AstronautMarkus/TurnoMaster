@@ -3,6 +3,8 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import DashboardLayout from '../Layouts/Dashboard/DashboardLayout';
 
 import Index from '../Pages/Dashboard/Index/Index';
+import Profile from '../Pages/Dashboard/Profile/Profile';
+import Settings from '../Pages/Dashboard/Settings/Settings';
 
 function parseJwt(token: string): { exp?: number } | null {
     try {
@@ -34,14 +36,13 @@ function DashboardGuard({ children }: { children: JSX.Element }) {
 function DashboardRouter() {
     return (
         <DashboardLayout>
-            <Routes>
-                <Route path="/*" element={<DashboardGuard><Index /></DashboardGuard>} />
-                <Route path="/dashboard" element={<DashboardGuard><div>Dashboard Page</div></DashboardGuard>} />
-                <Route path="/settings" element={<DashboardGuard><div>Settings Page</div></DashboardGuard>} />
-                <Route path="/profile" element={<DashboardGuard><div>Profile Page</div></DashboardGuard>} />
-                <Route path="/users" element={<DashboardGuard><div>Users Page</div></DashboardGuard>} />
-                <Route path="/reports" element={<DashboardGuard><div>Reports Page</div></DashboardGuard>} />
-            </Routes>
+            <DashboardGuard>
+                <Routes>
+                    <Route path="/*" element={<Index />} />
+                    <Route path="/settings" element={<Settings />} />
+                    <Route path="/profile" element={<Profile />} />
+                </Routes>
+            </DashboardGuard>
         </DashboardLayout>
     );
 }
