@@ -8,17 +8,17 @@ const Profile: React.FC = () => {
         <div className="p-6 min-h-screen">
             <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Mi perfil</h1>
 
-            <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6 relative">
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-6">
-                        <img src="/img/default/default.jpg" alt="Foto de perfil" className="w-24 h-24 rounded-full object-cover"/>
-                        <div>
-                            <h1 className="text-2xl font-bold text-gray-800">{user?.name}</h1>
-                            <p className="text-gray-600">{user?.email}</p>
-                            <p className="text-gray-600">cellphone_number</p>
+            <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-4 sm:p-6 relative">
+                <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between space-y-4 sm:space-y-0">
+                    <div className="flex items-center space-x-4 sm:space-x-6">
+                        <img src="/img/default/default.jpg" alt="Foto de perfil" className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover"/>
+                        <div className="text-center sm:text-left">
+                            <h1 className="text-lg sm:text-2xl font-bold text-gray-800">{user?.name}</h1>
+                            <p className="text-sm sm:text-base text-gray-600">{user?.email}</p>
+                            <p className="text-sm sm:text-base text-gray-600">cellphone_number</p>
                         </div>
                     </div>
-                    <button className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
+                    <button className="bg-red-500 text-white text-sm sm:text-base px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg hover:bg-red-600 transition">
                         Editar perfil
                     </button>
                 </div>
