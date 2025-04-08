@@ -1,6 +1,9 @@
 import React from 'react';
+import useProfileData from './useProfileData';
 
 const Profile: React.FC = () => {
+    const user = useProfileData();
+
     return (
         <div className="p-6 min-h-screen">
             <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Mi perfil</h1>
@@ -8,15 +11,11 @@ const Profile: React.FC = () => {
             <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6 relative">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-6">
-                        <img 
-                            src="/img/default/default.jpg" 
-                            alt="Foto de perfil" 
-                            className="w-24 h-24 rounded-full object-cover"
-                        />
+                        <img src="/img/default/default.jpg" alt="Foto de perfil" className="w-24 h-24 rounded-full object-cover"/>
                         <div>
-                            <h1 className="text-2xl font-bold text-gray-800">Kasane Teto</h1>
-                            <p className="text-gray-600">correo@ejemplo.com</p>
-                            <p className="text-gray-600">+34 123 456 789</p>
+                            <h1 className="text-2xl font-bold text-gray-800">{user?.name}</h1>
+                            <p className="text-gray-600">{user?.email}</p>
+                            <p className="text-gray-600">cellphone_number</p>
                         </div>
                     </div>
                     <button className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
@@ -35,7 +34,7 @@ const Profile: React.FC = () => {
                         </div>
                         <div>
                             <p className="text-gray-600 font-medium">Fecha de validación:</p>
-                            <p className="font-bold">16/03/2025</p>
+                            <p className="font-bold">xx/xx/xxxx</p>
                         </div>
                         <div>
                             <p className="text-gray-600 font-medium">Fecha de renovación:</p>
@@ -48,7 +47,6 @@ const Profile: React.FC = () => {
                     </div>
                 </div>
             </div>
-            
 
             <div className="mt-10">
                 <h2 className="text-xl font-semibold text-center text-gray-800 mb-4">Lista de empresas</h2>
