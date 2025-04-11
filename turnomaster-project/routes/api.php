@@ -7,7 +7,7 @@ use App\Http\Controllers\Auth\CreateDemoUser;
 use App\Http\Controllers\Contact\ContactFormsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\CreateUserController;
-use App\Http\Controllers\Auth\ForgotpasswordController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use Carbon\Carbon;
 use App\Http\Controllers\AuthController;
@@ -29,7 +29,7 @@ Route::middleware(['jwt.auth'])->group(function () {
     });
 });
 
-Route::post('/forgot-password', [ForgotpasswordController::class, 'sendResetLink']);
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink']);
 Route::post('/reset-password', [ResetPasswordController::class, 'reset']);
 Route::get('/validate-reset-token/{token}', function ($token) {
     $record = DB::table('password_resets')->where('token', $token)->first();
@@ -40,11 +40,8 @@ Route::get('/validate-reset-token/{token}', function ($token) {
 
     $expiresAt = Carbon::parse($record->created_at)->addMinutes(60);
     if (Carbon::now()->greaterThan($expiresAt)) {
-        return response()->json(['valid' => false], 410); // Token expirado
+        return response()->json(['valid' => false], 410); // expired token
     }
 
     return response()->json(['valid' => true]);
 });
-
-
-
