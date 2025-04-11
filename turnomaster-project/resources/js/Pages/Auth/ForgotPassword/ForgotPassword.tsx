@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa6';
+import axios from 'axios';
 
 const ForgotPassword: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -25,29 +26,21 @@ const ForgotPassword: React.FC = () => {
     setSuccessMessage('Si el correo está registrado, recibirás un enlace para restablecer tu contraseña.');
 
     try {
-      const response = await fetch('http://localhost:8000/api/forgot-password', {
-        method: 'POST',
+      const response = await axios.post('/api/forgot-password', {
+        email,
+      }, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
-        body: JSON.stringify({ email }),
       });
-  
-      const data = await response.json();
-  
-      if (!response.ok) {
-        throw new Error(data.message || 'Error al enviar el correo.');
-      }
- 
-      setSuccessMessage(data.message);
+
+      setSuccessMessage(response.data.message);
+
     } catch (err: any) {
-      setError(err.message || 'Ocurrió un error inesperado.');
+      setError(err.response?.data?.message || 'Ocurrió un error inesperado.');
     }
 
-    setTimeout(() => {
-      window.location.reload();
-    }, 100);
   };
 
   return (

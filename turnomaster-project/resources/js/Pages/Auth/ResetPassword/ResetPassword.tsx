@@ -11,7 +11,7 @@ const ResetPassword: React.FC = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/validate-reset-token/${token}`)
+    axios.get(`/api/validate-reset-token/${token}`)
       .then(response => {
         if (!response.data.valid) {
           setError('Token inválido o expirado.');
@@ -31,7 +31,7 @@ const ResetPassword: React.FC = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:8000/api/reset-password', {
+      const response = await axios.post('/api/reset-password', {
         token,
         password,
       });
