@@ -8,6 +8,7 @@ import {
   FiClock, 
   FiBarChart2, 
 } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 interface ExpandedItems {
   [key: string]: boolean;
@@ -105,13 +106,9 @@ function SidebarContent({
   return (
     <>
       <div className="flex items-center justify-start py-4 px-4 bg-slate-800">
-        <a 
-          href="#" 
+        <Link 
+          to="/dashboard" 
           className="flex items-center gap-3" 
-          onClick={(e: React.MouseEvent) => {
-            e.preventDefault();
-            handleNavigation("/dashboard");
-          }}
         >
           <img
             src="/img/logo/TurnoMaster.svg"
@@ -122,7 +119,7 @@ function SidebarContent({
             <span className="font-bold text-sm text-white">TurnoMaster</span>
             <span className="text-xs text-slate-300">Dashboard</span>
           </div>
-        </a>
+        </Link>
       </div>
       
       <div className="p-4">

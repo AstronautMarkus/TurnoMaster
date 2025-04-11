@@ -108,12 +108,20 @@ export default function Navbar() {
         <div className="hidden md:flex items-center space-x-4">
           {isAuthenticated ? (
             <div className="relative" ref={userDropdownRef}>
-              <button
-                className="flex items-center text-white text-lg hover:text-neutral-400 transition-colors duration-300"
+                <button
+                className="flex items-center space-x-2 text-white text-lg hover:text-neutral-400 transition-colors duration-300"
                 onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
-              >
-                {`Hola, ${userData.name}`} <FaAngleDown className="ml-2" />
-              </button>
+                >
+                <div className="h-10 w-10 rounded-full overflow-hidden bg-slate-600">
+                  <img
+                  src="/img/default/default.jpg"
+                  alt="Profile"
+                  className="h-full w-full object-cover"
+                  />
+                </div>
+                <span className="font-medium">{`Hola, ${userData.name}`}</span>
+                <FaAngleDown className="ml-1" />
+                </button>
               {isUserDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border-2 border-[#5C5AD6]">
                   <div className="py-1">
@@ -223,6 +231,13 @@ export default function Navbar() {
                     className="flex items-center w-full py-2 text-white text-lg hover:text-neutral-400 transition-colors duration-300"
                     onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
                   >
+                    <div className="h-10 w-10 rounded-full overflow-hidden bg-slate-600 mr-2">
+                      <img
+                        src="/img/default/default.jpg"
+                        alt="Profile"
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
                     {`Hola, ${userData.name}`} <FaAngleDown className="ml-2" />
                   </button>
                   {isUserDropdownOpen && (

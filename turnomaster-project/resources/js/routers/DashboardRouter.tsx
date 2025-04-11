@@ -1,8 +1,11 @@
 import React, { JSX } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 import DashboardLayout from '../Layouts/Dashboard/DashboardLayout';
 
 import Index from '../Pages/Dashboard/Index/Index';
+import Profile from '../Pages/Dashboard/Profile/Profile';
+import Settings from '../Pages/Dashboard/Settings/Settings';
 
 function parseJwt(token: string): { exp?: number } | null {
     try {
@@ -32,16 +35,28 @@ function DashboardGuard({ children }: { children: JSX.Element }) {
 }
 
 function DashboardRouter() {
+    const location = useLocation();
+
+    const pageTransition = {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 },
+        transition: { duration: 0.3 },
+    };
+
     return (
         <DashboardLayout>
-            <Routes>
-                <Route path="/*" element={<DashboardGuard><Index /></DashboardGuard>} />
-                <Route path="/dashboard" element={<DashboardGuard><div>Dashboard Page</div></DashboardGuard>} />
-                <Route path="/settings" element={<DashboardGuard><div>Settings Page</div></DashboardGuard>} />
-                <Route path="/profile" element={<DashboardGuard><div>Profile Page</div></DashboardGuard>} />
-                <Route path="/users" element={<DashboardGuard><div>Users Page</div></DashboardGuard>} />
-                <Route path="/reports" element={<DashboardGuard><div>Reports Page</div></DashboardGuard>} />
-            </Routes>
+            <DashboardGuard>
+                <AnimatePresence mode="wait">
+                    <motion.div key={location.pathname} {...pageTransition} className="w-full">
+                        <Routes location={location} key={location.pathname}>
+                            <Route path="/*" element={<Index />} />
+                            <Route path="/settings" element={<Settings />} />
+                            <Route path="/profile" element={<Profile />} />
+                        </Routes>
+                    </motion.div>
+                </AnimatePresence>
+            </DashboardGuard>
         </DashboardLayout>
     );
 }
