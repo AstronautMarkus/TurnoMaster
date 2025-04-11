@@ -8,11 +8,11 @@ interface LayoutProps {
 
 const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <div className="flex min-h-screen flex-col md:flex-row">
+    <div className="flex min-h-screen flex-col md:flex-row bg-gradient-to-b from-gray-100 to-gray-300">
       <Sidebar  />
       <div className="flex flex-col flex-1 w-full">
         <Navbar  />
-        <main className="flex-1 p-4 md:p-6 overflow-y-auto">
+        <main className="flex-1 overflow-y-auto">
           {children}
         </main>
       </div>
