@@ -47,6 +47,12 @@ class ResetPasswordController extends Controller
                 return response()->json(['message' => 'Usuario no encontrado.'], 404);
             }
 
+            if (Hash::check($request->password, $user->password)) {
+                return response()->json([
+                    'message' => 'La nueva contraseña no puede ser igual a la contraseña actual.',
+                ], 422);
+            }
+
             $usedBefore = PasswordHistory::where('user_id', $user->id)->get()
                 ->contains(function ($history) use ($request) {
                     return Hash::check($request->password, $history->password);
