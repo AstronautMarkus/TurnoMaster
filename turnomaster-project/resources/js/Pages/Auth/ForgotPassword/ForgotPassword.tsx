@@ -7,33 +7,18 @@ import axios from 'axios';
 const ForgotPassword: React.FC = () => {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState(''); 
+  const [success, setSuccess] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!email) {
-      setError('Por favor, ingresa tu correo.');
-      setSuccess(''); 
-      return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setError('Correo inválido.');
-      setSuccess(''); 
-      return;
-    }
-
     setError('');
-    setSuccess(''); 
+    setSuccess('');
     setIsLoading(true);
 
     try {
-      const response = await axios.post('/api/forgot-password', {
-        email,
-      }, {
+      const response = await axios.post('/api/forgot-password', { email }, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -42,11 +27,11 @@ const ForgotPassword: React.FC = () => {
 
       if (response.status === 200) {
         setSuccess(response.data.message);
-      } else {
-        setError(response.data.message);
       }
     } catch (err: any) {
-      if (err.response?.status === 404) {
+      if (err.response?.status === 422) {
+        setError(err.response.data.errors.email);
+      } else if (err.response?.status === 404) {
         setError(err.response.data.message);
       } else {
         setError('Ocurrió un error inesperado.');
@@ -59,7 +44,7 @@ const ForgotPassword: React.FC = () => {
   return (
     <div className="bg-white rounded-xl p-12 px-6 md:px-28 shadow-2xl w-full max-w-sm md:max-w-lg mx-auto mt-10">
       {isLoading ? (
-        <div className="text-center text-gray-700"><AuthLoadingScreen/></div>
+        <div className="text-center text-gray-700"><AuthLoadingScreen /></div>
       ) : (
         <form onSubmit={handleSubmit}>
           <div className="flex items-center justify-center mb-6">
