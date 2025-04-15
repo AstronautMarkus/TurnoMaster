@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaEye, FaEyeSlash } from 'react-icons/fa6';
 import AuthLoadingScreen from '../../../Components/Auth/LoadingScreen/AuthLoadingScreen';
 import axios from 'axios';
 
 const ResetPassword: React.FC = () => {
   const { token } = useParams<{ token: string }>();
+  const navigate = useNavigate();
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [password, setPassword] = useState('');
@@ -52,6 +53,9 @@ const ResetPassword: React.FC = () => {
 
       if (response.data.message) {
         setSuccessMessage(response.data.message);
+        setTimeout(() => {
+          navigate('/auth/login');
+        }, 2000);
       } else {
         throw new Error('Ocurrió un error al actualizar la contraseña.');
       }
