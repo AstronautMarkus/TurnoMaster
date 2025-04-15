@@ -105,7 +105,7 @@ function SidebarContent({
 }: SidebarContentProps){
   return (
     <>
-      <div className="flex items-center justify-start py-4 px-4 bg-slate-800">
+      <div className="flex items-center justify-start py-4 px-4">
         <Link 
           to="/dashboard" 
           className="flex items-center gap-3" 
