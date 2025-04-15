@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import DashboardLayout from '../Layouts/Dashboard/DashboardLayout';
-import { useDashboardGuard } from '../hooks/useDashboardGuard';
+import { useDashboardGuard } from '../hooks/auth/useDashboardGuard';
 
 import Index from '../Pages/Dashboard/Index/Index';
 import Profile from '../Pages/Dashboard/Profile/Profile';
