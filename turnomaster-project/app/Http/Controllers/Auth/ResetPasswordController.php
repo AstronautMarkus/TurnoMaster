@@ -50,7 +50,7 @@ class ResetPasswordController extends Controller
             if (Hash::check($request->password, $user->password)) {
                 return response()->json([
                     'message' => 'La nueva contraseña no puede ser igual a la contraseña actual.',
-                ], 422);
+                ], 400);
             }
 
             $usedBefore = PasswordHistory::where('user_id', $user->id)->get()
@@ -61,7 +61,7 @@ class ResetPasswordController extends Controller
             if ($usedBefore) {
                 return response()->json([
                     'message' => 'No puedes utilizar una contraseña que ya has usado antes.',
-                ], 422);
+                ], 400);
             }
 
             PasswordHistory::create([
