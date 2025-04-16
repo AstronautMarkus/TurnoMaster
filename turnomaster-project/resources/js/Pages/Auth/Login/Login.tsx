@@ -25,16 +25,20 @@ const Login: React.FC = () => {
     setErrorMessage(null);
     setSuccessMessage(null);
     setIsLoading(true);
+  
     try {
+      axios.defaults.withCredentials = true; // Enable cookies for cross-origin requests
+  
       const response = await axios.post("/api/login", {
         email: formData.username,
         password: formData.password,
       });
+  
       setSuccessMessage(response.data.message);
-
+  
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
-
+  
       setTimeout(() => {
         window.location.href = "/dashboard";
       }, 2000);
@@ -45,8 +49,10 @@ const Login: React.FC = () => {
         setErrorMessage("Ocurrió un error inesperado");
       }
     }
+  
     setIsLoading(false);
   };
+  
 
   return (
     <div className="bg-white rounded-xl p-12 px-6 md:px-28 shadow-2xl w-full max-w-sm md:max-w-lg">
