@@ -1,36 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { 
-  FiCalendar, 
-  FiChevronRight, 
-  FiGrid, 
-  FiSettings, 
-  FiUsers, 
-  FiClock, 
-  FiBarChart2, 
-} from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { FiChevronRight, FiGrid, FiSettings, FiUsers, FiClock, FiBarChart2 } from "react-icons/fi";
+import { Link, useLocation } from "react-router-dom";
 
 interface ExpandedItems {
   [key: string]: boolean;
 }
 
 interface SidebarContentProps {
-  activeItem: string;
   expandedItems: ExpandedItems;
   toggleSubMenu: (key: string) => void;
-  handleNavigation: (path: string) => void;
+  currentPath: string;
 }
 
 export function Sidebar(){
   const [isOpen, setIsOpen] = useState<boolean>(false); 
-  const [activeItem, setActiveItem] = useState<string>("/dashboard");
   const [expandedItems, setExpandedItems] = useState<ExpandedItems>({});
+  const location = useLocation();
 
   useEffect(() => {
-    
     const handleToggle = (): void => setIsOpen(!isOpen);
     window.addEventListener("toggle-sidebar", handleToggle);
-    
     
     const checkIfMobile = (): void => {
       if (window.innerWidth < 768) {
@@ -56,14 +45,6 @@ export function Sidebar(){
     }));
   };
 
-  const handleNavigation = (path: string): void => {
-    setActiveItem(path);
-    
-    if (window.innerWidth < 768) {
-      setIsOpen(false);
-    }
-  };
-
   return (
     <>
       {isOpen && (
@@ -76,10 +57,9 @@ export function Sidebar(){
             onClick={(e: React.MouseEvent) => e.stopPropagation()}
           >
             <SidebarContent 
-              activeItem={activeItem} 
               expandedItems={expandedItems} 
               toggleSubMenu={toggleSubMenu}
-              handleNavigation={handleNavigation}
+              currentPath={location.pathname}
             />
           </div>
         </div>
@@ -87,10 +67,9 @@ export function Sidebar(){
 
       <div className="hidden md:block w-64 bg-slate-700 text-white border-r border-slate-600 h-screen sticky top-0">
         <SidebarContent 
-          activeItem={activeItem} 
           expandedItems={expandedItems} 
           toggleSubMenu={toggleSubMenu}
-          handleNavigation={handleNavigation}
+          currentPath={location.pathname}
         />
       </div>
     </>
@@ -98,14 +77,13 @@ export function Sidebar(){
 }
 
 function SidebarContent({ 
-  activeItem, 
   expandedItems, 
   toggleSubMenu, 
-  handleNavigation 
+  currentPath 
 }: SidebarContentProps){
   return (
     <>
-      <div className="flex items-center justify-start py-4 px-4 bg-slate-800">
+      <div className="flex items-center justify-start py-4 px-4">
         <Link 
           to="/dashboard" 
           className="flex items-center gap-3" 
@@ -124,52 +102,13 @@ function SidebarContent({
       
       <div className="p-4">
         <div className="mb-6">
-          <h3 className="text-xs font-medium text-slate-300 mb-2">Main</h3>
+          <h3 className="text-xs font-medium text-slate-300 mb-2">Inicio</h3>
           <ul className="space-y-1">
             <li>
-              <a
-                href="#"
-                className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm ${
-                  activeItem === "/dashboard" ? "bg-slate-600 text-white" : "text-slate-200 hover:bg-slate-600"
-                }`}
-                onClick={(e: React.MouseEvent) => {
-                  e.preventDefault();
-                  handleNavigation("/dashboard");
-                }}
-              >
-                <FiGrid className="h-4 w-4" />
-                <span>Dashboard</span>
-              </a>
+              <Link to="/dashboard" className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm ${currentPath === "/dashboard" ? "bg-slate-600 text-white" : "text-slate-200 hover:bg-slate-600"}`}><FiGrid className="h-4 w-4" /><span>Panel inicio</span></Link>
             </li>
             <li>
-              <a
-                href="#"
-                className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm ${
-                  activeItem === "/turnos" ? "bg-slate-600 text-white" : "text-slate-200 hover:bg-slate-600"
-                }`}
-                onClick={(e: React.MouseEvent) => {
-                  e.preventDefault();
-                  handleNavigation("/turnos");
-                }}
-              >
-                <FiClock className="h-4 w-4" />
-                <span>Turnos</span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm ${
-                  activeItem === "/calendar" ? "bg-slate-600 text-white" : "text-slate-200 hover:bg-slate-600"
-                }`}
-                onClick={(e: React.MouseEvent) => {
-                  e.preventDefault();
-                  handleNavigation("/calendar");
-                }}
-              >
-                <FiCalendar className="h-4 w-4" />
-                <span>Calendar</span>
-              </a>
+              <Link to="/dashboard/schedule" className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm ${currentPath === "/dashboard/schedule" ? "bg-slate-600 text-white" : "text-slate-200 hover:bg-slate-600"}`}><FiClock className="h-4 w-4" /><span>Horarios</span></Link>
             </li>
           </ul>
         </div>
@@ -178,83 +117,26 @@ function SidebarContent({
           <h3 className="text-xs font-medium text-slate-300 mb-2">Management</h3>
           <ul className="space-y-1">
             <li>
-              <button
-                className={`flex items-center justify-between w-full gap-2 px-3 py-2 rounded-md text-sm ${
-                  activeItem.startsWith("/users") ? "bg-slate-600 text-white" : "text-slate-200 hover:bg-slate-600"
-                }`}
-                onClick={() => toggleSubMenu("users")}
-              >
-                <div className="flex items-center gap-2">
-                  <FiUsers className="h-4 w-4" />
-                  <span>Users</span>
-                </div>
-                <FiChevronRight className={`h-4 w-4 transition-transform ${expandedItems.users ? "rotate-90" : ""}`} />
-              </button>
+              <button className={`flex items-center justify-between w-full gap-2 px-3 py-2 rounded-md text-sm ${currentPath.startsWith("/users") ? "bg-slate-600 text-white" : "text-slate-200 hover:bg-slate-600"}`} onClick={() => toggleSubMenu("users")}><div className="flex items-center gap-2"><FiUsers className="h-4 w-4" /><span>Users</span></div><FiChevronRight className={`h-4 w-4 transition-transform ${expandedItems.users ? "rotate-90" : ""}`} /></button>
               
               {expandedItems.users && (
                 <ul className="mt-1 ml-6 space-y-1 border-l border-slate-600 pl-2">
                   <li>
-                    <a
-                      href="#"
-                      className={`flex items-center px-3 py-2 rounded-md text-sm ${
-                        activeItem === "/users" ? "text-white" : "text-slate-300 hover:text-white"
-                      }`}
-                      onClick={(e: React.MouseEvent) => {
-                        e.preventDefault();
-                        handleNavigation("/users");
-                      }}
-                    >
-                      All Users
-                    </a>
+                    <Link to="/users" className={`flex items-center px-3 py-2 rounded-md text-sm ${currentPath === "/users" ? "text-white" : "text-slate-300 hover:text-white"}`}>All Users</Link>
                   </li>
                   <li>
-                    <a
-                      href="#"
-                      className={`flex items-center px-3 py-2 rounded-md text-sm ${
-                        activeItem === "/users/new" ? "text-white" : "text-slate-300 hover:text-white"
-                      }`}
-                      onClick={(e: React.MouseEvent) => {
-                        e.preventDefault();
-                        handleNavigation("/users/new");
-                      }}
-                    >
-                      Add User
-                    </a>
+                    <Link to="/users/new" className={`flex items-center px-3 py-2 rounded-md text-sm ${currentPath === "/users/new" ? "text-white" : "text-slate-300 hover:text-white"}`}>Add User</Link>
                   </li>
                 </ul>
               )}
             </li>
             
             <li>
-              <a
-                href="#"
-                className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm ${
-                  activeItem === "/reports" ? "bg-slate-600 text-white" : "text-slate-200 hover:bg-slate-600"
-                }`}
-                onClick={(e: React.MouseEvent) => {
-                  e.preventDefault();
-                  handleNavigation("/reports");
-                }}
-              >
-                <FiBarChart2 className="h-4 w-4" />
-                <span>Reports</span>
-              </a>
+              <Link to="/reports" className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm ${currentPath === "/reports" ? "bg-slate-600 text-white" : "text-slate-200 hover:bg-slate-600"}`}><FiBarChart2 className="h-4 w-4" /><span>Reports</span></Link>
             </li>
             
             <li>
-              <a
-                href="#"
-                className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm ${
-                  activeItem === "/settings" ? "bg-slate-600 text-white" : "text-slate-200 hover:bg-slate-600"
-                }`}
-                onClick={(e: React.MouseEvent) => {
-                  e.preventDefault();
-                  handleNavigation("/settings");
-                }}
-              >
-                <FiSettings className="h-4 w-4" />
-                <span>Settings</span>
-              </a>
+              <Link to="/dashboard/settings" className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm ${currentPath === "/dashboard/settings" ? "bg-slate-600 text-white" : "text-slate-200 hover:bg-slate-600"}`}><FiSettings className="h-4 w-4" /><span>Ajustes</span></Link>
             </li>
           </ul>
         </div>

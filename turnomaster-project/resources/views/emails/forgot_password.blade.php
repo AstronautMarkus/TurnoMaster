@@ -137,9 +137,9 @@
             <h1>¡Buenas, {{ $name }}!</h1>
             
             <p>
-                <li>Al parecer estas teniendo problemas con tu cuenta de TurnoMaster
-                y has solicitado cambiar la contraseña de  tu cuenta,
-                Presiona el boton "Reestablecer contraseña" para iniciar el proceso del cambio de tu contraseña</li>
+                Al parecer estás teniendo problemas con tu cuenta de TurnoMaster
+                y has solicitado cambiar la contraseña de tu cuenta.
+                Presiona el botón "Reestablecer contraseña" para iniciar el proceso de cambio de tu contraseña.
             </p>
             
             <a href="{{ $resetUrl }}" class="button">
