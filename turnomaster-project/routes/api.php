@@ -12,6 +12,8 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use Carbon\Carbon;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Auth\ValidateTokenController;
+use App\Http\Controllers\Auth\TokenController;
+use App\Http\Controllers\Auth\LogoutController;
 
 Route::post('/create-demo-user', [CreateDemoUser::class, 'createDemoUser']);
 
@@ -19,7 +21,12 @@ Route::get('/contact-form-categories', [ContactFormsController::class, 'getCateg
 Route::post('/contact-form', [ContactFormsController::class, 'sendMessage']);
 
 Route::post('/login', [LoginController::class, 'login']);
+
+Route::post('/logout', [LogoutController::class, 'logout']);
+
 Route::post('/create-user', [CreateUserController::class, 'createUser']);
+
+Route::post('/refresh', [TokenController::class, 'refresh']);
 
 Route::middleware(['jwt.auth'])->group(function () {
     Route::get('/me', function (Request $request) {

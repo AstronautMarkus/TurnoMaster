@@ -7,6 +7,7 @@ import Login from '../Pages/Auth/Login/Login';
 import RegisterDemo from '../Pages/Auth/RegisterDemo/RegisterDemo';
 import ForgotPassword from '../Pages/Auth/ForgotPassword/ForgotPassword';
 import ResetPassword from '../Pages/Auth/ResetPassword/ResetPassword';
+import Logout from '../Pages/Auth/Logout/Logout';
 
 const pageVariants = {
     initial: { opacity: 0 },
@@ -26,6 +27,7 @@ function AuthRouter() {
                 <Routes>
                     <Route path="/*" element={<div>Auth</div>} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/logout" element={<Logout />} />
                     <Route path="/register" element={<div>Register Page</div>} />
                     <Route path="/reset-password" element={<div>Reset Password Page</div>} />
                     <Route path="/register-demo" element={<RegisterDemo />} />

@@ -5,8 +5,13 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\RefreshToken;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cookie;
+
+
 
 class LoginController extends Controller
 {
@@ -37,11 +42,12 @@ class LoginController extends Controller
             return response()->json(['message' => 'Usuario o contraseña incorrectos.'], 401);
         }
 
-        $payload = [
+        // Generate JWT token
+        $accessPayload = [
             'iss' => config('app.url'),
             'sub' => $user->id,
             'iat' => time(),
-            'exp' => time() + 3600,
+            'exp' => time() + 3600, // 1 hour
             'nbf' => time(),
             'role_id' => $user->role_id,
             'is_trial' => $user->is_trial,
@@ -49,14 +55,35 @@ class LoginController extends Controller
         ];
 
         try {
-            $jwt = JWT::encode($payload, env('JWT_SECRET'), 'HS256');
+            $accessToken = JWT::encode($accessPayload, env('JWT_SECRET'), 'HS256');
         } catch (\Exception $e) {
             return response()->json(['message' => 'Error generando el token'], 500);
         }
 
+        // Generate refresh token
+        $refreshToken = Str::random(64);
+        RefreshToken::create([
+            'user_id' => $user->id,
+            'token' => hash('sha256', $refreshToken),
+            'expires_at' => now()->addDays(15),
+        ]);
+
+        // HttpOnly cookie
+        $cookie = Cookie::make(
+            'refresh_token',       // Name
+            $refreshToken,         // Value (without hash)
+            60 * 24 * 15,          // 15 days
+            '/',                   // Path
+            null,                  // Domain
+            true,                  // Secure
+            true,                  // HttpOnly
+            false,                 // Raw
+            'Strict'               // SameSite
+        );
+
         return response()->json([
             'message' => 'Iniciado sesión correctamente.',
-            'token' => $jwt,
+            'token' => $accessToken,
             'user' => [
                 'name' => $user->name,
                 'email' => $user->email,
@@ -64,6 +91,6 @@ class LoginController extends Controller
                 'created_at' => $user->created_at,
                 'updated_at' => $user->updated_at,
             ],
-        ]);
+        ])->cookie($cookie);
     }
 }

@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { JSX } from "react";
 
 function parseJwt(token: string): { exp?: number } | null {
@@ -12,19 +14,48 @@ function parseJwt(token: string): { exp?: number } | null {
 }
 
 export function useDashboardGuard(children: JSX.Element): JSX.Element | null {
-    const token = localStorage.getItem('token');
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
-    if (!token) {
+    useEffect(() => {
+        const verifyAndRefreshToken = async () => {
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                redirectToLogin();
+                return;
+            }
+
+            const decoded = parseJwt(token);
+            const isExpired = !decoded || !decoded.exp || decoded.exp * 1000 < Date.now();
+
+            if (isExpired) {
+                try {
+                    axios.defaults.withCredentials = true;
+                    const res = await axios.post('/api/refresh'); // Use cookie HttpOnly
+                    const newToken = res.data.token;
+                    localStorage.setItem('token', newToken);
+                    setIsAuthenticated(true);
+                } catch (err) {
+                    console.warn("Refresh fallido, redirigiendo...");
+                    localStorage.removeItem('token');
+                    redirectToLogin();
+                }
+            } else {
+                setIsAuthenticated(true);
+            }
+        };
+
+        verifyAndRefreshToken();
+    }, []);
+
+    const redirectToLogin = () => {
         window.location.href = '/auth/login';
-        return null;
+        setIsAuthenticated(false);
+    };
+
+    if (isAuthenticated === null) {
+        return null; // Loading, opcional: mostrar spinner
     }
 
-    const decoded = parseJwt(token);
-    if (!decoded || !decoded.exp || decoded.exp * 1000 < Date.now()) {
-        localStorage.removeItem('token');
-        window.location.href = '/auth/login';
-        return null;
-    }
-
-    return children;
+    return isAuthenticated ? children : null;
 }
