@@ -15,6 +15,8 @@ use App\Http\Controllers\Auth\ValidateTokenController;
 use App\Http\Controllers\Auth\TokenController;
 use App\Http\Controllers\Auth\LogoutController;
 
+use App\Http\Controllers\Dashboard\GetPersonalDataController;
+
 Route::post('/create-demo-user', [CreateDemoUser::class, 'createDemoUser']);
 
 Route::get('/contact-form-categories', [ContactFormsController::class, 'getCategories']);
@@ -29,11 +31,7 @@ Route::post('/create-user', [CreateUserController::class, 'createUser']);
 Route::post('/refresh', [TokenController::class, 'refresh']);
 
 Route::middleware(['jwt.auth'])->group(function () {
-    Route::get('/me', function (Request $request) {
-        return response()->json([
-            'user' => $request->auth_user,
-        ]);
-    });
+    Route::get('/me', [GetPersonalDataController::class, 'getPersonalData']);
 });
 
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink']);
