@@ -23,9 +23,9 @@ const Profile: React.FC = () => {
                         <img src="/img/default/default.jpg" alt="Foto de perfil" className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover"/>
                         <div className="text-center sm:text-left">
                             <h1 className="text-lg sm:text-2xl font-bold text-gray-800">{user?.name}</h1>
-                            <p className="text-sm sm:text-base text-gray-600">{user?.email}</p>
+                            <p className="text-sm sm:text-base text-gray-600">Correo electrónico: {user?.email}</p>
                             <p className="text-sm sm:text-base text-gray-600">
-                                <span className="font-medium">Tipo de usuario:</span> {user?.role?.name?.toUpperCase()}
+                                <span className="font-medium">Tipo de usuario:</span> {user?.role?.name}
                             </p>
                         </div>
                     </div>

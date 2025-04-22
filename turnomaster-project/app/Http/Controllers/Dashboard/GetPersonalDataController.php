@@ -49,7 +49,7 @@ class GetPersonalDataController extends Controller
             'name'  => $user->name,
             'email' => $user->email,
             'role'  => [
-                'name' => $user->role->name ?? null
+                'name' => isset($user->role->name) ? ucfirst($user->role->name) : null
             ],
             'companies' => [
                 'owned' => $ownedCompanies,
