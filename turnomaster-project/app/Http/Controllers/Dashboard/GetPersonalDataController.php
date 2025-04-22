@@ -24,14 +24,14 @@ class GetPersonalDataController extends Controller
         try {
 
             $decoded = JWT::decode($token, new Key(env('JWT_SECRET'), 'HS256'));
-            $userId = $decoded->sub; // Sub contains the user ID
+            $userId = $decoded->sub;
         } catch (\Exception $e) {
             return response()->json(['error' => 'Invalid token'], 401);
         }
 
 
         $user = UserModel::with(['role:id,name', 'company:id,name'])
-            ->select('id', 'name', 'email', 'role_id', 'company_id')
+            ->select('id', 'name', 'email', 'role_id', 'company_id', 'is_trial')
             ->find($userId);
 
         if (!$user) {
@@ -48,6 +48,7 @@ class GetPersonalDataController extends Controller
             'id'    => $user->id,
             'name'  => $user->name,
             'email' => $user->email,
+            'is_trial' => $user->is_trial,
             'role'  => [
                 'name' => isset($user->role->name) ? ucfirst($user->role->name) : null
             ],
