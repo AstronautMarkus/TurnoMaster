@@ -37,11 +37,11 @@ const Profile: React.FC = () => {
 
             <div className="mt-10">
                 <h2 className="text-xl font-semibold text-center text-gray-800 mb-4">Lista de empresas</h2>
-                <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
                     {user?.companies?.owned.map((company) => (
                         <div key={company.id} className="bg-white shadow-md rounded-lg p-4 flex items-center space-x-4">
-                            <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">
-                                <span className="text-gray-400">Logo</span>
+                            <div className="w-16 h-16 bg-gray-200 rounded-full overflow-hidden flex items-center justify-center">
+                                <img src="/img/default/company-default.jpg" alt="Logo de la empresa" className="w-full h-full object-cover" />
                             </div>
                             <span className="text-gray-700 font-medium">{company.name}</span>
                         </div>
