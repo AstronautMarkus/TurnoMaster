@@ -44,7 +44,22 @@ const Login: React.FC = () => {
       }, 2000);
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        setErrorMessage(error.response?.data?.message || "Ocurrió un error inesperado");
+        const errorMessageFromBackend = error.response?.data?.message || "Ocurrió un error inesperado";
+        const errorUrl = error.response?.data?.url;
+
+        setErrorMessage(
+          errorUrl ? (
+            <>
+              {errorMessageFromBackend}{" "}
+              <br />
+              <a href={errorUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+                Acceder a la página de suscripciones y precios
+              </a>
+            </>
+          ) : (
+            errorMessageFromBackend
+          )
+        );
       } else {
         setErrorMessage("Ocurrió un error inesperado");
       }
@@ -137,4 +152,3 @@ const Login: React.FC = () => {
 };
 
 export default Login;
-// hola
