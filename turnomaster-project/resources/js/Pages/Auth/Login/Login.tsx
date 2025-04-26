@@ -27,7 +27,7 @@ const Login: React.FC = () => {
     setIsLoading(true);
   
     try {
-      axios.defaults.withCredentials = true; // Enable cookies for cross-origin requests
+      axios.defaults.withCredentials = true;
   
       const response = await axios.post("/api/login", {
         email: formData.username,
@@ -140,10 +140,10 @@ const Login: React.FC = () => {
             </Link>
           </div>
           <div className="mt-4 text-center flex items-center justify-center gap-2">
-            <Link rel="stylesheet" to="/prices" className="text-sm text-green-600 hover:underline flex items-center gap-1">
+            <a rel="stylesheet" href="/prices" className="text-sm text-green-600 hover:underline flex items-center gap-1">
               <FaGift />
               Prueba TurnoMaster gratis
-            </Link>
+            </a>
           </div>
         </form>
       )}
