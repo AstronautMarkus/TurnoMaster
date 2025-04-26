@@ -25,7 +25,6 @@ const useRegisterDemo = () => {
       setErrors({})
       setApiMessage(response.data.message)
       setFormData({ name: "", email: "", company_name: "" })
-      console.log("User Created:", response.data)
     } catch (error: any) {
       if (error.response.status === 422) {
         const newErrors = error.response.data.errors
@@ -38,9 +37,8 @@ const useRegisterDemo = () => {
         setFormData(updatedFormData)
       } else if (error.response.status === 400) {
         setErrors({ company_name: [error.response.data.message] })
-        console.log("Company Info:", error.response.data.company)
       } else {
-        setApiMessage("An unexpected error occurred. Please try again.")
+        setApiMessage("Ha ocurrido un error inesperado. Por favor, inténtelo de nuevo más tarde.")
       }
     } finally {
       setIsLoading(false)

@@ -146,11 +146,11 @@
             </div>
             
             <p>
-                Por favor, haz clic en el botón de abajo para activar tu cuenta:
+                Para probar TurnoMaster, haz clic en el siguiente botón:
             </p>
             
-            <a href="{{ $activationUrl }}" class="button">
-                Activar Cuenta
+            <a href="{{ $loginUrl }}" class="button">
+                Probar TurnoMaster
             </a>
             
             <p style="font-size: 14px; color: #64748b; margin-top: 25px;">
