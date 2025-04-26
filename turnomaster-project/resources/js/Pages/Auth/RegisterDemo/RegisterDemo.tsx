@@ -1,54 +1,19 @@
 import type React from "react"
-import { useState } from "react"
-import axios from "axios"
 import { FaRegCircleCheck, FaRegCircleXmark } from "react-icons/fa6"
 import AuthLoadingScreen from "../../../Components/Auth/LoadingScreen/AuthLoadingScreen"
+import useRegisterDemo from "../../../hooks/auth/registerDemo/useRegisterDemo"
 
 const RegisterDemo: React.FC = () => {
-  const [formData, setFormData] = useState({ name: "", email: "", company_name: "" })
-  const [errors, setErrors] = useState<{ [key: string]: string[] }>({})
-  const [apiMessage, setApiMessage] = useState<string | null>(null)
-  const [isLoading, setIsLoading] = useState(false)
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen)
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    try {
-      const response = await axios.post("/api/create-demo-user", formData)
-      setErrors({})
-      setApiMessage(response.data.message)
-      setFormData({ name: "", email: "", company_name: "" })
-      console.log("User Created:", response.data)
-    } catch (error: any) {
-      if (error.response.status === 422) {
-        const newErrors = error.response.data.errors
-        setErrors(newErrors)
-
-        const updatedFormData = { ...formData }
-        Object.keys(newErrors).forEach((field) => {
-          updatedFormData[field as keyof typeof formData] = ""
-        })
-        setFormData(updatedFormData)
-      } else if (error.response.status === 400) {
-        setErrors({ company_name: [error.response.data.message] })
-        console.log("Company Info:", error.response.data.company)
-      } else {
-        setApiMessage("An unexpected error occurred. Please try again.")
-      }
-    } finally {
-      setIsLoading(false)
-    }
-  }
+  const {
+    formData,
+    errors,
+    apiMessage,
+    isLoading,
+    isModalOpen,
+    toggleModal,
+    handleChange,
+    handleSubmit,
+  } = useRegisterDemo()
 
   return (
     <div className="w-full max-w-4xl mx-auto lg:flex lg:space-x-8">
@@ -136,12 +101,12 @@ const RegisterDemo: React.FC = () => {
                   </p>
                 )}
               </div>
-                <p
-                  onClick={toggleModal}
-                  className="text-blue-600 text-s font-semibold cursor-pointer text-center mt-4 mb-4 lg:hidden"
-                >
-                  Más información
-                </p>
+              <p
+                onClick={toggleModal}
+                className="text-blue-600 text-s font-semibold cursor-pointer text-center mt-4 mb-4 lg:hidden"
+              >
+                Más información
+              </p>
               <button
                 type="submit"
                 className="w-full px-4 py-2 text-white bg-blue-800 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
