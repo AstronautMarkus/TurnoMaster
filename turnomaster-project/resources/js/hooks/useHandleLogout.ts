@@ -4,10 +4,8 @@ export function useHandleLogout() {
   const navigate = useNavigate();
 
   const handleLogout = (onLogout?: () => void) => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
     if (onLogout) onLogout();
-    navigate("/");
+    navigate("/auth/logout");
   };
 
   return handleLogout;

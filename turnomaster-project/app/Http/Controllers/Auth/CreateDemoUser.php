@@ -70,7 +70,7 @@ class CreateDemoUser extends Controller
             'activationUrl' => $activationUrl,
         ], function ($message) use ($user) {
             $message->to($user->email)
-                    ->subject('Your Demo Account Details');
+                    ->subject('Activación cuenta Demo');
         });
 
         return response()->json([
