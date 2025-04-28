@@ -4,7 +4,7 @@ export const pricesFeatures = [
     description: "Ideal para probar el sistema.",
     price: "Gratis",
     yearlyPrice: "Gratis",
-    period: "",
+    period: "/mes",
     features: [
       "Hasta 1 negocio registrado.",
       "Máximo de 3 empleados activos.",

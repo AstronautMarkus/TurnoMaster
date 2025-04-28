@@ -12,7 +12,6 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cookie;
 
 
-
 class LoginController extends Controller
 {
     public function login(Request $request)
@@ -40,6 +39,14 @@ class LoginController extends Controller
 
         if (!$user || !\Hash::check($request->password, $user->password)) {
             return response()->json(['message' => 'Usuario o contraseña incorrectos.'], 401);
+        }
+
+        // Check if the account has expired
+        if ($user->expires_at && now()->greaterThan($user->expires_at)) {
+            return response()->json([
+                'message' => 'Esta cuenta de pruebas ha superado su tiempo de demostración. Por favor, considere adquirir una cuenta de nuestras suscripciones.',
+                'url' => url('/prices')
+            ], 403);
         }
 
         // Generate JWT token

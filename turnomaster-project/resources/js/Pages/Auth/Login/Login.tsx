@@ -27,7 +27,7 @@ const Login: React.FC = () => {
     setIsLoading(true);
   
     try {
-      axios.defaults.withCredentials = true; // Enable cookies for cross-origin requests
+      axios.defaults.withCredentials = true;
   
       const response = await axios.post("/api/login", {
         email: formData.username,
@@ -44,7 +44,22 @@ const Login: React.FC = () => {
       }, 2000);
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        setErrorMessage(error.response?.data?.message || "Ocurrió un error inesperado");
+        const errorMessageFromBackend = error.response?.data?.message || "Ocurrió un error inesperado";
+        const errorUrl = error.response?.data?.url;
+
+        setErrorMessage(
+          errorUrl ? (
+            <>
+              {errorMessageFromBackend}{" "}
+              <br />
+              <a href={errorUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+                Acceder a la página de suscripciones y precios
+              </a>
+            </>
+          ) : (
+            errorMessageFromBackend
+          )
+        );
       } else {
         setErrorMessage("Ocurrió un error inesperado");
       }
@@ -125,10 +140,10 @@ const Login: React.FC = () => {
             </Link>
           </div>
           <div className="mt-4 text-center flex items-center justify-center gap-2">
-            <Link rel="stylesheet" to="/prices" className="text-sm text-green-600 hover:underline flex items-center gap-1">
+            <a rel="stylesheet" href="/prices" className="text-sm text-green-600 hover:underline flex items-center gap-1">
               <FaGift />
               Prueba TurnoMaster gratis
-            </Link>
+            </a>
           </div>
         </form>
       )}
@@ -137,4 +152,3 @@ const Login: React.FC = () => {
 };
 
 export default Login;
-// hola

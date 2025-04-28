@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Auth\CreateDemoUser;
+use App\Http\Controllers\Auth\CreateDemoUserController;
 use App\Http\Controllers\Contact\ContactFormsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\CreateUserController;
@@ -13,7 +13,9 @@ use Carbon\Carbon;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Auth\ValidateTokenController;
 
-Route::post('/create-demo-user', [CreateDemoUser::class, 'createDemoUser']);
+use App\Http\Controllers\Dashboard\GetPersonalDataController;
+
+Route::post('/create-demo-user', [CreateDemoUserController::class, 'createDemoUser']);
 
 Route::get('/contact-form-categories', [ContactFormsController::class, 'getCategories']);
 Route::post('/contact-form', [ContactFormsController::class, 'sendMessage']);
@@ -28,11 +30,7 @@ Route::post('/create-employee', [CreateEmployeeController::class, 'createEmploye
 Route::post('/refresh', [TokenController::class, 'refresh']);
 
 Route::middleware(['jwt.auth'])->group(function () {
-    Route::get('/me', function (Request $request) {
-        return response()->json([
-            'user' => $request->auth_user,
-        ]);
-    });
+    Route::get('/me', [GetPersonalDataController::class, 'getPersonalData']);
 });
 
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink']);

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
-class CreateDemoUser extends Controller
+class CreateDemoUserController extends Controller
 {
     public function createDemoUser(Request $request)
     {
@@ -62,19 +62,19 @@ class CreateDemoUser extends Controller
         $user->update(['company_id' => $company->id]);
 
         
-        $activationUrl = url('/activate-account/' . $user->id); 
+        $loginUrl = url('/auth/login/'); 
         Mail::send('emails.demo_user', [
             'name' => $user->name,
             'email' => $user->email,
             'password' => $temporaryPassword,
-            'activationUrl' => $activationUrl,
+            'loginUrl' => $loginUrl,
         ], function ($message) use ($user) {
             $message->to($user->email)
-                    ->subject('Activación cuenta Demo');
+                    ->subject('Credenciales cuenta de demostración | TurnoMaster');
         });
 
         return response()->json([
-            'message' => 'Cuenta de demostración y empresa creados exitosamente. Se ha enviado un correo electrónico para activarla.',
+            'message' => 'Cuenta de demostración y empresa creados exitosamente. Se ha enviado un correo electrónico con los detalles de la cuenta.',
             'user' => $user,
             'company' => $company,
         ]);

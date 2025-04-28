@@ -125,13 +125,13 @@ export default function Navbar() {
               {isUserDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border-2 border-[#5C5AD6]">
                   <div className="py-1">
-                    <Link
-                      to="/dashboard"
+                    <a
+                      href="/dashboard"
                       className="block px-4 py-2 text-gray-800 hover:bg-[#5C5AD6] hover:text-white transition-colors duration-300"
                       onClick={() => setIsUserDropdownOpen(false)}
                     >
                       Dashboard
-                    </Link>
+                    </a>
                     <button
                       className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-[#5C5AD6] hover:text-white transition-colors duration-300"
                       onClick={() => {
@@ -147,18 +147,18 @@ export default function Navbar() {
             </div>
           ) : (
             <>
-              <Link
-                to="/auth/register-demo"
+              <a
+                href="/auth/register-demo"
                 className="flex items-center bg-[#F57424] hover:bg-[#db6821] text-white text-lg px-4 py-2 rounded-full transition-colors duration-300"
               >
                 <FaGift className="mr-2" /> <span>Prueba Gratis</span>
-              </Link>
-              <Link
+              </a>
+              <a
                 className="flex items-center bg-[#377CE4] hover:bg-[#326fc9] text-white text-lg px-4 py-2 rounded-full transition-colors duration-300"
-                to="/auth/login"
+                href="/auth/login"
               >
                 <FaUser className="mr-2" /> <span>Iniciar sesión</span>
-              </Link>
+              </a>
             </>
           )}
         </div>

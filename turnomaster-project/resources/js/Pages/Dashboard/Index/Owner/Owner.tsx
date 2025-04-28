@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Added import
 
 const Owner = () => {
     const [currentTime, setCurrentTime] = useState(new Date());
-    const navigate = useNavigate(); // Added useNavigate hook
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -33,10 +31,7 @@ const Owner = () => {
                 <p className="text-center text-sm text-gray-600 mt-2">
                     Gestiona los reportes enviados por los empleados
                 </p>
-                <button
-                    className="w-full px-4 py-2 text-white bg-blue-800 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-6"
-                    onClick={() => navigate('/dashboard/ListEmployees')}
-                >
+                <button className="w-full px-4 py-2 text-white bg-blue-800 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-6">
                     Gestionar personal
                 </button>
                 <p className="text-center text-sm text-gray-600 mt-2">
