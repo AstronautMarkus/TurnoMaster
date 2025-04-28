@@ -11,16 +11,16 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->unsignedBigInteger('rut')->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->unsignedBigInteger('company_id')->nullable();
             $table->unsignedBigInteger('role_id');
-            $table->boolean('is_trial')->default(true);
+            $table->boolean('is_trial')->default(false);
             $table->timestamp('expires_at')->nullable();
             $table->string('temporary_password')->nullable();
             $table->timestamps();
-            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         });
     }
