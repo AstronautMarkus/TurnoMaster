@@ -12,8 +12,6 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use Carbon\Carbon;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Auth\ValidateTokenController;
-use App\Http\Controllers\Auth\TokenController;
-use App\Http\Controllers\Auth\LogoutController;
 
 use App\Http\Controllers\Dashboard\GetPersonalDataController;
 
@@ -27,6 +25,7 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LogoutController::class, 'logout']);
 
 Route::post('/create-user', [CreateUserController::class, 'createUser']);
+Route::post('/create-employee', [CreateEmployeeController::class, 'createEmployee']);
 
 Route::post('/refresh', [TokenController::class, 'refresh']);
 
