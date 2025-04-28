@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Mail;
 
-use App\Models\ContactFormCategories;
-use App\Models\ContactForms;
+use App\Models\Forms\ContactFormCategories;
+use App\Models\Forms\ContactForms;
 
 class ContactFormsController extends Controller
 {
