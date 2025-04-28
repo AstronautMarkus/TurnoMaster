@@ -6,7 +6,6 @@ export const pricesFeatures = [
     yearlyPrice: "Gratis",
     period: "/mes",
     features: [
-      "Hasta 1 negocio registrado.",
       "Máximo de 3 empleados activos.",
       "Registro manual de asistencia.",
       "Solo 1 usuario (Administrador).",
@@ -27,7 +26,6 @@ export const pricesFeatures = [
     period: "/mes",
     features: [
       "Hasta 10 empleados activos.",
-      "Registro de 1 negocio.",
       "Roles: Admin + RRHH.",
       "Registro de entrada, colación y salida.",
       "Justificaciones y solicitudes de permisos.",
@@ -47,7 +45,6 @@ export const pricesFeatures = [
     period: "/mes",
     features: [
       "Hasta 30 empleados activos.",
-      "Hasta 2 negocios registrados.",
       "Roles: Admin + RRHH + Empleado.",
       "Historial completo de asistencias y justificaciones.",
       "Reportes detallados (PDF, Excel, CSV).",
@@ -67,7 +64,6 @@ export const pricesFeatures = [
     period: "/mes",
     features: [
       "Hasta 50 empleados (o más con expansión).",
-      "Hasta 3 negocios registrados.",
       "Todo lo de Silver +",
       "Integración con WhatsApp (registro, notificaciones).",
       "Reportes automáticos por correo.",
@@ -76,7 +72,6 @@ export const pricesFeatures = [
       "Historial de cambios y auditorías visibles.",
       "Dashboard avanzado por roles.",
       "Retención de datos por 12 meses.",
-      "Posibilidad de contratar expansiones extras (más negocios, más empleados).",
     ],
     buttonText: "Elegir Plan",
   },
