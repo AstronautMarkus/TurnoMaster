@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\ContactFormCategories;
+use App\Models\Forms\ContactFormCategories;
 
 class ContactFormSeeder extends Seeder
 {
