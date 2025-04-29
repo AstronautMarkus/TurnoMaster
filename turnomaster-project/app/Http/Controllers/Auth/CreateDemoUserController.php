@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Company;
-use App\Models\User;
+use App\Models\Companies;
+use App\Models\Users\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -14,15 +14,22 @@ class CreateDemoUserController extends Controller
     public function createDemoUser(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'rut' => 'required|string|unique:users,rut',
             'email' => 'required|email|unique:users,email',
             'company_name' => 'required|string|max:255',
         ], [
-            'name.required' => 'El nombre es obligatorio.',
+            'first_name.required' => 'El nombre es obligatorio.',
+            'last_name.required' => 'El apellido es obligatorio.',
+            'rut.required' => 'El RUT es obligatorio.',
+            'rut.string' => 'El RUT debe ser una cadena de texto.',
+            'rut.unique' => 'El RUT ya ha sido registrado.',
             'email.required' => 'El correo electrónico es obligatorio.',
             'email.email' => 'El correo electrónico debe ser una dirección válida.',
             'email.unique' => 'El correo electrónico ya ha sido registrado.',
             'company_name.required' => 'El nombre de la empresa es obligatorio.',
+            'company_name.string' => 'El nombre de la empresa debe ser una cadena de texto.',
         ]);
 
         if ($validator->fails()) {
@@ -32,7 +39,7 @@ class CreateDemoUserController extends Controller
             ], 422);
         }
 
-        $existingCompany = Company::where('name', $request->input('company_name'))->first();
+        $existingCompany = Companies::where('name', $request->input('company_name'))->first();
         if ($existingCompany) {
             return response()->json([
                 'message' => 'Ya existe una cuenta de Demostración para esta empresa.',
@@ -43,23 +50,22 @@ class CreateDemoUserController extends Controller
         
         $temporaryPassword = \Str::random(10);
 
+        $company = Companies::create([
+            'name' => $request->input('company_name'),
+            'subscription_id' => 1,
+        ]);
+
         $user = User::create([
-            'name' => $request->input('name'),
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'rut' => $request->input('rut'),
             'email' => $request->input('email'),
             'password' => Hash::make($temporaryPassword),
             'role_id' => 1,
-            'company_id' => null,
             'is_trial' => true,
             'expires_at' => now()->addDays(7),
-            'temporary_password' => $temporaryPassword,
+            'company_id' => $company->id,
         ]);
-
-        $company = Company::create([
-            'name' => $request->input('company_name'),
-            'owner_id' => $user->id,
-        ]);
-
-        $user->update(['company_id' => $company->id]);
 
         
         $loginUrl = url('/auth/login/'); 
