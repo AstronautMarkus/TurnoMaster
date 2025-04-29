@@ -16,12 +16,11 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('rut')->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->unsignedBigInteger('role_id');
+            $table->unsignedBigInteger('company_id');
             $table->boolean('is_trial')->default(false);
             $table->timestamp('expires_at')->nullable();
-            $table->string('temporary_password')->nullable();
             $table->timestamps();
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
         });
     }
 

@@ -13,7 +13,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
-        'first_name', 'last_name', 'rut','email', 'password', 'role_id', 'is_trial', 'expires_at', 'temporary_password'
+        'first_name', 'last_name', 'rut','email', 'password', 'company_id', 'is_trial', 'expires_at'
     ];
 
     protected $hidden = ['password', 'remember_token'];
@@ -26,11 +26,6 @@ class User extends Authenticatable
     public function company()
     {
         return $this->belongsTo(Company::class);
-    }
-
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
     }
 
     public function validatePassword(string $password): bool
