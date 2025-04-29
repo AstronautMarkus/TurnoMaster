@@ -70,7 +70,7 @@ class CreateDemoUserController extends Controller
         
         $loginUrl = url('/auth/login/'); 
         Mail::send('emails.demo_user', [
-            'name' => $user->name,
+            'name' => $user->first_name . ' ' . $user->last_name,
             'email' => $user->email,
             'password' => $temporaryPassword,
             'loginUrl' => $loginUrl,
