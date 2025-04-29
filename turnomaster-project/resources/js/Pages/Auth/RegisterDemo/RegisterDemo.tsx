@@ -39,20 +39,62 @@ const RegisterDemo: React.FC = () => {
             )}
             <form onSubmit={handleSubmit} className="w-full">
               <div className="mb-4">
-                <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-700">
+                <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-700">
                   Nombre
                 </label>
                 <input
                   type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
+                  id="first_name"
+                  name="first_name"
+                  value={formData.first_name}
                   onChange={handleChange}
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Ej: John Doe"
+                  placeholder="Ej: John"
                   required
                 />
-                {errors.name && (
+                {errors.first_name && (
+                  <p className="text-sm text-red-600 text-center">
+                    <FaRegCircleXmark className="inline mr-2" />
+                    {errors.name[0]}
+                  </p>
+                )}
+              </div>
+              <div className="mb-4">
+                <label htmlFor="last_name" className="block mb-2 text-sm font-medium text-gray-700">
+                  Nombre
+                </label>
+                <input
+                  type="text"
+                  id="last_name"
+                  name="last_name"
+                  value={formData.last_name}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Ej: Doe"
+                  required
+                />
+                {errors.last_name && (
+                  <p className="text-sm text-red-600 text-center">
+                    <FaRegCircleXmark className="inline mr-2" />
+                    {errors.name[0]}
+                  </p>
+                )}
+              </div>
+              <div className="mb-4">
+                <label htmlFor="rut" className="block mb-2 text-sm font-medium text-gray-700">
+                  RUT (sin nombres ni guión)
+                </label>
+                <input
+                  type="text"
+                  id="rut"
+                  name="rut"
+                  value={formData.rut}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Ej: 1234567890"
+                  required
+                />
+                {errors.rut && (
                   <p className="text-sm text-red-600 text-center">
                     <FaRegCircleXmark className="inline mr-2" />
                     {errors.name[0]}

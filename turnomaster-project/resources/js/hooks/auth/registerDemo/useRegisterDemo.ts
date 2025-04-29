@@ -2,7 +2,7 @@ import { useState } from "react"
 import axios from "axios"
 
 const useRegisterDemo = () => {
-  const [formData, setFormData] = useState({ name: "", email: "", company_name: "" })
+  const [formData, setFormData] = useState({ first_name: "", last_name: "", rut: "", email: "", company_name: "" })
   const [errors, setErrors] = useState<{ [key: string]: string[] }>({})
   const [apiMessage, setApiMessage] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -24,7 +24,7 @@ const useRegisterDemo = () => {
       const response = await axios.post("/api/create-demo-user", formData)
       setErrors({})
       setApiMessage(response.data.message)
-      setFormData({ name: "", email: "", company_name: "" })
+      setFormData({ first_name: "", last_name:"", rut:"", email: "", company_name: "" })
     } catch (error: any) {
       if (error.response.status === 422) {
         const newErrors = error.response.data.errors
