@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { FaGift, FaUser, FaAngleUp, FaAngleDown } from "react-icons/fa6";
+import { FaGift, FaUser, FaAngleUp, FaAngleDown, FaBuilding, FaUserTie } from "react-icons/fa6";
 import { useNavbarFeatures } from "./useNavbarFeatures";
 import { LogoutModal } from "../../../Dashboard/Components/Navbar/UserNav/LogoutModal";
 import { useHandleLogout } from "../../../../hooks/useHandleLogout";
@@ -10,8 +10,10 @@ export default function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const [isAccessDropdownOpen, setIsAccessDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const userDropdownRef = useRef<HTMLDivElement>(null);
+  const accessDropdownRef = useRef<HTMLDivElement>(null);
   const features = useNavbarFeatures();
 
   const userData = JSON.parse(localStorage.getItem("user") || "null");
@@ -30,6 +32,12 @@ export default function Navbar() {
         !userDropdownRef.current.contains(event.target as Node)
       ) {
         setIsUserDropdownOpen(false);
+      }
+      if (
+        accessDropdownRef.current &&
+        !accessDropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsAccessDropdownOpen(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -153,12 +161,33 @@ export default function Navbar() {
               >
                 <FaGift className="mr-2" /> <span>Prueba Gratis</span>
               </a>
-              <a
-                className="flex items-center bg-[#377CE4] hover:bg-[#326fc9] text-white text-lg px-4 py-2 rounded-full transition-colors duration-300"
-                href="/auth/login"
-              >
-                <FaUser className="mr-2" /> <span>Iniciar sesión</span>
-              </a>
+              <div className="relative" ref={accessDropdownRef}>
+                <button
+                  className="flex items-center bg-[#377CE4] hover:bg-[#326fc9] text-white text-lg px-4 py-2 rounded-full transition-colors duration-300"
+                  onClick={() => setIsAccessDropdownOpen(!isAccessDropdownOpen)}
+                >
+                  <FaUser className="mr-2" /> <span>Acceso</span>
+                  <FaAngleDown className="ml-2" />
+                </button>
+                {isAccessDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border-2 border-[#377CE4]">
+                    <div className="py-1">
+                      <a
+                        href="/auth/login/companies"
+                        className="flex items-center px-4 py-2 text-gray-800 hover:bg-[#377CE4] hover:text-white transition-colors duration-300"
+                      >
+                        <FaBuilding className="mr-2" /> <span>Empresas</span>
+                      </a>
+                      <a
+                        href="/auth/login/employees"
+                        className="flex items-center px-4 py-2 text-gray-800 hover:bg-[#377CE4] hover:text-white transition-colors duration-300"
+                      >
+                        <FaUserTie className="mr-2" /> <span>Empleados</span>
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </div>
             </>
           )}
         </div>
@@ -272,12 +301,33 @@ export default function Navbar() {
                 >
                   <FaGift className="mr-2" /> <span>Prueba Gratis</span>
                 </Link>
-                <Link
-                  className="flex items-center bg-[#377CE4] hover:bg-[#326fc9] text-white text-lg px-4 py-2 rounded-full transition-colors duration-300"
-                  to="/auth/login"
-                >
-                  <FaUser className="mr-2" /> <span>Iniciar sesión</span>
-                </Link>
+                <div className="relative" ref={accessDropdownRef}>
+                  <button
+                    className="flex items-center w-full py-2 bg-[#377CE4] hover:bg-[#326fc9] text-white text-lg px-4 py-2 rounded-full transition-colors duration-300"
+                    onClick={() => setIsAccessDropdownOpen(!isAccessDropdownOpen)}
+                  >
+                    <FaUser className="mr-2" /> <span>Acceso</span>
+                    <FaAngleDown className="ml-2" />
+                  </button>
+                  {isAccessDropdownOpen && (
+                    <div className="mt-2 bg-white rounded-md shadow-lg border-2 border-[#377CE4]">
+                      <div className="py-1">
+                        <Link
+                          to="/auth/login/companies"
+                          className="flex items-center px-4 py-2 text-gray-800 hover:bg-[#377CE4] hover:text-white transition-colors duration-300"
+                        >
+                          <FaBuilding className="mr-2" /> <span>Empresas</span>
+                        </Link>
+                        <Link
+                          to="/auth/login/employees"
+                          className="flex items-center px-4 py-2 text-gray-800 hover:bg-[#377CE4] hover:text-white transition-colors duration-300"
+                        >
+                          <FaUserTie className="mr-2" /> <span>Empleados</span>
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </>
             )}
           </div>
