@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import AuthLayout from '../Layouts/Auth/AuthLayout';
 
-import Login from '../Pages/Auth/Login/Login';
+import LoginRouter from './LoginRouter';
 import RegisterDemo from '../Pages/Auth/RegisterDemo/RegisterDemo';
 import ForgotPassword from '../Pages/Auth/ForgotPassword/ForgotPassword';
 import ResetPassword from '../Pages/Auth/ResetPassword/ResetPassword';
@@ -26,7 +26,7 @@ function AuthRouter() {
             >
                 <Routes>
                     <Route path="/*" element={<div>Auth</div>} />
-                    <Route path="/login" element={<Login />} />
+                    <Route path="/login/*" element={<LoginRouter />} />
                     <Route path="/logout" element={<Logout />} />
                     <Route path="/register" element={<div>Register Page</div>} />
                     <Route path="/reset-password" element={<div>Reset Password Page</div>} />
