@@ -55,7 +55,7 @@ class LoginCompaniesController extends Controller
             'iat' => time(),
             'exp' => time() + 3600, // 1 hour
             'nbf' => time(),
-            'role_id' => $user->role_id,
+            'role_id' => 1, // Role 1 is for Owners
             'is_trial' => $user->is_trial,
             'company_id' => $user->company_id,
         ];
