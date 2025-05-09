@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\Companies;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CreateEmployeeController extends Controller
 {
@@ -74,8 +75,19 @@ class CreateEmployeeController extends Controller
             'company_id' => $request->company_id,
         ]);
 
+        $loginUrl = url('/auth/login/'); 
+        Mail::send('emails.employee_user', [
+            'name' => ucfirst($user->first_name) . ' ' . ucfirst($user->last_name),
+            'email' => $user->email,
+            'password' => $temporaryPassword,
+            'loginUrl' => $loginUrl,
+        ], function ($message) use ($user) {
+            $message->to($user->email)
+                    ->subject('Credenciales cuenta de empleado | TurnoMaster');
+        });
+
         return response()->json([
-            'message' => 'User created successfully',
+            'message' => 'Cuenta de empleado creada exitosamente. Se ha enviado un correo electrónico a la dirección proporcionada con las credenciales de acceso.',
             'user' => $user,
         ], 201);
     }
