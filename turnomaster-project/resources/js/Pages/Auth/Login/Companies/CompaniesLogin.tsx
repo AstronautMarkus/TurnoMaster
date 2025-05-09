@@ -107,7 +107,7 @@ const CompaniesLogin: React.FC = () => {
                 <label htmlFor="password" className="block mb-2 text-sm font-medium">
                   Contraseña
                 </label>
-                <Link to="/auth/forgot-password" className="text-sm hover:underline">
+                <Link to="/auth/forgot-password/companies" className="text-sm hover:underline">
                   Olvidé mi contraseña
                 </Link>
               </div>
