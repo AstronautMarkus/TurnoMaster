@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import IndexPage from '../Pages/Default/Index/Index';
@@ -11,6 +11,7 @@ import Clients from '../Pages/Default/Clients/Clients';
 import Contact from '../Pages/Default/Contact/Contact';
 import Audience from '../Pages/Default/Audience/Audience';
 import SecurityPrivacy from '../Pages/Default/SecurityPrivacy/SecurityPrivacy';
+import Product from '../Pages/Default/Product/Product';
 
 function NormalRouter() {
     const location = useLocation();
@@ -22,9 +23,13 @@ function NormalRouter() {
         transition: { duration: 0.3 },
     };
 
+    const handleExitComplete = () => {
+        window.scrollTo(0, 0);
+    };
+
     return (
         <DefaultLayout>
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="wait" onExitComplete={handleExitComplete}>
                 <motion.div key={location.pathname} {...pageTransition} className="w-full">
                     <Routes location={location} key={location.pathname}>
                         <Route path="/*" element={<IndexPage />} />
@@ -37,6 +42,8 @@ function NormalRouter() {
                         <Route path="/faq" element={<FaqPage />} />
                         <Route path="/security-privacy" element={<SecurityPrivacy />} />
                         <Route path="/contact" element={<Contact />} />
+                        <Route path="/product" element={<Product />} />
+                        <Route path="/product/:slug" element={<Product />} />
                     </Routes>
                 </motion.div>
             </AnimatePresence>
