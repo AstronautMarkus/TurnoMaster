@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth\Login;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Dashboard\DashboardUser;
+use App\Models\Users\DashboardUser;
 use App\Models\RefreshToken;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
