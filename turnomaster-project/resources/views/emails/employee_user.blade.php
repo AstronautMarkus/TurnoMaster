@@ -142,15 +142,16 @@
         </div>
 
         <div class="content">
-            <h1>¡Buenas, {{ $name }}!</h1>
-
+            <h1>¡Hola, {{ $name }}!</h1>
+            <p>¡Estamos emocionados de darte la bienvenida a TurnoMaster! 🚀</p>
             <p>
-                Has sido registrado como empleado en TurnoMaster. A continuación, encontrarás los detalles de tu cuenta.
+                Has sido registrado como empleado en {{ $companyName }}, registrada en TurnoMaster. A continuación, encontrarás los detalles de tu cuenta.
             </p>
 
             <div class="info-box">
                 <p><strong>Correo electrónico:</strong> {{ $email }}</p>
                 <p><strong>Contraseña:</strong> {{ $password }}</p>
+                <p><strong>Nombre de la empresa:</strong> {{ $companyName }}</p>
             </div>
 
             <p>

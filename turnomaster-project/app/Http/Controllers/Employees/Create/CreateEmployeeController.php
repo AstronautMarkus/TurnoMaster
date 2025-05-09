@@ -64,6 +64,7 @@ class CreateEmployeeController extends Controller
 
         $temporaryPassword = \Str::random(10);
 
+
         $user = DashboardUser::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -76,11 +77,16 @@ class CreateEmployeeController extends Controller
         ]);
 
         $loginUrl = url('/auth/login/'); 
+
+        $company = Companies::find($request->company_id);
+        $companyName = $company->name;
+
         Mail::send('emails.employee_user', [
             'name' => ucfirst($user->first_name) . ' ' . ucfirst($user->last_name),
             'email' => $user->email,
             'password' => $temporaryPassword,
             'loginUrl' => $loginUrl,
+            'companyName' => $companyName,
         ], function ($message) use ($user) {
             $message->to($user->email)
                     ->subject('Credenciales cuenta de empleado | TurnoMaster');
