@@ -69,13 +69,17 @@ const CompaniesLogin: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center min-h-screen">
+    <div className="flex flex-col md:flex-row items-center justify-center min-h-screen w-full">
       <div className="bg-white p-8 md:p-12 w-full max-w-md md:max-w-lg shadow-lg">
-        <div className="flex items-center justify-center mb-6">
+        <div className="flex items-center justify-center">
           <img src="/img/logo/TurnoMasterRed.svg" alt="Logo" className="w-12 h-12 mr-3" />
             <h2 className="text-2xl font-semibold flex items-center">
-            Iniciar sesión <span className="ml-2"><FaBuilding /></span> (Empresas)
+            Iniciar sesión
             </h2>
+        </div>
+        <div className="flex items-center justify-center mb-6">
+          <FaBuilding className="mr-2" />
+          <h2 className="font-semibold">(Empresas)</h2>
         </div>
         {isLoading ? (
           <div className="flex items-center justify-center h-48">
