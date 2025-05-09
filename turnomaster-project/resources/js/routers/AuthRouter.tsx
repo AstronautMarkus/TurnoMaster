@@ -4,7 +4,10 @@ import AuthLayout from '../Layouts/Auth/AuthLayout';
 
 import LoginRouter from './LoginRouter';
 import RegisterDemo from '../Pages/Auth/RegisterDemo/RegisterDemo';
-import ForgotPassword from '../Pages/Auth/ForgotPassword/ForgotPassword';
+
+import CompaniesForgotPassword from '../Pages/Auth/ForgotPassword/Companies/CompaniesForgotPassword';
+import EmployeesForgotPassword from '../Pages/Auth/ForgotPassword/Employees/EmployeesForgotPassword';
+
 import ResetPassword from '../Pages/Auth/ResetPassword/ResetPassword';
 import Logout from '../Pages/Auth/Logout/Logout';
 
@@ -18,7 +21,8 @@ function AuthRouter() {
                 <Route path="/register" element={<div>Register Page</div>} />
                 <Route path="/reset-password" element={<div>Reset Password Page</div>} />
                 <Route path="/register-demo" element={<RegisterDemo />} />
-                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/forgot-password/companies" element={<CompaniesForgotPassword />} />
+                <Route path="/forgot-password/employees" element={<EmployeesForgotPassword />} />
                 <Route path="/reset-password/:token" element={<ResetPassword />} />
             </Routes>
         </AuthLayout>

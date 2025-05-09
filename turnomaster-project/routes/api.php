@@ -6,7 +6,10 @@ use Carbon\Carbon;
 
 use App\Http\Controllers\Auth\CreateDemoUserController;
 use App\Http\Controllers\Contact\ContactFormsController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
+
+use App\Http\Controllers\Auth\ForgotPassword\Companies\ForgotPasswordCompaniesController;
+use App\Http\Controllers\Auth\ForgotPassword\Employees\ForgotPasswordEmployeesController;
+
 use App\Http\Controllers\Auth\ResetPasswordController;
 
 use App\Http\Controllers\AuthController;
@@ -37,7 +40,8 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::get('/me', [GetPersonalDataController::class, 'getPersonalData']);
 });
 
-Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink']);
+Route::post('/forgot-password/companies', [ForgotPasswordCompaniesController::class, 'sendResetLink']);
+Route::post('/forgot-password/employees', [ForgotPasswordEmployeesController::class, 'sendResetLink']);
 
 Route::post('/reset-password', [ResetPasswordController::class, 'reset']);
 
