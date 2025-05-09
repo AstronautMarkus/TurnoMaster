@@ -94,8 +94,8 @@ const CompaniesForgotPassword: React.FC = () => {
 
               <div className="mt-6 text-center">
                 <Link
-                to="/auth/login"
-                className="text-sm text-gray-600 hover:text-blue-700 flex justify-center items-center gap-2"
+                to="/auth/login/companies"
+                className="text-sm text-gray-600 hover:text-black flex justify-center items-center gap-2"
                 >
                 <FaArrowLeft />
                 Volver al inicio de sesión
