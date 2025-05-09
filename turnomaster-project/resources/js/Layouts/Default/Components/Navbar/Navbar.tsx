@@ -49,13 +49,13 @@ export default function Navbar() {
   const handleLogout = useHandleLogout();
 
   return (
-    <nav className="bg-[#5C5AD6] shadow-lg py-4 px-6 sticky top-0 z-50">
+    <nav className="bg-[#891818] shadow-lg py-4 px-6 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <img src="/img/logo/TurnoMaster.svg" alt="" className="h-auto w-14" />
+          <img src="/img/logo/TurnoMasterWhite.svg" alt="" className="h-auto w-14" />
           <Link
             to="/"
-            className="text-white text-3xl font-semibold hover:text-neutral-400 transition-colors duration-300"
+            className="text-white text-3xl font-semibold hover:underline transition-colors duration-300"
           >
             TurnoMaster
           </Link>
@@ -64,26 +64,26 @@ export default function Navbar() {
         <div className="hidden md:flex items-center space-x-8">
           <Link
             to="/prices"
-            className="text-white text-lg hover:text-neutral-400 transition-colors duration-300"
+            className="text-white text-lg hover:underline transition-colors duration-300"
           >
             Precios
           </Link>
           <div className="relative" ref={dropdownRef}>
             <button
-              className="flex items-center text-white text-lg hover:text-neutral-400 transition-colors duration-300"
+              className="flex items-center text-white text-lg hover:underline transition-colors duration-300"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
               Características <FaAngleDown className="ml-2" />
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg border-2 border-[#5C5AD6]">
+              <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg border-2 border-[#891818]">
                 <div className="py-1">
                   {features.map((feature) => (
                     <Link
                       key={feature.path}
                       to={feature.path}
-                      className="block px-4 py-2 text-gray-800 hover:bg-[#5C5AD6] hover:text-white transition-colors duration-300"
+                      className="block px-4 py-2 text-gray-800 hover:bg-[#891818] hover:text-white transition-colors duration-300"
                       onClick={() => setIsDropdownOpen(false)}
                     >
                       {feature.name}
@@ -95,19 +95,19 @@ export default function Navbar() {
           </div>
           <Link
             to="/clients"
-            className="text-white text-lg hover:text-neutral-400 transition-colors duration-300"
+            className="text-white text-lg hover:underline transition-colors duration-300"
           >
             Clientes
           </Link>
           <Link
             to="/about-project"
-            className="text-white text-lg hover:text-neutral-400 transition-colors duration-300"
+            className="text-white text-lg hover:underline transition-colors duration-300"
           >
             Sobre el proyecto
           </Link>
           <Link
             to="/contact"
-            className="text-white text-lg hover:text-neutral-400 transition-colors duration-300"
+            className="text-white text-lg hover:underline transition-colors duration-300"
           >
             Contacto
           </Link>
@@ -131,17 +131,17 @@ export default function Navbar() {
                 <FaAngleDown className="ml-1" />
                 </button>
               {isUserDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border-2 border-[#5C5AD6]">
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border-2 border-[#891818]">
                   <div className="py-1">
                     <a
                       href="/dashboard"
-                      className="block px-4 py-2 text-gray-800 hover:bg-[#5C5AD6] hover:text-white transition-colors duration-300"
+                      className="block px-4 py-2 text-gray-800 hover:bg-[#891818] hover:text-white transition-colors duration-300"
                       onClick={() => setIsUserDropdownOpen(false)}
                     >
                       Dashboard
                     </a>
                     <button
-                      className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-[#5C5AD6] hover:text-white transition-colors duration-300"
+                      className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-[#891818] hover:text-white transition-colors duration-300"
                       onClick={() => {
                         setIsUserDropdownOpen(false);
                         setIsLogoutModalOpen(true);
@@ -157,30 +157,30 @@ export default function Navbar() {
             <>
               <a
                 href="/auth/register-demo"
-                className="flex items-center bg-[#F57424] hover:bg-[#db6821] text-white text-lg px-4 py-2 rounded-full transition-colors duration-300"
+                className="flex items-center text-white text-lg px-4 py-2"
               >
                 <FaGift className="mr-2" /> <span>Prueba Gratis</span>
               </a>
               <div className="relative" ref={accessDropdownRef}>
                 <button
-                  className="flex items-center bg-[#377CE4] hover:bg-[#326fc9] text-white text-lg px-4 py-2 rounded-full transition-colors duration-300"
+                  className="flex items-center  text-white text-lg px-4 py-2"
                   onClick={() => setIsAccessDropdownOpen(!isAccessDropdownOpen)}
                 >
                   <FaUser className="mr-2" /> <span>Acceso</span>
                   <FaAngleDown className="ml-2" />
                 </button>
                 {isAccessDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border-2 border-[#377CE4]">
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border-2 border-[#891818]">
                     <div className="py-1">
                       <a
                         href="/auth/login/companies"
-                        className="flex items-center px-4 py-2 text-gray-800 hover:bg-[#377CE4] hover:text-white transition-colors duration-300"
+                        className="flex items-center px-4 py-2 text-gray-800 hover:bg-[#891818] hover:text-white transition-colors duration-300"
                       >
                         <FaBuilding className="mr-2" /> <span>Empresas</span>
                       </a>
                       <a
                         href="/auth/login/employees"
-                        className="flex items-center px-4 py-2 text-gray-800 hover:bg-[#377CE4] hover:text-white transition-colors duration-300"
+                        className="flex items-center px-4 py-2 text-gray-800 hover:bg-[#891818] hover:text-white transition-colors duration-300"
                       >
                         <FaUserTie className="mr-2" /> <span>Empleados</span>
                       </a>
