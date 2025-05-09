@@ -82,8 +82,7 @@ class LoginEmployeesController extends Controller
             'message' => 'Iniciado sesión correctamente.',
             'token' => $accessToken,
             'user' => [
-                'first_name' => $user->first_name,
-                'last_name' => $user->last_name,
+                'name' => $user->first_name . ' ' . $user->last_name,
                 'email' => $user->email,
                 'created_at' => $user->created_at,
                 'updated_at' => $user->updated_at,

@@ -91,7 +91,7 @@ class LoginCompaniesController extends Controller
             'message' => 'Iniciado sesión correctamente.',
             'token' => $accessToken,
             'user' => [
-                'name' => $user->name,
+                'name' => $user->first_name . ' ' . $user->last_name,
                 'email' => $user->email,
                 'expires_at' => $user->expires_at,
                 'created_at' => $user->created_at,

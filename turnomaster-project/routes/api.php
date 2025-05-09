@@ -2,14 +2,13 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Carbon\Carbon;
 
 use App\Http\Controllers\Auth\CreateDemoUserController;
 use App\Http\Controllers\Contact\ContactFormsController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\CreateUserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-use Carbon\Carbon;
+
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Auth\ValidateTokenController;
 
@@ -28,8 +27,7 @@ Route::post('/login-employees', [LoginEmployeesController::class, 'login']);
 
 Route::post('/logout', [LogoutController::class, 'logout']);
 
-Route::post('/create-user', [CreateUserController::class, 'createUser']);
-Route::post('/create-employee', [CreateEmployeeController::class, 'createEmployee']);
+
 
 Route::post('/refresh', [TokenController::class, 'refresh']);
 
