@@ -18,7 +18,7 @@ const EmployeesForgotPassword: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post('/api/forgot-password/companies', { email }, {
+      const response = await axios.post('/api/forgot-password/employees', { email }, {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
