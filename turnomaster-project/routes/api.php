@@ -15,6 +15,8 @@ use App\Http\Controllers\Auth\ValidateTokenController;
 use App\Http\Controllers\Auth\Login\LoginCompaniesController;
 use App\Http\Controllers\Auth\Login\LoginEmployeesController;
 
+use App\Http\Controllers\Auth\Logout\LogoutController;
+
 use App\Http\Controllers\Dashboard\GetPersonalDataController;
 
 Route::post('/create-demo-user', [CreateDemoUserController::class, 'createDemoUser']);
