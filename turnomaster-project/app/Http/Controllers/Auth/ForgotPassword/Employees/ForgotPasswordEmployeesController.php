@@ -45,7 +45,7 @@ class ForgotPasswordEmployeesController extends Controller
 
             try {
                 Mail::send('emails.forgot_password', [
-                    'name' => $user->name,
+                    'name' => ucfirst($user->first_name) . ' ' . ucfirst($user->last_name),
                     'email' => $user->email,
                     'resetUrl' => $resetLink,
                 ], function ($message) use ($user) {
