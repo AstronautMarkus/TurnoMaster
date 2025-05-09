@@ -1,6 +1,7 @@
 export const pricesFeatures = [
   {
     title: "Freemium",
+    slug: "freemium",
     description: "Ideal para probar el sistema.",
     price: "Gratis",
     yearlyPrice: "Gratis",
@@ -20,6 +21,7 @@ export const pricesFeatures = [
   },
   {
     title: "Básico",
+    slug: "basico",
     description: "Ideal para pequeños negocios.",
     price: "$4.990 CLP",
     yearlyPrice: "$49.900 CLP",
@@ -39,6 +41,7 @@ export const pricesFeatures = [
   },
   {
     title: "Silver",
+    slug: "silver",
     description: "Perfecto para negocios medianos.",
     price: "$9.990 CLP",
     yearlyPrice: "$99.900 CLP",
@@ -58,6 +61,7 @@ export const pricesFeatures = [
   },
   {
     title: "Gold",
+    slug: "gold",
     description: "Diseñado para grandes organizaciones.",
     price: "$19.990 CLP",
     yearlyPrice: "$199.900 CLP",
