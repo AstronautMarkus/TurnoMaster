@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { usePricesFeatures } from "./usePricesFeatures";
 import { FaCheck, FaXmark } from "react-icons/fa6";
-import { FiMessageCircle } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 const PricingComparison: React.FC = () => {
@@ -65,9 +64,9 @@ const PricingComparison: React.FC = () => {
                                 ))}
                             </ul>
                             <div className="mt-auto">
-                                <button className="w-full bg-[#6c5ce7] text-white py-2 px-4 rounded hover:bg-[#5b4acb]">
+                                <Link to={`/product/${plan.slug}`} className="w-full bg-[#6c5ce7] text-white py-2 px-4 rounded hover:bg-[#5b4acb]">
                                     {plan.buttonText}
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     ))}
