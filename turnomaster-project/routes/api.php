@@ -14,6 +14,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Auth\ValidateTokenController;
 
 use App\Http\Controllers\Auth\Login\LoginCompaniesController;
+use App\Http\Controllers\Auth\Login\LoginEmployeesController;
 
 use App\Http\Controllers\Dashboard\GetPersonalDataController;
 
@@ -23,6 +24,7 @@ Route::get('/contact-form-categories', [ContactFormsController::class, 'getCateg
 Route::post('/contact-form', [ContactFormsController::class, 'sendMessage']);
 
 Route::post('/login-companies', [LoginCompaniesController::class, 'login']);
+Route::post('/login-employees', [LoginEmployeesController::class, 'login']);
 
 Route::post('/logout', [LogoutController::class, 'logout']);
 
