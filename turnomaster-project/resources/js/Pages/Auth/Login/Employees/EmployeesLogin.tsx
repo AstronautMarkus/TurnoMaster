@@ -69,83 +69,83 @@ const EmployeesLogin: React.FC = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl p-12 px-6 md:px-28 shadow-2xl w-full max-w-sm md:max-w-lg">
-      <div className="flex items-center justify-center mb-6">
-        <img src="/img/logo/TurnoMaster.svg" alt="Logo" className="w-14 h-14 mr-4" />
-        <h2 className="text-3xl font-bold text-gray-800">Iniciar sesión (Empleados)</h2>
-      </div>
-      {isLoading ? (
-        <div className="flex items-center justify-center h-40">
-          <AuthLoadingScreen />
+    <div className="flex flex-col md:flex-row items-center justify-center min-h-screen">
+      <div className="bg-white p-8 md:p-12 w-full max-w-md md:max-w-lg shadow-lg">
+        <div className="flex items-center justify-center mb-6">
+          <img src="/img/logo/TurnoMasterRed.svg" alt="Logo" className="w-12 h-12 mr-3" />
+          <h2 className="text-2xl font-semibold">Iniciar sesión (Empleados)</h2>
         </div>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-700">
-              Usuario o correo electrónico
-            </label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Ej: john@doe.com"
-              required
-            />
+        {isLoading ? (
+          <div className="flex items-center justify-center h-48">
+            <AuthLoadingScreen />
           </div>
-          <div className="mb-6">
-            <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-700">
-              Contraseña
-            </label>
-            <div className="relative">
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+              <label htmlFor="username" className="block mb-2 text-sm font-medium">
+                Correo electrónico
+              </label>
               <input
-                type={showPassword ? "text" : "password"}
-                id="password"
-                name="password"
-                value={formData.password}
+                type="text"
+                id="username"
+                name="username"
+                value={formData.username}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Ingrese su contraseña"
+                className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                placeholder="Ingrese su correo electrónico"
                 required
               />
-              <button
-                type="button"
-                onClick={togglePasswordVisibility}
-                className="absolute inset-y-0 right-3 flex items-center text-gray-500"
-              >
-                {showPassword ? <FaEyeLowVision /> : <FaEye />}
-              </button>
             </div>
-          </div>
-          {errorMessage && (
-            <div className="mb-4 text-sm text-red-600 text-center">
-              {errorMessage}
+            <div className="mb-6">
+              <div className="flex justify-between items-center">
+                <label htmlFor="password" className="block mb-2 text-sm font-medium">
+                  Contraseña
+                </label>
+                <Link to="/auth/forgot-password" className="text-sm hover:underline">
+                  Olvidé mi contraseña
+                </Link>
+              </div>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                  placeholder="Ingrese su contraseña"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute inset-y-0 right-3 flex items-center"
+                >
+                  {showPassword ? <FaEyeLowVision /> : <FaEye />}
+                </button>
+              </div>
             </div>
-          )}
-          {successMessage && (
-            <div className="mb-4 text-sm text-green-600 text-center">
-              {successMessage}
+            <div className="mb-4 text-center">
+              {errorMessage && (
+                <div className="text-m text-red-600 bg-red-100 border border-red-400 rounded p-2">
+                  {errorMessage}
+                </div>
+              )}
+              {successMessage && (
+                <div className="text-m text-green-600 bg-green-100 border border-green-400 rounded p-2">
+                  {successMessage}
+                </div>
+              )}
             </div>
-          )}
-          <button type="submit" className="w-full px-4 py-2 text-white bg-blue-800 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            Iniciar sesión
-          </button>
-          <div className="mt-4 text-center flex items-center justify-center gap-2">
-            <Link rel="stylesheet" to="/auth/forgot-password" className="text-sm text-red-600 hover:underline flex items-center gap-1">
-              <FaGhost />
-              Olvidé mi contraseña
-            </Link>
-          </div>
-          <div className="mt-4 text-center flex items-center justify-center gap-2">
-            <a rel="stylesheet" href="/prices" className="text-sm text-green-600 hover:underline flex items-center gap-1">
-              <FaGift />
-              Prueba TurnoMaster gratis
-            </a>
-          </div>
-        </form>
-      )}
+            <button
+              type="submit"
+              className="w-full px-4 py-2 bg-[#e01d1d] hover:bg-[#b21e1e] text-white rounded focus:outline-none focus:ring-2 focus:ring-[#e01d1d]"
+            >
+              Iniciar sesión
+            </button>
+          </form>
+        )}
+      </div>
     </div>
   );
 };

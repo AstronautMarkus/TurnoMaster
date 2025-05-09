@@ -70,7 +70,6 @@ const CompaniesLogin: React.FC = () => {
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-center min-h-screen">
-
       <div className="bg-white p-8 md:p-12 w-full max-w-md md:max-w-lg shadow-lg">
         <div className="flex items-center justify-center mb-6">
           <img src="/img/logo/TurnoMasterRed.svg" alt="Logo" className="w-12 h-12 mr-3" />
