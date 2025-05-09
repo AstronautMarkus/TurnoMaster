@@ -13,6 +13,8 @@ use Carbon\Carbon;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Auth\ValidateTokenController;
 
+use App\Http\Controllers\Auth\Login\LoginCompaniesController;
+
 use App\Http\Controllers\Dashboard\GetPersonalDataController;
 
 Route::post('/create-demo-user', [CreateDemoUserController::class, 'createDemoUser']);
@@ -20,7 +22,7 @@ Route::post('/create-demo-user', [CreateDemoUserController::class, 'createDemoUs
 Route::get('/contact-form-categories', [ContactFormsController::class, 'getCategories']);
 Route::post('/contact-form', [ContactFormsController::class, 'sendMessage']);
 
-Route::post('/login', [LoginController::class, 'login']);
+Route::post('/login-companies', [LoginCompaniesController::class, 'login']);
 
 Route::post('/logout', [LogoutController::class, 'logout']);
 
