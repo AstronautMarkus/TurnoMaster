@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaEye, FaEyeLowVision} from "react-icons/fa6";
+import { FaBuilding, FaEye, FaEyeLowVision} from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import AuthLoadingScreen from "../../../../Components/Auth/LoadingScreen/AuthLoadingScreen";
@@ -73,7 +73,9 @@ const CompaniesLogin: React.FC = () => {
       <div className="bg-white p-8 md:p-12 w-full max-w-md md:max-w-lg shadow-lg">
         <div className="flex items-center justify-center mb-6">
           <img src="/img/logo/TurnoMasterRed.svg" alt="Logo" className="w-12 h-12 mr-3" />
-          <h2 className="text-2xl font-semibold">Iniciar sesión (Empresas)</h2>
+            <h2 className="text-2xl font-semibold flex items-center">
+            Iniciar sesión <span className="ml-2"><FaBuilding /></span> (Empresas)
+            </h2>
         </div>
         {isLoading ? (
           <div className="flex items-center justify-center h-48">
