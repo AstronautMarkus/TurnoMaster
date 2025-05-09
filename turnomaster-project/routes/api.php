@@ -4,8 +4,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Carbon\Carbon;
 
-use App\Http\Controllers\Auth\CreateDemoUserController;
+// Create users controllers
+use App\Http\Controllers\DemoUser\Create\CreateDemoUserController;
+use App\Http\Controllers\Employees\Create\CreateEmployeeController;
+
+// Contact forms and help controllers
+
 use App\Http\Controllers\Contact\ContactFormsController;
+
+// Forgot password controllers
 
 use App\Http\Controllers\Auth\ForgotPassword\Companies\ForgotPasswordCompaniesController;
 use App\Http\Controllers\Auth\ForgotPassword\Employees\ForgotPasswordEmployeesController;
@@ -22,7 +29,9 @@ use App\Http\Controllers\Auth\Logout\LogoutController;
 
 use App\Http\Controllers\Dashboard\GetPersonalDataController;
 
-Route::post('/create-demo-user', [CreateDemoUserController::class, 'createDemoUser']);
+Route::post('/create/demo-user', [CreateDemoUserController::class, 'createDemoUser']);
+Route::post('/create/employee', [CreateEmployeeController::class, 'createEmployee']);
+
 
 Route::get('/contact-form-categories', [ContactFormsController::class, 'getCategories']);
 Route::post('/contact-form', [ContactFormsController::class, 'sendMessage']);

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\DemoUser\Create;
 
 use App\Http\Controllers\Controller;
 use App\Models\Companies;
@@ -16,25 +16,29 @@ class CreateDemoUserController extends Controller
         $validator = \Validator::make($request->all(), [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'rut' => 'required|string|unique:users,rut',
+            'rut' => 'required|integer',
+            'rut_dv' => 'required|string|max:1',
             'email' => 'required|email|unique:users,email',
             'company_name' => 'required|string|max:255',
         ], [
             'first_name.required' => 'El nombre es obligatorio.',
             'last_name.required' => 'El apellido es obligatorio.',
             'rut.required' => 'El RUT es obligatorio.',
-            'rut.string' => 'El RUT debe ser una cadena de texto.',
-            'rut.unique' => 'El RUT ya ha sido registrado.',
+            'rut.integer' => 'El RUT debe ser un número entero.',
+            'rut_dv.required' => 'El dígito verificador es obligatorio.',
+            'rut_dv.string' => 'El dígito verificador debe ser una cadena de texto.',
+            'rut_dv.max' => 'El dígito verificador no puede tener más de 1 carácter.',
             'email.required' => 'El correo electrónico es obligatorio.',
             'email.email' => 'El correo electrónico debe ser una dirección válida.',
             'email.unique' => 'El correo electrónico ya ha sido registrado.',
             'company_name.required' => 'El nombre de la empresa es obligatorio.',
             'company_name.string' => 'El nombre de la empresa debe ser una cadena de texto.',
+            'company_name.max' => 'El nombre de la empresa no puede tener más de 100 caracteres.',
         ]);
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Validation failed.',
+                'message' => 'La validación ha fallado.',
                 'errors' => $validator->errors(),
             ], 422);
         }
@@ -42,8 +46,7 @@ class CreateDemoUserController extends Controller
         $existingCompany = Companies::where('name', $request->input('company_name'))->first();
         if ($existingCompany) {
             return response()->json([
-                'message' => 'Ya existe una cuenta de Demostración para esta empresa.',
-                'company' => $existingCompany,
+                'message' => 'Ya existe una cuenta de Demostración para esta empresa.'
             ], 400);
         }
 
