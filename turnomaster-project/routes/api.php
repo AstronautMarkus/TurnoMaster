@@ -45,7 +45,6 @@ Route::post('/login-employees', [LoginEmployeesController::class, 'login']);
 Route::post('/logout', [LogoutController::class, 'logout']);
 
 
-
 Route::post('/refresh', [TokenController::class, 'refresh']);
 
 Route::middleware(['jwt.auth'])->group(function () {
