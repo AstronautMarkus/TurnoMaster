@@ -56,5 +56,6 @@ Route::post('/forgot-password/companies', [ForgotPasswordCompaniesController::cl
 Route::post('/forgot-password/employees', [ForgotPasswordEmployeesController::class, 'sendResetLink']);
 
 Route::post('/reset-password/companies', [ResetPasswordCompaniesController::class, 'resetPassword']);
+Route::post('/reset-password/employees', [ResetPasswordEmployeesController::class, 'resetPassword']);
 
 Route::get('/validate-reset-token/{token}', [ValidateTokenController::class, 'validateToken']);
