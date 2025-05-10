@@ -11,17 +11,17 @@ import EmployeesForgotPassword from '../../Pages/Auth/ForgotPassword/Employees/E
 import CompaniesResetPassword from '../../Pages/Auth/ResetPassword/Companies/CompaniesResetPassword';
 import EmployeesResetPassword from '../../Pages/Auth/ResetPassword/Employees/EmployeesResetPassword';
 
+import AuthErrorPage from '../../Pages/Auth/ErrorPage/AuthErrorPage';
+
 import Logout from '../../Pages/Auth/Logout/Logout';
 
 function AuthRouter() {
     return (
         <AuthLayout>
             <Routes>
-                <Route path="/*" element={<div>Auth</div>} />
+                <Route path="/*" element={<AuthErrorPage />} />
                 <Route path="/login/*" element={<LoginRouter />} />
                 <Route path="/logout" element={<Logout />} />
-                <Route path="/register" element={<div>Register Page</div>} />
-                <Route path="/reset-password" element={<div>Reset Password Page</div>} />
                 <Route path="/register-demo" element={<RegisterDemo />} />
                 <Route path="/forgot-password/companies" element={<CompaniesForgotPassword />} />
                 <Route path="/forgot-password/employees" element={<EmployeesForgotPassword />} />
