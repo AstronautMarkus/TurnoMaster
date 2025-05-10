@@ -1,14 +1,14 @@
 import React from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import DashboardLayout from '../Layouts/Dashboard/DashboardLayout';
-import { useDashboardGuard } from '../hooks/auth/useDashboardGuard';
+import DashboardLayout from '../../Layouts/Dashboard/DashboardLayout';
+import { useDashboardGuard } from '../../hooks/auth/useDashboardGuard';
 
-import Index from '../Pages/Dashboard/Index/Index';
-import Profile from '../Pages/Dashboard/Profile/Profile';
-import Settings from '../Pages/Dashboard/Settings/Settings';
-import ListEmployees from '../Pages/Dashboard/ListEmployees/List_employee';
-import CreateEmployees from '../Pages/Dashboard/CreateEmployees/Create_employee';
+import Index from '../../Pages/Dashboard/Index/Index';
+import Profile from '../../Pages/Dashboard/Profile/Profile';
+import Settings from '../../Pages/Dashboard/Settings/Settings';
+import ListEmployees from '../../Pages/Dashboard/ListEmployees/List_employee';
+import CreateEmployees from '../../Pages/Dashboard/CreateEmployees/Create_employee';
 
 function DashboardRouter() {
     const location = useLocation();

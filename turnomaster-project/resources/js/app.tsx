@@ -4,7 +4,7 @@ import '../css/app.css';
 
 import NormalRouter from './routers/Default/NormalRouter';
 import AuthRouter from './routers/AuthRouter';
-import DashboardRouter from './routers/DashboardRouter';
+import DashboardRouter from './routers/Dashboard/DashboardRouter';
 
 function App() {
     return (
