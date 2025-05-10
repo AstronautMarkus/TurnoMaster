@@ -56,6 +56,7 @@ class CreateDemoUserController extends Controller
         $company = Companies::create([
             'name' => $request->input('company_name'),
             'subscription_id' => 1,
+            'owner_email' => $request->input('email'),
         ]);
 
         $user = User::create([
