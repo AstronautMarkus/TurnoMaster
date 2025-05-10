@@ -32,9 +32,16 @@ use App\Http\Controllers\Auth\ValidateTokenController;
 use App\Http\Controllers\Auth\Login\LoginCompaniesController;
 use App\Http\Controllers\Auth\Login\LoginEmployeesController;
 
+// Logout controllers
+
 use App\Http\Controllers\Auth\Logout\LogoutController;
 
+// Get data controllers
+
 use App\Http\Controllers\Dashboard\GetPersonalDataController;
+
+use App\Http\Controllers\Dashboard\Company\GetCompanyDataController;
+
 
 Route::post('/create/demo-user', [CreateDemoUserController::class, 'createDemoUser']);
 Route::post('/create/employee', [CreateEmployeeController::class, 'createEmployee']);
@@ -65,4 +72,5 @@ Route::get('/validate-reset-token/{token}', [ValidateTokenController::class, 'va
 
 Route::middleware(['jwt.auth'])->group(function () {
     Route::get('/me', [GetPersonalDataController::class, 'getPersonalData']);
+    Route::get('/company', [GetCompanyDataController::class, 'getCompanyData']);
 });
