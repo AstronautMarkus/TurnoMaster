@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import AuthLayout from '../../Layouts/Auth/AuthLayout';
 
-import LoginRouter from './../LoginRouter';
+import LoginRouter from './Login/LoginRouter';
 import RegisterDemo from '../../Pages/Auth/RegisterDemo/RegisterDemo';
 
 import CompaniesForgotPassword from '../../Pages/Auth/ForgotPassword/Companies/CompaniesForgotPassword';
