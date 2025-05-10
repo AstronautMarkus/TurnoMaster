@@ -39,9 +39,19 @@ class GetPersonalDataController extends Controller
                     return response()->json(['error' => 'Compañía no encontrada.'], 404);
                 }
 
+                $role = Role::where('id', $user->role_id)->first();
+                if (!$role) {
+                    return response()->json(['error' => 'Rol no encontrado.'], 404);
+                }
+
                 return response()->json([
                     'user' => $user,
-                    'company' => $company->name
+                    'company' => $company->name,
+                    'role' => [
+                        'name' => $role->name,
+                        'description' => $role->description,
+                    ],
+
                 ]);
 
             } elseif ($userType === 'employee') {
@@ -54,9 +64,18 @@ class GetPersonalDataController extends Controller
                     return response()->json(['error' => 'Compañía no encontrada.'], 404);
                 }
 
+                $role = Role::where('id', $user->role_id)->first();
+                if (!$role) {
+                    return response()->json(['error' => 'Rol no encontrado.'], 404);
+                }
+
                 return response()->json([
                     'user' => $user,
-                    'company' => $company->name
+                    'company' => $company->name,
+                    'role' => [
+                        'name' => $role->name,
+                        'description' => $role->description,
+                    ],
                 ]);
             } else {
                 return response()->json(['error' => 'Tipo de usuario inválido.'], 400);
