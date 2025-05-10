@@ -22,8 +22,12 @@ use App\Http\Controllers\Auth\ForgotPassword\Employees\ForgotPasswordEmployeesCo
 use App\Http\Controllers\Auth\ResetPassword\Companies\ResetPasswordCompaniesController;
 use App\Http\Controllers\Auth\ResetPassword\Employees\ResetPasswordEmployeesController;
 
-use App\Http\Controllers\AuthController;
+// Token controllers
+
+use App\Http\Controllers\Auth\Token\TokenController;
 use App\Http\Controllers\Auth\ValidateTokenController;
+
+// Login controllers
 
 use App\Http\Controllers\Auth\Login\LoginCompaniesController;
 use App\Http\Controllers\Auth\Login\LoginEmployeesController;
@@ -47,9 +51,7 @@ Route::post('/logout', [LogoutController::class, 'logout']);
 
 Route::post('/refresh', [TokenController::class, 'refresh']);
 
-Route::middleware(['jwt.auth'])->group(function () {
-    Route::get('/me', [GetPersonalDataController::class, 'getPersonalData']);
-});
+
 
 Route::post('/forgot-password/companies', [ForgotPasswordCompaniesController::class, 'sendResetLink']);
 Route::post('/forgot-password/employees', [ForgotPasswordEmployeesController::class, 'sendResetLink']);
@@ -58,3 +60,9 @@ Route::post('/reset-password/companies', [ResetPasswordCompaniesController::clas
 Route::post('/reset-password/employees', [ResetPasswordEmployeesController::class, 'resetPassword']);
 
 Route::get('/validate-reset-token/{token}', [ValidateTokenController::class, 'validateToken']);
+
+// Protected routes
+
+Route::middleware(['jwt.auth'])->group(function () {
+    Route::get('/me', [GetPersonalDataController::class, 'getPersonalData']);
+});

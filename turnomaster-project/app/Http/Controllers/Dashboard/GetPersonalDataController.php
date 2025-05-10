@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User as UserModel;
+use App\Models\Users\User;
 use App\Models\Company;
 use App\Models\Role;
 use Firebase\JWT\JWT;
