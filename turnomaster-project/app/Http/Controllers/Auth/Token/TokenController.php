@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Firebase\JWT\JWT;
+
+use App\Models\Users\User;
+use App\Models\Users\DashboardUser;
 use App\Models\RefreshToken;
-use App\Models\User;
+
 use Illuminate\Support\Str;
 
 class TokenController extends Controller
@@ -34,6 +37,12 @@ class TokenController extends Controller
 
         $user = $refreshToken->user;
 
+        // Detect user type dynamically
+        $userType = $user instanceof \App\Models\Users\User ? 'company' : 'employee';
+
+        // Set role_id to 1 for company users
+        $roleId = $userType === 'company' ? 1 : $user->role_id;
+
         // Generate new access token
         $accessPayload = [
             'iss' => config('app.url'),
@@ -41,14 +50,16 @@ class TokenController extends Controller
             'iat' => time(),
             'exp' => time() + 3600, // 1 hour
             'nbf' => time(),
-            'role_id' => $user->role_id,
-            'is_trial' => $user->is_trial,
+            'role_id' => $roleId,
+            'is_trial' => $user->is_trial ?? false,
             'company_id' => $user->company_id,
+            'user_type' => $userType,
+            'user_id' => $user->id,
         ];
 
         $accessToken = JWT::encode($accessPayload, env('JWT_SECRET'), 'HS256');
 
-        // (Optional) rotate the refresh token
+        // Rotate the refresh token
         $newRefreshToken = Str::random(64);
         $refreshToken->update([
             'token' => hash('sha256', $newRefreshToken),
