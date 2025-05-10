@@ -25,38 +25,40 @@ const ListEmployees: React.FC = () => {
         </div>
       </div>
 
-      <div className="bg-white shadow w-full">
-        <table className="table-auto w-full border-collapse">
-          <thead>
-            <tr className="bg-[#7c1d1d] text-white uppercase text-sm tracking-wider">
-              <th className="px-4 py-3 text-left">Nombre</th>
-              <th className="px-4 py-3 text-left">RUT</th>
-              <th className="px-4 py-3 text-left">Correo</th>
-              <th className="px-4 py-3 text-left">Rol</th>
-              <th className="px-4 py-3 text-left">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {employees.map((employee, index) => (
-              <tr key={index} className="hover:bg-gray-100 transition-colors">
-                <td className="px-4 py-2 flex items-center space-x-4">
-                  <img src={employee.image} alt={`${employee.first_name} ${employee.last_name}`} className="w-12 h-12" />
-                  <span>{employee.first_name} {employee.last_name}</span>
-                </td>
-                <td className="px-4 py-2">{employee.rut}</td>
-                <td className="px-4 py-2">{employee.email}</td>
-                <td className="px-4 py-2">{employee.role}</td>
-                <td className="px-4 py-2">
-                  <div className="flex space-x-2">
-                    <button className="bg-blue-600 text-white px-4 py-2 text-sm hover:bg-blue-700 transition-colors">Editar</button>
-                    <button className="bg-red-700 text-white px-4 py-2 text-sm hover:bg-red-800 transition-colors">Borrar</button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <div className="bg-white shadow w-full overflow-x-auto">
+          <div className="max-h-96 overflow-y-auto">
+            <table className="table-auto w-full border-collapse">
+              <thead className="sticky top-0 bg-[#7c1d1d] text-white uppercase text-sm tracking-wider">
+                <tr>
+                  <th className="px-4 py-3 text-left">Nombre</th>
+                  <th className="px-4 py-3 text-left">RUT</th>
+                  <th className="px-4 py-3 text-left">Correo</th>
+                  <th className="px-4 py-3 text-left">Rol</th>
+                  <th className="px-4 py-3 text-left">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {employees.map((employee, index) => (
+                  <tr key={index} className="hover:bg-gray-100 transition-colors">
+                    <td className="px-4 py-2 flex items-center space-x-4">
+                      <img src={employee.image} alt={`${employee.first_name} ${employee.last_name}`} className="w-12 h-12" />
+                      <span>{employee.first_name} {employee.last_name}</span>
+                    </td>
+                    <td className="px-4 py-2">{employee.rut}</td>
+                    <td className="px-4 py-2">{employee.email}</td>
+                    <td className="px-4 py-2">{employee.role}</td>
+                    <td className="px-4 py-2">
+                      <div className="flex space-x-2">
+                        <button className="bg-blue-600 text-white px-4 py-2 text-sm hover:bg-blue-700 transition-colors">Editar</button>
+                        <button className="bg-red-700 text-white px-4 py-2 text-sm hover:bg-red-800 transition-colors">Borrar</button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
 
       <div className="flex justify-between items-center mt-4">
         <span className="text-gray-700">Mostrando 1-10 de 50 empleados</span>
