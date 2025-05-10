@@ -11,12 +11,21 @@ interface Company {
 }
 
 interface UserProfile {
-    name: string;
+    first_name: string;
+    last_name: string;
+    
     email: string;
     role: UserRole;
     companies: {
         owned: Company[];
     };
+    rut: number;
+    rut_dv: string;
+    company_id: number;
+    role_id: number;
+    created_at: string;
+    updated_at: string;
+    company: string;
 }
 
 const useProfileData = () => {
@@ -32,7 +41,11 @@ const useProfileData = () => {
                             Authorization: `Bearer ${token}`,
                         },
                     });
-                    setUser(response.data);
+                    const { user, company } = response.data;
+                    setUser({
+                        ...user,
+                        company,
+                    });
                 } catch (error) {
                     console.error('Error fetching user data:', error);
                 }

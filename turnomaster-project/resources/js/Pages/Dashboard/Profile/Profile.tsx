@@ -20,27 +20,27 @@ const Profile: React.FC = () => {
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm font-medium">Nombre</label>
-                                    <p className="">Lorem</p>
+                                    <p>{user.first_name}</p>
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium">Apellido</label>
-                                    <p className="">Ipsum</p>
+                                    <p>{user.last_name || 'N/A'}</p>
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium">RUT</label>
-                                    <p className="">Lorem</p>
+                                    <p>{user.rut}-{user.rut_dv}</p>
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium">Email</label>
-                                    <p className="">Lorem</p>
+                                    <p>{user.email}</p>
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium">Teléfono</label>
-                                    <p className="">Lorem</p>
+                                    <p>N/A</p>
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium">Empresa</label>
-                                    <p className="">Lorem</p>
+                                    <p>{user.company}</p>
                                 </div>
                             </div>
                         </div>
