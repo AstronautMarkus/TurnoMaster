@@ -7,8 +7,8 @@ import { useDashboardGuard } from '../../hooks/auth/useDashboardGuard';
 import Index from '../../Pages/Dashboard/Index/Index';
 import Profile from '../../Pages/Dashboard/Profile/Profile';
 import Settings from '../../Pages/Dashboard/Settings/Settings';
-import ListEmployees from '../../Pages/Dashboard/ListEmployees/List_employee';
-import CreateEmployees from '../../Pages/Dashboard/CreateEmployees/Create_employee';
+
+
 
 function DashboardRouter() {
     const location = useLocation();
@@ -29,8 +29,6 @@ function DashboardRouter() {
                             <Route path="/*" element={<Index />} />
                             <Route path="/settings" element={<Settings />} />
                             <Route path="/profile" element={<Profile />} />
-                            <Route path="/listEmployees" element={<ListEmployees />} />
-                            <Route path="/createEmployees" element={<CreateEmployees />} />
                         </Routes>
                     </motion.div>
                 </AnimatePresence>
