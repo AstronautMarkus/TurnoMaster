@@ -25,12 +25,12 @@ const sidebarConfig = [
     category: "Gestión",
     links: [
       {
-        label: "Usuarios",
+        label: "Empleados",
         icon: FiUsers,
-        subMenuKey: "usuarios",
+        subMenuKey: "employees",
         subLinks: [
-          { to: "/users", label: "Lista de usuarios" },
-          { to: "/users/new", label: "Crear usuario" },
+          { to: "/dashboard/employees", label: "Lista de usuarios" },
+          { to: "/dashboard/employees/create", label: "Crear usuario" },
         ],
       },
       { to: "/reports", label: "Reports", icon: FiBarChart2 },
@@ -108,13 +108,16 @@ function SidebarContent({
   toggleSubMenu,
   currentPath,
 }: SidebarContentProps) {
+  const isSubMenuActive = (subLinks: { to: string }[]) =>
+    subLinks.some((subLink) => currentPath.startsWith(subLink.to));
+
   return (
     <>
       <div className="flex items-center justify-start py-4 px-4">
         <Link to="/dashboard" className="flex items-center gap-3">
-            <div className="h-8 w-8 rounded bg-[#891818] flex items-center justify-center">
-            <img src="/img/logo/TurnoMasterWhite.svg" className="h-6 w-6"/>
-            </div>
+          <div className="h-8 w-8 rounded bg-[#891818] flex items-center justify-center">
+            <img src="/img/logo/TurnoMasterWhite.svg" className="h-6 w-6" />
+          </div>
           <div className="flex flex-col">
             <span className="font-bold text-sm text-white">TurnoMaster</span>
             <span className="text-xs text-slate-300">Panel de trabajo</span>
@@ -134,7 +137,7 @@ function SidebarContent({
                   <li key={link.label}>
                     <button
                       className={`flex items-center justify-between w-full gap-2 px-3 py-2 rounded-md text-sm ${
-                        expandedItems[link.subMenuKey]
+                        isSubMenuActive(link.subLinks || [])
                           ? "bg-[#891818] text-white"
                           : "text-slate-200 hover:bg-[#891818]"
                       }`}
@@ -158,7 +161,7 @@ function SidebarContent({
                               to={subLink.to}
                               className={`flex items-center px-3 py-2 rounded-md text-sm ${
                                 currentPath === subLink.to
-                                  ? "text-white"
+                                  ? "text-white font-bold"
                                   : "text-slate-300 hover:text-white"
                               }`}
                             >
