@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 interface UserRole {
+    id: number;
     name: string;
+    description: string;
 }
 
 interface Company {
@@ -13,7 +15,6 @@ interface Company {
 interface UserProfile {
     first_name: string;
     last_name: string;
-    
     email: string;
     role: UserRole;
     companies: {
@@ -41,10 +42,11 @@ const useProfileData = () => {
                             Authorization: `Bearer ${token}`,
                         },
                     });
-                    const { user, company } = response.data;
+                    const { user, company, role } = response.data;
                     setUser({
                         ...user,
                         company,
+                        role,
                     });
                 } catch (error) {
                     console.error('Error fetching user data:', error);

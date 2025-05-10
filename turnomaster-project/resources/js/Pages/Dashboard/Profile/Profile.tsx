@@ -1,6 +1,8 @@
 import React from 'react';
 import useProfileData from './useProfileData';
 import AuthLoadingScreen from '../../../Components/Auth/LoadingScreen/AuthLoadingScreen';
+import { FaUserShield,FaUser  } from 'react-icons/fa';
+import { FaUserGear } from "react-icons/fa6";
 
 const Profile: React.FC = () => {
     const user = useProfileData();
@@ -18,8 +20,8 @@ const Profile: React.FC = () => {
                     <>
                         <div className="flex-grow w-9/10 bg-white shadow-md sm:p-6">
                             <div className="mb-6">
-                                <h2 className="text-2xl font-semibold text-gray-700 mb-2">Información Personal</h2>
-                                <p className="text-gray-600">Aquí puedes ver los detalles de tu perfil personal.</p>
+                                <h2 className="text-2xl font-semibold mb-2">Información Personal</h2>
+                                <p>Aquí puedes ver los detalles de tu perfil personal.</p>
                             </div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
@@ -61,6 +63,21 @@ const Profile: React.FC = () => {
                     </>
                 )}
             </div>
+
+            {user && (
+                <div className="mt-6 bg-white shadow-md sm:p-6">
+                    <h2 className="text-2xl font-semibold mb-4">Rol empleado en {user.company}</h2>
+                    <div className="flex items-center gap-4">
+                        <div className="text-4xl">
+                            {user.role.id === 1 ? <FaUserShield /> : user.role.id === 3 ? <FaUser /> : <FaUserGear />}
+                        </div>
+                        <div>
+                            <p className="text-lg font-bold">{user.role.name}</p>
+                            <p>{user.role.description}</p>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
