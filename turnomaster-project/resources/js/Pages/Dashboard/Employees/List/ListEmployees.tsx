@@ -40,7 +40,7 @@ const ListEmployees: React.FC = () => {
             {employees.map((employee, index) => (
               <tr key={index} className="hover:bg-gray-100 transition-colors">
                 <td className="px-4 py-2 flex items-center space-x-4">
-                  <img src={employee.image} alt={`${employee.first_name} ${employee.last_name}`} className="w-12 h-12 rounded-full" />
+                  <img src={employee.image} alt={`${employee.first_name} ${employee.last_name}`} className="w-12 h-12" />
                   <span>{employee.first_name} {employee.last_name}</span>
                 </td>
                 <td className="px-4 py-2">{employee.rut}</td>
