@@ -49,6 +49,7 @@ class LoginEmployeesController extends Controller
             'nbf' => time(),
             'role_id' => $user->role_id,
             'company_id' => $user->company_id,
+            'is_trial' => false,
             'user_type' => 'employee',
             'user_id' => $user->id,
         ];
