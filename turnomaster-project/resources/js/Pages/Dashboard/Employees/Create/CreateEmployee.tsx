@@ -2,9 +2,9 @@ import React from 'react';
 
 const CreateEmployee: React.FC = () => {
     return (
-        <div>
-            <h1>Create Employee</h1>
-            <p>Welcome to the Create Employee page!</p>
+        <div className="p-6">
+            <h1 className="text-3xl sm:text-4xl font-bold text-left mb-6 mt-4">Crear empleado</h1>
+            <div className="bg-white shadow-md w-full h-64"></div>
         </div>
     );
 };
