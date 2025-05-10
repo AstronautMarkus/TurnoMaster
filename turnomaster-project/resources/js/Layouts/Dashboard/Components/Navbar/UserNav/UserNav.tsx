@@ -32,14 +32,14 @@ export function UserNav() {
   return (
     <div className="relative" ref={dropdownRef}>
       <button
-        className="flex items-center gap-2 rounded-full focus:outline-none focus:ring-2 focus:ring-slate-400"
+        className="flex items-center gap-2"
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="h-8 w-8 rounded-full overflow-hidden bg-slate-600">
           <img
-            src="/img/profile/default.jpg"
-            alt="Profile"
-            className="h-full w-full object-cover"
+        src="/img/profile/default.jpg"
+        alt="Profile"
+        className="h-full w-full object-cover"
           />
         </div>
         <span className="hidden text-sm font-medium md:inline-block">
@@ -48,7 +48,7 @@ export function UserNav() {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-56 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-50">
+        <div className="absolute right-0 mt-2 w-56 bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-50">
           <div className="p-2">
             <div className="px-4 py-3">
               <p className="text-sm font-medium text-gray-900">{userName}</p>
