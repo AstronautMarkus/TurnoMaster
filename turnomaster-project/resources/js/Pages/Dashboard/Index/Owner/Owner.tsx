@@ -78,8 +78,46 @@ const Owner = () => {
             <div className="flex flex-col mt-6">
                 <div className="bg-white shadow-md sm:p-6">
                     <div className="mb-6 text-center">
-                        <h2 className="text-2xl font-semibold mb-2">Estado actual de la empresa</h2>
-                        <p>En esta sección puedes ver un resumen de tu empresa, la cantidad de empleados y los detalles de la suscripción a TurnoMaster.</p>
+                        <h2 className="text-2xl font-semibold mb-4">Mi empresa</h2>
+                        <div className="flex flex-wrap items-center gap-6">
+                            <div className="w-48 h-48 bg-gray-200 overflow-hidden rounded">
+                                <img src="/img/company/tux.png" alt="Empresa" className="object-cover w-full h-full" />
+                            </div>
+                            <div className="flex-grow grid grid-cols-2 sm:grid-cols-3 gap-4">
+                                <div>
+                                    <p className="text-lg font-bold">Nombre de la empresa:</p>
+                                    <p className="font-normal">TurnoMaster S.A.</p>
+                                </div>
+                                <div>
+                                    <p className="text-lg font-bold">Miembros totales:</p>
+                                    <p className="font-normal">50</p>
+                                </div>
+                                <div>
+                                    <p className="text-lg font-bold">Administradores:</p>
+                                    <p className="font-normal">5</p>
+                                </div>
+                                <div>
+                                    <p className="text-lg font-bold">Recursos Humanos:</p>
+                                    <p className="font-normal">3</p>
+                                </div>
+                                <div>
+                                    <p className="text-lg font-bold">Empleados:</p>
+                                    <p className="font-normal">42</p>
+                                </div>
+                                <div>
+                                    <p className="text-lg font-bold">Tipo de suscripción:</p>
+                                    <p className="font-normal">Premium</p>
+                                </div>
+                                <div>
+                                    <p className="text-lg font-bold">Última fecha de pago:</p>
+                                    <p className="font-normal">01/10/2023</p>
+                                </div>
+                                <div>
+                                    <p className="text-lg font-bold">Próximo pago:</p>
+                                    <p className="font-normal">01/11/2023</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
