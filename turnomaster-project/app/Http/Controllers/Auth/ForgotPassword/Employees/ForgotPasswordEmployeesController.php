@@ -41,7 +41,7 @@ class ForgotPasswordEmployeesController extends Controller
                 ]
             );
 
-            $resetLink = url('/auth/reset-password/' . $token);
+            $resetLink = url('/auth/reset-password/employees/' . $token);
 
             try {
                 Mail::send('emails.forgot_password', [

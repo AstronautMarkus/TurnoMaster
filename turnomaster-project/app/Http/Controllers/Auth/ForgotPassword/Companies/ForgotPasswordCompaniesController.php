@@ -41,7 +41,7 @@ class ForgotPasswordCompaniesController extends Controller
                 ]
             );
 
-            $resetLink = url('/auth/reset-password/' . $token);
+            $resetLink = url('/auth/reset-password/companies/' . $token);
 
             try {
                 Mail::send('emails.forgot_password', [
