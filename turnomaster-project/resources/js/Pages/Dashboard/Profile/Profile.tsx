@@ -17,30 +17,34 @@ const Profile: React.FC = () => {
                 ) : (
                     <>
                         <div className="flex-grow w-9/10 bg-white shadow-md sm:p-6">
+                            <div className="mb-6">
+                                <h2 className="text-2xl font-semibold text-gray-700 mb-2">Información Personal</h2>
+                                <p className="text-gray-600">Aquí puedes ver los detalles de tu perfil personal.</p>
+                            </div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm font-medium">Nombre</label>
-                                    <p>{user.first_name}</p>
+                                    <p className="font-bold">{user.first_name}</p>
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium">Apellido</label>
-                                    <p>{user.last_name || 'N/A'}</p>
+                                    <p className="font-bold">{user.last_name || 'N/A'}</p>
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium">RUT</label>
-                                    <p>{user.rut}-{user.rut_dv}</p>
+                                    <p className="font-bold">{user.rut}-{user.rut_dv}</p>
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium">Email</label>
-                                    <p>{user.email}</p>
+                                    <p className="font-bold">{user.email}</p>
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium">Teléfono</label>
-                                    <p>N/A</p>
+                                    <p className="font-bold">N/A</p>
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium">Empresa</label>
-                                    <p>{user.company}</p>
+                                    <p className="font-bold">{user.company}</p>
                                 </div>
                             </div>
                         </div>
