@@ -1,17 +1,17 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import AuthLayout from '../Layouts/Auth/AuthLayout';
+import AuthLayout from '../../Layouts/Auth/AuthLayout';
 
-import LoginRouter from './LoginRouter';
-import RegisterDemo from '../Pages/Auth/RegisterDemo/RegisterDemo';
+import LoginRouter from './../LoginRouter';
+import RegisterDemo from '../../Pages/Auth/RegisterDemo/RegisterDemo';
 
-import CompaniesForgotPassword from '../Pages/Auth/ForgotPassword/Companies/CompaniesForgotPassword';
-import EmployeesForgotPassword from '../Pages/Auth/ForgotPassword/Employees/EmployeesForgotPassword';
+import CompaniesForgotPassword from '../../Pages/Auth/ForgotPassword/Companies/CompaniesForgotPassword';
+import EmployeesForgotPassword from '../../Pages/Auth/ForgotPassword/Employees/EmployeesForgotPassword';
 
-import CompaniesResetPassword from '../Pages/Auth/ResetPassword/Companies/CompaniesResetPassword';
-import EmployeesResetPassword from '../Pages/Auth/ResetPassword/Employees/EmployeesResetPassword';
+import CompaniesResetPassword from '../../Pages/Auth/ResetPassword/Companies/CompaniesResetPassword';
+import EmployeesResetPassword from '../../Pages/Auth/ResetPassword/Employees/EmployeesResetPassword';
 
-import Logout from '../Pages/Auth/Logout/Logout';
+import Logout from '../../Pages/Auth/Logout/Logout';
 
 function AuthRouter() {
     return (
