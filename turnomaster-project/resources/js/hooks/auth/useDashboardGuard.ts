@@ -36,9 +36,7 @@ export function useDashboardGuard(children: JSX.Element): JSX.Element | null {
                     localStorage.setItem('token', newToken);
                     setIsAuthenticated(true);
                 } catch (err) {
-                    console.warn("Refresh fallido, redirigiendo...");
-                    localStorage.removeItem('token');
-                    redirectToLogin();
+                    console.warn("Refresh");
                 }
             } else {
                 setIsAuthenticated(true);
