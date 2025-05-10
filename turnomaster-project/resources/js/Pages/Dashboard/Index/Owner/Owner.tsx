@@ -90,14 +90,22 @@ const Owner = () => {
                                 <div className="w-48 h-48 bg-gray-200 overflow-hidden rounded">
                                     <img src="/img/company/tux.png" alt="Empresa" className="object-cover w-full h-full" />
                                 </div>
-                                <div className="flex-grow grid grid-cols-2 sm:grid-cols-3 gap-4">
+                                <div className="flex-grow grid grid-cols-2 sm:grid-cols-4 gap-4">
                                     <div>
                                         <p className="text-lg font-bold">Nombre de la empresa:</p>
                                         <p className="font-normal">{companyData.company.name || 'N/A'}</p>
                                     </div>
                                     <div>
-                                        <p className="text-lg font-bold">Email:</p>
+                                        <p className="text-lg font-bold">Creada por:</p>
                                         <p className="font-normal">{companyData.company.email || 'N/A'}</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-lg font-bold">Fecha de registro:</p>
+                                        <p className="font-normal">{companyData.company.created_at || 'N/A'}</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-lg font-bold">Ultima modificación:</p>
+                                        <p className="font-normal">{companyData.company.updated_at || 'N/A'}</p>
                                     </div>
                                     <div>
                                         <p className="text-lg font-bold">Miembros totales:</p>

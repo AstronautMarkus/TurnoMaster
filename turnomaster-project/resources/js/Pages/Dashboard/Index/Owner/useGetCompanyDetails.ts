@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { format } from 'date-fns';
 
 interface CompanyDetails {
     company: {
@@ -31,7 +32,17 @@ const useGetCompanyDetails = () => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                setData(response.data);
+
+                const formattedData = {
+                    ...response.data,
+                    company: {
+                        ...response.data.company,
+                        created_at: format(new Date(response.data.company.created_at), 'dd/MM/yyyy - HH:mm'),
+                        updated_at: format(new Date(response.data.company.updated_at), 'dd/MM/yyyy - HH:mm'),
+                    },
+                };
+
+                setData(formattedData);
             } catch (error) {
                 console.error('Error fetching company details:', error);
             } finally {
