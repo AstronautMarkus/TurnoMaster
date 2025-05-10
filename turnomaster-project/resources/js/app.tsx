@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import '../css/app.css';
 
-import NormalRouter from './routers/NormalRouter';
+import NormalRouter from './routers/Default/NormalRouter';
 import AuthRouter from './routers/AuthRouter';
 import DashboardRouter from './routers/DashboardRouter';
 

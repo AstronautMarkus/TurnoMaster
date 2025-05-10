@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import IndexPage from '../Pages/Default/Index/Index';
-import DefaultLayout from '../Layouts/Default/DefaultLayout';
-import PricingComparison from '../Pages/Default/Prices/Prices';
-import AboutProject from '../Pages/Default/AboutProject/AboutProject';
-import Features from '../Pages/Default/Features/Features';
-import FaqPage from '../Pages/Default/Faq/Faq';
-import Clients from '../Pages/Default/Clients/Clients';
-import Contact from '../Pages/Default/Contact/Contact';
-import Audience from '../Pages/Default/Audience/Audience';
-import SecurityPrivacy from '../Pages/Default/SecurityPrivacy/SecurityPrivacy';
-import Product from '../Pages/Default/Product/Product';
+import IndexPage from '../../Pages/Default/Index/Index';
+import DefaultLayout from '../../Layouts/Default/DefaultLayout';
+import PricingComparison from '../../Pages/Default/Prices/Prices';
+import AboutProject from '../../Pages/Default/AboutProject/AboutProject';
+import Features from '../../Pages/Default/Features/Features';
+import FaqPage from '../../Pages/Default/Faq/Faq';
+import Clients from '../../Pages/Default/Clients/Clients';
+import Contact from '../../Pages/Default/Contact/Contact';
+import Audience from '../../Pages/Default/Audience/Audience';
+import SecurityPrivacy from '../../Pages/Default/SecurityPrivacy/SecurityPrivacy';
+import Product from '../../Pages/Default/Product/Product';
 
 function NormalRouter() {
     const location = useLocation();
