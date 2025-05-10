@@ -8,7 +8,7 @@ import CompaniesLogin from '../../../Pages/Auth/Login/Companies/CompaniesLogin';
 function LoginRouter() {
     return (
         <Routes>
-            <Route path="/" element={<DefalutLogin />} />
+            <Route path="/*" element={<DefalutLogin />} />
             <Route path="/employees" element={<EmployeesLogin />} />
             <Route path="/companies" element={<CompaniesLogin />} />
         </Routes>
