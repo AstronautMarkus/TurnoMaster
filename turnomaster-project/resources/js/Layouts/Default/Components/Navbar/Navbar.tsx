@@ -106,7 +106,7 @@ export default function Navbar() {
         onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
       >
         <div className="h-10 w-10 rounded-full overflow-hidden bg-slate-600">
-          <img src="/img/default/default.jpg" alt="Profile" className="h-full w-full object-cover" />
+          <img src="/img/profile/default.png" alt="Profile" className="h-full w-full object-cover" />
         </div>
         <span className="font-medium">{`${userData.name}`}</span>
         <FaAngleDown className="ml-1" />

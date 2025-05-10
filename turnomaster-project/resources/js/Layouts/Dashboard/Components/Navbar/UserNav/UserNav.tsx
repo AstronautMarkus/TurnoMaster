@@ -37,7 +37,7 @@ export function UserNav() {
       >
         <div className="h-8 w-8 rounded-full overflow-hidden bg-slate-600">
           <img
-        src="/img/profile/default.jpg"
+        src="/img/profile/default.png"
         alt="Profile"
         className="h-full w-full object-cover"
           />

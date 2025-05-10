@@ -54,7 +54,7 @@ const Profile: React.FC = () => {
                         <div className="w-1/10 bg-white shadow-md sm:p-6 flex flex-col">
                             <label className="block text-m font-medium mb-2">Imagen de perfil</label>
                             <div className="w-48 h-48 bg-gray-200 overflow-hidden rounded">
-                                <img src="/img/profile/default.jpg" className="object-cover w-full h-full"/>
+                                <img src="/img/profile/default.png" className="object-cover w-full h-full"/>
                             </div>
                             <button className="mt-4 bg-[#e01d1d] text-white py-2 px-4 rounded hover:bg-red-700 transition duration-300">
                                 Cambiar imagen
