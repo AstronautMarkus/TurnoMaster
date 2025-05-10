@@ -17,23 +17,20 @@ const sidebarConfig = [
     category: "Inicio",
     links: [
       { to: "/dashboard", label: "Menú Principal", icon: FiGrid },
-      { to: "/dashboard/schedule", label: "Lista de horarios", icon: FiClock },
-      { to: "/dashboard/turns", label: "Lista de turnos", icon: FiClock },
     ],
   },
   {
-    category: "Gestión",
+    category: "Administración",
     links: [
       {
         label: "Empleados",
         icon: FiUsers,
         subMenuKey: "employees",
         subLinks: [
-          { to: "/dashboard/employees", label: "Lista de usuarios" },
-          { to: "/dashboard/employees/create", label: "Crear usuario" },
+          { to: "/dashboard/employees", label: "Lista de empleados" },
+          { to: "/dashboard/employees/create", label: "Crear empleado" },
         ],
       },
-      { to: "/reports", label: "Reports", icon: FiBarChart2 },
       { to: "/dashboard/settings", label: "Ajustes", icon: FiSettings },
     ],
   },
