@@ -53,7 +53,7 @@ class ResetPasswordEmployeesController extends Controller
                 ], 400);
             }
 
-            $usedBefore = PasswordHistoriesCompanies::where('user_id', $user->id)->get()
+            $usedBefore = PasswordHistoriesEmployees::where('user_id', $user->id)->get()
                 ->contains(function ($history) use ($request) {
                     return Hash::check($request->password, $history->password);
                 });
@@ -64,7 +64,7 @@ class ResetPasswordEmployeesController extends Controller
                 ], 400);
             }
 
-            PasswordHistoriesCompanies::create([
+            PasswordHistoriesEmployees::create([
                 'user_id' => $user->id,
                 'password' => Hash::make($user->password),
             ]);
