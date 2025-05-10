@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { FaCalendar, FaUsers } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
+import useGetCompanyDetails from './useGetCompanyDetails';
 
 const Owner = () => {
     const [currentTime, setCurrentTime] = useState(new Date());
+    const { data: companyData, loading } = useGetCompanyDetails();
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -79,45 +81,43 @@ const Owner = () => {
                 <div className="bg-white shadow-md sm:p-6">
                     <div className="mb-6 text-center">
                         <h2 className="text-2xl font-semibold mb-4">Mi empresa</h2>
-                        <div className="flex flex-wrap items-center gap-6">
-                            <div className="w-48 h-48 bg-gray-200 overflow-hidden rounded">
-                                <img src="/img/company/tux.png" alt="Empresa" className="object-cover w-full h-full" />
+                        {loading ? (
+                            <div className="flex items-center justify-center h-48">
+                                <p className="text-lg font-semibold">Cargando...</p>
                             </div>
-                            <div className="flex-grow grid grid-cols-2 sm:grid-cols-3 gap-4">
-                                <div>
-                                    <p className="text-lg font-bold">Nombre de la empresa:</p>
-                                    <p className="font-normal">TurnoMaster S.A.</p>
+                        ) : companyData && companyData.company ? (
+                            <div className="flex flex-wrap items-center gap-6">
+                                <div className="w-48 h-48 bg-gray-200 overflow-hidden rounded">
+                                    <img src="/img/company/tux.png" alt="Empresa" className="object-cover w-full h-full" />
                                 </div>
-                                <div>
-                                    <p className="text-lg font-bold">Miembros totales:</p>
-                                    <p className="font-normal">50</p>
-                                </div>
-                                <div>
-                                    <p className="text-lg font-bold">Administradores:</p>
-                                    <p className="font-normal">5</p>
-                                </div>
-                                <div>
-                                    <p className="text-lg font-bold">Recursos Humanos:</p>
-                                    <p className="font-normal">3</p>
-                                </div>
-                                <div>
-                                    <p className="text-lg font-bold">Empleados:</p>
-                                    <p className="font-normal">42</p>
-                                </div>
-                                <div>
-                                    <p className="text-lg font-bold">Tipo de suscripción:</p>
-                                    <p className="font-normal">Premium</p>
-                                </div>
-                                <div>
-                                    <p className="text-lg font-bold">Última fecha de pago:</p>
-                                    <p className="font-normal">01/10/2023</p>
-                                </div>
-                                <div>
-                                    <p className="text-lg font-bold">Próximo pago:</p>
-                                    <p className="font-normal">01/11/2023</p>
+                                <div className="flex-grow grid grid-cols-2 sm:grid-cols-3 gap-4">
+                                    <div>
+                                        <p className="text-lg font-bold">Nombre de la empresa:</p>
+                                        <p className="font-normal">{companyData.company.name || 'N/A'}</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-lg font-bold">Miembros totales:</p>
+                                        <p className="font-normal">{companyData.employees?.total || 0}</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-lg font-bold">Administradores:</p>
+                                        <p className="font-normal">{companyData.employees?.details?.admin || 0}</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-lg font-bold">Recursos Humanos:</p>
+                                        <p className="font-normal">{companyData.employees?.details?.hr || 0}</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-lg font-bold">Empleados:</p>
+                                        <p className="font-normal">{companyData.employees?.details?.employee || 0}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        ) : (
+                            <div className="flex items-center justify-center h-48">
+                                <p className="text-lg font-semibold text-red-500">Error al cargar los datos de la empresa.</p>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
