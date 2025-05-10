@@ -26,6 +26,7 @@ class GetPersonalDataController extends Controller
             $decoded = JWT::decode($token, new Key(env('JWT_SECRET'), 'HS256'));
             $userType = $decoded->user_type;
             $userCompany = $decoded->company_id; 
+            $roleId = $decoded->role_id;
 
 
             if ($userType === 'company') {
@@ -39,7 +40,7 @@ class GetPersonalDataController extends Controller
                     return response()->json(['error' => 'Compañía no encontrada.'], 404);
                 }
 
-                $role = Role::where('id', $user->role_id)->first();
+                $role = Role::where('id', $roleId)->first();
                 if (!$role) {
                     return response()->json(['error' => 'Rol no encontrado.'], 404);
                 }
@@ -48,6 +49,7 @@ class GetPersonalDataController extends Controller
                     'user' => $user,
                     'company' => $company->name,
                     'role' => [
+                        'id' => $role->id,
                         'name' => $role->name,
                         'description' => $role->description,
                     ],
@@ -73,6 +75,7 @@ class GetPersonalDataController extends Controller
                     'user' => $user,
                     'company' => $company->name,
                     'role' => [
+                        'id' => $role->id,
                         'name' => $role->name,
                         'description' => $role->description,
                     ],
