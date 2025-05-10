@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaEye, FaEyeSlash } from 'react-icons/fa6';
-import AuthLoadingScreen from '../../../Components/Auth/LoadingScreen/AuthLoadingScreen';
+import AuthLoadingScreen from '../../../../Components/Auth/LoadingScreen/AuthLoadingScreen';
 import axios from 'axios';
 
-const ResetPassword: React.FC = () => {
+const EmployeesResetPassword: React.FC = () => {
   const { token } = useParams<{ token: string }>();
   const navigate = useNavigate();
   const [error, setError] = useState('');
@@ -48,7 +48,7 @@ const ResetPassword: React.FC = () => {
     }
 
     try {
-      const response = await axios.post('/api/reset-password/companies', {
+      const response = await axios.post('/api/reset-password/employees', {
         token,
         password,
         confirm_password: confirmPassword,
@@ -194,4 +194,4 @@ const ResetPassword: React.FC = () => {
   );
 };
 
-export default ResetPassword;
+export default EmployeesResetPassword;
