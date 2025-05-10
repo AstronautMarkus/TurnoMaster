@@ -112,7 +112,7 @@ function SidebarContent({
     <>
       <div className="flex items-center justify-start py-4 px-4">
         <Link to="/dashboard" className="flex items-center gap-3">
-            <div className="h-8 w-8 rounded bg-[#e01d1d] flex items-center justify-center">
+            <div className="h-8 w-8 rounded bg-[#891818] flex items-center justify-center">
             <img src="/img/logo/TurnoMasterWhite.svg" className="h-6 w-6"/>
             </div>
           <div className="flex flex-col">
