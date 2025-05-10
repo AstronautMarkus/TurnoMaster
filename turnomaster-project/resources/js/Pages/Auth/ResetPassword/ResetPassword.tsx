@@ -48,7 +48,7 @@ const ResetPassword: React.FC = () => {
     }
 
     try {
-      const response = await axios.post('/api/reset-password', {
+      const response = await axios.post('/api/reset-password/companies', {
         token,
         password,
         confirm_password: confirmPassword,

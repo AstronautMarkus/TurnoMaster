@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth\ResetPassword\Companies;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
-use App\Models\User;
+use App\Models\Users\User;
 use App\Models\PasswordHistory;
 use Carbon\Carbon;
 
-class ResetPasswordController extends Controller
+class ResetPasswordCompaniesController extends Controller
 {
-    public function reset(Request $request)
+    public function resetPassword(Request $request)
     {
         try {   
             $validatedData = $request->validate([

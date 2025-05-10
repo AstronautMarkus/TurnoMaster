@@ -17,7 +17,10 @@ use App\Http\Controllers\Contact\ContactFormsController;
 use App\Http\Controllers\Auth\ForgotPassword\Companies\ForgotPasswordCompaniesController;
 use App\Http\Controllers\Auth\ForgotPassword\Employees\ForgotPasswordEmployeesController;
 
-use App\Http\Controllers\Auth\ResetPasswordController;
+// Reset password controllers
+
+use App\Http\Controllers\Auth\ResetPassword\Companies\ResetPasswordCompaniesController;
+use App\Http\Controllers\Auth\ResetPassword\Employees\ResetPasswordEmployeesController;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Auth\ValidateTokenController;
@@ -52,6 +55,6 @@ Route::middleware(['jwt.auth'])->group(function () {
 Route::post('/forgot-password/companies', [ForgotPasswordCompaniesController::class, 'sendResetLink']);
 Route::post('/forgot-password/employees', [ForgotPasswordEmployeesController::class, 'sendResetLink']);
 
-Route::post('/reset-password', [ResetPasswordController::class, 'reset']);
+Route::post('/reset-password/companies', [ResetPasswordCompaniesController::class, 'resetPassword']);
 
 Route::get('/validate-reset-token/{token}', [ValidateTokenController::class, 'validateToken']);
