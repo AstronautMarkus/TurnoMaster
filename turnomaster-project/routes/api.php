@@ -39,7 +39,7 @@ use App\Http\Controllers\Auth\Logout\LogoutController;
 // Get data controllers
 
 use App\Http\Controllers\Dashboard\GetPersonalDataController;
-
+use App\Http\Controllers\Dashboard\Roles\GetRolesDataController;
 use App\Http\Controllers\Dashboard\Company\GetCompanyDataController;
 
 
@@ -67,6 +67,8 @@ Route::post('/reset-password/companies', [ResetPasswordCompaniesController::clas
 Route::post('/reset-password/employees', [ResetPasswordEmployeesController::class, 'resetPassword']);
 
 Route::get('/validate-reset-token/{token}', [ValidateTokenController::class, 'validateToken']);
+
+Route::get('/roles', [GetRolesDataController::class, 'getRoles']);
 
 // Protected routes
 
