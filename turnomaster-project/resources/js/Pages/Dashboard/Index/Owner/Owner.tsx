@@ -51,14 +51,14 @@ const Owner = () => {
                             </div>
                         </Link>
                         
-                        <Link to="/dashboard/usuarios" className="bg-gray-500 text-white p-4 rounded-none flex flex-col items-center justify-center w-full sm:w-10/12 mx-auto sm:ml-0 sm:mr-auto hover:bg-gray-600 transition-colors">
+                        <Link to="/dashboard/employees" className="bg-gray-500 text-white p-4 rounded-none flex flex-col items-center justify-center w-full sm:w-10/12 mx-auto sm:ml-0 sm:mr-auto hover:bg-gray-600 transition-colors">
                             <div className="flex items-center">
                                 <div className="text-4xl mr-4">
                                     <FaUsers />
                                 </div>
                                 <div>
-                                    <h3 className="text-xl font-bold">Usuarios</h3>
-                                    <p className="text-sm">Gestiona tus usuarios aquí</p>
+                                    <h3 className="text-xl font-bold">Empleados</h3>
+                                    <p className="text-sm">Gestiona tus empleados aquí</p>
                                 </div>
                             </div>
                         </Link>
