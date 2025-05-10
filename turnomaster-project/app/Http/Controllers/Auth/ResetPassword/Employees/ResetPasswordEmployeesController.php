@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use App\Models\Users\DashboardUser;
-use App\Models\PasswordHistory;
+use App\Models\Users\PasswordHistories\Employees\PasswordHistoriesEmployees;
 use Carbon\Carbon;
 
 class ResetPasswordEmployeesController extends Controller
@@ -53,7 +53,7 @@ class ResetPasswordEmployeesController extends Controller
                 ], 400);
             }
 
-            $usedBefore = PasswordHistory::where('user_id', $user->id)->get()
+            $usedBefore = PasswordHistoriesCompanies::where('user_id', $user->id)->get()
                 ->contains(function ($history) use ($request) {
                     return Hash::check($request->password, $history->password);
                 });
@@ -64,9 +64,9 @@ class ResetPasswordEmployeesController extends Controller
                 ], 400);
             }
 
-            PasswordHistory::create([
+            PasswordHistoriesCompanies::create([
                 'user_id' => $user->id,
-                'password' => $user->password,
+                'password' => Hash::make($user->password),
             ]);
 
             $user->password = Hash::make($request->password);
