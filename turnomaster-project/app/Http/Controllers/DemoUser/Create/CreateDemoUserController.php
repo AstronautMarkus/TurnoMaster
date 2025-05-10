@@ -62,6 +62,7 @@ class CreateDemoUserController extends Controller
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
             'rut' => $request->input('rut'),
+            'rut_dv' => $request->input('rut_dv'),
             'email' => $request->input('email'),
             'password' => Hash::make($temporaryPassword),
             'role_id' => 1,
