@@ -1,5 +1,6 @@
 import React from "react";
 import useGetEmployeesList from "./useGetEmployeesList";
+import { Link } from "react-router-dom";
 
 const ListEmployees: React.FC = () => {
   const employees = useGetEmployeesList();
@@ -9,6 +10,9 @@ const ListEmployees: React.FC = () => {
       <h1 className="text-3xl sm:text-4xl font-bold text-left mb-6 mt-4 text-gray-800">Lista de empleados</h1>
 
       <div className="flex justify-between items-center mb-4">
+        <div className="flex space-x-2">
+            <Link to="/dashboard/employees/create" className="text-white px-4 py-2 bg-[#a91e1e] hover:bg-[#891818] transition-colors">Crear empleado</Link>
+        </div>
         <input
           type="text"
           placeholder="Buscar empleado..."
