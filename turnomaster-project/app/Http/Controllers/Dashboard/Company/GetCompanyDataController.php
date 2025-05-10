@@ -43,7 +43,7 @@ class GetCompanyDataController extends Controller
             return response()->json([
                 'company' => [
                     'name' => $company->name,
-                    'email' => $company->email,
+                    'email' => $company->owner_email,
                     'created_at' => $company->created_at,
                     'updated_at' => $company->updated_at,
                 ],

@@ -96,6 +96,10 @@ const Owner = () => {
                                         <p className="font-normal">{companyData.company.name || 'N/A'}</p>
                                     </div>
                                     <div>
+                                        <p className="text-lg font-bold">Email:</p>
+                                        <p className="font-normal">{companyData.company.email || 'N/A'}</p>
+                                    </div>
+                                    <div>
                                         <p className="text-lg font-bold">Miembros totales:</p>
                                         <p className="font-normal">{companyData.employees?.total || 0}</p>
                                     </div>
