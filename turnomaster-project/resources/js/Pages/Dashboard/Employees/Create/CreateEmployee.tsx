@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import useCreateEmployee from './useCreateEmployee';
 import { useGetRoles } from './useGetRoles';
+import { Link } from 'react-router-dom';
 
 const CreateEmployee: React.FC = () => {
     const { formValues, errors, handleChange, handleSubmit } = useCreateEmployee();
@@ -135,7 +136,12 @@ const CreateEmployee: React.FC = () => {
                 </div>
                 <button type="submit" className="mt-4 px-4 py-2 bg-blue-600 text-white">Crear</button>
             </form>
+
+            <div className="flex space-x-2 justify-end mt-4">
+                <Link to="/dashboard/employees" className="text-white px-4 py-2 bg-[#a91e1e] hover:bg-[#891818] transition-colors">Salir</Link>
+            </div>
         </div>
+        
     );
 };
 
