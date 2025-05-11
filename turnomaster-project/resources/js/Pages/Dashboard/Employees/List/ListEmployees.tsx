@@ -1,9 +1,18 @@
 import React from "react";
 import useGetEmployeesList from "./useGetEmployeesList";
 import { Link } from "react-router-dom";
+import AuthLoadingScreen from "../../../../Components/Auth/LoadingScreen/AuthLoadingScreen";
 
 const ListEmployees: React.FC = () => {
-  const employees = useGetEmployeesList();
+  const { employees, page, setPage, totalPages, loading } = useGetEmployeesList();
+
+  const handlePrevious = () => {
+    if (page > 1) setPage(page - 1);
+  };
+
+  const handleNext = () => {
+    if (page < totalPages) setPage(page + 1);
+  };
 
   return (
     <div className="p-6">
@@ -11,7 +20,7 @@ const ListEmployees: React.FC = () => {
 
       <div className="flex justify-between items-center mb-4">
         <div className="flex space-x-2">
-            <Link to="/dashboard/employees/create" className="text-white px-4 py-2 bg-[#a91e1e] hover:bg-[#891818] transition-colors">Crear empleado</Link>
+          <Link to="/dashboard/employees/create" className="text-white px-4 py-2 bg-[#a91e1e] hover:bg-[#891818] transition-colors">Crear empleado</Link>
         </div>
         <input
           type="text"
@@ -30,6 +39,11 @@ const ListEmployees: React.FC = () => {
       </div>
 
       <div className="bg-white shadow w-full overflow-x-auto">
+        {loading ? ( 
+          <div className="flex justify-center items-center h-48">
+            <AuthLoadingScreen />
+          </div>
+        ) : (
           <div className="max-h-96 overflow-y-auto">
             <table className="table-auto w-full border-collapse">
               <thead className="sticky top-0 bg-[#7c1d1d] text-white uppercase text-sm tracking-wider">
@@ -50,7 +64,7 @@ const ListEmployees: React.FC = () => {
                     </td>
                     <td className="px-4 py-2">{employee.rut}</td>
                     <td className="px-4 py-2">{employee.email}</td>
-                    <td className="px-4 py-2">{employee.role}</td>
+                    <td className="px-4 py-2">{employee.role}</td> {/* Display role string */}
                     <td className="px-4 py-2">
                       <div className="flex space-x-2">
                         <button className="bg-blue-600 text-white px-4 py-2 text-sm hover:bg-blue-700 transition-colors">Editar</button>
@@ -62,13 +76,26 @@ const ListEmployees: React.FC = () => {
               </tbody>
             </table>
           </div>
-        </div>
+        )}
+      </div>
 
       <div className="flex justify-between items-center mt-4">
-        <span className="text-gray-700">Mostrando 1-10 de 50 empleados</span>
+        <span className="text-gray-700">Página {page} de {totalPages}</span>
         <div className="flex space-x-2">
-          <button className="bg-gray-300 text-gray-700 px-4 py-2 hover:bg-gray-400 transition-colors">Anterior</button>
-          <button className="bg-gray-300 text-gray-700 px-4 py-2 hover:bg-gray-400 transition-colors">Siguiente</button>
+          <button
+            onClick={handlePrevious}
+            disabled={page === 1}
+            className={`px-4 py-2 ${page === 1 ? "bg-gray-200 text-gray-500" : "bg-gray-300 text-gray-700 hover:bg-gray-400"} transition-colors`}
+          >
+            Anterior
+          </button>
+          <button
+            onClick={handleNext}
+            disabled={page === totalPages}
+            className={`px-4 py-2 ${page === totalPages ? "bg-gray-200 text-gray-500" : "bg-gray-300 text-gray-700 hover:bg-gray-400"} transition-colors`}
+          >
+            Siguiente
+          </button>
         </div>
       </div>
     </div>
