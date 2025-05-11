@@ -52,8 +52,6 @@ const useCreateEmployee = () => {
             newErrors.rut_general = 'El RUT no puede tener más de 8 dígitos.';
         } else if (formValues.rut.length < 8) {
             newErrors.rut_general = 'El RUT no puede tener menos de 8 dígitos.';
-        } else if (!isValidDV(formValues.rut, formValues.rut_dv)) {
-            newErrors.rut_general = 'El dígito verificador ingresado no es válido.';
         }
 
         setErrors(newErrors);
@@ -70,7 +68,6 @@ const useCreateEmployee = () => {
     const handleChange = (field: keyof FormValues, value: string) => {
         setFormValues((prev) => ({ ...prev, [field]: value }));
 
-        // Clear errors for the `rut_general` field if `rut` and `rut_dv` become valid
         if ((field === 'rut' || field === 'rut_dv') && errors.rut_general) {
             if (isValidDV(field === 'rut' ? value : formValues.rut, field === 'rut_dv' ? value : formValues.rut_dv)) {
                 const updatedErrors = { ...errors };
