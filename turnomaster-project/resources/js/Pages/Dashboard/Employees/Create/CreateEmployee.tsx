@@ -26,13 +26,13 @@ const CreateEmployee: React.FC = () => {
     }, []);
 
     const handleRutChange = (value: string) => {
-        const numericValue = value.replace(/[^0-9]/g, '');
+        const numericValue = value.replace(/[^0-9]/g, '').slice(0, 8); // Limit to 8 characters
         setRut(numericValue);
         handleChange('rut', numericValue);
     };
 
     const handleRutDvChange = (value: string) => {
-        const validValue = value.replace(/[^0-9kK]/g, '').toUpperCase();
+        const validValue = value.replace(/[^0-9kK]/g, '').toUpperCase().slice(0, 1); // Limit to 1 character
         setRutDv(validValue);
         handleChange('rut_dv', validValue);
     };
