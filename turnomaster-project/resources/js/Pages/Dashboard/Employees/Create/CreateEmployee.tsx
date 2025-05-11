@@ -1,22 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useCreateEmployee from './useCreateEmployee';
+import { useGetRoles } from './useGetRoles';
 
 const CreateEmployee: React.FC = () => {
     const { formValues, errors, handleChange, handleSubmit } = useCreateEmployee();
     const [rut, setRut] = useState('');
     const [rutDv, setRutDv] = useState('');
+    const [roles, setRoles] = useState<{ id: string, name: string }[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        const fetchRoles = async () => {
+            try {
+                const fetchedRoles = await useGetRoles();
+                setRoles(fetchedRoles);
+                setLoading(false);
+            } catch (err) {
+                setError('Error al cargar los roles. Por favor, intente más tarde.');
+                setLoading(false);
+            }
+        };
+        fetchRoles();
+    }, []);
 
     const handleRutChange = (value: string) => {
-        const numericValue = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+        const numericValue = value.replace(/[^0-9]/g, '');
         setRut(numericValue);
         handleChange('rut', numericValue);
     };
 
     const handleRutDvChange = (value: string) => {
-        const validValue = value.replace(/[^0-9kK]/g, '').toUpperCase(); // Convert to uppercase for consistency
+        const validValue = value.replace(/[^0-9kK]/g, '').toUpperCase();
         setRutDv(validValue);
         handleChange('rut_dv', validValue);
     };
+
+    if (loading) {
+        return <div className="p-6">Cargando...</div>;
+    }
+
+    if (error) {
+        return <div className="p-6 text-red-500">{error}</div>;
+    }
 
     return (
         <div className="p-6">
@@ -100,9 +126,9 @@ const CreateEmployee: React.FC = () => {
                             className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
                         >
                             <option value="" disabled>Selecciona un rol</option>
-                            <option value="admin">Admin</option>
-                            <option value="rh">RH</option>
-                            <option value="empleado">Empleado</option>
+                            {roles.map((role) => (
+                                <option key={role.id} value={role.id}>{role.name}</option>
+                            ))}
                         </select>
                         {errors.role_id && <p className="text-red-500 text-sm">{errors.role_id}</p>}
                     </div>
