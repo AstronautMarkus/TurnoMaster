@@ -41,6 +41,7 @@ use App\Http\Controllers\Auth\Logout\LogoutController;
 use App\Http\Controllers\Dashboard\GetPersonalDataController;
 use App\Http\Controllers\Dashboard\Roles\GetRolesDataController;
 use App\Http\Controllers\Dashboard\Company\GetCompanyDataController;
+use App\Http\Controllers\Dashboard\Employees\GetEmployeesListController;
 
 
 Route::post('/create/demo-user', [CreateDemoUserController::class, 'createDemoUser']);
@@ -75,4 +76,5 @@ Route::get('/roles', [GetRolesDataController::class, 'getRoles']);
 Route::middleware(['jwt.auth'])->group(function () {
     Route::get('/me', [GetPersonalDataController::class, 'getPersonalData']);
     Route::get('/company', [GetCompanyDataController::class, 'getCompanyData']);
+    Route::get('/employees', [GetEmployeesListController::class, 'getEmployeesList']);
 });
