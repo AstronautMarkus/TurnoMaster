@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import useGetEmployeesList from "./useGetEmployeesList";
 import { Link } from "react-router-dom";
 import AuthLoadingScreen from "../../../../Components/Auth/LoadingScreen/AuthLoadingScreen";
 
 const ListEmployees: React.FC = () => {
-  const { employees, page, setPage, totalPages, loading } = useGetEmployeesList();
+  const { employees, roles, page, setPage, totalPages, loading } = useGetEmployeesList();
+  const [selectedRole, setSelectedRole] = useState<string>("Todos"); // Default value role filter
+
+  const handleRoleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedRole(event.target.value);
+  };
+
+
+  const filteredEmployees = selectedRole === "Todos"
+    ? employees
+    : employees.filter((employee) => employee.role === selectedRole);
 
   const handlePrevious = () => {
     if (page > 1) setPage(page - 1);
@@ -29,11 +39,15 @@ const ListEmployees: React.FC = () => {
         />
         <div className="flex items-center space-x-2">
           <span className="text-gray-700 font-medium w-64">Filtrar por rol:</span>
-          <select className="border border-gray-300 rounded px-4 py-2 w-full sm:w-1/1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <select
+            value={selectedRole}
+            onChange={handleRoleChange}
+            className="border border-gray-300 rounded px-4 py-2 w-full sm:w-1/1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
             <option value="Todos">Todos</option>
-            <option value="Administrador">Administrador</option>
-            <option value="Empleado">Empleado</option>
-            <option value="Supervisor">Supervisor</option>
+            {roles.map((role, index) => (
+              <option key={index} value={role}>{role}</option>
+            ))}
           </select>
         </div>
       </div>
@@ -56,7 +70,7 @@ const ListEmployees: React.FC = () => {
                 </tr>
               </thead>
               <tbody>
-                {employees.map((employee, index) => (
+                {filteredEmployees.map((employee, index) => (
                   <tr key={index} className="hover:bg-gray-100 transition-colors">
                     <td className="px-4 py-2 flex items-center space-x-4">
                       <img src={employee.image} alt={`${employee.first_name} ${employee.last_name}`} className="w-12 h-12" />

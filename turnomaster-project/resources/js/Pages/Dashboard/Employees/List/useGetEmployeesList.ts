@@ -19,6 +19,7 @@ const getRandomImage = () => {
 
 const useGetEmployeesList = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
+  const [roles, setRoles] = useState<string[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -43,6 +44,10 @@ const useGetEmployeesList = () => {
           image: getRandomImage(),
         }));
         setEmployees(employeesData);
+
+        const uniqueRoles = Array.from(new Set(data.map((employee: any) => employee.role))) as string[];
+        setRoles(uniqueRoles);
+
         setTotalPages(last_page || 1); // Fallback to 1 if last_page is undefined
       } catch (error) {
         console.error("Error fetching employees:", error);
@@ -54,7 +59,7 @@ const useGetEmployeesList = () => {
     fetchEmployees();
   }, [page]);
 
-  return { employees, page, setPage, totalPages, loading };
+  return { employees, roles, page, setPage, totalPages, loading };
 };
 
 export default useGetEmployeesList;
