@@ -64,7 +64,7 @@ const ListEmployees: React.FC = () => {
                     </td>
                     <td className="px-4 py-2">{employee.rut}</td>
                     <td className="px-4 py-2">{employee.email}</td>
-                    <td className="px-4 py-2">{employee.role}</td> {/* Display role string */}
+                    <td className="px-4 py-2">{employee.role}</td>
                     <td className="px-4 py-2">
                       <div className="flex space-x-2">
                         <button className="bg-blue-600 text-white px-4 py-2 text-sm hover:bg-blue-700 transition-colors">Editar</button>

@@ -33,7 +33,7 @@ const useGetEmployeesList = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        const { data, meta } = response.data;
+        const { data, last_page } = response.data;
         const employeesData = data.map((employee: any) => ({
           first_name: employee.first_name,
           last_name: employee.last_name,
@@ -43,7 +43,7 @@ const useGetEmployeesList = () => {
           image: getRandomImage(),
         }));
         setEmployees(employeesData);
-        setTotalPages(meta.last_page);
+        setTotalPages(last_page || 1); // Fallback to 1 if last_page is undefined
       } catch (error) {
         console.error("Error fetching employees:", error);
       } finally {
