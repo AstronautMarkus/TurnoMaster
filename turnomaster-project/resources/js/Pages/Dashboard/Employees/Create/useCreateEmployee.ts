@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { JSX } from "react";
 
 type FormValues = {
     first_name: string;
@@ -10,6 +11,17 @@ type FormValues = {
 };
 
 type Errors = Partial<Record<keyof FormValues | 'rut_general', string>>;
+
+function parseJwt(token: string): { exp?: number; company_id?: string } | null {
+    try {
+        const base64Payload = token.split('.')[1];
+        const payload = atob(base64Payload);
+        return JSON.parse(payload);
+    } catch (error) {
+        console.error('Failed to parse JWT:', error);
+        return null;
+    }
+}
 
 const useCreateEmployee = () => {
     const [formValues, setFormValues] = useState<FormValues>({
@@ -61,7 +73,16 @@ const useCreateEmployee = () => {
 
     const handleSubmit = () => {
         if (validate()) {
-            console.log('Formulario válido:', formValues);
+            const token = localStorage.getItem('token');
+            const parsedToken = token ? parseJwt(token) : null;
+            const company_id = parsedToken?.company_id;
+
+            const finalData = {
+                ...formValues,
+                company_id,
+            };
+
+            console.log('Formulario válido:', finalData);
         }
     };
 
