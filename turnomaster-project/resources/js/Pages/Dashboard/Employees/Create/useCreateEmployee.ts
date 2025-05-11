@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { JSX } from "react";
+import axios from 'axios';
 
 type FormValues = {
     first_name: string;
@@ -71,7 +72,7 @@ const useCreateEmployee = () => {
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async (): Promise<{ type: 'success' | 'error'; message: string } | null> => {
         if (validate()) {
             const token = localStorage.getItem('token');
             const parsedToken = token ? parseJwt(token) : null;
@@ -82,8 +83,24 @@ const useCreateEmployee = () => {
                 company_id,
             };
 
-            console.log('Formulario válido:', finalData);
+            try {
+                const response = await axios.post('/api/create/employee', finalData, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (response.status === 201) {
+                    return { type: 'success', message: response.data.message };
+                }
+            } catch (error: any) {
+                if (error.response?.status === 422) {
+                    return { type: 'error', message: error.response.data.message };
+                }
+                return { type: 'error', message: 'Ocurrió un error inesperado. Por favor, intente más tarde.' };
+            }
         }
+        return null;
     };
 
     const handleChange = (field: keyof FormValues, value: string) => {

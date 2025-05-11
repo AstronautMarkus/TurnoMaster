@@ -19,7 +19,7 @@ class CreateEmployeeController extends Controller
             'last_name' => 'required|string|max:255',
             'rut' => 'required|integer',
             'rut_dv' => 'required|string|max:1',
-            'email' => 'required|email|unique:dashboard_users,email',
+            'email' => 'required|email',
             'role_id' => 'required|integer',
             'company_id' => 'required|integer',
         ], [
@@ -36,7 +36,6 @@ class CreateEmployeeController extends Controller
             'rut_dv.max' => 'El dígito verificador no puede tener más de 1 carácter.',
             'email.required' => 'El correo electrónico es obligatorio.',
             'email.email' => 'El correo electrónico debe ser una dirección válida.',
-            'email.unique' => 'El correo electrónico ya ha sido registrado.',
             'role_id.required' => 'El rol es obligatorio.',
             'role_id.integer' => 'El rol debe ser un número entero.',
             'company_id.required' => 'El ID de la empresa es obligatorio.',
@@ -47,6 +46,12 @@ class CreateEmployeeController extends Controller
             return response()->json([
                 'message' => 'La validación ha fallado.',
                 'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        if (DashboardUser::where('email', $request->email)->exists()) {
+            return response()->json([
+                'message' => 'El correo electrónico ya ha sido registrado.',
             ], 422);
         }
 
@@ -63,7 +68,6 @@ class CreateEmployeeController extends Controller
         }
 
         $temporaryPassword = \Str::random(10);
-
 
         $user = DashboardUser::create([
             'first_name' => $request->first_name,
