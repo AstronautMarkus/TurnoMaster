@@ -28,6 +28,7 @@ export default function Navbar() {
 
   const userData = JSON.parse(localStorage.getItem("user") || "null");
   const isAuthenticated = !!userData;
+  const userImage = userData?.profile_photo || "/img/profile/default.png";
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -106,7 +107,7 @@ export default function Navbar() {
         onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
       >
         <div className="h-10 w-10 rounded-full overflow-hidden bg-slate-600">
-          <img src="/img/profile/default.png" alt="Profile" className="h-full w-full object-cover" />
+          <img src={userImage} alt="Profile" className="h-full w-full object-cover" />
         </div>
         <span className="font-medium">{`${userData.name}`}</span>
         <FaAngleDown className="ml-1" />

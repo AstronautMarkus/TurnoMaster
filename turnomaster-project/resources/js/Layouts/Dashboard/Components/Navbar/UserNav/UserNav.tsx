@@ -15,6 +15,7 @@ export function UserNav() {
   const user = JSON.parse(localStorage.getItem("user") || "{}");
   const userName = user.name || "Usuario";
   const userEmail = user.email || "email@ejemplo.com";
+  const userImage = user.profile_photo || "/img/profile/default.png";
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent): void {
@@ -37,7 +38,7 @@ export function UserNav() {
       >
         <div className="h-8 w-8 rounded-full overflow-hidden bg-slate-600">
           <img
-        src="/img/profile/default.png"
+        src={userImage}
         alt="Profile"
         className="h-full w-full object-cover"
           />
