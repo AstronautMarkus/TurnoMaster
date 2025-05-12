@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Employees\Create;
+namespace App\Http\Controllers\Dashboard\Employees\Create;
 
 use App\Http\Controllers\Controller;
 use App\Models\Users\DashboardUser;

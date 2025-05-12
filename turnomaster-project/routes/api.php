@@ -6,7 +6,7 @@ use Carbon\Carbon;
 
 // Create users controllers
 use App\Http\Controllers\DemoUser\Create\CreateDemoUserController;
-use App\Http\Controllers\Employees\Create\CreateEmployeeController;
+use App\Http\Controllers\Dashboard\Employees\Create\CreateEmployeeController;
 
 // Contact forms and help controllers
 
