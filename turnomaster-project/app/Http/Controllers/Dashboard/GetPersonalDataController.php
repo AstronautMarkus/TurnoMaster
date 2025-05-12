@@ -46,7 +46,20 @@ class GetPersonalDataController extends Controller
                 }
 
                 return response()->json([
-                    'user' => $user,
+                    'user' => [
+                        'id' => $user->id,
+                        'first_name' => $user->first_name,
+                        'last_name' => $user->last_name,
+                        'rut' => $user->rut,
+                        'rut_dv' => $user->rut_dv,
+                        'email' => $user->email,
+                        'profile_photo' => $user->profile_photo 
+                            ? url("api/assets/{$user->profile_photo}") 
+                            : null,
+                        'company_id' => $user->company_id,
+                        'is_trial' => $user->is_trial,
+                        'expires_at' => $user->expires_at,
+                    ],
                     'company' => $company->name,
                     'role' => [
                         'id' => $role->id,
@@ -72,7 +85,20 @@ class GetPersonalDataController extends Controller
                 }
 
                 return response()->json([
-                    'user' => $user,
+                    'user' => [
+                        'id' => $user->id,
+                        'first_name' => $user->first_name,
+                        'last_name' => $user->last_name,
+                        'rut' => $user->rut,
+                        'rut_dv' => $user->rut_dv,
+                        'email' => $user->email,
+                        'profile_photo' => $user->profile_photo 
+                            ? url("api/assets/{$user->profile_photo}") 
+                            : null,
+                        'company_id' => $user->company_id,
+                        'role_id' => $user->role_id,
+                        'expires_at' => $user->expires_at,
+                    ],
                     'company' => $company->name,
                     'role' => [
                         'id' => $role->id,

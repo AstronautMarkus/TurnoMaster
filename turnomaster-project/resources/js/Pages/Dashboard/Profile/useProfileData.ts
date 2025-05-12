@@ -17,6 +17,7 @@ interface UserProfile {
     last_name: string;
     email: string;
     role: UserRole;
+    profile_photo: string;
     companies: {
         owned: Company[];
     };

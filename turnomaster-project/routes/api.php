@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 // Create users controllers
 use App\Http\Controllers\DemoUser\Create\CreateDemoUserController;
@@ -48,6 +49,11 @@ use App\Http\Controllers\Dashboard\Employees\Get\GetEmployeeByIdController;
 
 use App\Http\Controllers\Dashboard\Employees\Edit\EditEmployeeController;
 
+// Image controllers
+
+use App\Http\Controllers\User\Image\UpdateImageController;
+use App\Http\Controllers\User\Image\ServeImageController;
+
 
 Route::post('/create/demo-user', [CreateDemoUserController::class, 'createDemoUser']);
 Route::post('/create/employee', [CreateEmployeeController::class, 'createEmployee']);
@@ -84,4 +90,12 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::get('/employees', [GetEmployeesListController::class, 'getEmployeesList']);
     Route::get('/employees/{id}', [GetEmployeeByIdController::class, 'getEmployeeById']);
     Route::put('/employees/{id}', [EditEmployeeController::class, 'editEmployee']);
+    Route::post('/user/profile-image', [UpdateImageController::class, 'update']);
 });
+
+Route::get('/assets/{path}', function ($path) {
+    if (!Storage::exists($path)) {
+        return response()->json(['message' => 'File not found.'], 404);
+    }
+    return response()->file(Storage::path($path));
+})->where('path', '.*');
