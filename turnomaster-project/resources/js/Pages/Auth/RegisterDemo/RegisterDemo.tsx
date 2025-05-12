@@ -40,7 +40,7 @@ const RegisterDemo: React.FC = () => {
                   placeholder="Ingrese su nombre"
                   
                 />
-                {errors.first_name && (
+                {errors?.first_name && ( 
                   <p className="text-m text-red-600 text-center">
                     {errors.first_name[0]}
                   </p>
@@ -60,7 +60,7 @@ const RegisterDemo: React.FC = () => {
                   placeholder="Ingrese su apellido"
                   
                 />
-                {errors.last_name && (
+                {errors?.last_name && ( 
                   <p className="text-m text-red-600 text-center">
                     {errors.last_name[0]}
                   </p>
@@ -103,7 +103,7 @@ const RegisterDemo: React.FC = () => {
                     placeholder="DV"
                     />
                 </div>
-                {errors.rut && (
+                {errors?.rut && ( 
                   <p className="text-m text-red-600 text-center">
                   {errors.rut[0]}
                   </p>
@@ -123,7 +123,7 @@ const RegisterDemo: React.FC = () => {
                   placeholder="Ingrese su correo electrónico"
                   
                 />
-                {errors.email && (
+                {errors?.email && ( 
                   <p className="text-m text-red-600 text-center">
                     {errors.email[0]}
                   </p>
@@ -143,15 +143,21 @@ const RegisterDemo: React.FC = () => {
                   placeholder="Ingrese el nombre de su empresa"
                   
                 />
-                {errors.company_name && (
+                {errors?.company_name && ( 
                   <p className="text-m text-red-600 text-center">
                     {errors.company_name[0]}
                   </p>
                 )}
               </div>
 
-              {apiMessage && !errors.name && !errors.email && !errors.company_name && (
-                <p className="text-m text-green-600 bg-green-100 border border-green-400 rounded p-2 mb-4">
+              {apiMessage && (
+                <p
+                  className={`text-m ${
+                    apiMessage === "El RUT ya ha sido registrado."
+                      ? "text-red-600 bg-red-100 border border-red-400"
+                      : "text-green-600 bg-green-100 border border-green-400"
+                  } rounded p-2 mb-4`}
+                >
                   {apiMessage}
                 </p>
               )}

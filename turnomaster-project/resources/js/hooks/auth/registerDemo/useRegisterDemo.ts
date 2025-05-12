@@ -81,7 +81,7 @@ const useRegisterDemo = () => {
       setFormData({ first_name: "", last_name: "", rut: "", rut_dv: "", email: "", company_name: "" })
     } catch (error: any) {
       if (error.response.status === 422) {
-        const newErrors = error.response.data.errors
+        const newErrors = error.response.data.errors || {} // Ensure newErrors is always an object
         setErrors(newErrors)
 
         const updatedFormData = { ...formData }
