@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import useGetEmployeesList from "./useGetEmployeesList";
 import { Link } from "react-router-dom";
-import AuthLoadingScreen from "../../../../Components/Auth/LoadingScreen/AuthLoadingScreen";
 
 const ListEmployees: React.FC = () => {
   const { employees, roles, page, setPage, totalPages, loading } = useGetEmployeesList();
@@ -55,7 +54,7 @@ const ListEmployees: React.FC = () => {
       <div className="bg-white shadow w-full overflow-x-auto">
         {loading ? ( 
           <div className="flex justify-center items-center h-48">
-            <AuthLoadingScreen />
+            <h1>Cargando...</h1>
           </div>
         ) : (
           <div className="max-h-96 overflow-y-auto">
@@ -87,6 +86,11 @@ const ListEmployees: React.FC = () => {
                     </td>
                   </tr>
                 ))}
+                {filteredEmployees.length === 0 && (
+                  <tr>
+                    <td colSpan={5} className="text-center py-4 text-gray-500">No se encontraron empleados. Por favor, presione "Crear empleado".</td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
