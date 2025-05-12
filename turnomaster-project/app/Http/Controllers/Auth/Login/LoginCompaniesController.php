@@ -95,6 +95,9 @@ class LoginCompaniesController extends Controller
             'user' => [
                 'name' => $user->first_name . ' ' . $user->last_name,
                 'email' => $user->email,
+                'profile_photo' => $user->profile_photo 
+                    ? url("api/assets/{$user->profile_photo}") 
+                    : null,
                 'expires_at' => $user->expires_at,
                 'created_at' => $user->created_at,
                 'updated_at' => $user->updated_at,
