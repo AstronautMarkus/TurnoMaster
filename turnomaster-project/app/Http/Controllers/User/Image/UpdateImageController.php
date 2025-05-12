@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Users\User;
+use App\Models\Users\DashboardUser;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Illuminate\Support\Str; // Import for generating unique filenames
 
 class UpdateImageController extends Controller
 {
@@ -20,33 +22,43 @@ class UpdateImageController extends Controller
         // Extract and decode the JWT token
         $token = $request->bearerToken();
         if (!$token) {
-            return response()->json(['message' => 'Token not provided.'], 401);
+            return response()->json(['message' => 'Token no proporcionado.'], 401);
         }
 
         try {
             $decoded = JWT::decode($token, new Key(env('JWT_SECRET'), 'HS256'));
-            $userId = $decoded->sub; // Assuming 'sub' contains the user ID
-            $user = User::find($userId);
+            $userId = $decoded->user_id;
+            $userType = $decoded->user_type;
+
+
+            if ($userType === 'company') {
+                $user = User::find($userId);
+            } elseif ($userType === 'employee') {
+                $user = DashboardUser::find($userId);
+            } else {
+                return response()->json(['message' => 'Tipo de usuario inválido.'], 400);
+            }
 
             if (!$user) {
-                return response()->json(['message' => 'User not found.'], 404);
+                return response()->json(['message' => 'User no encontrado.'], 404);
             }
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Invalid token.'], 401);
+            return response()->json(['message' => 'Token inválido.'], 401);
         }
 
-        // Delete the old profile photo if it exists
+
         if ($user->profile_photo) {
             Storage::delete($user->profile_photo);
         }
 
-        // Store the new profile image
-        $path = $request->file('profile_image')->store('profile_images');
 
-        // Update the user's profile photo path
+        $file = $request->file('profile_image');
+        $uniqueFilename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+        $path = $file->storeAs('profile_images', $uniqueFilename);
+
         $user->profile_photo = $path;
         $user->save();
 
-        return response()->json(['message' => 'Profile image updated successfully.', 'profile_photo' => $path], 200);
+        return response()->json(['message' => 'Imagen actualizada exitosamente.', 'profile_photo' => $path], 200);
     }
 }
