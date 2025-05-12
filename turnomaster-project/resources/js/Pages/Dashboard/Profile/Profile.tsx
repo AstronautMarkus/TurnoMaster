@@ -7,7 +7,7 @@ import { FaUserGear } from "react-icons/fa6";
 
 const Profile: React.FC = () => {
     const user = useProfileData();
-    const { updateImage, isLoading, error, isSuccess } = useUpdateImage();
+    const { updateImage, deleteImage, isLoading, error, isSuccess } = useUpdateImage();
     const [previewImage, setPreviewImage] = useState<string | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -115,6 +115,21 @@ const Profile: React.FC = () => {
                                 onClick={() => setIsModalOpen(false)}
                             >
                                 Cerrar
+                            </button>
+                            <button 
+                                className="text-white px-4 py-2 bg-[#a91e1e] hover:bg-[#891818] transition-colors"
+                                onClick={async () => {
+                                    try {
+                                        await deleteImage();
+                                        setPreviewImage(null);
+                                        setIsModalOpen(false);
+                                    } catch (err) {
+                                        console.error(err);
+                                    }
+                                }}
+                                disabled={isLoading}
+                            >
+                                Borrar imagen
                             </button>
                         </div>
                     </div>

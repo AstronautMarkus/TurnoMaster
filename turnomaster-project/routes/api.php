@@ -53,6 +53,7 @@ use App\Http\Controllers\Dashboard\Employees\Edit\EditEmployeeController;
 
 use App\Http\Controllers\User\Image\UpdateImageController;
 use App\Http\Controllers\User\Image\ServeImageController;
+use App\Http\Controllers\User\Image\DeleteImageController;
 
 
 Route::post('/create/demo-user', [CreateDemoUserController::class, 'createDemoUser']);
@@ -91,6 +92,7 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::get('/employees/{id}', [GetEmployeeByIdController::class, 'getEmployeeById']);
     Route::put('/employees/{id}', [EditEmployeeController::class, 'editEmployee']);
     Route::post('/user/profile-image', [UpdateImageController::class, 'update']);
+    Route::delete('/user/profile-image', [DeleteImageController::class, 'delete']);
 });
 
 Route::get('/assets/{path}', function ($path) {

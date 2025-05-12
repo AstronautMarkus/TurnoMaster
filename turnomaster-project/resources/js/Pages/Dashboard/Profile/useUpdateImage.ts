@@ -46,7 +46,39 @@ const useUpdateImage = () => {
         }
     };
 
-    return { updateImage, isLoading, error, isSuccess };
+    const deleteImage = async () => {
+        setIsLoading(true);
+        setError(null);
+        setIsSuccess(false);
+
+        const token = localStorage.getItem('token');
+
+        try {
+            await axios.delete('/api/user/profile-image', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+
+            const user = localStorage.getItem('user');
+            if (user) {
+                const parsedUser = JSON.parse(user);
+                parsedUser.profile_photo = null;
+                localStorage.setItem('user', JSON.stringify(parsedUser));
+            }
+
+            setIsSuccess(true);
+        } catch (err: any) {
+            setError(err.response?.data?.message || 'Error eliminando la foto de perfil.');
+            throw err;
+        } finally {
+            setIsLoading(false);
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            window.location.reload();
+        }
+    };
+
+    return { updateImage, deleteImage, isLoading, error, isSuccess };
 };
 
 export default useUpdateImage;
