@@ -9,7 +9,8 @@ use App\Models\Users\User;
 use App\Models\Users\DashboardUser;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
-use Illuminate\Support\Str; // Import for generating unique filenames
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 class UpdateImageController extends Controller
 {
@@ -30,7 +31,6 @@ class UpdateImageController extends Controller
             $userId = $decoded->user_id;
             $userType = $decoded->user_type;
 
-
             if ($userType === 'company') {
                 $user = User::find($userId);
             } elseif ($userType === 'employee') {
@@ -46,15 +46,13 @@ class UpdateImageController extends Controller
             return response()->json(['message' => 'Token inválido.'], 401);
         }
 
-
         if ($user->profile_photo) {
             Storage::delete($user->profile_photo);
         }
 
-
         $file = $request->file('profile_image');
-        $uniqueFilename = Str::uuid() . '.' . $file->getClientOriginalExtension();
-        $path = $file->storeAs('profile_images', $uniqueFilename);
+        $filename = Str::slug($user->first_name . '-' . $user->last_name . '-' . $user->rut) . '.' . $file->getClientOriginalExtension();
+        $path = $file->storeAs('profile_images', $filename);
 
         $user->profile_photo = $path;
         $user->save();
