@@ -48,6 +48,7 @@ const useProfileData = () => {
                         ...user,
                         company,
                         role,
+                        profile_photo: user.profile_photo || '/img/profile/default.png',
                     });
                 } catch (error) {
                     console.error('Error fetching user data:', error);
