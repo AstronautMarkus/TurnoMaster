@@ -41,7 +41,7 @@ use App\Http\Controllers\Auth\Logout\LogoutController;
 use App\Http\Controllers\Dashboard\GetPersonalDataController;
 use App\Http\Controllers\Dashboard\Roles\GetRolesDataController;
 use App\Http\Controllers\Dashboard\Company\GetCompanyDataController;
-use App\Http\Controllers\Dashboard\Employees\GetEmployeesListController;
+use App\Http\Controllers\Dashboard\Employees\Get\GetEmployeesListController;
 
 
 Route::post('/create/demo-user', [CreateDemoUserController::class, 'createDemoUser']);
