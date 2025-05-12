@@ -4,10 +4,12 @@ import axios from 'axios';
 const useUpdateImage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [isSuccess, setIsSuccess] = useState(false);
 
     const updateImage = async (file: File) => {
         setIsLoading(true);
         setError(null);
+        setIsSuccess(false);
 
         const token = localStorage.getItem('token');
 
@@ -21,16 +23,19 @@ const useUpdateImage = () => {
                     'Authorization': `Bearer ${token}`,
                 },
             });
+            setIsSuccess(true);
             return response.data.profile_photo;
         } catch (err: any) {
-            setError(err.response?.data?.message || 'Error updating profile image.');
+            setError(err.response?.data?.message || 'Error actualizando la foto de perfil.');
             throw err;
         } finally {
             setIsLoading(false);
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            window.location.reload();
         }
     };
 
-    return { updateImage, isLoading, error };
+    return { updateImage, isLoading, error, isSuccess };
 };
 
 export default useUpdateImage;

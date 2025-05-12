@@ -7,17 +7,17 @@ import { FaUserGear } from "react-icons/fa6";
 
 const Profile: React.FC = () => {
     const user = useProfileData();
-    const { updateImage, isLoading, error } = useUpdateImage();
+    const { updateImage, isLoading, error, isSuccess } = useUpdateImage();
     const [previewImage, setPreviewImage] = useState<string | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files[0]) {
             const file = event.target.files[0];
             setPreviewImage(URL.createObjectURL(file));
             try {
-                const updatedImagePath = await updateImage(file);
-                alert('Imagen actualizada correctamente.');
-                // Optionally refresh user data here
+                await updateImage(file);
+                
             } catch (err) {
                 console.error(err);
             }
@@ -68,28 +68,58 @@ const Profile: React.FC = () => {
                             </div>
                         </div>
 
-                        <div className="w-1/10 bg-white shadow-md sm:p-6 flex flex-col">
-                            <label className="block text-m font-medium mb-2">Imagen de perfil</label>
+                        <div className="w-1/10 bg-white shadow-md sm:p-6 flex flex-col items-center">
+                            <h2 className="text-1xl font-semibold mb-2">Imagen de perfil</h2> 
                             <div className="w-48 h-48 bg-gray-200 overflow-hidden rounded">
                                 <img 
-                                    src={previewImage || user.profile_photo} 
+                                    src={user.profile_photo} 
                                     className="object-cover w-full h-full" 
                                     alt="Profile"
                                 />
                             </div>
-                            <input 
-                                type="file" 
-                                accept="image/*" 
-                                className="mt-4" 
-                                onChange={handleImageChange} 
-                                disabled={isLoading}
-                            />
-                            {isLoading && <p className="text-sm text-gray-500 mt-2">Subiendo imagen...</p>}
-                            {error && <p className="text-sm text-red-500 mt-2">{error}</p>}
+                            <button 
+                                className="mt-4 text-white px-4 py-2 bg-[#a91e1e] hover:bg-[#891818] transition-colors"
+                                onClick={() => setIsModalOpen(true)}
+                            >
+                                Cambiar foto
+                            </button>
                         </div>
                     </>
                 )}
             </div>
+
+            {isModalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="bg-white p-6 rounded shadow-lg w-96">
+                        <h2 className="text-xl font-bold mb-4">Cambiar foto de perfil</h2>
+                        <div className="w-48 h-48 bg-gray-200 overflow-hidden rounded mx-auto mb-4">
+                            <img 
+                                src={previewImage || user?.profile_photo} 
+                                className="object-cover w-full h-full" 
+                                alt="Preview"
+                            />
+                        </div>
+                        <input 
+                            type="file" 
+                            accept="image/*" 
+                            className="block w-full mb-4"
+                            onChange={handleImageChange} 
+                            disabled={isLoading}
+                        />
+                        {isLoading && <p className="text-sm text-gray-500 mb-2">Subiendo imagen...</p>}
+                        {error && <p className="text-sm text-red-500 mb-2">{error}</p>}
+                        {isSuccess && <p className="text-m mb-2">Imagen actualizada correctamente.</p>}
+                        <div className="flex justify-end gap-2">
+                            <button 
+                                className="px-4 py-2 bg-gray-300 hover:bg-gray-400"
+                                onClick={() => setIsModalOpen(false)}
+                            >
+                                Cerrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {user && (
                 <div className="mt-6 bg-white shadow-md sm:p-6">
