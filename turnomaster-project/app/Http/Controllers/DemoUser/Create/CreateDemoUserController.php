@@ -19,10 +19,11 @@ class CreateDemoUserController extends Controller
             'rut' => 'required|integer',
             'rut_dv' => 'required|string|max:1',
             'email' => 'required|email|unique:users,email',
-            'company_name' => 'required|string|max:255',
+            'company_name' => 'required|string|max:255', 
         ], [
             'first_name.required' => 'El nombre es obligatorio.',
             'last_name.required' => 'El apellido es obligatorio.',
+            'rut.unique' => 'El RUT ya ha sido registrado.',
             'rut.required' => 'El RUT es obligatorio.',
             'rut.integer' => 'El RUT debe ser un número entero.',
             'rut_dv.required' => 'El dígito verificador es obligatorio.',
@@ -50,7 +51,13 @@ class CreateDemoUserController extends Controller
             ], 400);
         }
 
-        
+        $existingUser = User::where('rut', $request->input('rut'))->first();
+        if ($existingUser) {
+            return response()->json([
+                'message' => 'El RUT ya ha sido registrado.',
+            ], 422);
+        }
+
         $temporaryPassword = \Str::random(10);
 
         $company = Companies::create([
