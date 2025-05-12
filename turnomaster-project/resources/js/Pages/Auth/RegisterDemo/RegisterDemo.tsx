@@ -48,7 +48,7 @@ const RegisterDemo: React.FC = () => {
               </div>
               <div className="mb-4">
                 <label htmlFor="last_name" className="block mb-2 text-m font-medium text-gray-700">
-                  Nombre
+                  Apellido
                 </label>
                 <input
                   type="text"
