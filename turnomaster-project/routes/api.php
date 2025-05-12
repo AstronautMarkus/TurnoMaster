@@ -43,6 +43,10 @@ use App\Http\Controllers\Dashboard\Roles\GetRolesDataController;
 use App\Http\Controllers\Dashboard\Company\GetCompanyDataController;
 use App\Http\Controllers\Dashboard\Employees\Get\GetEmployeesListController;
 
+// Edit controllers
+
+use App\Http\Controllers\Dashboard\Employees\Edit\EditEmployeeController;
+
 
 Route::post('/create/demo-user', [CreateDemoUserController::class, 'createDemoUser']);
 Route::post('/create/employee', [CreateEmployeeController::class, 'createEmployee']);
@@ -77,4 +81,5 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::get('/me', [GetPersonalDataController::class, 'getPersonalData']);
     Route::get('/company', [GetCompanyDataController::class, 'getCompanyData']);
     Route::get('/employees', [GetEmployeesListController::class, 'getEmployeesList']);
+    Route::put('/employees/{id}', [EditEmployeeController::class, 'editEmployee']);
 });
