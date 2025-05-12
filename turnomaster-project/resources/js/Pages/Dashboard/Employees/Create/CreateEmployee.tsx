@@ -44,24 +44,19 @@ const CreateEmployee: React.FC = () => {
         <div className="p-6">
             <h1 className="text-3xl sm:text-4xl font-bold text-left mb-6 mt-4">Crear empleado</h1>
             <div className="bg-white shadow-md w-full p-6 relative">
-                {loading && (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                        {error ? (
-                            <div className="text-lg text-red-500">{error}</div>
-                        ) : (
-                            <div className="text-lg">Cargando...</div>
-                        )}
-                    </div>
-                )}
-                {!loading && (
                     <>
                         {submissionMessage && (
                             <div
                                 className={`p-4 mb-4 text-sm ${
-                                    submissionMessage.type === 'success' ? 'text-green-600 bg-green-100' : 'text-red-600 bg-red-100'
+                                    submissionMessage.type === 'success' ? 'text-black bg-green-400' : 'text-red-600 bg-red-100'
                                 }`}
                             >
                                 {submissionMessage.message}
+                            </div>
+                        )}
+                        {error && (
+                            <div className="p-4 mb-4 text-sm text-red-600 bg-red-100">
+                                {error}
                             </div>
                         )}
                         <form
@@ -86,6 +81,7 @@ const CreateEmployee: React.FC = () => {
                                         value={formValues.first_name}
                                         onChange={(e) => handleChange('first_name', e.target.value)}
                                         className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                        disabled={loading}
                                     />
                                     {errors.first_name && <p className="text-red-500 text-sm">{errors.first_name}</p>}
                                 </div>
@@ -98,6 +94,7 @@ const CreateEmployee: React.FC = () => {
                                         value={formValues.last_name}
                                         onChange={(e) => handleChange('last_name', e.target.value)}
                                         className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                        disabled={loading}
                                     />
                                     {errors.last_name && <p className="text-red-500 text-sm">{errors.last_name}</p>}
                                 </div>
@@ -112,6 +109,7 @@ const CreateEmployee: React.FC = () => {
                                             onChange={(e) => handleRutChange(e.target.value)}
                                             className="flex-grow px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
                                             placeholder="12345678"
+                                            disabled={loading}
                                         />
                                         <span>-</span>
                                         <input
@@ -122,6 +120,7 @@ const CreateEmployee: React.FC = () => {
                                             onChange={(e) => handleRutDvChange(e.target.value)}
                                             className="w-12 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
                                             placeholder="k"
+                                            disabled={loading}
                                         />
                                     </div>
                                     {errors.rut_general && <p className="text-red-500 text-sm">{errors.rut_general}</p>}
@@ -135,6 +134,7 @@ const CreateEmployee: React.FC = () => {
                                         value={formValues.email}
                                         onChange={(e) => handleChange('email', e.target.value)}
                                         className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                        disabled={loading}
                                     />
                                     {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
                                 </div>
@@ -146,6 +146,7 @@ const CreateEmployee: React.FC = () => {
                                         value={formValues.role_id}
                                         onChange={(e) => handleChange('role_id', e.target.value)}
                                         className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                        disabled={loading}
                                     >
                                         <option value="" disabled>Selecciona un rol</option>
                                         {roles.map((role) => (
@@ -155,12 +156,21 @@ const CreateEmployee: React.FC = () => {
                                     {errors.role_id && <p className="text-red-500 text-sm">{errors.role_id}</p>}
                                 </div>
                             </div>
-                            <button type="submit" className="mt-4 px-4 py-2 bg-blue-600 text-white" disabled={loading}>
-                                Crear
+                            <button
+                                type="submit"
+                                className={`mt-4 px-4 py-2 text-white ${
+                                    loading
+                                        ? error
+                                            ? 'bg-red-600'
+                                            : 'bg-blue-400'
+                                        : 'bg-blue-600 hover:bg-blue-700'
+                                }`}
+                                disabled={loading}
+                            >
+                                {loading ? (error ? 'Error' : 'Cargando...') : 'Crear'}
                             </button>
                         </form>
                     </>
-                )}
             </div>
             <div className="flex space-x-2 justify-end mt-4">
                 <Link to="/dashboard/employees" className="text-white px-4 py-2 bg-[#a91e1e] hover:bg-[#891818] transition-colors">Salir</Link>
