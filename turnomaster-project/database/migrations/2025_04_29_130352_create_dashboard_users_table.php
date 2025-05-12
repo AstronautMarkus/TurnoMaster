@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('rut_dv', 1);
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('profile_photo')->nullable();
             $table->unsignedBigInteger('company_id');
             $table->unsignedBigInteger('role_id');
             $table->timestamps();

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class DashboardUser extends Model
 {
     protected $fillable = [
-        'first_name', 'last_name', 'rut','rut_dv','email', 'password', 'company_id', 'role_id'
+        'first_name', 'last_name', 'rut','rut_dv','email', 'password','profile_photo', 'company_id', 'role_id'
     ];
 
     protected $hidden = ['password'];
