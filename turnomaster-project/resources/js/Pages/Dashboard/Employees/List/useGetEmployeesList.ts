@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 interface Employee {
+  id: number;
   first_name: string;
   last_name: string;
   rut: string;
@@ -36,6 +37,7 @@ const useGetEmployeesList = () => {
         });
         const { data, last_page } = response.data;
         const employeesData = data.map((employee: any) => ({
+          id: employee.id,
           first_name: employee.first_name,
           last_name: employee.last_name,
           rut: `${employee.rut}-${employee.rut_dv}`,

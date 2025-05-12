@@ -81,7 +81,7 @@ const ListEmployees: React.FC = () => {
                     <td className="px-4 py-2">{employee.role}</td>
                     <td className="px-4 py-2">
                       <div className="flex space-x-2">
-                        <button className="bg-blue-600 text-white px-4 py-2 text-sm hover:bg-blue-700 transition-colors">Editar</button>
+                        <Link to={`/dashboard/employees/edit/${employee.id}`} className="bg-blue-600 text-white px-4 py-2 text-sm hover:bg-blue-700 transition-colors">Editar</Link>
                         <button className="bg-red-700 text-white px-4 py-2 text-sm hover:bg-red-800 transition-colors">Borrar</button>
                       </div>
                     </td>
