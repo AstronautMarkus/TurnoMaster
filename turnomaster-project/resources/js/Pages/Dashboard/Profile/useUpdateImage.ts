@@ -23,8 +23,19 @@ const useUpdateImage = () => {
                     'Authorization': `Bearer ${token}`,
                 },
             });
+
+
+            const newProfilePhotoUrl = `/api/assets/${response.data.profile_photo}`;
+
+            const user = localStorage.getItem('user');
+            if (user) {
+                const parsedUser = JSON.parse(user);
+                parsedUser.profile_photo = newProfilePhotoUrl;
+                localStorage.setItem('user', JSON.stringify(parsedUser));
+            }
+
             setIsSuccess(true);
-            return response.data.profile_photo;
+            return newProfilePhotoUrl;
         } catch (err: any) {
             setError(err.response?.data?.message || 'Error actualizando la foto de perfil.');
             throw err;
