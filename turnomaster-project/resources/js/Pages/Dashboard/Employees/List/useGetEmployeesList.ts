@@ -43,7 +43,7 @@ const useGetEmployeesList = () => {
           rut: `${employee.rut}-${employee.rut_dv}`,
           email: employee.email,
           role: employee.role,
-          image: employee.profile_photo,
+          image: employee.profile_photo || "/img/profile/default.png",
         }));
         setEmployees(employeesData);
 
