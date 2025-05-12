@@ -16,7 +16,7 @@ class EditEmployeeController extends Controller
             'rut' => 'nullable|integer',
             'rut_dv' => 'nullable|string|max:1',
             'email' => 'nullable|email',
-            'role_id' => 'nullable|integer',
+            'role_id' => 'nullable|integer|exists:roles,id',
         ], [
             'first_name.string' => 'El nombre debe ser una cadena de texto.',
             'first_name.max' => 'El nombre no puede tener más de 255 caracteres.',
@@ -27,6 +27,7 @@ class EditEmployeeController extends Controller
             'rut_dv.max' => 'El dígito verificador no puede tener más de 1 carácter.',
             'email.email' => 'El correo electrónico debe ser una dirección válida.',
             'role_id.integer' => 'El rol debe ser un número entero.',
+            'role_id.exists' => 'El rol proporcionado no existe.',
         ]);
 
         if ($validator->fails()) {
