@@ -54,7 +54,10 @@ class CreateDemoUserController extends Controller
         $existingUser = User::where('rut', $request->input('rut'))->first();
         if ($existingUser) {
             return response()->json([
-                'message' => 'El RUT ya ha sido registrado.',
+            'message' => 'La validación ha fallado.',
+            'errors' => [
+                'rut' => ['El RUT ya ha sido registrado.'],
+            ],
             ], 422);
         }
 
