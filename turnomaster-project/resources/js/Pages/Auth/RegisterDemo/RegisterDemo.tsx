@@ -24,11 +24,7 @@ const RegisterDemo: React.FC = () => {
           <AuthLoadingScreen />
         ) : (
           <div className="flex flex-col items-center">
-            {apiMessage && !errors.name && !errors.email && !errors.company_name && (
-              <p className="mb-4 text-m text-center text-green-700">
-                {apiMessage}
-              </p>
-            )}
+
             <form onSubmit={handleSubmit} className="w-full">
               <div className="mb-4">
                 <label htmlFor="first_name" className="block mb-2 text-m font-medium text-gray-700">
@@ -153,6 +149,13 @@ const RegisterDemo: React.FC = () => {
                   </p>
                 )}
               </div>
+
+              {apiMessage && !errors.name && !errors.email && !errors.company_name && (
+                <p className="text-m text-green-600 bg-green-100 border border-green-400 rounded p-2 mb-4">
+                  {apiMessage}
+                </p>
+              )}
+
               <button
                 type="submit"
                 className="w-full px-4 py-2 bg-[#e01d1d] hover:bg-[#b21e1e] text-white rounded focus:outline-none focus:ring-2 focus:ring-[#e01d1d]"
