@@ -42,6 +42,7 @@ use App\Http\Controllers\Dashboard\GetPersonalDataController;
 use App\Http\Controllers\Dashboard\Roles\GetRolesDataController;
 use App\Http\Controllers\Dashboard\Company\GetCompanyDataController;
 use App\Http\Controllers\Dashboard\Employees\Get\GetEmployeesListController;
+use App\Http\Controllers\Dashboard\Employees\Get\GetEmployeeByIdController;
 
 // Edit controllers
 
@@ -81,5 +82,6 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::get('/me', [GetPersonalDataController::class, 'getPersonalData']);
     Route::get('/company', [GetCompanyDataController::class, 'getCompanyData']);
     Route::get('/employees', [GetEmployeesListController::class, 'getEmployeesList']);
+    Route::get('/employees/{id}', [GetEmployeeByIdController::class, 'getEmployeeById']);
     Route::put('/employees/{id}', [EditEmployeeController::class, 'editEmployee']);
 });
