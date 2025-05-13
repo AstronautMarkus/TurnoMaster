@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use App\Models\Users\User;
+use App\Models\Users\DashboardUser;
 
 class JwtMiddleware
 {
@@ -22,7 +23,11 @@ class JwtMiddleware
 
         try {
             $decoded = JWT::decode($token, new Key(env('JWT_SECRET'), 'HS256'));
-            $user = User::find($decoded->sub);
+
+            // Determine the user model based on user_type
+            
+            $userModel = $decoded->user_type === 'company' ? User::class : DashboardUser::class;
+            $user = $userModel::find($decoded->sub);
 
             if (!$user) {
                 return response()->json(['message' => 'Usuario no encontrado'], 401);
