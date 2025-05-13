@@ -136,6 +136,51 @@ const Owner = () => {
                     </div>
                 </div>
             </div>
+
+            <div className="flex flex-col mt-6">
+                <div className="bg-white shadow-md sm:p-6">
+                    <div className="mb-6 text-center">
+                        <h2 className="text-2xl font-semibold mb-4">Suscripción de la empresa</h2>
+                        <div className="flex flex-wrap items-center gap-6">
+                            <div className="flex-grow grid grid-cols-2 sm:grid-cols-4 gap-4">
+                                <div>
+                                    <p className="text-lg font-bold">Plan actual:</p>
+                                    <p className="font-normal">TBA</p>
+                                </div>
+                                <div>
+                                    <p className="text-lg font-bold">Fecha de inicio:</p>
+                                    <p className="font-normal">TBA</p>
+                                </div>
+                                <div>
+                                    <p className="text-lg font-bold">Fecha de expiración:</p>
+                                    <p className="font-normal">TBA</p>
+                                </div>
+                                <div>
+                                    <p className="text-lg font-bold">Estado:</p>
+                                    <p className="font-normal text-green-500">TBA</p>
+                                </div>
+                                <div>
+                                    <p className="text-lg font-bold">Usuarios permitidos:</p>
+                                    <p className="font-normal">TBA</p>
+                                </div>
+                                <div>
+                                    <p className="text-lg font-bold">Costo mensual:</p>
+                                    <p className="font-normal">TBA</p>
+                                </div>
+                                <div>
+                                    <p className="text-lg font-bold">Renovación automática:</p>
+                                    <p className="font-normal">TBA</p>
+                                </div>
+                                <div>
+                                    <p className="text-lg font-bold">Soporte prioritario:</p>
+                                    <p className="font-normal">TBA</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     );
 };
