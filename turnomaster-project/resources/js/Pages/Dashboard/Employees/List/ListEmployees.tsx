@@ -1,15 +1,44 @@
 import React, { useState } from "react";
 import useGetEmployeesList from "./useGetEmployeesList";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const ListEmployees: React.FC = () => {
   const { employees, roles, page, setPage, totalPages, loading } = useGetEmployeesList();
-  const [selectedRole, setSelectedRole] = useState<string>("Todos"); // Default value role filter
+  const [selectedRole, setSelectedRole] = useState<string>("Todos");
+  const [showModal, setShowModal] = useState(false);
+  const [employeeToDelete, setEmployeeToDelete] = useState<{ id: number; first_name: string; last_name: string } | null>(null);
 
   const handleRoleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedRole(event.target.value);
   };
 
+  const handleDeleteClick = (employee: { id: number; first_name: string; last_name: string }) => {
+    setEmployeeToDelete(employee);
+    setShowModal(true);
+  };
+
+  const confirmDelete = async () => {
+    if (employeeToDelete) {
+      try {
+        const token = localStorage.getItem('token');
+        await axios.delete(`/api/employees/${employeeToDelete.id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setShowModal(false);
+        setEmployeeToDelete(null);
+
+        const index = employees.findIndex(emp => emp.id === employeeToDelete.id);
+        if (index !== -1) {
+          employees.splice(index, 1);
+        }
+      } catch (error) {
+        console.error("Error deleting employee:", error);
+      }
+    }
+  };
 
   const filteredEmployees = selectedRole === "Todos"
     ? employees
@@ -81,7 +110,12 @@ const ListEmployees: React.FC = () => {
                     <td className="px-4 py-2">
                       <div className="flex space-x-2">
                         <Link to={`/dashboard/employees/edit/${employee.id}`} className="bg-blue-600 text-white px-4 py-2 text-sm hover:bg-blue-700 transition-colors">Editar</Link>
-                        <button className="bg-red-700 text-white px-4 py-2 text-sm hover:bg-red-800 transition-colors">Borrar</button>
+                        <button
+                          onClick={() => handleDeleteClick(employee)}
+                          className="bg-red-700 text-white px-4 py-2 text-sm hover:bg-red-800 transition-colors"
+                        >
+                          Borrar
+                        </button>
                       </div>
                     </td>
                   </tr>
@@ -116,6 +150,28 @@ const ListEmployees: React.FC = () => {
           </button>
         </div>
       </div>
+
+      {showModal && employeeToDelete && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded shadow-lg">
+            <h2 className="text-lg font-bold mb-4">¿Está seguro de que desea borrar a {employeeToDelete.first_name} {employeeToDelete.last_name}?</h2>
+            <div className="flex justify-end space-x-4">
+              <button
+                onClick={() => setShowModal(false)}
+                className="px-4 py-2 bg-gray-300 text-gray-700 hover:bg-gray-400 transition-colors"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={confirmDelete}
+                className="px-4 py-2 bg-red-700 text-white hover:bg-red-800 transition-colors"
+              >
+                Sí, borrar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
