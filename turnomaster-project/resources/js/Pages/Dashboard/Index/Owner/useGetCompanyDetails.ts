@@ -8,6 +8,7 @@ interface CompanyDetails {
         email: string | null;
         created_at: string;
         updated_at: string;
+        profile_image: string;
     };
     employees: {
         total: number;
@@ -39,6 +40,7 @@ const useGetCompanyDetails = () => {
                         ...response.data.company,
                         created_at: format(new Date(response.data.company.created_at), 'dd/MM/yyyy - HH:mm'),
                         updated_at: format(new Date(response.data.company.updated_at), 'dd/MM/yyyy - HH:mm'),
+                        profile_image: response.data.company.profile_image || '/img/company/default.png',
                     },
                 };
 

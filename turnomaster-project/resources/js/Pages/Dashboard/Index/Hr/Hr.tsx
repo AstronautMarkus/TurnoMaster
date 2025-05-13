@@ -88,7 +88,7 @@ const Hr = () => {
                         ) : companyData && companyData.company ? (
                             <div className="flex flex-wrap items-center gap-6">
                                 <div className="w-48 h-48 bg-gray-200 overflow-hidden rounded">
-                                    <img src="/img/company/tux.png" alt="Empresa" className="object-cover w-full h-full" />
+                                    <img src={companyData.company.profile_image} alt="Empresa" className="object-cover w-full h-full" />
                                 </div>
                                 <div className="flex-grow grid grid-cols-2 sm:grid-cols-4 gap-4">
                                     <div>
