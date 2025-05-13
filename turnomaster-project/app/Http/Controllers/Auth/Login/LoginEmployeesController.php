@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth\Login;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Users\DashboardUser;
-use App\Models\RefreshToken;
+use App\Models\RefreshTokens\DashboardUserRefreshToken;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Illuminate\Support\Str;
@@ -62,7 +62,7 @@ class LoginEmployeesController extends Controller
 
         // Generate refresh token
         $refreshToken = Str::random(64);
-        RefreshToken::create([
+        DashboardUserRefreshToken::create([
             'user_id' => $user->id,
             'token' => hash('sha256', $refreshToken),
             'expires_at' => now()->addDays(15),
