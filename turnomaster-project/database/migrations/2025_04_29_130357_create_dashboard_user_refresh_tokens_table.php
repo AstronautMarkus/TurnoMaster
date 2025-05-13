@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('dashboard_user_refresh_tokens', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('dashboard_users')->onDelete('cascade');
             $table->string('token')->unique();
             $table->dateTime('expires_at');
             $table->boolean('revoked')->default(false);
