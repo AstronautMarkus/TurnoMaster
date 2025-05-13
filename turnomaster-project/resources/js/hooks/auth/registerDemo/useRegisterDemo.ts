@@ -64,8 +64,6 @@ const useRegisterDemo = () => {
       newErrors.rut = ["El RUT no puede tener más de 8 dígitos."]
     } else if (formData.rut.length < 8) {
       newErrors.rut = ["El RUT no puede tener menos de 8 dígitos."]
-    } else if (!isValidDV(formData.rut, formData.rut_dv)) {
-      newErrors.rut = ["El dígito verificador ingresado no es válido."]
     }
 
     if (Object.keys(newErrors).length > 0) {
