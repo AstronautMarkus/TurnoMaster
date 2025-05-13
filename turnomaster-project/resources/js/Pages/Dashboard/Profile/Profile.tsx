@@ -1,53 +1,155 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useProfileData from './useProfileData';
+import useUpdateImage from './useUpdateImage';
 import AuthLoadingScreen from '../../../Components/Auth/LoadingScreen/AuthLoadingScreen';
+import { FaUserShield, FaUser } from 'react-icons/fa';
+import { FaUserGear } from "react-icons/fa6";
 
 const Profile: React.FC = () => {
     const user = useProfileData();
+    const { updateImage, deleteImage, isLoading, error, isSuccess } = useUpdateImage();
+    const [previewImage, setPreviewImage] = useState<string | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    if (!user) {
-        return (
-            <div className="flex items-center justify-center min-h-screen">
-            <AuthLoadingScreen />
-            </div>
-        );
-    }
+    const handleImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files && event.target.files[0]) {
+            const file = event.target.files[0];
+            setPreviewImage(URL.createObjectURL(file));
+            try {
+                await updateImage(file);
+                
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    };
 
     return (
-        <div className="p-6 min-h-screen">
-            <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Mi perfil</h1>
+        <div className="p-6">
+            <h1 className="text-4xl font-bold text-left mb-6 mt-4">Mi perfil</h1>
+            
+            <div className="flex gap-4">
+                {!user ? (
+                    <div className="flex items-center justify-center w-full">
+                        <AuthLoadingScreen />
+                    </div>
+                ) : (
+                    <>
+                        <div className="flex-grow w-9/10 bg-white shadow-md sm:p-6">
+                            <div className="mb-6">
+                                <h2 className="text-2xl font-semibold mb-2">Información Personal</h2>
+                                <p>Aquí puedes ver los detalles de tu perfil personal.</p>
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium">Nombre</label>
+                                    <p className="font-bold">{user.first_name}</p>
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium">Apellido</label>
+                                    <p className="font-bold">{user.last_name || 'N/A'}</p>
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium">RUT</label>
+                                    <p className="font-bold">{user.rut}-{user.rut_dv}</p>
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium">Email</label>
+                                    <p className="font-bold">{user.email}</p>
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium">Teléfono</label>
+                                    <p className="font-bold">N/A</p>
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium">Empresa</label>
+                                    <p className="font-bold">{user.company}</p>
+                                </div>
+                            </div>
+                        </div>
 
-            <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-4 sm:p-6 relative">
-                <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between space-y-4 sm:space-y-0">
-                    <div className="flex items-center space-x-4 sm:space-x-6">
-                        <img src="/img/default/default.jpg" alt="Foto de perfil" className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover"/>
-                        <div className="text-center sm:text-left">
-                            <h1 className="text-lg sm:text-2xl font-bold text-gray-800">{user?.name}</h1>
-                            <p className="text-sm sm:text-base text-gray-600">Correo electrónico: {user?.email}</p>
-                            <p className="text-sm sm:text-base text-gray-600">
-                                <span className="font-medium">Tipo de usuario:</span> {user?.role?.name}
-                            </p>
+                        <div className="w-1/10 bg-white shadow-md sm:p-6 flex flex-col items-center">
+                            <h2 className="text-1xl font-semibold mb-2">Imagen de perfil</h2> 
+                            <div className="w-48 h-48 bg-gray-200 overflow-hidden rounded">
+                                <img 
+                                    src={user.profile_photo} 
+                                    className="object-cover w-full h-full" 
+                                    alt="Profile"
+                                />
+                            </div>
+                            <button 
+                                className="mt-4 text-white px-4 py-2 bg-[#a91e1e] hover:bg-[#891818] transition-colors"
+                                onClick={() => setIsModalOpen(true)}
+                            >
+                                Cambiar foto
+                            </button>
+                        </div>
+                    </>
+                )}
+            </div>
+
+            {isModalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="bg-white p-6 rounded shadow-lg w-96">
+                        <h2 className="text-xl font-bold mb-4">Cambiar foto de perfil</h2>
+                        <div className="w-48 h-48 bg-gray-200 overflow-hidden rounded mx-auto mb-4">
+                            <img 
+                                src={previewImage || user?.profile_photo} 
+                                className="object-cover w-full h-full" 
+                                alt="Preview"
+                            />
+                        </div>
+                        <input 
+                            type="file" 
+                            accept="image/*" 
+                            className="block w-full mb-4"
+                            onChange={handleImageChange} 
+                            disabled={isLoading}
+                        />
+                        {isLoading && <p className="text-sm text-gray-500 mb-2">Subiendo imagen...</p>}
+                        {error && <p className="text-sm text-red-500 mb-2">{error}</p>}
+                        {isSuccess && <p className="text-m mb-2">Imagen actualizada correctamente.</p>}
+                        <div className="flex justify-end gap-2">
+                            <button 
+                                className="px-4 py-2 bg-gray-300 hover:bg-gray-400"
+                                onClick={() => setIsModalOpen(false)}
+                            >
+                                Cerrar
+                            </button>
+                            <button 
+                                className="text-white px-4 py-2 bg-[#a91e1e] hover:bg-[#891818] transition-colors"
+                                onClick={async () => {
+                                    try {
+                                        await deleteImage();
+                                        setPreviewImage(null);
+                                        setIsModalOpen(false);
+                                    } catch (err) {
+                                        console.error(err);
+                                    }
+                                }}
+                                disabled={isLoading}
+                            >
+                                Borrar imagen
+                            </button>
                         </div>
                     </div>
-                    <button className="bg-red-500 text-white text-sm sm:text-base px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg hover:bg-red-600 transition">
-                        Editar perfil
-                    </button>
                 </div>
-            </div>
+            )}
 
-            <div className="mt-10">
-                <h2 className="text-xl font-semibold text-center text-gray-800 mb-4">Lista de empresas</h2>
-                <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
-                    {user?.companies?.owned.map((company) => (
-                        <div key={company.id} className="bg-white shadow-md rounded-lg p-4 flex items-center space-x-4">
-                            <div className="w-16 h-16 bg-gray-200 rounded-full overflow-hidden flex items-center justify-center">
-                                <img src="/img/default/company-default.jpg" alt="Logo de la empresa" className="w-full h-full object-cover" />
-                            </div>
-                            <span className="text-gray-700 font-medium">{company.name}</span>
+            {user && (
+                <div className="mt-6 bg-white shadow-md sm:p-6">
+                    <h2 className="text-2xl font-semibold mb-4">Rol empleado en {user.company}</h2>
+                    <div className="flex items-center gap-4">
+                        <div className="text-4xl">
+                            {user.role.id === 1 ? <FaUserShield /> : user.role.id === 3 ? <FaUser /> : <FaUserGear />}
                         </div>
-                    ))}
+                        <div>
+                            <p className="text-lg font-bold">{user.role.name}</p>
+                            <p>{user.role.description}</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };

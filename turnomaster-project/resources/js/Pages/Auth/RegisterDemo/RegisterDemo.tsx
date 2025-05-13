@@ -1,5 +1,4 @@
 import type React from "react"
-import { FaRegCircleCheck, FaRegCircleXmark } from "react-icons/fa6"
 import AuthLoadingScreen from "../../../Components/Auth/LoadingScreen/AuthLoadingScreen"
 import useRegisterDemo from "../../../hooks/auth/registerDemo/useRegisterDemo"
 
@@ -9,58 +8,109 @@ const RegisterDemo: React.FC = () => {
     errors,
     apiMessage,
     isLoading,
-    isModalOpen,
-    toggleModal,
     handleChange,
     handleSubmit,
+    isValidDV, // Import isValidDV from the hook
   } = useRegisterDemo()
 
   return (
-    <div className="w-full max-w-4xl mx-auto lg:flex lg:space-x-8">
-      <div className="bg-white rounded-xl p-8 shadow-2xl w-full lg:w-auto lg:flex-1">
-        <div className="flex flex-col items-center justify-center mb-6">
-          <img src="/img/logo/TurnoMaster.svg" alt="Logo" className="w-16 h-16 mb-3" />
-          <h2 className="font-bold text-gray-800 text-center text-2xl lg:text-3xl">Empieza a utilizar TurnoMaster!</h2>
-          <p className="text-gray-600 text-center mt-2 text-sm lg:text-base">
-            {isLoading
-              ? "Procesando tu solicitud, lo mejor está por venir..."
-              : "Gracias por interesarte! Rellena el formulario para usar una prueba gratuita de 7 días."}
-          </p>
+    <div className="flex flex-col md:flex-row items-center justify-center min-h-screen w-full">
+      <div className="bg-white p-8 md:p-12 w-full max-w-md md:max-w-lg shadow-lg">
+        <div className="flex items-center justify-center">
+          <img src="/img/logo/TurnoMasterRed.svg" alt="Logo" className="w-12 h-12 mr-3" />
+          <h2 className="font-bold text-gray-800 text-center lg:text-2xl">Utiliza nuestra Demo gratuita</h2>
         </div>
         {isLoading ? (
           <AuthLoadingScreen />
         ) : (
           <div className="flex flex-col items-center">
-            {apiMessage && !errors.name && !errors.email && !errors.company_name && (
-              <p className="mb-4 text-sm text-center text-green-700">
-                <FaRegCircleCheck className="inline mr-2" />
-                {apiMessage}
-              </p>
-            )}
+
             <form onSubmit={handleSubmit} className="w-full">
               <div className="mb-4">
-                <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-700">
+                <label htmlFor="first_name" className="block mb-2 text-m font-medium text-gray-700">
                   Nombre
                 </label>
                 <input
                   type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
+                  id="first_name"
+                  name="first_name"
+                  value={formData.first_name}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Ej: John Doe"
-                  required
+                  className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                  placeholder="Ingrese su nombre"
+                  
                 />
-                {errors.name && (
-                  <p className="text-sm text-red-600 text-center">
-                    <FaRegCircleXmark className="inline mr-2" />
-                    {errors.name[0]}
+                {errors?.first_name && ( 
+                  <p className="text-m text-red-600 text-center">
+                    {errors.first_name[0]}
                   </p>
                 )}
               </div>
               <div className="mb-4">
-                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-700">
+                <label htmlFor="last_name" className="block mb-2 text-m font-medium text-gray-700">
+                  Apellido
+                </label>
+                <input
+                  type="text"
+                  id="last_name"
+                  name="last_name"
+                  value={formData.last_name}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                  placeholder="Ingrese su apellido"
+                  
+                />
+                {errors?.last_name && ( 
+                  <p className="text-m text-red-600 text-center">
+                    {errors.last_name[0]}
+                  </p>
+                )}
+              </div>
+                <div className="mb-4">
+                <label htmlFor="rut" className="block mb-2 text-m font-medium text-gray-700">
+                  RUT
+                </label>
+                <div className="flex space-x-2">
+                  <input
+                  type="text"
+                  id="rut"
+                  name="rut"
+                  value={formData.rut}
+                  onChange={(e) => {
+                    handleChange(e)
+
+                    if (errors.rut && isValidDV(e.target.value, formData.rut_dv)) {
+                      delete errors.rut
+                    }
+                  }}
+                  className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                  placeholder="Ingrese su RUT sin puntos ni guión"
+                  />
+                    <input
+                    type="text"
+                    id="rut_dv"
+                    name="rut_dv"
+                    value={formData.rut_dv}
+                    onChange={(e) => {
+                      handleChange(e)
+
+                      if (errors.rut && isValidDV(formData.rut, e.target.value)) {
+                        delete errors.rut
+                      }
+                    }}
+                    maxLength={1}
+                    className="w-16 px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d] text-center"
+                    placeholder="DV"
+                    />
+                </div>
+                {errors?.rut && ( 
+                  <p className="text-m text-red-600 text-center">
+                  {errors.rut[0]}
+                  </p>
+                )}
+                </div>
+              <div className="mb-4">
+                <label htmlFor="email" className="block mb-2 text-m font-medium text-gray-700">
                   Correo Electrónico
                 </label>
                 <input
@@ -69,19 +119,18 @@ const RegisterDemo: React.FC = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Ej: john@doe.com"
-                  required
+                  className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                  placeholder="Ingrese su correo electrónico"
+                  
                 />
-                {errors.email && (
-                  <p className="text-sm text-red-600 text-center">
-                    <FaRegCircleXmark className="inline mr-2" />
+                {errors?.email && ( 
+                  <p className="text-m text-red-600 text-center">
                     {errors.email[0]}
                   </p>
                 )}
               </div>
               <div className="mb-6">
-                <label htmlFor="company_name" className="block mb-2 text-sm font-medium text-gray-700">
+                <label htmlFor="company_name" className="block mb-2 text-m font-medium text-gray-700">
                   Nombre de la Empresa
                 </label>
                 <input
@@ -90,26 +139,32 @@ const RegisterDemo: React.FC = () => {
                   name="company_name"
                   value={formData.company_name}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Ej: TurnoMaster Inc."
-                  required
+                  className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                  placeholder="Ingrese el nombre de su empresa"
+                  
                 />
-                {errors.company_name && (
-                  <p className="text-sm text-red-600 text-center">
-                    <FaRegCircleXmark className="inline mr-2" />
+                {errors?.company_name && ( 
+                  <p className="text-m text-red-600 text-center">
                     {errors.company_name[0]}
                   </p>
                 )}
               </div>
-              <p
-                onClick={toggleModal}
-                className="text-blue-600 text-s font-semibold cursor-pointer text-center mt-4 mb-4 lg:hidden"
-              >
-                Más información
-              </p>
+
+              {apiMessage && (
+                <p
+                  className={`text-m ${
+                    apiMessage === "El RUT ya ha sido registrado."
+                      ? "text-red-600 bg-red-100 border border-red-400"
+                      : "text-green-600 bg-green-100 border border-green-400"
+                  } rounded p-2 mb-4`}
+                >
+                  {apiMessage}
+                </p>
+              )}
+
               <button
                 type="submit"
-                className="w-full px-4 py-2 text-white bg-blue-800 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 bg-[#e01d1d] hover:bg-[#b21e1e] text-white rounded focus:outline-none focus:ring-2 focus:ring-[#e01d1d]"
               >
                 Registrar
               </button>
@@ -117,74 +172,6 @@ const RegisterDemo: React.FC = () => {
           </div>
         )}
       </div>
-
-      <div className="hidden lg:block bg-white rounded-xl p-8 shadow-2xl lg:flex-1">
-        <div className="bg-gray-100 p-6 rounded-lg h-full">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Compruebe todo el poder de TurnoMaster en una prueba gratuita de 7 días.</h3>
-            <ul className="text-gray-600 text-sm list-disc list-inside">
-            <li>No necesitas agregar datos de una tarjeta para su uso.</li>
-            <li>Prueba gratuita de 7 días.</li>
-            <li>A diferencia de nuestro <strong>Modelo Fremium</strong>, aquí puedes probar todas las funciones del sistema sin limitaciones.</li>
-            <li>Prueba el acceso total de las funciones de TurnoMaster por tiempo limitado.</li>
-            <li>La prueba gratis no es funcional para entornos de producción.</li>
-            </ul>
-            <div className="mt-6 border-t border-gray-300 pt-6 flex flex-col lg:flex-row lg:space-x-4">
-              <div className="flex-1 text-center">
-                <h4 className="text-sm font-semibold text-gray-800 mb-2">Paso 1</h4>
-                <p className="text-gray-600 text-xs">Rellena el formulario con tus datos personales y de tu empresa.</p>
-              </div>
-              <div className="flex-1 text-center">
-                <h4 className="text-sm font-semibold text-gray-800 mb-2">Paso 2</h4>
-                <p className="text-gray-600 text-xs">Revisa tu correo electrónico para confirmar tu registro.</p>
-              </div>
-              <div className="flex-1 text-center">
-                <h4 className="text-sm font-semibold text-gray-800 mb-2">Paso 3</h4>
-                <p className="text-gray-600 text-xs">Accede a tu cuenta y comienza a explorar TurnoMaster.</p>
-              </div>
-            </div>
-
-        </div>
-      </div>
-
-
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg w-11/12 max-w-md">
-            <button
-              onClick={toggleModal}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-lg"
-            >
-              ✕
-            </button>
-            <h3 className="text-sm font-semibold text-gray-800 mb-4">
-              Compruebe todo el poder de TurnoMaster en una prueba gratuita de 7 días.
-            </h3>
-            <ul className="text-gray-600 text-xs list-disc list-inside space-y-2">
-              <li>No necesitas agregar datos de una tarjeta para su uso.</li>
-              <li>Prueba gratuita de 7 días.</li>
-              <li>A diferencia de nuestro <strong>Modelo Fremium</strong>, aquí puedes probar todas las funciones del sistema sin limitaciones.</li>
-              <li>Prueba el acceso total de las funciones de TurnoMaster por tiempo limitado.</li>
-              <li>La prueba gratis no es funcional para entornos de producción.</li>
-            </ul>
-            <div className="mt-6 border-t border-gray-300 pt-6">
-              <div className="flex flex-col space-y-6">
-                <div className="flex-1 text-center">
-                  <h4 className="text-sm font-semibold text-gray-800 mb-2">Paso 1</h4>
-                  <p className="text-gray-600 text-xs">Rellena el formulario con tus datos personales y de tu empresa.</p>
-                </div>
-                <div className="flex-1 text-center">
-                  <h4 className="text-sm font-semibold text-gray-800 mb-2">Paso 2</h4>
-                  <p className="text-gray-600 text-xs">Revisa tu correo electrónico para confirmar tu registro.</p>
-                </div>
-                <div className="flex-1 text-center">
-                  <h4 className="text-sm font-semibold text-gray-800 mb-2">Paso 3</h4>
-                  <p className="text-gray-600 text-xs">Accede a tu cuenta y comienza a explorar TurnoMaster.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   )
 }

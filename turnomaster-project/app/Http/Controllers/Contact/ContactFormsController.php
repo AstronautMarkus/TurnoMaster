@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Mail;
 
-use App\Models\ContactFormCategories;
-use App\Models\ContactForms;
+use App\Models\Forms\ContactFormCategories;
+use App\Models\Forms\ContactForms;
 
 class ContactFormsController extends Controller
 {
@@ -37,8 +37,8 @@ class ContactFormsController extends Controller
             $contactForm = ContactForms::create($validatedData);
 
             Mail::send('emails.contact_success', [
-                'name' => $contactForm->name,
-                'last_name' => $contactForm->last_name,
+                'name' => ucfirst($contactForm->name),
+                'last_name' => ucfirst($contactForm->last_name),
             ], function ($message) use ($contactForm) {
                 $message->to($contactForm->email)
                         ->subject('Solicitud de contacto recibida | TurnoMaster');

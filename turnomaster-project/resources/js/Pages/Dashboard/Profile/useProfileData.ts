@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 interface UserRole {
+    id: number;
     name: string;
+    description: string;
 }
 
 interface Company {
@@ -11,12 +13,21 @@ interface Company {
 }
 
 interface UserProfile {
-    name: string;
+    first_name: string;
+    last_name: string;
     email: string;
     role: UserRole;
+    profile_photo: string;
     companies: {
         owned: Company[];
     };
+    rut: number;
+    rut_dv: string;
+    company_id: number;
+    role_id: number;
+    created_at: string;
+    updated_at: string;
+    company: string;
 }
 
 const useProfileData = () => {
@@ -32,7 +43,13 @@ const useProfileData = () => {
                             Authorization: `Bearer ${token}`,
                         },
                     });
-                    setUser(response.data);
+                    const { user, company, role } = response.data;
+                    setUser({
+                        ...user,
+                        company,
+                        role,
+                        profile_photo: user.profile_photo || '/img/profile/default.png',
+                    });
                 } catch (error) {
                     console.error('Error fetching user data:', error);
                 }

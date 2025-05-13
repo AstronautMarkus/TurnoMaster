@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User as UserModel;
-use App\Models\Company;
+use App\Models\Users\User;
+use App\Models\Users\DashboardUser;
+use App\Models\Companies;
 use App\Models\Role;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
@@ -18,45 +19,96 @@ class GetPersonalDataController extends Controller
         $token = $request->bearerToken();
 
         if (!$token) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => 'Token no proporcionado.'], 401);
         }
 
-        try {
 
             $decoded = JWT::decode($token, new Key(env('JWT_SECRET'), 'HS256'));
-            $userId = $decoded->sub;
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Invalid token'], 401);
-        }
+            $userType = $decoded->user_type;
+            $userCompany = $decoded->company_id; 
+            $roleId = $decoded->role_id;
 
 
-        $user = UserModel::with(['role:id,name', 'company:id,name'])
-            ->select('id', 'name', 'email', 'role_id', 'company_id', 'is_trial')
-            ->find($userId);
+            if ($userType === 'company') {
+                $user = User::where('id', $decoded->user_id)->first();
+                if (!$user) {
+                    return response()->json(['error' => 'Usuario no encontrado.'], 404);
+                }
 
-        if (!$user) {
-            return response()->json(['error' => 'User not found'], 404);
-        }
+                $company = Companies::where('id', $userCompany)->first();
+                if (!$company) {
+                    return response()->json(['error' => 'Compañía no encontrada.'], 404);
+                }
 
-        $isOwner = Company::where('owner_id', $user->id)->exists();
+                $role = Role::where('id', $roleId)->first();
+                if (!$role) {
+                    return response()->json(['error' => 'Rol no encontrado.'], 404);
+                }
 
-        $ownedCompanies = Company::where('owner_id', $user->id)
-            ->select('id', 'name')
-            ->get();
+                return response()->json([
+                    'user' => [
+                        'id' => $user->id,
+                        'first_name' => $user->first_name,
+                        'last_name' => $user->last_name,
+                        'rut' => $user->rut,
+                        'rut_dv' => $user->rut_dv,
+                        'email' => $user->email,
+                        'profile_photo' => $user->profile_photo 
+                            ? url("api/assets/{$user->profile_photo}") 
+                            : null,
+                        'company_id' => $user->company_id,
+                        'is_trial' => $user->is_trial,
+                        'expires_at' => $user->expires_at,
+                    ],
+                    'company' => $company->name,
+                    'role' => [
+                        'id' => $role->id,
+                        'name' => $role->name,
+                        'description' => $role->description,
+                    ],
 
-        $userData = [
-            'id'    => $user->id,
-            'name'  => $user->name,
-            'email' => $user->email,
-            'is_trial' => $user->is_trial,
-            'role'  => [
-                'name' => isset($user->role->name) ? ucfirst($user->role->name) : null
-            ],
-            'companies' => [
-                'owned' => $ownedCompanies,
-            ],
-        ];
+                ]);
 
-        return response()->json($userData);
+            } elseif ($userType === 'employee') {
+                $user = DashboardUser::where('id', $decoded->user_id)->first();
+                if (!$user) {
+                    return response()->json(['error' => 'Empleado no encontrado.'], 404);
+                }
+                                $company = Companies::where('id', $userCompany)->first();
+                if (!$company) {
+                    return response()->json(['error' => 'Compañía no encontrada.'], 404);
+                }
+
+                $role = Role::where('id', $user->role_id)->first();
+                if (!$role) {
+                    return response()->json(['error' => 'Rol no encontrado.'], 404);
+                }
+
+                return response()->json([
+                    'user' => [
+                        'id' => $user->id,
+                        'first_name' => $user->first_name,
+                        'last_name' => $user->last_name,
+                        'rut' => $user->rut,
+                        'rut_dv' => $user->rut_dv,
+                        'email' => $user->email,
+                        'profile_photo' => $user->profile_photo 
+                            ? url("api/assets/{$user->profile_photo}") 
+                            : null,
+                        'company_id' => $user->company_id,
+                        'role_id' => $user->role_id,
+                        'expires_at' => $user->expires_at,
+                    ],
+                    'company' => $company->name,
+                    'role' => [
+                        'id' => $role->id,
+                        'name' => $role->name,
+                        'description' => $role->description,
+                    ],
+                ]);
+            } else {
+                return response()->json(['error' => 'Tipo de usuario inválido.'], 400);
+            }
+
     }
 }

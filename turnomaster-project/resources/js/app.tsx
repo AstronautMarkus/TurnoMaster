@@ -2,9 +2,9 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import '../css/app.css';
 
-import NormalRouter from './routers/NormalRouter';
-import AuthRouter from './routers/AuthRouter';
-import DashboardRouter from './routers/DashboardRouter';
+import NormalRouter from './routers/Default/NormalRouter';
+import AuthRouter from './routers/Auth/AuthRouter';
+import DashboardRouter from './routers/Dashboard/DashboardRouter';
 
 function App() {
     return (
