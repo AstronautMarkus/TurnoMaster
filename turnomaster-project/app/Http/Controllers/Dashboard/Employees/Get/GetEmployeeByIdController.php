@@ -29,7 +29,9 @@ class GetEmployeeByIdController extends Controller
 
         $role = Role::find($employee->role_id);
         $employee->role = $role ? $role->name : null;
-        unset($employee->role_id);
+                    $employee->profile_photo = $employee->profile_photo 
+                ? url("api/assets/{$employee->profile_photo}") 
+                : null;
 
         return response()->json($employee);
     }

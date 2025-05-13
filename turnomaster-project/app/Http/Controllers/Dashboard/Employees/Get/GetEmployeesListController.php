@@ -28,7 +28,6 @@ class GetEmployeesListController extends Controller
             $employee->profile_photo = $employee->profile_photo 
                 ? url("api/assets/{$employee->profile_photo}") 
                 : null;
-            unset($employee->role_id);
             return $employee;
         });
 
