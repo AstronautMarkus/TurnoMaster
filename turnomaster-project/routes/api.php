@@ -49,6 +49,10 @@ use App\Http\Controllers\Dashboard\Employees\Get\GetEmployeeByIdController;
 
 use App\Http\Controllers\Dashboard\Employees\Edit\EditEmployeeController;
 
+// Delete controllers
+
+use App\Http\Controllers\Dashboard\Employees\Delete\DeleteEmployeeController;
+
 // Image controllers
 
 use App\Http\Controllers\User\Image\UpdateImageController;
@@ -91,6 +95,7 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::get('/employees', [GetEmployeesListController::class, 'getEmployeesList']);
     Route::get('/employees/{id}', [GetEmployeeByIdController::class, 'getEmployeeById']);
     Route::put('/employees/{id}', [EditEmployeeController::class, 'editEmployee']);
+    Route::delete('/employees/{id}', [DeleteEmployeeController::class, 'deleteEmployee']);
     Route::post('/user/profile-image', [UpdateImageController::class, 'update']);
     Route::delete('/user/profile-image', [DeleteImageController::class, 'delete']);
 });
