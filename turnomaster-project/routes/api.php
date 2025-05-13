@@ -26,6 +26,7 @@ use App\Http\Controllers\Auth\ResetPassword\Employees\ResetPasswordEmployeesCont
 // Token controllers
 
 use App\Http\Controllers\Auth\Token\TokenController;
+use App\Http\Controllers\Auth\Token\GenericTokenController;
 use App\Http\Controllers\Auth\ValidateTokenController;
 
 // Login controllers
@@ -73,7 +74,7 @@ Route::post('/login-employees', [LoginEmployeesController::class, 'login']);
 Route::post('/logout', [LogoutController::class, 'logout']);
 
 
-Route::post('/refresh', [TokenController::class, 'refresh']);
+Route::post('/refresh', [GenericTokenController::class, 'refresh']);
 
 
 
