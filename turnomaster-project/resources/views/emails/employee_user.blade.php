@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuenta de empleado | TurnoMaster</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        
+        * {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            margin: 0;
+            padding: 0;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            background-color: #891818;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo {
+            height: auto;
+            margin-right: 15px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 16px;
+            color: #DDDDDD;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .info-box {
+            background-color: #2B2B2B;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid #891818;
+        }
+
+        .info-box p {
+            font-size: 16px;
+            color: #ffffff;
+            margin: 8px 0;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #891818;
+            color: #ffffff !important;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color:rgb(105, 15, 15);
+        }
+
+        .footer {
+            background-color: #121212;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #2B2B2B;
+        }
+
+        .footer p {
+            font-size: 14px;
+            color: #AAAAAA;
+            margin: 5px 0;
+        }
+
+        .social-links {
+            margin: 15px 0;
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin: 0 8px;
+            color: #AAAAAA;
+            text-decoration: none;
+        }
+
+        .disclaimer {
+            font-size: 13px;
+            color: #888888;
+            margin-top: 15px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .container {
+                width: 100%;
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjAwIiB6b29tQW5kUGFuPSJtYWduaWZ5IiB2aWV3Qm94PSIwIDAgNDUwIDQ0OS45OTk5ODQiIGhlaWdodD0iNjAwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0IiB2ZXJzaW9uPSIxLjAiPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgdHJhbnNmb3JtPSJtYXRyaXgoMC43NSwgLTAuMDAwMDAwMDAwMDAwMDAwNTU4LCAwLjAwMDAwMDAwMDAwMDAwMDU1OCwgMC43NSwgMzYuMzUyMzA0LCAxMjkuNTA0MTMyKSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgZD0iTSAyMS40OTkwMTMgMjEuNDk5NzAxIEwgMTI1LjMzMjM1NCAyMS40OTk3MDEgIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iNDMiIHN0cm9rZS1vcGFjaXR5PSIxIiBzdHJva2UtbWl0ZXJsaW1pdD0iNCIvPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgdHJhbnNmb3JtPSJtYXRyaXgoMC43NSwgLTAuMDAwMDAwMDAwMDAwMDAwOTMsIDAuMDAwMDAwMDAwMDAwMDAwOTMsIDAuNzUsIDE1OC41MzUxMTMsIDEyOS41MDQxMzIpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBkPSJNIDIxLjUwMDA1OSAyMS40OTk3MDEgTCA2Ni4xOTc5NzkgMjEuNDk5NzAxICIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjQzIiBzdHJva2Utb3BhY2l0eT0iMSIgc3Ryb2tlLW1pdGVybGltaXQ9IjQiLz48cGF0aCBzdHJva2UtbGluZWNhcD0icm91bmQiIHRyYW5zZm9ybT0ibWF0cml4KDAuNzUsIDAuMDAwMDAwMDAwMDAwMDAwMzYxLCAtMC4wMDAwMDAwMDAwMDAwMDAzNjEsIDAuNzUsIDIzNi40MDIyNDYsIDEyOS41MDQxMzIpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBkPSJNIDIxLjQ5OTAxMyAyMS40OTk3MDEgTCAyMTQuODI4MjcyIDIxLjQ5OTcwMSAiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSI0MyIgc3Ryb2tlLW9wYWNpdHk9IjEiIHN0cm9rZS1taXRlcmxpbWl0PSI0Ii8+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjc1LCAtMC4wMDAwMDAwMDAwMDAwMDAxODYsIDAuMDAwMDAwMDAwMDAwMDAwMTg2LCAwLjc1LCAzNi4zNTIzMDQsIDE4Mi40MTgwMzQpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBkPSJNIDIxLjQ5OTAxMyAyMS40OTk5MTUgTCA0ODEuNTYxNTQ5IDIxLjQ5OTkxNSAiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSI0MyIgc3Ryb2tlLW9wYWNpdHk9IjEiIHN0cm9rZS1taXRlcmxpbWl0PSI0Ii8+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjc1LCAwLjAwMDAwMDAwMDAwMDAwMDQwNywgLTAuMDAwMDAwMDAwMDAwMDAwNDA3LCAwLjc1LCAzNi4zNTIzMDQsIDIzNS4zMzE5MzQpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBkPSJNIDIxLjQ5OTAxMyAyMS41MDAxMzIgTCAzOTcuMDc3MTY3IDIxLjUwMDEzMiAiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSI0MyIgc3Ryb2tlLW9wYWNpdHk9IjEiIHN0cm9rZS1taXRlcmxpbWl0PSI0Ii8+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjc1LCAwLCAwLCAwLjc1LCAzNTkuOTk4OTU1LCAyMzUuMzMxOTM0KSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgZD0iTSAyMS41MDEzOTUgMjEuNTAwMTMyIEwgNTAuMDMyNjQ3IDIxLjUwMDEzMiAiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSI0MyIgc3Ryb2tlLW9wYWNpdHk9IjEiIHN0cm9rZS1taXRlcmxpbWl0PSI0Ii8+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjc1LCAwLCAwLCAwLjc1LCAxODMuMDk2OTk1LCAyODguMjQ1ODA3KSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgZD0iTSAyMS41MDA4ODQgMjEuNTAwMzg0IEwgMjg0Ljk4MDA3MSAyMS41MDAzODQgIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iNDMiIHN0cm9rZS1vcGFjaXR5PSIxIiBzdHJva2UtbWl0ZXJsaW1pdD0iNCIvPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgdHJhbnNmb3JtPSJtYXRyaXgoMC43NSwgMCwgMCwgMC43NSwgMzYuMzUyMzA0LCAyODguMjQ1ODA3KSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgZD0iTSAyMS40OTkwMTMgMjEuNTAwMzg0IEwgMTU4Ljg4OTY0OSAyMS41MDAzODQgIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iNDMiIHN0cm9rZS1vcGFjaXR5PSIxIiBzdHJva2UtbWl0ZXJsaW1pdD0iNCIvPjwvc3ZnPg=="  alt="logo" style="width: 50px; height: auto;">
+            <h2 style="color: #FFFFFF; font-size: 20px; margin: 0;">TurnoMaster</h2>
+        </div>
+
+        <div class="content">
+            <h1>¡Hola, {{ $name }}!</h1>
+            <p>¡Estamos emocionados de darte la bienvenida a TurnoMaster! 🚀</p>
+            <p>
+                Has sido registrado como empleado en {{ $companyName }}, registrada en TurnoMaster. A continuación, encontrarás los detalles de tu cuenta.
+            </p>
+
+            <div class="info-box">
+                <p><strong>Correo electrónico:</strong> {{ $email }}</p>
+                <p><strong>Contraseña:</strong> {{ $password }}</p>
+                <p><strong>Nombre de la empresa:</strong> {{ $companyName }}</p>
+            </div>
+
+            <p>
+                Esta contraseña es generada automáticamente y puedes cambiarla en cualquier momento desde tu perfil dentro de la aplicación.
+            </p>
+
+            <p>
+                Para Acceder a tu cuenta, haz clic en el siguiente botón:
+            </p>
+
+            <a href="{{ $loginUrl }}" class="button">
+                Acceder a mi cuenta
+            </a>
+
+            <p>
+                Dentro de nuestro panel debes presionar la opción "Empleados" como se muestra en la siguiente imagen: 
+            </p>
+
+            <img src="/img/help/empleados_info.png" alt="Instrucciones" style="width: 100%; max-width: 200px; border-radius: 8px; margin-bottom: 20px;">
+
+            <p>
+                Si tienes alguna duda o necesitas ayuda, no dudes en contactarnos a través de nuestro correo de soporte.
+            </p>
+
+        </div>
+
+        <div class="footer">
+            <p><strong>TurnoMaster</strong> - Sistema de Gestión de Turnos</p>
+            <p>Creado por <a href="https://www.reyesandfriends.cl" style="color: #E3003D;">Reyes&Friends</a></p>
+            <p>Soporte: <a href="mailto:soporte@turnomaster.com" style="color: #E3003D;">soporte@turnomaster.com</a></p>
+            <p class="disclaimer">
+                © {{ date('Y') }} TurnoMaster. Todos los derechos reservados.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
