@@ -18,22 +18,22 @@ function NormalRouter() {
 
     useEffect(() => {
         const titles: Record<string, string> = {
-            '/': 'Inicio | Reyes&Friends',
-            '/prices': 'Planes y precios | Reyes&Friends',
-            '/clients': 'Clientes | Reyes&Friends',
-            '/about-project': 'Sobre el proyecto | Reyes&Friends',
-            '/features': 'Características | Reyes&Friends',
-            '/turnomaster-audience': 'Público objetivo | Reyes&Friends',
-            '/faq': 'Preguntas frecuentes | Reyes&Friends',
-            '/security-privacy': 'Seguridad y privacidad | Reyes&Friends',
-            '/contact': 'Contacto | Reyes&Friends',
-            '/product': 'Producto | Reyes&Friends',
+            '/': 'Inicio | TurnoMaster',
+            '/prices': 'Planes y precios | TurnoMaster',
+            '/clients': 'Clientes | TurnoMaster',
+            '/about-project': 'Sobre el proyecto | TurnoMaster',
+            '/features': 'Características | TurnoMaster',
+            '/turnomaster-audience': 'Público objetivo | TurnoMaster',
+            '/faq': 'Preguntas frecuentes | TurnoMaster',
+            '/security-privacy': 'Seguridad y privacidad | TurnoMaster',
+            '/contact': 'Contacto | TurnoMaster',
+            '/product': 'Producto | TurnoMaster',
         };
 
         const currentPath = location.pathname;
         const basePath = currentPath.includes('/product/') ? '/product' : currentPath;
 
-        document.title = titles[basePath] || 'Reyes&Friends';
+        document.title = titles[basePath] || 'TurnoMaster';
     }, [location]);
 
     const pageTransition = {
