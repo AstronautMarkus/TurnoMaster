@@ -1,11 +1,15 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import HelmetHelper from '../../../hooks/HelmetHelper/HelmetHelper';
 
 import { MdAssessment, MdAssignmentAdd, MdAvTimer, MdVolunteerActivism } from "react-icons/md";
 
 
 const IndexPage: React.FC = () => {
     return (
+    <>
+        <HelmetHelper path="/" />
+
         <div className="flex flex-col w-full h-full">
 
                 <section className="relative w-full py-24">
@@ -143,9 +147,8 @@ const IndexPage: React.FC = () => {
 
                 </section>
 
-            
-
         </div>
+    </>
     );
 };
 

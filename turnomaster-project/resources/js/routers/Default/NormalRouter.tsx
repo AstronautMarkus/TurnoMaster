@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import IndexPage from '../../Pages/Default/Index/Index';
@@ -14,26 +13,6 @@ import Product from '../../Pages/Default/Product/Product';
 
 function NormalRouter() {
     const location = useLocation();
-
-    useEffect(() => {
-        const titles: Record<string, string> = {
-            '/': 'Inicio | TurnoMaster',
-            '/prices': 'Planes y precios | TurnoMaster',
-            '/about-project': 'Sobre el proyecto | TurnoMaster',
-            '/features': 'Características | TurnoMaster',
-            '/turnomaster-audience': 'Público objetivo | TurnoMaster',
-            '/faq': 'Preguntas frecuentes | TurnoMaster',
-            '/security-privacy': 'Seguridad y privacidad | TurnoMaster',
-            '/contact': 'Contacto | TurnoMaster',
-            '/product': 'Producto | TurnoMaster',
-        };
-
-        const currentPath = location.pathname;
-        const basePath = currentPath.includes('/product/') ? '/product' : currentPath;
-
-        document.title = titles[basePath] || 'TurnoMaster';
-    }, [location]);
-
     const pageTransition = {
         initial: { opacity: 0 },
         animate: { opacity: 1 },
