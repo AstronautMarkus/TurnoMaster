@@ -1,25 +1,9 @@
 import { Helmet } from 'react-helmet';
+import { helmetData } from './useGetHelpers';
 
 interface HelmetProps {
   path: string;
 }
-
-const helmetData: Record<string, {
-  title: string;
-  description: string;
-  image?: string;
-}> = {
-  '/': {
-    title: 'TurnoMaster | Gestión de Turnos Inteligente',
-    description: 'Optimiza la gestión de turnos y reservas con TurnoMaster. Plataforma profesional para empresas y clientes. ¡Descubre la mejor experiencia en organización!',
-  },
-  '/prices': {
-    title: 'Planes de TurnoMaster',
-    description: 'Compara los planes y elige el que mejor se adapte a las necesidades de tu negocio.',
-  },
-  
-  
-};
 
 const HelmetHelper: React.FC<HelmetProps> = ({ path }) => {
   const meta = helmetData[path] || {

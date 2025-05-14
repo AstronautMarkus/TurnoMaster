@@ -1,14 +1,7 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-    FaShieldAlt,
-    FaLock,
-    FaUserSecret,
-    FaBug,
-    FaCodeBranch
-} from 'react-icons/fa';
+import { FaShieldAlt, FaLock, FaUserSecret,FaBug, FaCodeBranch} from 'react-icons/fa';
 
-const SecurityPrivacy: React.FC = () => {
+const SecurityPrivacy = () => {
     return (
         <section className="min-h-screen py-10 px-6">
             <div className="max-w-6xl mx-auto">
