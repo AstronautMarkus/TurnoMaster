@@ -7,7 +7,6 @@ import PricingComparison from '../../Pages/Default/Prices/Prices';
 import AboutProject from '../../Pages/Default/AboutProject/AboutProject';
 import Features from '../../Pages/Default/Features/Features';
 import FaqPage from '../../Pages/Default/Faq/Faq';
-import Clients from '../../Pages/Default/Clients/Clients';
 import Contact from '../../Pages/Default/Contact/Contact';
 import Audience from '../../Pages/Default/Audience/Audience';
 import SecurityPrivacy from '../../Pages/Default/SecurityPrivacy/SecurityPrivacy';
@@ -20,7 +19,6 @@ function NormalRouter() {
         const titles: Record<string, string> = {
             '/': 'Inicio | TurnoMaster',
             '/prices': 'Planes y precios | TurnoMaster',
-            '/clients': 'Clientes | TurnoMaster',
             '/about-project': 'Sobre el proyecto | TurnoMaster',
             '/features': 'Características | TurnoMaster',
             '/turnomaster-audience': 'Público objetivo | TurnoMaster',
@@ -54,7 +52,6 @@ function NormalRouter() {
                     <Routes location={location} key={location.pathname}>
                         <Route path="/*" element={<IndexPage />} />
                         <Route path="/prices" element={<PricingComparison />} />
-                        <Route path="/clients" element={<Clients />} />
                         <Route path="/about-project" element={<AboutProject />} />
                         <Route path="/features" element={<Features />} />
                         <Route path="/turnomaster-audience" element={<Audience />} />
