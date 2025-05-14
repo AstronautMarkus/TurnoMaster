@@ -8,7 +8,7 @@ const DefaultLayout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 
       <Navbar />
       
-      <main className="flex-grow flex bg-gradient-to-b from-gray-100 to-gray-300">
+      <main className="flex-grow flex">
         {children}
       </main>
 

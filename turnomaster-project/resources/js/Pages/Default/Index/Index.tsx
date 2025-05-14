@@ -1,17 +1,18 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import StatsGetter from '../../../Components/Default/StatsGetter/StatsGetter';
+import { MdAssessment, MdAssignmentAdd, MdAvTimer, MdVolunteerActivism } from "react-icons/md";
+
 
 const IndexPage: React.FC = () => {
     return (
         <div className="flex flex-col w-full h-full">
 
-                <section className="relative w-full py-24 bg-gray-900">
+                <section className="relative w-full py-24">
                     <div className="absolute inset-0">
                         <img
                             src="/img/persons/nastuh-abootalebi-yWwob8kwOCk-unsplash.jpg"
-                            alt="Person working illustration"
+                            alt="Background TurnoMaster"
                             className="object-cover object-center w-full h-full"
                         />
                         <div className="absolute inset-0 bg-black opacity-50"></div>
@@ -21,164 +22,128 @@ const IndexPage: React.FC = () => {
                         <div className="space-y-6 text-white">
 
                             <h2 className="text-2xl font-semibold">
-                                ¿Estás listo para optimizar la gestión de tu empresa?
+                                Facilita la gestión de turnos en tu empresa
                             </h2>
                             <h1 className="lg:text-6xl font-extrabold tracking-tight">
-                                Lleva la gestión de tu empresa al siguiente nivel con TurnoMaster
+                                TurnoMaster simplifica tus horarios
                             </h1>
                             <p className="text-lg max-w-xl">
-                                Ahorra horas de trabajo con nuestro sistema que registra entradas, colaciones y salidas de forma rápida y centralizada.
-                                Administra tus equipos como nunca antes.
+                                Registra y administra turnos de forma rápida y centralizada.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                                <NavLink to="/prices" className="inline-flex h-12 items-center justify-center rounded-full bg-[#e01d1d] hover:bg-[#b21e1e] px-6 font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
-                                    Adquirir TurnoMaster
+                                <NavLink
+                                    to="/about-project"
+                                    className="inline-flex h-16 text-xl items-center justify-center bg-[#e01d1d] hover:bg-[#b21e1e] px-10 font-semibold text-white transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                                >
+                                    Descubrir TurnoMaster
                                 </NavLink>
-                                <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" className="inline-flex h-12 items-center justify-center rounded-full border border-white px-6 font-medium text-white transition-colors hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2">
-                                    Ver demostración
-                                </a>
                             </div>
                         </div>
 
                     </div>
                 </section>
 
-                <section className="w-full py-12 bg-white">
-                    <div className="container mx-auto px-4 md:px-6 text-center">
-                        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                            ¿Qué es TurnoMaster?
-                        </h1>
-                        <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
-                            TurnoMaster es una plataforma web que permite a empresas gestionar los horarios de sus trabajadores de manera simple, eficiente y moderna. Desde el registro de entrada/colación/salida hasta reportes detallados y notificaciones automáticas, todo en un solo lugar.
-                        </p>
-                    </div>
-                    <div className="container mx-auto px-4 md:px-6 mt-4">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
-                            <div className="space-y-4">
-                                <div className="text-4xl">✅</div>
-                                <h3 className="text-xl font-semibold text-gray-900">Registro de turnos</h3>
-                                <p className="text-gray-600 text-sm">
-                                    Lleva un control preciso de las entradas, salidas y colaciones de tu equipo.
-                                </p>
-                            </div>
-                            <div className="space-y-4">
-                                <div className="text-4xl">📊</div>
-                                <h3 className="text-xl font-semibold text-gray-900">Reportes detallados</h3>
-                                <p className="text-gray-600 text-sm">
-                                    Obtén reportes completos para analizar el rendimiento y la asistencia.
-                                </p>
-                            </div>
-                            <div className="space-y-4">
-                                <div className="text-4xl">📬</div>
-                                <h3 className="text-xl font-semibold text-gray-900">Notificaciones inteligentes</h3>
-                                <p className="text-gray-600 text-sm">
-                                    Recibe alertas automáticas para mantenerte informado en todo momento.
-                                </p>
-                            </div>
-                            <div className="space-y-4">
-                                <div className="text-4xl">🧠</div>
-                                <h3 className="text-xl font-semibold text-gray-900">Control total de tu personal</h3>
-                                <p className="text-gray-600 text-sm">
-                                    Administra a tu equipo de manera eficiente y sin complicaciones.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="w-full py-12 md:py-24 lg:py-32">
-                    <div className="container mx-auto px-4 md:px-6">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                            <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] bg-gray-200 rounded-lg overflow-hidden">
-                                <img
-                                    src="/img/persons/krakenimages-376KN_ISplE-unsplash.jpg"
-                                    alt="Simple tool illustration"
-                                    className="object-cover object-center w-full h-full"
-                                />
-                            </div>
-                            <div className="text-center md:text-left">
-                                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
-                                    Menos complicaciones
-                                </h2>
-                                <p className="text-lg text-gray-500 md:text-xl mt-4 max-w-[600px]">
-                                    En el ámbito empresarial, <strong>"poco es mucho"</strong>.<br />
-                                    TurnoMaster elimina la complejidad innecesaria y te ofrece una herramienta simple, pero eficiente.<br />
-                                    Gestiona los horarios de tus empleados sin dolores de cabeza.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <StatsGetter />
-
-
-                <section className="w-full py-12">
-                    <h2 className="text-4xl font-semibold text-center mb-4">Una mirada al interior de TurnoMaster</h2>
-                    <div className="container mx-auto px-4 md:px-6">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <div className="relative w-full h-[300px] bg-gray-200 rounded-lg overflow-hidden">
-                                <img
-                                    src="https://via.placeholder.com/400x300"
-                                    alt="Vista previa del sistema TurnoMaster 1"
-                                    className="object-cover object-center w-full h-full"
-                                />
-                            </div>
-                            <div className="relative w-full h-[300px] bg-gray-200 rounded-lg overflow-hidden">
-                                <img
-                                    src="https://via.placeholder.com/400x300"
-                                    alt="Vista previa del sistema TurnoMaster 2"
-                                    className="object-cover object-center w-full h-full"
-                                />
-                            </div>
-                            <div className="relative w-full h-[300px] bg-gray-200 rounded-lg overflow-hidden">
-                                <img
-                                    src="https://via.placeholder.com/400x300"
-                                    alt="Vista previa del sistema TurnoMaster 3"
-                                    className="object-cover object-center w-full h-full"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="w-full py-12 bg-gray-100">
-                    <div className="container mx-auto px-4 md:px-6 text-center">
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                            Próximamente en TurnoMaster:
+                <section className="relative w-full py-16 bg-[#891818]">
+                    <div className="container mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between gap-8">
+                        <div className="flex-1 text-white space-y-4">
+                        <h2 className="text-3xl md:text-4xl font-bold">
+                            Un plan que se adapta a lo que buscas
                         </h2>
-                        <ul className="space-y-4 text-lg text-gray-700">
-                            <li className="flex items-center justify-center gap-2">
-                                <span role="img" aria-label="App móvil">📱</span> App móvil
-                            </li>
-                            <li className="flex items-center justify-center gap-2">
-                                <span role="img" aria-label="Integración con WhatsApp">💬</span> Integración con WhatsApp
-                            </li>
-                            <li className="flex items-center justify-center gap-2">
-                                <span role="img" aria-label="Expansión de planes personalizados">🎯</span> Expansión de planes personalizados
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section className="w-full py-12">
-                    <div className="container mx-auto px-4 md:px-6 text-center">
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                            ¿Listo para empezar?
-                        </h2>
-                        <p className="text-lg md:text-xl text-gray-600 mb-6">
-                            Únete a la revolución de la gestión de turnos con TurnoMaster.
+                        <p className="text-lg">
+                            Elige la opción que mejor se ajuste a tu empresa y empieza a optimizar tu gestión de turnos hoy mismo.
                         </p>
+                        </div>
+                        <div>
                         <NavLink
                             to="/prices"
-                            className="inline-flex h-12 items-center justify-center rounded-full bg-[#28a745] hover:bg-[#218838] px-6 font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                            className="inline-flex h-14 text-lg items-center justify-center bg-white hover:bg-gray-300 px-8 font-semibold text-[#891818] transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
                         >
-                            Adquirir TurnoMaster
+                            Ver planes y precios
                         </NavLink>
+                        </div>
                     </div>
+
                 </section>
 
 
+                <section className="w-full py-12">
+                        <div className="mt-12 container mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-10">
+
+                            <div className="flex flex-col justify-center items-start space-y-4">
+                                <div className="flex items-center mb-2">
+                                    <div className="w-2 h-10 bg-[#e01d1d] mr-4"></div>
+                                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+                                        ¿Por qué elegir TurnoMaster?
+                                    </h2>
+                                </div>
+                                <p className="text-lg text-gray-700">
+                                    Gestiona turnos, empleados y cuentas de manera eficiente. Nuestra plataforma te ayuda a ahorrar tiempo y mejorar la organización de tu empresa.
+                                </p>
+                                <ul className="list-disc pl-5 text-gray-700">
+                                    <li>Fácil de usar y configurar</li>
+                                    <li>Acceso para múltiples empleados</li>
+                                    <li>Control total de horarios y turnos</li>
+                                </ul>
+                            </div>
+
+                            <div className="flex flex-col items-center border-2 border-gray-300">
+                                <img
+                                    src="/img/persons/workplace-5517762_1280.jpg"
+                                    alt="Personas"
+                                    className="object-cover object-center w-full h-full shadow-lg"
+                                />
+                            </div>
+
+                        </div>
+                </section>
+
+                <section className="w-full py-16">
+
+                    <div className="container mx-auto px-4 md:px-6">
+                        <div className="flex items-center justify-center mb-10">
+                            <div className="w-2 h-10 bg-[#e01d1d] mr-4"></div>
+                            <h2 className="text-3xl md:text-3xl font-bold text-center text-black">
+                                Nos encargamos de la gestión. Accede a la información que necesitas, cuando la necesites.
+                            </h2>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 justify-items-center">
+                            <div className="flex flex-col items-center shadow-md p-10 w-full h-full border-2 border-gray-300">
+                                <MdAssignmentAdd className="w-20 h-20 text-[#e01d1d] mb-6" />
+                                <h3 className="text-2xl font-semibold text-black mb-4">Gestión avanzada de usuarios</h3>
+                                <p className="text-lg text-gray-700 text-center">Crea y administra cuentas para cada miembro de tu equipo, garantizando control y seguridad en todo momento.</p>
+                            </div>
+                            <div className="flex flex-col items-center shadow-md p-10 w-full h-full border-2 border-gray-300">
+                                <MdAvTimer className="w-20 h-20 text-[#e01d1d] mb-6" />
+                                <h3 className="text-2xl font-semibold text-black mb-4">Registro de actividad en tiempo real</h3>
+                                <p className="text-lg text-gray-700 text-center">Supervisa la asistencia y desempeño de tus empleados con información precisa y actualizada.</p>
+                            </div>
+                            <div className="flex flex-col items-center shadow-md p-10 w-full h-full border-2 border-gray-300">
+                                <MdAssessment className="w-20 h-20 text-[#e01d1d] mb-6" />
+                                <h3 className="text-2xl font-semibold text-black mb-4">Estadísticas precisas y detalladas</h3>
+                                <p className="text-lg text-gray-700 text-center">Accede a reportes visuales y completos para tomar decisiones informadas y potenciar tu empresa.</p>
+                            </div>
+                            <div className="flex flex-col items-center shadow-md p-10 w-full h-full border-2 border-gray-300">
+                                <MdVolunteerActivism className="w-20 h-20 text-[#e01d1d] mb-6" />
+                                <h3 className="text-2xl font-semibold text-black mb-4">Sin trámites innecesarios</h3>
+                                <p className="text-lg text-gray-700 text-center">Olvídate de procesos complejos. Gestiona todo de manera ágil, sencilla y eficiente.</p>
+                            </div>
+                        </div>
+                    </div>
+                            
+                            
+                    <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center items-center mt-8">
+                        <NavLink
+                            to="/features"
+                            className="inline-flex h-16 text-xl items-center justify-center bg-[#e01d1d] hover:bg-[#b21e1e] px-10 font-semibold text-white transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                        >
+                            Conozca todos los detalles
+                        </NavLink>
+                    </div>
+
+                </section>
+
+            
 
         </div>
     );
