@@ -18,5 +18,9 @@ export const helmetData: Record<string, { title: string; description: string; im
   '/about-project': {
         title: 'Acerca de - TurnoMaster',
         description: 'Conoce más sobre TurnoMaster, la plataforma diseñada para optimizar la gestión de turnos y reservas en tu negocio.',
-    }
+    },
+  '/security-privacy':{
+    title: 'Seguridad y Privacidad - TurnoMaster',
+    description: 'En TurnoMaster, la seguridad de tus datos es prioridad. Implementamos múltiples capas de protección para garantizar que tu información esté siempre segura.',
+  }
 };

@@ -19,7 +19,7 @@ const Product = () => {
 
     return (
         <>
-            <HelmetHelper path={`/product/`} />
+            <HelmetHelper path="/product/" />
             <div className="min-h-screen py-16 px-6">
                 <div className="max-w-4xl mx-auto text-center">
                     <h1 className="text-3xl font-bold">{product.title}</h1>
