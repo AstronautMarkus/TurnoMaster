@@ -22,5 +22,9 @@ export const helmetData: Record<string, { title: string; description: string; im
   '/security-privacy':{
     title: 'Seguridad y Privacidad - TurnoMaster',
     description: 'En TurnoMaster, la seguridad de tus datos es prioridad. Implementamos múltiples capas de protección para garantizar que tu información esté siempre segura.',
-  }
+  },
+  '/features': {
+    title: 'Características generales - TurnoMaster',
+    description: 'Descubre las funcionalidades más destacadas que hacen de TurnoMaster una solución poderosa.',
+  },
 };
