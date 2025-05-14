@@ -15,4 +15,8 @@ export const helmetData: Record<string, { title: string; description: string; im
     title: 'Plan seleccionado - TurnoMaster',
     description: 'Descubre las características y beneficios del plan seleccionado. Optimiza la gestión de turnos con TurnoMaster.',
   },
+  '/about-project': {
+        title: 'Acerca de - TurnoMaster',
+        description: 'Conoce más sobre TurnoMaster, la plataforma diseñada para optimizar la gestión de turnos y reservas en tu negocio.',
+    }
 };
