@@ -152,6 +152,8 @@ export default function Navbar() {
         <div className="hidden md:flex items-center space-x-8">
           {renderLink("/prices", "Precios")}
 
+          {renderLink("/about-project", "Sobre el proyecto")}
+
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -166,8 +168,6 @@ export default function Navbar() {
             )}
           </div>
 
-          {renderLink("/clients", "Clientes")}
-          {renderLink("/about-project", "Sobre el proyecto")}
           {renderLink("/contact", "Contacto")}
         </div>
 
@@ -199,6 +199,7 @@ export default function Navbar() {
       {isOpen && (
         <div className="md:hidden mt-4 space-y-2">
           {renderLink("/prices", "Precios")}
+          {renderLink("/about-project", "Sobre el proyecto")}
 
           <div className="relative" ref={dropdownRef}>
             <button
@@ -213,9 +214,7 @@ export default function Navbar() {
               </div>
             )}
           </div>
-
-          {renderLink("/clients", "Clientes")}
-          {renderLink("/about-project", "Sobre el proyecto")}
+          
           {renderLink("/contact", "Contacto")}
 
           {isAuthenticated ? (
