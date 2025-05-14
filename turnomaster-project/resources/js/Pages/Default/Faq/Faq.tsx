@@ -1,10 +1,11 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-
+import HelmetHelper from '../../../hooks/HelmetHelper/HelmetHelper';
 import Faq from '../../../Components/Default/FAQ/Faq';
 
-const FaqPage: React.FC = () => {
+const FaqPage = () => {
     return(
+    <>
+        <HelmetHelper path="/faq"/>
         <div className='min-h-screen'>
             <section className='container mx-auto py-10 px-6'>
                 <div className='mb-6'>
@@ -27,6 +28,7 @@ const FaqPage: React.FC = () => {
 
             </section>
         </div>
+    </>
     )
 };
 

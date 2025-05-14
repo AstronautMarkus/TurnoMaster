@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Modal from "./Modal/Modal";
 import AuthLoadingScreen from "../../../Components/Auth/LoadingScreen/AuthLoadingScreen";
+import HelmetHelper from "../../../hooks/HelmetHelper/HelmetHelper";
 
-const Contact: React.FC = () => {
+const Contact = () => {
     const [categories, setCategories] = useState<{ id: number; name: string }[]>([]);
     const [loading, setLoading] = useState(true);
     const [formData, setFormData] = useState({
@@ -75,6 +76,7 @@ const Contact: React.FC = () => {
 
     return (
         <>
+            <HelmetHelper path="/contact"/>
             <Modal
                 isOpen={modal.isOpen}
                 message={modal.message}

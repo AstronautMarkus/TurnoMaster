@@ -27,4 +27,12 @@ export const helmetData: Record<string, { title: string; description: string; im
     title: 'Características generales - TurnoMaster',
     description: 'Descubre las funcionalidades más destacadas que hacen de TurnoMaster una solución poderosa.',
   },
+  '/faq': {
+    title: 'Preguntas Frecuentes - TurnoMaster',
+    description: 'Encuentra respuestas a las preguntas más comunes sobre TurnoMaster. Si tienes dudas, ¡contáctanos!',
+  },
+  '/contact': {
+    title: 'Contáctanos - TurnoMaster',
+    description: '¿Tienes preguntas o necesitas ayuda? Contáctanos y estaremos encantados de asistirte.',
+  },
 };
