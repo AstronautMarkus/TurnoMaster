@@ -13,6 +13,10 @@ const helmetData: Record<string, {
     title: 'TurnoMaster | Gestión de Turnos Inteligente',
     description: 'Optimiza la gestión de turnos y reservas con TurnoMaster. Plataforma profesional para empresas y clientes. ¡Descubre la mejor experiencia en organización!',
   },
+  '/prices': {
+    title: 'Planes de TurnoMaster',
+    description: 'Compara los planes y elige el que mejor se adapte a las necesidades de tu negocio.',
+  },
   
   
 };

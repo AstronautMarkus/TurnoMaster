@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { usePricesFeatures } from "./usePricesFeatures";
 import { FaCheck, FaXmark } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import HelmetHelper from "../../../hooks/HelmetHelper/HelmetHelper";
 
 const PricingComparison: React.FC = () => {
     const prices = usePricesFeatures();
@@ -10,6 +11,9 @@ const PricingComparison: React.FC = () => {
     const togglePricing = () => setIsYearly(!isYearly);
 
     return (
+    <>
+        <HelmetHelper path="/prices" />
+
         <div className="min-h-screen py-16 px-6">
             <div className="max-w-6xl mx-auto text-center">
                 <div className="flex flex-col items-center mb-8 space-y-4">
@@ -84,6 +88,7 @@ const PricingComparison: React.FC = () => {
                 </div>
             </div>
         </div>
+    </>
     );
 };
 
