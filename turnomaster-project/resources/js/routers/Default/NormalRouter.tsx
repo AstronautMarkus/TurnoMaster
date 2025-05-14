@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import IndexPage from '../../Pages/Default/Index/Index';
@@ -15,6 +15,26 @@ import Product from '../../Pages/Default/Product/Product';
 
 function NormalRouter() {
     const location = useLocation();
+
+    useEffect(() => {
+        const titles: Record<string, string> = {
+            '/': 'Inicio | Reyes&Friends',
+            '/prices': 'Planes y precios | Reyes&Friends',
+            '/clients': 'Clientes | Reyes&Friends',
+            '/about-project': 'Sobre el proyecto | Reyes&Friends',
+            '/features': 'Características | Reyes&Friends',
+            '/turnomaster-audience': 'Público objetivo | Reyes&Friends',
+            '/faq': 'Preguntas frecuentes | Reyes&Friends',
+            '/security-privacy': 'Seguridad y privacidad | Reyes&Friends',
+            '/contact': 'Contacto | Reyes&Friends',
+            '/product': 'Producto | Reyes&Friends',
+        };
+
+        const currentPath = location.pathname;
+        const basePath = currentPath.includes('/product/') ? '/product' : currentPath;
+
+        document.title = titles[basePath] || 'Reyes&Friends';
+    }, [location]);
 
     const pageTransition = {
         initial: { opacity: 0 },
@@ -38,7 +58,6 @@ function NormalRouter() {
                         <Route path="/about-project" element={<AboutProject />} />
                         <Route path="/features" element={<Features />} />
                         <Route path="/turnomaster-audience" element={<Audience />} />
-                        <Route path="/integrations" element={<h1>Integrations Page</h1>} />
                         <Route path="/faq" element={<FaqPage />} />
                         <Route path="/security-privacy" element={<SecurityPrivacy />} />
                         <Route path="/contact" element={<Contact />} />
