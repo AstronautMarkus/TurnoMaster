@@ -73,7 +73,7 @@ export default function Navbar() {
     <div className="relative" ref={accessDropdownRef}>
       <button
         onClick={() => setIsAccessDropdownOpen(!isAccessDropdownOpen)}
-        className="flex items-center text-white text-lg px-4 py-2 rounded-full border border-white transition-colors hover:bg-white hover:text-black w-full md:w-auto"
+        className="flex items-center text-white text-lg px-4 py-2 rounded border border-white transition-colors hover:bg-white hover:text-black w-full md:w-auto"
       >
         <FaUser className="mr-2" />
         <span>Acceder</span>
@@ -179,7 +179,7 @@ export default function Navbar() {
             <>
               <Link
                 to="/auth/register-demo"
-                className="flex items-center text-white text-lg px-4 py-2 rounded-full border border-white transition-colors hover:bg-white hover:text-black"
+                className="flex items-center text-white text-lg px-4 py-2 rounded border border-white transition-colors hover:bg-white hover:text-black"
               >
                 <FaGift className="mr-2" /> <span>Prueba Gratis</span>
               </Link>
@@ -223,7 +223,7 @@ export default function Navbar() {
             <>
               <Link
                 to="/auth/register-demo"
-                className="flex items-center text-white text-lg px-4 py-2 rounded-full border border-white transition-colors hover:bg-white hover:text-black"
+                className="flex items-center text-white text-lg px-4 py-2 rounded border border-white transition-colors hover:bg-white hover:text-black"
               >
                 <FaGift className="mr-2" /> <span>Prueba Gratis</span>
               </Link>
