@@ -150,8 +150,7 @@ export default function Navbar() {
 
 
         <div className="hidden md:flex items-center space-x-8">
-          {renderLink("/prices", "Precios")}
-
+          {renderLink("/prices", "Planes y precios")}
           {renderLink("/about-project", "Sobre el proyecto")}
 
           <div className="relative" ref={dropdownRef}>
@@ -198,7 +197,7 @@ export default function Navbar() {
 
       {isOpen && (
         <div className="md:hidden mt-4 space-y-2">
-          {renderLink("/prices", "Precios")}
+          {renderLink("/prices", "Planes y precios")}
           {renderLink("/about-project", "Sobre el proyecto")}
 
           <div className="relative" ref={dropdownRef}>
