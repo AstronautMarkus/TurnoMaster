@@ -12,7 +12,7 @@ const Contact = () => {
         name: "",
         last_name: "",
         email: "",
-        cellphone: "",
+        cellphone: "+56",
         company: "",
         message_category_id: "",
         message: "",
@@ -38,6 +38,25 @@ const Contact = () => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value, type } = e.target as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
         const checked = type === "checkbox" && (e.target as HTMLInputElement).checked;
+
+        if (name === "cellphone") {
+
+            let input = value;
+
+            if (!input.startsWith("+56")) {
+                input = "+56" + input.replace(/[^0-9]/g, "");
+            } else {
+   
+                input = "+56" + input.slice(3).replace(/[^0-9]/g, "");
+            }
+            setFormData({
+                ...formData,
+                [name]: input,
+            });
+            setErrors({ ...errors, [name]: "" });
+            return;
+        }
+
         setFormData({
             ...formData,
             [name]: type === "checkbox" ? checked : value,
@@ -55,7 +74,7 @@ const Contact = () => {
                     name: "",
                     last_name: "",
                     email: "",
-                    cellphone: "",
+                    cellphone: "+56",
                     company: "",
                     message_category_id: "",
                     message: "",
@@ -147,6 +166,7 @@ const Contact = () => {
                                     errors.cellphone ? "border-red-500" : ""
                                 }`}
                                 disabled={isFormDisabled}
+                                maxLength={12}
                             />
                             {errors.cellphone && <p className="text-red-500 text-sm mt-1">{errors.cellphone}</p>}
                         </div>
