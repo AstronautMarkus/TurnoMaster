@@ -206,10 +206,12 @@ const Contact = () => {
                             className="mr-2 accent-[#e01d1d]"
                             disabled={isFormDisabled}
                         />
-                        <label className="text-sm text-gray-700">
-                            Acepto los <Link to="/terms-and-conditions" target="_blank" className="text-[#e01d1d] underline">términos y condiciones</Link>
-                        </label>
-                        {errors.terms_accepted && <p className="text-red-500 text-sm mt-1 mx-2">{errors.terms_accepted}</p>}
+                        <div>
+                            <label className="text-sm text-gray-700">
+                                Acepto los <Link to="/terms-and-conditions" target="_blank" className="text-[#e01d1d] underline">términos y condiciones</Link>
+                            </label>
+                            {errors.terms_accepted && <p className="text-red-500 text-sm mt-1">{errors.terms_accepted}</p>}
+                        </div>
                     </div>
                     <div style={{ display: "none" }}>
                         <label>Honeypot:</label>
