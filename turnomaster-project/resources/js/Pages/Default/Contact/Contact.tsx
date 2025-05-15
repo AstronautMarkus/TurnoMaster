@@ -64,8 +64,29 @@ const Contact = () => {
         setErrors({ ...errors, [name]: "" });
     };
 
+
+    const validateRequiredFields = () => {
+        const newErrors: { [key: string]: string } = {};
+        if (!formData.name.trim()) newErrors.name = "El nombre es obligatorio.";
+        if (!formData.last_name.trim()) newErrors.last_name = "El apellido es obligatorio.";
+        if (!formData.email.trim()) newErrors.email = "El correo electrónico es obligatorio.";
+        if (!formData.cellphone.trim() || formData.cellphone === "+56") newErrors.cellphone = "El teléfono es obligatorio.";
+        if (!formData.message_category_id) newErrors.message_category_id = "La categoría es obligatoria.";
+        if (!formData.message.trim()) newErrors.message = "El mensaje es obligatorio.";
+        if (!formData.terms_accepted) newErrors.terms_accepted = "Debes aceptar los términos y condiciones.";
+
+        return newErrors;
+    };
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+
+        const requiredErrors = validateRequiredFields();
+        if (Object.keys(requiredErrors).length > 0) {
+            setErrors(requiredErrors);
+            return;
+        }
+
         setSubmitting(true);
         axios.post("/api/contact-form", formData)
             .then(() => {
