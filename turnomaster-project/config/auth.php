@@ -13,12 +13,6 @@ return [
     |
     */
 
-    'defaults' => [
-        'guard' => env('AUTH_GUARD', 'sanctum'),
-        'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
-    ],
-
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
@@ -35,13 +29,6 @@ return [
     | Supported: "session"
     |
     */
-
-    'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
-    ],
 
     /*
     |--------------------------------------------------------------------------
