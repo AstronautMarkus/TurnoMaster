@@ -35,4 +35,8 @@ export const helmetData: Record<string, { title: string; description: string; im
     title: 'Contáctanos - TurnoMaster',
     description: '¿Tienes preguntas o necesitas ayuda? Contáctanos y estaremos encantados de asistirte.',
   },
+  '/turnomaster-audience': {
+    title: '¿Para quién es TurnoMaster? - TurnoMaster',
+    description: 'TurnoMaster está diseñado para adaptarse a distintos tipos de empresas, sin importar su tamaño ni su rubro.',
+  },
 };
