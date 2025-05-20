@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { FiChevronRight, FiGrid, FiSettings, FiUsers, FiClock, FiBarChart2 } from "react-icons/fi";
+import { FiChevronRight, FiGrid, FiSettings, FiUsers} from "react-icons/fi";
+import { FaCalendar } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 
 interface ExpandedItems {
@@ -22,6 +23,15 @@ const sidebarConfig = [
   {
     category: "Administración",
     links: [
+      {
+        label: "Turnos",
+        icon: FaCalendar,
+        subMenuKey: "turnos",
+        subLinks: [
+          { to: "/dashboard/turnos", label: "Lista de turnos" },
+          { to: "/dashboard/turnos/create", label: "Crear turno" },
+        ],
+      },
       {
         label: "Empleados",
         icon: FiUsers,
