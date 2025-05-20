@@ -1,7 +1,9 @@
 import { NavLink } from 'react-router-dom';
 import HelmetHelper from '../../../hooks/HelmetHelper/HelmetHelper';
+import { FaSearch, FaMoneyBillWave, FaBook } from "react-icons/fa";
+import { FaHandshakeSimple } from "react-icons/fa6";
 
-import { MdAssessment, MdAssignmentAdd, MdAvTimer, MdVolunteerActivism } from "react-icons/md";
+import { MdAssessment, MdAssignmentAdd, MdAvTimer } from "react-icons/md";
 
 
 const IndexPage = () => {
@@ -36,8 +38,9 @@ const IndexPage = () => {
                             <div className="flex flex-col sm:flex-row gap-4 pt-4">
                                 <NavLink
                                     to="/about-project"
-                                    className="inline-flex h-16 text-xl items-center justify-center bg-[#e01d1d] hover:bg-[#b21e1e] px-10 font-semibold text-white transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                                    className="inline-flex h-16 text-xl items-center justify-center bg-[#e01d1d] hover:bg-[#b21e1e] px-10 font-semibold text-white transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 gap-3"
                                 >
+                                    <FaSearch className="w-6 h-6" />
                                     Descubrir TurnoMaster
                                 </NavLink>
                             </div>
@@ -59,8 +62,9 @@ const IndexPage = () => {
                         <div>
                         <NavLink
                             to="/prices"
-                            className="inline-flex h-14 text-lg items-center justify-center bg-white hover:bg-gray-300 px-8 font-semibold text-[#891818] transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
+                            className="flex items-center text-white text-lg px-4 py-2 border border-white transition-colors hover:bg-white hover:text-black h-14 gap-2"
                         >
+                            <FaMoneyBillWave className="w-6 h-6" />
                             Ver planes y precios
                         </NavLink>
                         </div>
@@ -127,7 +131,7 @@ const IndexPage = () => {
                                 <p className="text-lg text-gray-700 text-center">Accede a reportes visuales y completos para tomar decisiones informadas y potenciar tu empresa.</p>
                             </div>
                             <div className="flex flex-col items-center shadow-md p-10 w-full h-full border-2 border-gray-300">
-                                <MdVolunteerActivism className="w-20 h-20 text-[#e01d1d] mb-6" />
+                                <FaHandshakeSimple className="w-20 h-20 text-[#e01d1d] mb-6" />
                                 <h3 className="text-2xl font-semibold text-black mb-4">Sin trámites innecesarios</h3>
                                 <p className="text-lg text-gray-700 text-center">Olvídate de procesos complejos. Gestiona todo de manera ágil, sencilla y eficiente.</p>
                             </div>
@@ -138,8 +142,9 @@ const IndexPage = () => {
                     <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center items-center mt-8">
                         <NavLink
                             to="/features"
-                            className="inline-flex h-16 text-xl items-center justify-center bg-[#e01d1d] hover:bg-[#b21e1e] px-10 font-semibold text-white transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                            className="inline-flex h-16 text-xl items-center justify-center bg-[#e01d1d] hover:bg-[#b21e1e] px-10 font-semibold text-white transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 gap-3"
                         >
+                            <FaBook className="w-6 h-6" />
                             Conozca todos los detalles
                         </NavLink>
                     </div>
