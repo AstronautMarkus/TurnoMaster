@@ -6,6 +6,7 @@ import { FaPlus, FaMinus } from "react-icons/fa6";
 import { FaSearch, FaEdit } from "react-icons/fa";
 import { FaUserShield, FaUser } from 'react-icons/fa';
 import { FaUserGear } from "react-icons/fa6";
+import { FiUsers } from "react-icons/fi";
 import { FaXmark } from "react-icons/fa6";
 
 const ListEmployees = () => {
@@ -78,52 +79,64 @@ const ListEmployees = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-3xl sm:text-4xl font-bold text-left mb-6 mt-4 text-gray-800">Lista de empleados</h1>
+      <h1 className="text-3xl sm:text-4xl font-bold text-left mb-6 mt-4 text-gray-800 flex items-center">
+        <FiUsers className="mr-3" />
+        Lista de empleados
+      </h1>
       <p className="text-gray-600 mb-6 text-lg">Aquí puedes gestionar los empleados de tu empresa.</p>
 
-      <div className="flex justify-between items-center mb-4">
-        <Link to="/dashboard/employees/create" className="flex items-center text-white px-4 py-2 bg-[#a91e1e] hover:bg-[#891818] transition-colors">
-          <FaPlus className="mr-2" />
-          Crear empleado
-        </Link>
-        <div className="flex items-center space-x-2 w-full sm:w-1/3">
-          <input
-            type="text"
-            placeholder="Buscar empleado..."
-            value={searchInput}
-            onChange={handleSearchInputChange}
-            className="flex-grow px-4 py-2 h-10 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
-          />
-          <button
-            type="button"
-            onClick={handleSearch}
-            className="flex items-center text-white px-4 py-2 h-10 min-h-[2.5rem] bg-[#a91e1e] hover:bg-[#891818] transition-colors"
+      <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center mb-4">
+        <div className="w-full sm:w-auto">
+          <Link
+            to="/dashboard/employees/create"
+            className="flex items-center justify-center w-full sm:w-auto text-white px-4 py-2 bg-[#a91e1e] hover:bg-[#891818] transition-colors"
           >
-            <FaSearch className="text-lg" />
-          </button>
-          {searchInput && (
+            <FaPlus className="mr-2" />
+            Crear empleado
+          </Link>
+        </div>
+        <div className="flex flex-col gap-2 w-full sm:w-1/3">
+          <div className="flex items-center space-x-2 w-full">
+            <input
+              type="text"
+              placeholder="Buscar empleado..."
+              value={searchInput}
+              onChange={handleSearchInputChange}
+              className="flex-grow px-4 py-2 h-10 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+            />
             <button
               type="button"
-              onClick={handleClearSearch}
-              className="flex items-center text-white px-2 py-2 h-10 min-h-[2.5rem] bg-gray-500 hover:bg-gray-600 transition-colors"
-              title="Limpiar búsqueda"
+              onClick={handleSearch}
+              className="flex items-center text-white px-4 py-2 h-10 min-h-[2.5rem] bg-[#a91e1e] hover:bg-[#891818] transition-colors"
             >
-              <FaXmark className="text-lg" />
+              <FaSearch className="text-lg" />
             </button>
-          )}
+            {searchInput && (
+              <button
+                type="button"
+                onClick={handleClearSearch}
+                className="flex items-center text-white px-2 py-2 h-10 min-h-[2.5rem] bg-gray-500 hover:bg-gray-600 transition-colors"
+                title="Limpiar búsqueda"
+              >
+                <FaXmark className="text-lg" />
+              </button>
+            )}
+          </div>
         </div>
-        <div className="flex items-center space-x-2">
-          <span className="text-gray-700 font-medium w-64">Filtrar por rol:</span>
-          <select
-            value={selectedRole}
-            onChange={handleRoleChange}
-            className="border border-gray-300 px-4 py-2 w-full sm:w-1/1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="Todos">Todos</option>
-            {roles.map((role, index) => (
-              <option key={index} value={role}>{role}</option>
-            ))}
-          </select>
+        <div className="flex flex-col w-full sm:w-auto">
+          <div className="flex items-center space-x-2">
+            <span className="text-gray-700 font-medium w-64 sm:w-auto">Filtrar por rol:</span>
+            <select
+              value={selectedRole}
+              onChange={handleRoleChange}
+              className="border border-gray-300 px-4 py-2 w-full sm:w-1/1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="Todos">Todos</option>
+              {roles.map((role, index) => (
+                <option key={index} value={role}>{role}</option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
