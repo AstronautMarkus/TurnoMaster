@@ -1,12 +1,24 @@
 import { useState } from "react"
 import axios from "axios"
 
+const FIELD_LABELS: Record<string, string> = {
+  first_name: "Nombre",
+  last_name: "Apellido",
+  rut: "RUT",
+  rut_dv: "Dígito verificador",
+  email: "Correo electrónico",
+  company_name: "Nombre de la empresa",
+}
+
 const useRegisterDemo = () => {
   const [formData, setFormData] = useState({ first_name: "", last_name: "", rut: "", rut_dv: "", email: "", company_name: "" })
   const [errors, setErrors] = useState<{ [key: string]: string[] }>({})
   const [apiMessage, setApiMessage] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [step, setStep] = useState(1)
+  const [showSummary, setShowSummary] = useState(false)
+  const [success, setSuccess] = useState(false)
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen)
@@ -16,113 +28,125 @@ const useRegisterDemo = () => {
     const { name, value } = e.target
 
     if (name === "rut") {
-
       const sanitized = value.replace(/\D/g, "").slice(0, 8)
       setFormData({ ...formData, rut: sanitized })
-
-      if (errors.rut && isValidDV(sanitized, formData.rut_dv)) {
-        const updatedErrors = { ...errors }
-        delete updatedErrors.rut
-        setErrors(updatedErrors)
-      }
       return
     }
 
     if (name === "rut_dv") {
-
-      let sanitized = value.replace(/[^1-9kK]/g, "").slice(0, 1)
+      const sanitized = value.replace(/[^1-9kK]/g, "").slice(0, 1)
       setFormData({ ...formData, rut_dv: sanitized })
-
-      if (errors.rut && isValidDV(formData.rut, sanitized)) {
-        const updatedErrors = { ...errors }
-        delete updatedErrors.rut
-        setErrors(updatedErrors)
-      }
       return
     }
 
     setFormData({ ...formData, [name]: value })
-
-
-    if ((name === "rut" || name === "rut_dv") && errors.rut) {
-      if (isValidDV(name === "rut" ? value : formData.rut, name === "rut_dv" ? value : formData.rut_dv)) {
-        const updatedErrors = { ...errors }
-        delete updatedErrors.rut
-        setErrors(updatedErrors)
-      }
-    }
   }
 
-  const isValidDV = (rut: string, dv: string): boolean => {
-    let sum = 0
-    let multiplier = 2
+  const nextStep = () => {
 
-    for (let i = rut.length - 1; i >= 0; i--) {
-      sum += parseInt(rut[i], 10) * multiplier
-      multiplier = multiplier === 7 ? 2 : multiplier + 1
-    }
+    if (step === 1) {
+      const requiredFields = {
+        first_name: "El nombre es obligatorio.",
+        last_name: "El apellido es obligatorio.",
+      }
+      const newErrors: { [key: string]: string[] } = {}
 
-    const calculatedDV = 11 - (sum % 11)
-    if (calculatedDV === 11) return dv.toLowerCase() === "0"
-    if (calculatedDV === 10) return dv.toLowerCase() === "k"
-    return dv === calculatedDV.toString()
-  }
+      for (const field in requiredFields) {
+        if (!formData[field as keyof typeof formData]) {
+          newErrors[field] = [requiredFields[field as keyof typeof requiredFields]]
+        }
+      }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+      if (!formData.rut || !formData.rut_dv) {
+        newErrors.rut = ["Por favor ingrese su RUT y dígito verificador."]
+      } else if (formData.rut.length > 8) {
+        newErrors.rut = ["El RUT no puede tener más de 8 dígitos."]
+      } else if (formData.rut.length < 8) {
+        newErrors.rut = ["El RUT no puede tener menos de 8 dígitos."]
+      } else if (!/^[1-9kK]{1}$/.test(formData.rut_dv)) {
+        newErrors.rut = ["El dígito verificador debe ser un número del 1 al 9 o la letra K."]
+      }
 
-    const requiredFields = {
-      first_name: "El nombre es obligatorio.",
-      last_name: "El apellido es obligatorio.",
-      email: "El correo electrónico es obligatorio.",
-      company_name: "El nombre de la empresa es obligatorio."
-    }
-    const newErrors: { [key: string]: string[] } = {}
-
-    for (const field in requiredFields) {
-      if (!formData[field as keyof typeof formData]) {
-        newErrors[field] = [requiredFields[field as keyof typeof requiredFields]]
+      if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors)
+        return
       }
     }
+    if (step === 2) {
+      const requiredFields = {
+        email: "El correo electrónico es obligatorio.",
+        company_name: "El nombre de la empresa es obligatorio."
+      }
+      const newErrors: { [key: string]: string[] } = {}
 
-    if (!formData.rut || !formData.rut_dv) {
-      newErrors.rut = ["Por favor valide su RUT y dígito verificador."]
-    } else if (formData.rut.length > 8) {
-      newErrors.rut = ["El RUT no puede tener más de 8 dígitos."]
-    } else if (formData.rut.length < 8) {
-      newErrors.rut = ["El RUT no puede tener menos de 8 dígitos."]
-    }
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors)
+      for (const field in requiredFields) {
+        if (!formData[field as keyof typeof formData]) {
+          newErrors[field] = [requiredFields[field as keyof typeof requiredFields]]
+        }
+      }
+      if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors)
+        return
+      }
+      setShowSummary(true)
       return
     }
+    setErrors({})
+    setStep((prev) => prev + 1)
+  }
 
+  const prevStep = () => {
+    if (showSummary) {
+      setShowSummary(false)
+      return
+    }
+    setStep((prev) => Math.max(1, prev - 1))
+  }
+
+  const editStep = (stepToEdit: number) => {
+    setShowSummary(false)
+    setStep(stepToEdit)
+  }
+
+  const handleSubmit = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault()
     setIsLoading(true)
+    setSuccess(false)
     try {
       const response = await axios.post("/api/create/demo-user", formData)
       setErrors({})
       setApiMessage(response.data.message)
-      setFormData({ first_name: "", last_name: "", rut: "", rut_dv: "", email: "", company_name: "" })
+      setSuccess(true)
+      setShowSummary(true)
     } catch (error: any) {
-      if (error.response.status === 422) {
-        const newErrors = error.response.data.errors || {}
-        setErrors(newErrors)
+      setSuccess(false)
+      setApiMessage(error.response?.data?.message || "Ha ocurrido un error inesperado. Por favor, inténtelo de nuevo más tarde.")
+      if (error.response?.status === 422) {
+        const apiErrors = error.response.data.errors || {}
+
+        const translatedErrors: { [key: string]: string[] } = {}
+        for (const field in apiErrors) {
+          if (Object.prototype.hasOwnProperty.call(apiErrors, field)) {
+            const label = FIELD_LABELS[field] || field
+            translatedErrors[label] = apiErrors[field] as string[]
+          }
+        }
+        setErrors(translatedErrors)
 
         const updatedFormData = { ...formData }
-        Object.keys(newErrors).forEach((field) => {
+        Object.keys(apiErrors).forEach((field) => {
           updatedFormData[field as keyof typeof formData] = ""
         })
         setFormData(updatedFormData)
-      } else if (error.response.status === 400) {
-        setErrors({ company_name: [error.response.data.message] })
-      } else {
-        setApiMessage("Ha ocurrido un error inesperado. Por favor, inténtelo de nuevo más tarde.")
+      } else if (error.response?.status === 400) {
+        setErrors({ [FIELD_LABELS.company_name]: [error.response.data.message] })
       }
     } finally {
       setIsLoading(false)
     }
   }
+
+
 
   return {
     formData,
@@ -133,7 +157,12 @@ const useRegisterDemo = () => {
     toggleModal,
     handleChange,
     handleSubmit,
-    isValidDV,
+    step,
+    nextStep,
+    prevStep,
+    showSummary,
+    editStep,
+    success,
   }
 }
 
