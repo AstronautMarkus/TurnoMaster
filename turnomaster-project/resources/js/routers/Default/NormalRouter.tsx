@@ -1,6 +1,6 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import IndexPage from '../../Pages/Default/Index/Index';
+import HomePage from '../../Pages/Default/Home/Home';
 import DefaultLayout from '../../Layouts/Default/DefaultLayout';
 import PricingComparison from '../../Pages/Default/Prices/Prices';
 import AboutProject from '../../Pages/Default/AboutProject/AboutProject';
@@ -29,7 +29,7 @@ function NormalRouter() {
             <AnimatePresence mode="wait" onExitComplete={handleExitComplete}>
                 <motion.div key={location.pathname} {...pageTransition} className="w-full">
                     <Routes location={location} key={location.pathname}>
-                        <Route path="/*" element={<IndexPage />} />
+                        <Route path="/*" element={<HomePage />} />
                         <Route path="/prices" element={<PricingComparison />} />
                         <Route path="/about-project" element={<AboutProject />} />
                         <Route path="/features" element={<Features />} />

@@ -6,7 +6,7 @@ import { FaHandshakeSimple } from "react-icons/fa6";
 import { MdAssessment, MdAssignmentAdd, MdAvTimer } from "react-icons/md";
 
 
-const IndexPage = () => {
+const HomePage = () => {
     return (
     <>
         <HelmetHelper path="/" />
@@ -156,4 +156,4 @@ const IndexPage = () => {
     );
 };
 
-export default IndexPage;
+export default HomePage;
