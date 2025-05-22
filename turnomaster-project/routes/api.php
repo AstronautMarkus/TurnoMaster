@@ -10,6 +10,9 @@ use App\Http\Controllers\DemoUser\Create\CreateDemoUserController;
 use App\Http\Controllers\Dashboard\Employees\Create\CreateEmployeeController;
 use App\Http\Controllers\Dashboard\Turnos\Create\CreateTurnosController;
 
+// Update data controllers
+use App\Http\Controllers\Dashboard\Turnos\Edit\EditTurnosController;
+
 // Contact forms and help controllers
 
 use App\Http\Controllers\Contact\ContactFormsController;
@@ -55,6 +58,7 @@ use App\Http\Controllers\Dashboard\Employees\Edit\EditEmployeeController;
 // Delete controllers
 
 use App\Http\Controllers\Dashboard\Employees\Delete\DeleteEmployeeController;
+use App\Http\Controllers\Dashboard\Turnos\Delete\DeleteTurnosController;
 
 // Image controllers
 
@@ -103,6 +107,8 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::delete('/user/profile-image', [DeleteImageController::class, 'delete']);
     Route::get('/turnos', [GetTurnosController::class, 'getTurnos']);
     Route::post('/turnos', [CreateTurnosController::class, 'createTurnos']);
+    Route::put('/turnos/{id}', [EditTurnosController::class, 'updateTurnos']);
+    Route::delete('/turnos/{id}', [DeleteTurnosController::class, 'deleteTurnos']);
 });
 
 Route::get('/assets/{path}', function ($path) {
