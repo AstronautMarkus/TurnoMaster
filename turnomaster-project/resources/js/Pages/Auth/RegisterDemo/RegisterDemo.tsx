@@ -36,9 +36,15 @@ const RegisterDemo = () => {
   return (
     <div className="flex flex-col md:flex-row items-center justify-center min-h-screen w-full">
       <div className="bg-white p-8 md:p-12 w-full max-w-md md:max-w-lg shadow-lg relative">
-        <div className="flex items-center justify-center">
-          <img src="/img/logo/TurnoMasterRed.svg" alt="Logo" className="w-12 h-12 mr-3" />
-          <h2 className="font-bold text-gray-800 text-center lg:text-2xl">
+        <div className="flex flex-col items-center justify-center mb-4">
+          <div className="flex items-center justify-center mb-2">
+            <img src="/img/logo/TurnoMasterRed.svg" alt="Logo" className="w-12 h-12 mr-3" />
+            <h1 className="text-2xl font-bold text-gray-800">Registro de Cuenta Demo</h1>
+          </div>
+          <p className="text-gray-600 text-center mb-2">
+            Para probar nuestro sistema, por favor complete el siguiente formulario.
+          </p>
+          <h2 className="font-semibold text-gray-600 text-center text-sm lg:text-base mt-1">
             {showSummary ? "Resumen de Registro" : step === 1 ? "Información Personal" : "Datos del Sistema"}
           </h2>
         </div>
@@ -48,8 +54,8 @@ const RegisterDemo = () => {
               {step === 1 && (
                 <>
                   <div className="mb-4">
-                    <label htmlFor="first_name" className="block mb-2 text-m font-medium text-gray-700">
-                      Nombre
+                    <label htmlFor="first_name" className="block mb-2 text-m font-medium text-black">
+                      Nombre *
                     </label>
                     <input
                       type="text"
@@ -67,8 +73,8 @@ const RegisterDemo = () => {
                     )}
                   </div>
                   <div className="mb-4">
-                    <label htmlFor="last_name" className="block mb-2 text-m font-medium text-gray-700">
-                      Apellido
+                    <label htmlFor="last_name" className="block mb-2 text-m font-medium text-black">
+                      Apellido *
                     </label>
                     <input
                       type="text"
@@ -86,8 +92,8 @@ const RegisterDemo = () => {
                     )}
                   </div>
                   <div className="mb-4">
-                    <label htmlFor="rut" className="block mb-2 text-m font-medium text-gray-700">
-                      RUT
+                    <label htmlFor="rut" className="block mb-2 text-m font-medium text-black">
+                      RUT *
                     </label>
                     <div className="flex space-x-2">
                       <input
@@ -121,8 +127,8 @@ const RegisterDemo = () => {
               {step === 2 && (
                 <>
                   <div className="mb-4">
-                    <label htmlFor="email" className="block mb-2 text-m font-medium text-gray-700">
-                      Correo Electrónico
+                    <label htmlFor="email" className="block mb-2 text-m font-medium black">
+                      Correo Electrónico *
                     </label>
                     <input
                       type="email"
@@ -140,8 +146,8 @@ const RegisterDemo = () => {
                     )}
                   </div>
                   <div className="mb-6">
-                    <label htmlFor="company_name" className="block mb-2 text-m font-medium text-gray-700">
-                      Nombre de la Empresa
+                    <label htmlFor="company_name" className="block mb-2 text-m font-medium text-black">
+                      Nombre de la Empresa *
                     </label>
                     <input
                       type="text"
