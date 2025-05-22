@@ -6,12 +6,14 @@ import { FaPlus, FaMinus } from "react-icons/fa6";
 import { FaSearch, FaEdit } from "react-icons/fa";
 import { FaUserShield, FaUser } from 'react-icons/fa';
 import { FaUserGear } from "react-icons/fa6";
+import { FaXmark } from "react-icons/fa6";
 
-const ListEmployees: React.FC = () => {
-  const { employees, roles, page, setPage, totalPages, loading } = useGetEmployeesList();
+const ListEmployees = () => {
+  const { employees, roles, page, setPage, totalPages, loading, setSearchName } = useGetEmployeesList();
   const [selectedRole, setSelectedRole] = useState<string>("Todos");
   const [showModal, setShowModal] = useState(false);
   const [employeeToDelete, setEmployeeToDelete] = useState<{ id: number; first_name: string; last_name: string } | null>(null);
+  const [searchInput, setSearchInput] = useState<string>("");
 
   const handleRoleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedRole(event.target.value);
@@ -44,6 +46,24 @@ const ListEmployees: React.FC = () => {
     }
   };
 
+
+  const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(e.target.value);
+  };
+
+
+  const handleSearch = () => {
+    setPage(1);
+    setSearchName(searchInput.trim());
+  };
+
+
+  const handleClearSearch = () => {
+    setSearchInput("");
+    setPage(1);
+    setSearchName("");
+  };
+
   const filteredEmployees = selectedRole === "Todos"
     ? employees
     : employees.filter((employee) => employee.role === selectedRole);
@@ -70,14 +90,27 @@ const ListEmployees: React.FC = () => {
           <input
             type="text"
             placeholder="Buscar empleado..."
+            value={searchInput}
+            onChange={handleSearchInputChange}
             className="flex-grow px-4 py-2 h-10 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
           />
           <button
             type="button"
+            onClick={handleSearch}
             className="flex items-center text-white px-4 py-2 h-10 min-h-[2.5rem] bg-[#a91e1e] hover:bg-[#891818] transition-colors"
           >
             <FaSearch className="text-lg" />
           </button>
+          {searchInput && (
+            <button
+              type="button"
+              onClick={handleClearSearch}
+              className="flex items-center text-white px-2 py-2 h-10 min-h-[2.5rem] bg-gray-500 hover:bg-gray-600 transition-colors"
+              title="Limpiar búsqueda"
+            >
+              <FaXmark className="text-lg" />
+            </button>
+          )}
         </div>
         <div className="flex items-center space-x-2">
           <span className="text-gray-700 font-medium w-64">Filtrar por rol:</span>

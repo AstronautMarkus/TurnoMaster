@@ -41,13 +41,18 @@ const useGetEmployeesList = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [searchName, setSearchName] = useState<string>("");
 
   useEffect(() => {
     const fetchEmployees = async () => {
       setLoading(true);
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(`/api/employees?page=${page}`, {
+        let url = `/api/employees?page=${page}`;
+        if (searchName) {
+          url += `&name=${encodeURIComponent(searchName)}`;
+        }
+        const response = await axios.get(url, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -76,9 +81,9 @@ const useGetEmployeesList = () => {
     };
 
     fetchEmployees();
-  }, [page]);
+  }, [page, searchName]);
 
-  return { employees, roles, page, setPage, totalPages, loading };
+  return { employees, roles, page, setPage, totalPages, loading, setSearchName };
 };
 
 export default useGetEmployeesList;
