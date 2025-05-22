@@ -19,8 +19,17 @@ class GetEmployeesListController extends Controller
         $decoded = JWT::decode($token, new Key(env('JWT_SECRET'), 'HS256'));
         $userCompany = $decoded->company_id; 
 
-        $employees = DashboardUser::where('company_id', $userCompany)
-            ->paginate(10, ['id', 'first_name', 'last_name', 'rut', 'rut_dv', 'email', 'role_id', 'profile_photo']);
+        $query = DashboardUser::where('company_id', $userCompany);
+
+        if ($request->has('name') && !empty($request->query('name'))) {
+            $name = $request->query('name');
+            $query->where(function ($q) use ($name) {
+                $q->where('first_name', 'like', "%{$name}%")
+                  ->orWhere('last_name', 'like', "%{$name}%");
+            });
+        }
+
+        $employees = $query->paginate(10, ['id', 'first_name', 'last_name', 'rut', 'rut_dv', 'email', 'role_id', 'profile_photo']);
 
         $employees->getCollection()->transform(function ($employee) {
             $role = Role::find($employee->role_id);
