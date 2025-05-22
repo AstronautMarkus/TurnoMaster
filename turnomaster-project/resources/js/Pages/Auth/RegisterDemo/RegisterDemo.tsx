@@ -1,17 +1,8 @@
-import type React from "react"
 import AuthLoadingScreen from "../../../Components/Auth/LoadingScreen/AuthLoadingScreen"
-import useRegisterDemo from "../../../hooks/auth/registerDemo/useRegisterDemo"
+import useRegisterDemo from "../../../hooks/auth/RegisterDemo/useRegisterDemo"
 
-const RegisterDemo: React.FC = () => {
-  const {
-    formData,
-    errors,
-    apiMessage,
-    isLoading,
-    handleChange,
-    handleSubmit,
-    isValidDV, // Import isValidDV from the hook
-  } = useRegisterDemo()
+const RegisterDemo = () => {
+  const { formData,errors,apiMessage,isLoading,handleChange,handleSubmit,isValidDV,} = useRegisterDemo()
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-center min-h-screen w-full">

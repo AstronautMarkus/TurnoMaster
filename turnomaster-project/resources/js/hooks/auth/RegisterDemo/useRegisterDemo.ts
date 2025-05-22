@@ -14,9 +14,36 @@ const useRegisterDemo = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
+
+    if (name === "rut") {
+
+      const sanitized = value.replace(/\D/g, "").slice(0, 8)
+      setFormData({ ...formData, rut: sanitized })
+
+      if (errors.rut && isValidDV(sanitized, formData.rut_dv)) {
+        const updatedErrors = { ...errors }
+        delete updatedErrors.rut
+        setErrors(updatedErrors)
+      }
+      return
+    }
+
+    if (name === "rut_dv") {
+
+      let sanitized = value.replace(/[^1-9kK]/g, "").slice(0, 1)
+      setFormData({ ...formData, rut_dv: sanitized })
+
+      if (errors.rut && isValidDV(formData.rut, sanitized)) {
+        const updatedErrors = { ...errors }
+        delete updatedErrors.rut
+        setErrors(updatedErrors)
+      }
+      return
+    }
+
     setFormData({ ...formData, [name]: value })
 
-    // Clear errors for the `rut` field if `rut_dv` becomes valid
+
     if ((name === "rut" || name === "rut_dv") && errors.rut) {
       if (isValidDV(name === "rut" ? value : formData.rut, name === "rut_dv" ? value : formData.rut_dv)) {
         const updatedErrors = { ...errors }
@@ -79,7 +106,7 @@ const useRegisterDemo = () => {
       setFormData({ first_name: "", last_name: "", rut: "", rut_dv: "", email: "", company_name: "" })
     } catch (error: any) {
       if (error.response.status === 422) {
-        const newErrors = error.response.data.errors || {} // Ensure newErrors is always an object
+        const newErrors = error.response.data.errors || {}
         setErrors(newErrors)
 
         const updatedFormData = { ...formData }
