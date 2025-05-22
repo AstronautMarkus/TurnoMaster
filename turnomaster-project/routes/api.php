@@ -5,9 +5,10 @@ use Illuminate\Support\Facades\Route;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
-// Create users controllers
+// Create data controllers
 use App\Http\Controllers\DemoUser\Create\CreateDemoUserController;
 use App\Http\Controllers\Dashboard\Employees\Create\CreateEmployeeController;
+use App\Http\Controllers\Dashboard\Turnos\Create\CreateTurnosController;
 
 // Contact forms and help controllers
 
@@ -45,6 +46,7 @@ use App\Http\Controllers\Dashboard\Roles\GetRolesDataController;
 use App\Http\Controllers\Dashboard\Company\GetCompanyDataController;
 use App\Http\Controllers\Dashboard\Employees\Get\GetEmployeesListController;
 use App\Http\Controllers\Dashboard\Employees\Get\GetEmployeeByIdController;
+use App\Http\Controllers\Dashboard\Turnos\Get\GetTurnosController;
 
 // Edit controllers
 
@@ -99,6 +101,8 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::delete('/employees/{id}', [DeleteEmployeeController::class, 'deleteEmployee']);
     Route::post('/user/profile-image', [UpdateImageController::class, 'update']);
     Route::delete('/user/profile-image', [DeleteImageController::class, 'delete']);
+    Route::get('/turnos', [GetTurnosController::class, 'getTurnos']);
+    Route::post('/turnos', [CreateTurnosController::class, 'createTurnos']);
 });
 
 Route::get('/assets/{path}', function ($path) {
