@@ -18,6 +18,23 @@ const getRandomImage = () => {
   return `/img/profile/default${randomNumber}.png`;
 };
 
+const formatChileanRut = (rut: string | number, dv: string) => {
+  const rutStr = typeof rut === "number" ? rut.toString() : rut;
+  let result = "";
+  let i = rutStr.length;
+  let count = 0;
+  while (i > 0) {
+    i--;
+    result = rutStr[i] + result;
+    count++;
+    if (count === 3 && i !== 0) {
+      result = "." + result;
+      count = 0;
+    }
+  }
+  return `${result}-${dv}`;
+};
+
 const useGetEmployeesList = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [roles, setRoles] = useState<string[]>([]);
@@ -40,7 +57,7 @@ const useGetEmployeesList = () => {
           id: employee.id,
           first_name: employee.first_name,
           last_name: employee.last_name,
-          rut: `${employee.rut}-${employee.rut_dv}`,
+          rut: formatChileanRut(employee.rut, employee.rut_dv),
           email: employee.email,
           role: employee.role,
           image: employee.profile_photo || "/img/profile/default.png",
