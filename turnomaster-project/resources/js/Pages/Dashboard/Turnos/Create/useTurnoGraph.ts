@@ -49,6 +49,15 @@ function useTurnoGraph(form: FormType, chartRef: React.RefObject<HTMLDivElement>
         const end = toDate(eHour, eMin);
 
 
+        const inicio = sHour * 60 + sMin;
+        const almuerzo = lHour * 60 + lMin;
+        const fin = eHour * 60 + eMin;
+        if (!isNaN(lHour) && !isNaN(lMin)) {
+            if (inicio >= almuerzo || almuerzo >= fin) return;
+        } else {
+            if (inicio >= fin) return;
+        }
+
         function formatHourMin(date: Date) {
             return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
         }

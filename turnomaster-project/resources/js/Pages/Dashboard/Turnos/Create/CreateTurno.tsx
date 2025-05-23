@@ -69,9 +69,7 @@ const CreateTurno = () => {
         const almuerzo = Number(lunchHour) * 60 + Number(lunchMinute);
         const fin = Number(endHour) * 60 + Number(endMinute);
 
-
-        if (inicio >= almuerzo || almuerzo >= fin) return null;
-
+        if (inicio >= almuerzo || almuerzo >= fin) return "invalid";
 
         const minutosTrabajados = (almuerzo - inicio) + (fin - almuerzo);
         if (minutosTrabajados <= 0) return null;
@@ -264,7 +262,13 @@ const CreateTurno = () => {
                     </div>
                 ) : null}
 
-                {calcularHorasTrabajadas() && (
+                {calcularHorasTrabajadas() === "invalid" && (
+                    <div className="mb-2 font-bold text-red-700">
+                        Este horario carece de lógica, por favor revise los campos.
+                    </div>
+                )}
+
+                {calcularHorasTrabajadas() && calcularHorasTrabajadas() !== "invalid" && (
                     <div className="mb-2 font-bold text-red-700">
                         Horas totales trabajadas: {calcularHorasTrabajadas()}
                     </div>
