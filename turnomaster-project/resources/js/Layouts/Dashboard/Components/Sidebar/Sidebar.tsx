@@ -122,7 +122,7 @@ function SidebarContent({
     <>
       <div className="flex items-center justify-start py-4 px-4">
         <Link to="/dashboard" className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded bg-[#891818] flex items-center justify-center">
+          <div className="h-8 w-8 rounded bg-reyes flex items-center justify-center">
             <img src="/img/logo/TurnoMasterWhite.svg" className="h-6 w-6" />
           </div>
           <div className="flex flex-col">
@@ -145,8 +145,8 @@ function SidebarContent({
                     <button
                       className={`flex items-center justify-between w-full gap-2 px-3 py-2 rounded-md text-sm ${
                         isSubMenuActive(link.subLinks || [])
-                          ? "bg-[#891818] text-white"
-                          : "text-slate-200 hover:bg-[#891818]"
+                          ? "bg-reyes text-white"
+                          : "text-slate-200 hover:bg-reyes-active"
                       }`}
                       onClick={() => toggleSubMenu(link.subMenuKey!)}
                     >
@@ -186,8 +186,8 @@ function SidebarContent({
                         to={link.to}
                         className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm ${
                           currentPath === link.to
-                            ? "bg-[#891818] text-white"
-                            : "text-slate-200 hover:bg-[#891818]"
+                            ? "bg-reyes text-white"
+                            : "text-slate-200 hover:bg-reyes-active"
                         }`}
                       >
                         {link.icon && <link.icon className="h-4 w-4" />}
