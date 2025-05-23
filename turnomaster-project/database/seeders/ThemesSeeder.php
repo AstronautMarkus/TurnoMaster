@@ -14,6 +14,7 @@ class ThemesSeeder extends Seeder
         DB::table('themes')->insert([
             ['name' => 'Reyes', 'slug' => 'reyes', 'description' => 'Elegante, clásico, funcional.'],
             ['name' => 'Reyes blue', 'slug' => 'reyes-blue', 'description' => 'Frescura y modernidad en cada detalle.'],
+            ['name' => 'Ubuntu', 'slug' => 'ubuntu', 'description' => 'El naranja más vibrante.'],
         ]);
     }
 }

@@ -26,6 +26,20 @@
   --success-light: #6ee7da;
 }
 
+.theme-ubuntu{
+  --bg: #2c2c2c;
+  --text: #eaeaea;
+  --accent: #d75f00;
+  --accent-hover: #b65a00;
+  --accent-light: #ff8700;
+  --secondary: #3c3c3c;
+  --secondary-hover: #323232;
+  --secondary-light: #4a4a4a;
+  --success: #4caf50;
+  --success-hover: #45a049;
+  --success-light: #66bb6a;
+}
+
 .dashboard-text{
   color: var(--accent);
 }
