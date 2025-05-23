@@ -70,8 +70,8 @@ class CreateDemoUserController extends Controller
         ]);
 
         $user = User::create([
-            'first_name' => $request->input('first_name'),
-            'last_name' => $request->input('last_name'),
+            'first_name' => ucfirst($request->input('first_name')),
+            'last_name' => ucfirst($request->input('last_name')),
             'rut' => $request->input('rut'),
             'rut_dv' => $request->input('rut_dv'),
             'email' => $request->input('email'),
