@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const THEME_KEY = 'theme';
 const DEFAULT_THEME = 'reyes';
@@ -16,6 +17,22 @@ export default function useDashboardTheme() {
     useEffect(() => {
         localStorage.setItem(THEME_KEY, theme);
     }, [theme]);
+
+    useEffect(() => {
+        async function validateTheme() {
+            try {
+                const { data } = await axios.get('/api/themes');
+                const validSlugs = data.map((t: any) => t.slug);
+                const storedTheme = localStorage.getItem(THEME_KEY);
+                if (!validSlugs.includes(storedTheme)) {
+                    localStorage.setItem(THEME_KEY, DEFAULT_THEME);
+                    window.location.reload();
+                }
+            } catch (e) {
+            }
+        }
+        validateTheme();
+    }, []);
 
     return theme;
 }
