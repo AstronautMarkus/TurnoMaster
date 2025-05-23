@@ -88,13 +88,29 @@ class CreateTurnosController extends Controller
             ], 422);
         }
 
+        // Calculate total hours -1 lunch work
+
+        $startDateTime = \DateTime::createFromFormat('H:i', $start);
+        $endDateTime = \DateTime::createFromFormat('H:i', $end);
+
+        // Difference between start and end time
+        $totalMinutes = ($endDateTime->format('H') * 60 + $endDateTime->format('i')) - ($startDateTime->format('H') * 60 + $startDateTime->format('i'));
+
+        // Minus 60 minutes for lunch
+        $totalWorkedMinutes = $totalMinutes - 60;
+
+        // Convert to hours
+        $totalWorkedHours = intdiv($totalWorkedMinutes, 60);
+
+
         $turno = Turnos::create([
             'name' => $request->name,
             'description' => $request->description,
             'start_time' => $request->start_time,
             'lunch_time' => $request->lunch_time,
             'end_time' => $request->end_time,
-            'company_id' => $userCompany
+            'company_id' => $userCompany,
+            'total_hours' => $totalWorkedHours,
         ]);
 
         return response()->json([

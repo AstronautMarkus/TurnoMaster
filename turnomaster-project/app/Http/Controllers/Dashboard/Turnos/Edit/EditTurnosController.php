@@ -109,6 +109,21 @@ class EditTurnosController extends Controller
                 'message' => 'No se enviaron datos para actualizar.',
             ], 400);
         }
+
+        
+        if (
+            isset($data['start_time']) &&
+            isset($data['lunch_time']) &&
+            isset($data['end_time'])
+        ) {
+            $startDateTime = \DateTime::createFromFormat('H:i', $data['start_time']);
+            $endDateTime = \DateTime::createFromFormat('H:i', $data['end_time']);
+            $totalMinutes = ($endDateTime->format('H') * 60 + $endDateTime->format('i')) - ($startDateTime->format('H') * 60 + $startDateTime->format('i'));
+            $totalWorkedMinutes = $totalMinutes - 60; // 60 minutes for lunch
+            $totalWorkedHours = intdiv($totalWorkedMinutes, 60);
+            $data['total_hours'] = $totalWorkedHours;
+        }
+
         $turno->update($data);
 
         return response()->json([

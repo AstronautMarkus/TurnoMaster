@@ -13,6 +13,7 @@ class Turnos extends Model
         'lunch_time',
         'end_time',
         'company_id',
+        'total_hours',
     ];
 }
 

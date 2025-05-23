@@ -18,6 +18,7 @@ return new class extends Migration
             $table->time('start_time');
             $table->time('lunch_time')->nullable();
             $table->time('end_time');
+            $table->integer('total_hours');
             $table->unsignedBigInteger('company_id');
             $table->timestamps();
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
