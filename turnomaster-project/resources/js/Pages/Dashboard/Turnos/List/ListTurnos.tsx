@@ -115,7 +115,7 @@ const ListTurnos = () => {
                                         </td>
                                         <td className="px-4 py-2">
                                             <div className="flex space-x-2">
-                                                <Link to={`/dashboard/turnos/edit/}`} className="bg-gray-600 text-white px-4 py-2 text-sm hover:bg-gray-700 transition-colors flex items-center">
+                                                <Link to={`/dashboard/turnos/edit/${turno.id}`} className="bg-gray-600 text-white px-4 py-2 text-sm hover:bg-gray-700 transition-colors flex items-center">
                                                     <FaEdit className="mr-2" />
                                                     Editar
                                                 </Link>
