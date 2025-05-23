@@ -15,6 +15,7 @@ const Logout: React.FC = () => {
         if (res.status === 200) {
           localStorage.removeItem("token");
           localStorage.removeItem("user");
+          localStorage.removeItem("theme");
 
           setMessage("Sesión cerrada correctamente.");
           setStatus("success");
