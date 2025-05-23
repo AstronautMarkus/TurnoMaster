@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\DemoUser\Create\CreateDemoUserController;
 use App\Http\Controllers\Dashboard\Employees\Create\CreateEmployeeController;
 use App\Http\Controllers\Dashboard\Turnos\Create\CreateTurnosController;
+use App\Http\Controllers\Dashboard\Turnos\ShiftUser\Create\CreateShiftUsersController;
 
 // Update data controllers
 use App\Http\Controllers\Dashboard\Turnos\Edit\EditTurnosController;
@@ -116,6 +117,7 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::put('/turnos/{id}', [EditTurnosController::class, 'updateTurnos']);
     Route::delete('/turnos/{id}', [DeleteTurnosController::class, 'deleteTurnos']);
     Route::get('/turnos/shift/{id}', [GetShiftUsersByIdController::class, 'getShiftUserById']);
+    Route::post('/turnos/shift', [CreateShiftUsersController::class, 'createShiftUsers']);
 });
 
 Route::get('/assets/{path}', function ($path) {
