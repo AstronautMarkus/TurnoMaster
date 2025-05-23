@@ -5,8 +5,7 @@ import DashboardLayout from '../../Layouts/Dashboard/DashboardLayout';
 import { useDashboardGuard } from '../../hooks/auth/useDashboardGuard';
 
 import Index from '../../Pages/Dashboard/Index/Index';
-import Profile from '../../Pages/Dashboard/Profile/Profile';
-import Settings from '../../Pages/Dashboard/Settings/Settings';
+import DashboardSettingsRouter from './Settings/DashboardSettingsRouter';
 
 import DashboardEmployeesRouter from './Employees/DashboardEmployeesRouter';
 import DashboardTurnosRouter from './Turnos/DashboardTurnosRouter';
@@ -28,8 +27,7 @@ function DashboardRouter() {
                     <motion.div key={location.pathname} {...pageTransition} className="w-full">
                         <Routes location={location} key={location.pathname}>
                             <Route path="/*" element={<Index />} />
-                            <Route path="/settings" element={<Settings />} />
-                            <Route path="/profile" element={<Profile />} />
+                            <Route path="/settings/*" element={<DashboardSettingsRouter />} />
                             <Route path="/employees/*" element={<DashboardEmployeesRouter />} />
                             <Route path="/turnos/*" element={<DashboardTurnosRouter />} />
                         </Routes>

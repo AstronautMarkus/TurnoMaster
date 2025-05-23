@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ContactFormSeeder::class);
         $this->call(SubscriptionsSeeder::class);
         $this->call(AttendanceStatusesSeeder::class);
+        $this->call(ThemesSeeder::class);
         
     }
 }

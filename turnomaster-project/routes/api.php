@@ -52,6 +52,7 @@ use App\Http\Controllers\Dashboard\Employees\Get\GetEmployeeByIdController;
 use App\Http\Controllers\Dashboard\Turnos\Get\GetTurnosController;
 use App\Http\Controllers\Dashboard\Turnos\Get\GetTurnosByIdController;
 use App\Http\Controllers\Dashboard\Turnos\ShiftUser\Get\GetShiftUsersByIdController;
+use App\Http\Controllers\Dashboard\Themes\GetThemesController;
 
 // Edit controllers
 
@@ -95,6 +96,8 @@ Route::post('/reset-password/employees', [ResetPasswordEmployeesController::clas
 Route::get('/validate-reset-token/{token}', [ValidateTokenController::class, 'validateToken']);
 
 Route::get('/roles', [GetRolesDataController::class, 'getRoles']);
+
+Route::get('/themes', [GetThemesController::class, 'getThemesList']);
 
 // Protected routes
 

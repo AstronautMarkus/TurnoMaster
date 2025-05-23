@@ -304,7 +304,7 @@ const calcularHorasTrabajadas = () => {
                 </div>
             </div>
 
-                        <div className="flex space-x-2 justify-end mt-4">
+            <div className="flex space-x-2 justify-end mt-4">
                 <Link to="/dashboard/turnos" className="text-white px-4 py-2 dashboard-button transition-colors">Salir</Link>
             </div>
 

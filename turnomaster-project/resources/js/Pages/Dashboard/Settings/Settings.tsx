@@ -8,13 +8,13 @@ const Settings: React.FC = () => {
             icon: <FaUser />,
             title: 'Perfil',
             description: 'Gestiona la información de tu perfil y preferencias personales.',
-            url:"/dashboard/profile"
+            url:"/dashboard/settings/profile"
         },
         {
             icon: <FaBrush />,
             title: 'Apariencia',
             description: 'Personaliza la apariencia de la aplicación a tu gusto.',
-            url:"/dashboard/appearance"
+            url:"/dashboard/settings/appearance"
         },
     ];
 
