@@ -24,9 +24,15 @@ export default function useDashboardTheme() {
                 const { data } = await axios.get('/api/themes');
                 const validSlugs = data.map((t: any) => t.slug);
                 const storedTheme = localStorage.getItem(THEME_KEY);
-                if (!validSlugs.includes(storedTheme)) {
-                    localStorage.setItem(THEME_KEY, DEFAULT_THEME);
-                    window.location.reload();
+                if (
+                    !Array.isArray(data) ||
+                    data.length === 0 ||
+                    !validSlugs.includes(storedTheme)
+                ) {
+                    if (storedTheme !== DEFAULT_THEME) {
+                        localStorage.setItem(THEME_KEY, DEFAULT_THEME);
+                        window.location.reload();
+                    }
                 }
             } catch (e) {
             }
