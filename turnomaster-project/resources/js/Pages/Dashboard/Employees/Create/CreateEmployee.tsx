@@ -85,7 +85,7 @@ const CreateEmployee: React.FC = () => {
                                         value={formValues.first_name}
                                         onChange={(e) => handleChange('first_name', e.target.value)}
                                         placeholder="Ingrese un nombre"
-                                        className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                        className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
                                         disabled={loading}
                                     />
                                     {errors.first_name && <p className="text-red-500 text-sm">{errors.first_name}</p>}
@@ -99,7 +99,7 @@ const CreateEmployee: React.FC = () => {
                                         value={formValues.last_name}
                                         onChange={(e) => handleChange('last_name', e.target.value)}
                                         placeholder="Ingrese un apellido"
-                                        className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                        className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
                                         disabled={loading}
                                     />
                                     {errors.last_name && <p className="text-red-500 text-sm">{errors.last_name}</p>}
@@ -113,7 +113,7 @@ const CreateEmployee: React.FC = () => {
                                             name="rut"
                                             value={rut}
                                             onChange={(e) => handleRutChange(e.target.value)}
-                                            className="flex-grow px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                            className="flex-grow px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
                                             placeholder="12345678"
                                             disabled={loading}
                                         />
@@ -124,7 +124,7 @@ const CreateEmployee: React.FC = () => {
                                             name="rut_dv"
                                             value={rutDv}
                                             onChange={(e) => handleRutDvChange(e.target.value)}
-                                            className="w-12 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                            className="w-12 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
                                             placeholder="k"
                                             disabled={loading}
                                         />
@@ -140,7 +140,7 @@ const CreateEmployee: React.FC = () => {
                                         value={formValues.email}
                                         onChange={(e) => handleChange('email', e.target.value)}
                                         placeholder="Ingrese un correo electrónico"
-                                        className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                        className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
                                         disabled={loading}
                                     />
                                     {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
@@ -152,7 +152,7 @@ const CreateEmployee: React.FC = () => {
                                         name="role_id"
                                         value={formValues.role_id}
                                         onChange={(e) => handleChange('role_id', e.target.value)}
-                                        className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                        className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
                                         disabled={loading}
                                     >
                                         <option value="" disabled>Selecciona un rol</option>
@@ -168,7 +168,7 @@ const CreateEmployee: React.FC = () => {
                                 className={`mt-4 px-4 py-2 text-white ${
                                     loading
                                         ? error
-                                            ? 'bg-red-600'
+                                            ? 'bg-reyes'
                                             : 'bg-gray-400'
                                         : 'bg-gray-600 hover:bg-gray-700'
                                 } flex items-center justify-center`}
@@ -181,7 +181,7 @@ const CreateEmployee: React.FC = () => {
                     </>
             </div>
             <div className="flex space-x-2 justify-end mt-4">
-                <Link to="/dashboard/employees" className="text-white px-4 py-2 bg-[#a91e1e] hover:bg-[#891818] transition-colors">Salir</Link>
+                <Link to="/dashboard/employees" className="text-white px-4 py-2 bg-reyes hover:bg-reyes-active transition-colors">Salir</Link>
             </div>
         </div>
         

@@ -89,7 +89,7 @@ const ListEmployees = () => {
         <div className="w-full sm:w-auto">
           <Link
             to="/dashboard/employees/create"
-            className="flex items-center justify-center w-full sm:w-auto text-white px-4 py-2 bg-[#a91e1e] hover:bg-[#891818] transition-colors"
+            className="flex items-center justify-center w-full sm:w-auto text-white px-4 py-2 bg-reyes hover:bg-reyes-active transition-colors"
           >
             <FaPlus className="mr-2" />
             Crear empleado
@@ -107,7 +107,7 @@ const ListEmployees = () => {
             <button
               type="button"
               onClick={handleSearch}
-              className="flex items-center text-white px-4 py-2 h-10 min-h-[2.5rem] bg-[#a91e1e] hover:bg-[#891818] transition-colors"
+              className="flex items-center text-white px-4 py-2 h-10 min-h-[2.5rem] bg-reyes hover:bg-reyes-active transition-colors"
             >
               <FaSearch className="text-lg" />
             </button>
@@ -148,7 +148,7 @@ const ListEmployees = () => {
         ) : (
           <div className="max-h-96 overflow-y-auto">
             <table className="table-auto w-full border-collapse">
-              <thead className="sticky top-0 bg-[#7c1d1d] text-white uppercase text-sm tracking-wider">
+              <thead className="sticky top-0 bg-reyes text-white uppercase text-sm tracking-wider">
                 <tr>
                   <th className="px-4 py-3 text-left">Nombre</th>
                   <th className="px-4 py-3 text-left">RUT</th>
@@ -186,7 +186,7 @@ const ListEmployees = () => {
                         </Link>
                         <button
                           onClick={() => handleDeleteClick(employee)}
-                          className="bg-red-700 text-white px-4 py-2 text-sm hover:bg-red-800 transition-colors flex items-center"
+                          className="text-white px-4 py-2 text-sm bg-reyes hover:bg-reyes-active transition-colors flex items-center"
                         >
                           <FaMinus className="mr-2" />
                           Eliminar

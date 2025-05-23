@@ -133,7 +133,7 @@ const calcularHorasTrabajadas = () => {
                                         name="name"
                                         value={form.name}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                        className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
                                     />
                                     {getFieldError("name") && (
                                         <p className="text-red-500 text-sm">{getFieldError("name")}</p>
@@ -145,7 +145,7 @@ const calcularHorasTrabajadas = () => {
                                         name="description"
                                         value={form.description}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                        className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
                                     />
                                     {getFieldError("description") && (
                                         <p className="text-red-500 text-sm">{getFieldError("description")}</p>
@@ -163,7 +163,7 @@ const calcularHorasTrabajadas = () => {
                                             value={form.startHour}
                                             onChange={handleChange}
                                             placeholder="HH"
-                                            className="w-16 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                            className="w-16 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
                                             maxLength={2}
                                         />
                                         <span>:</span>
@@ -173,7 +173,7 @@ const calcularHorasTrabajadas = () => {
                                             value={form.startMinute}
                                             onChange={handleChange}
                                             placeholder="MM"
-                                            className="w-16 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                            className="w-16 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
                                             maxLength={2}
                                         />
                                     </div>
@@ -195,7 +195,7 @@ const calcularHorasTrabajadas = () => {
                                             value={form.lunchHour}
                                             onChange={handleChange}
                                             placeholder="HH"
-                                            className="w-16 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                            className="w-16 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
                                             maxLength={2}
                                         />
                                         <span>:</span>
@@ -205,7 +205,7 @@ const calcularHorasTrabajadas = () => {
                                             value={form.lunchMinute}
                                             onChange={handleChange}
                                             placeholder="MM"
-                                            className="w-16 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                            className="w-16 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
                                             maxLength={2}
                                         />
                                     </div>
@@ -227,7 +227,7 @@ const calcularHorasTrabajadas = () => {
                                             value={form.endHour}
                                             onChange={handleChange}
                                             placeholder="HH"
-                                            className="w-16 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                            className="w-16 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
                                             maxLength={2}
                                         />
                                         <span>:</span>
@@ -237,7 +237,7 @@ const calcularHorasTrabajadas = () => {
                                             value={form.endMinute}
                                             onChange={handleChange}
                                             placeholder="MM"
-                                            className="w-16 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                            className="w-16 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
                                             maxLength={2}
                                         />
                                     </div>
@@ -305,7 +305,7 @@ const calcularHorasTrabajadas = () => {
             </div>
 
                         <div className="flex space-x-2 justify-end mt-4">
-                <Link to="/dashboard/turnos" className="text-white px-4 py-2 bg-[#a91e1e] hover:bg-[#891818] transition-colors">Salir</Link>
+                <Link to="/dashboard/turnos" className="text-white px-4 py-2 bg-reyes hover:bg-reyes-active transition-colors">Salir</Link>
             </div>
 
         </div>

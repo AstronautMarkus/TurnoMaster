@@ -78,7 +78,7 @@ const Profile: React.FC = () => {
                                 />
                             </div>
                             <button 
-                                className="mt-4 text-white px-4 py-2 bg-[#a91e1e] hover:bg-[#891818] transition-colors"
+                                className="mt-4 text-white px-4 py-2 bg-reyes hover:bg-reyes-active transition-colors"
                                 onClick={() => setIsModalOpen(true)}
                             >
                                 Cambiar foto
@@ -117,7 +117,7 @@ const Profile: React.FC = () => {
                                 Cerrar
                             </button>
                             <button 
-                                className="text-white px-4 py-2 bg-[#a91e1e] hover:bg-[#891818] transition-colors"
+                                className="text-white px-4 py-2 bg-reyes hover:bg-reyes-active transition-colors"
                                 onClick={async () => {
                                     try {
                                         await deleteImage();

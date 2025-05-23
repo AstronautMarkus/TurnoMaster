@@ -12,7 +12,7 @@ export function Navbar(){
   };
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-[#891818] text-white px-4 sm:px-6">
+    <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-reyes text-white px-4 sm:px-6">
       <div className="ml-auto flex items-center gap-2">
         <UserNav />
         <button
