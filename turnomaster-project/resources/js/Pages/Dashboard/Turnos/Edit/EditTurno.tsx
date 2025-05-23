@@ -56,26 +56,52 @@ const EditTurno = () => {
     const turnoTitle = useTurnoGraph(form, chartRef);
 
     const calcularHorasTrabajadas = () => {
-        const { startHour, startMinute, lunchHour, lunchMinute, endHour, endMinute } = form;
-        if (
-            [startHour, startMinute, lunchHour, lunchMinute, endHour, endMinute].some(
-                v => v === "" || isNaN(Number(v))
-            )
-        ) return null;
+    const { startHour, startMinute, lunchHour, lunchMinute, endHour, endMinute } = form;
 
-        const inicio = Number(startHour) * 60 + Number(startMinute);
-        const almuerzo = Number(lunchHour) * 60 + Number(lunchMinute);
-        const fin = Number(endHour) * 60 + Number(endMinute);
+    if (
+        [startHour, startMinute, lunchHour, lunchMinute, endHour, endMinute].some(
+            v => v === "" || isNaN(Number(v))
+        )
+    ) return null;
 
-        if (inicio >= almuerzo || almuerzo >= fin) return "invalid";
+    const inicio = Number(startHour) * 60 + Number(startMinute);
+    const almuerzo = Number(lunchHour) * 60 + Number(lunchMinute);
+    const fin = Number(endHour) * 60 + Number(endMinute);
 
-        const minutosTrabajados = (almuerzo - inicio) + (fin - almuerzo);
-        if (minutosTrabajados <= 0) return null;
+    if (inicio >= almuerzo || almuerzo >= fin) return "invalid";
 
-        const horas = Math.floor(minutosTrabajados / 60);
-        const minutos = minutosTrabajados % 60;
-        return `${horas} hora${horas !== 1 ? "s" : ""}${minutos > 0 ? ` ${minutos} minuto${minutos !== 1 ? "s" : ""}` : ""}`;
-    };
+    const duracionTotal = fin - inicio;
+    const duracionAlmuerzo = 60;
+    const minutosTrabajados = duracionTotal - duracionAlmuerzo;
+
+    if (minutosTrabajados <= 0) return null;
+
+    const secretMessages = [
+        "¿Más de 16 horas? ¡Tus empleados no son robots! 🤖",
+        "¡Eso es explotación laboral nivel jefe final! 😅",
+        "¿Turno eterno? Recuerda que tus empleados también duermen. 💤",
+        "¡Cuidado! Así solo lograrás que renuncien... o se conviertan en vampiros. 🧛‍♂️",
+        "¿Buscas el récord Guinness de horas trabajadas? Tus empleados no te lo agradecerán. 🏆",
+        "¡Wow! ¿Un turno o una maratón? Mejor cuida a tu equipo. ❤️",
+        "Tus empleados necesitan descanso, no solo café. ☕",
+        "Recuerda: empleados felices, empresa feliz. ¡No los mates de cansancio! 😉",
+        "¡Eso no es un turno, es una condena! Dale un respiro a tu gente. 🌬️",
+        "Ese Turno no es tan master que digamos... 😅",
+        "Ni ChatGPT trabaja tanto. ¡Dale un respiro a tu equipo! 🤖"
+    ];
+
+    
+    if (duracionTotal > 16 * 60) {
+        return `${Math.floor(minutosTrabajados / 60)} hora${Math.floor(minutosTrabajados / 60) !== 1 ? "s" : ""}${minutosTrabajados % 60 > 0 ? ` ${minutosTrabajados % 60} minuto${minutosTrabajados % 60 !== 1 ? "s" : ""}` : ""} — ${secretMessages[Math.floor(Math.random() * secretMessages.length)]}`;
+    }
+
+
+    const horas = Math.floor(minutosTrabajados / 60);
+    const minutos = minutosTrabajados % 60;
+
+    return `${horas} hora${horas !== 1 ? "s" : ""}${minutos > 0 ? ` ${minutos} minuto${minutos !== 1 ? "s" : ""}` : ""}`;
+};
+
 
     return (
         <div className="p-6">
