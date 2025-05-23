@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import useCreateTurno from "./useCreateTurno";
 import { FaPlus } from 'react-icons/fa6';
 import { Link } from "react-router-dom";
+import useTurnoGraph from "./useTurnoGraph";
 
 const CreateTurno = () => {
     const [form, setForm] = useState({
@@ -18,6 +19,7 @@ const CreateTurno = () => {
     const onlyNumbers = (value: string) => /^[0-9]{0,2}$/.test(value);
 
     const {
+
         loading,
         error,
         success,
@@ -50,6 +52,9 @@ const CreateTurno = () => {
         e.preventDefault();
         handleValidateAndSubmit();
     };
+
+    const chartRef = useRef(null) as unknown as React.RefObject<HTMLDivElement>;
+    const turnoTitle = useTurnoGraph(form, chartRef);
 
     return (
         <div className="p-6">
@@ -214,9 +219,24 @@ const CreateTurno = () => {
                     </form>
                 </>
             </div>
-            <div className="flex space-x-2 justify-end mt-4">
+
+            <div className="bg-white shadow-md w-full p-6 relative mt-4">
+                <div className="mb-2 font-bold">Vista previa del turno</div>
+                {!form.startHour || !form.startMinute || !form.lunchHour || !form.lunchMinute || !form.endHour || !form.endMinute ? (
+                    <div className="text-gray-500 mb-4">
+                        Para ver el gráfico, por favor rellene los campos de horario.
+                    </div>
+                ) : null}
+                <div className="mb-2 font-bold">{turnoTitle}</div>
+                <div style={{ height: 200 }}>
+                    <div ref={chartRef} style={{ height: "100px" }}></div>
+                </div>
+            </div>
+
+                        <div className="flex space-x-2 justify-end mt-4">
                 <Link to="/dashboard/turnos" className="text-white px-4 py-2 bg-[#a91e1e] hover:bg-[#891818] transition-colors">Salir</Link>
             </div>
+
         </div>
     );
 };
