@@ -56,6 +56,31 @@ const CreateTurno = () => {
     const chartRef = useRef(null) as unknown as React.RefObject<HTMLDivElement>;
     const turnoTitle = useTurnoGraph(form, chartRef);
 
+
+    const calcularHorasTrabajadas = () => {
+        const { startHour, startMinute, lunchHour, lunchMinute, endHour, endMinute } = form;
+        if (
+            [startHour, startMinute, lunchHour, lunchMinute, endHour, endMinute].some(
+                v => v === "" || isNaN(Number(v))
+            )
+        ) return null;
+
+        const inicio = Number(startHour) * 60 + Number(startMinute);
+        const almuerzo = Number(lunchHour) * 60 + Number(lunchMinute);
+        const fin = Number(endHour) * 60 + Number(endMinute);
+
+
+        if (inicio >= almuerzo || almuerzo >= fin) return null;
+
+
+        const minutosTrabajados = (almuerzo - inicio) + (fin - almuerzo);
+        if (minutosTrabajados <= 0) return null;
+
+        const horas = Math.floor(minutosTrabajados / 60);
+        const minutos = minutosTrabajados % 60;
+        return `${horas} hora${horas !== 1 ? "s" : ""}${minutos > 0 ? ` ${minutos} minuto${minutos !== 1 ? "s" : ""}` : ""}`;
+    };
+
     return (
         <div className="p-6">
                 <h1 className="text-3xl sm:text-4xl font-bold text-left mb-6 mt-4 flex items-center gap-2">
@@ -227,6 +252,12 @@ const CreateTurno = () => {
                         Para ver el gráfico, por favor rellene los campos de horario.
                     </div>
                 ) : null}
+
+                {calcularHorasTrabajadas() && (
+                    <div className="mb-2 font-bold text-red-700">
+                        Horas totales trabajadas: {calcularHorasTrabajadas()}
+                    </div>
+                )}
                 <div className="mb-2 font-bold">{turnoTitle}</div>
                 <div style={{ height: 200 }}>
                     <div ref={chartRef} style={{ height: "100px" }}></div>
