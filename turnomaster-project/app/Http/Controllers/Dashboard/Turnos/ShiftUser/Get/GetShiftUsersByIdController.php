@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Dashboard\Turnos\ShiftUser\Get;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Shift\ShiftUser;
-use App\Models\DashboardUser;
+use App\Models\Users\DashboardUser;
 use App\Models\Turnos\Turnos;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
@@ -36,10 +36,22 @@ class GetShiftUsersByIdController extends Controller
 
         $shiftUsers = ShiftUser::where('shift_id', $id)
             ->get(['id', 'user_id', 'shift_id', 'days', 'is_active', 'created_by', 'created_at', 'updated_at']);
-        
+
+        // Get dashboard users data
+        $shiftUsersWithUserData = $shiftUsers->map(function ($shiftUser) {
+            $dashboardUser = DashboardUser::where('id', $shiftUser->user_id)
+                ->select('first_name', 'last_name', 'rut', 'rut_dv', 'email', 'role_id')
+                ->first();
+
+            return [
+                'shift_user' => $shiftUser,
+                'user' => $dashboardUser
+            ];
+        });
+
         return response()->json([
             'message' => 'Usuarios obtenidos correctamente.',
-            'data' => $shiftUsers
+            'data' => $shiftUsersWithUserData
         ], 200);
 
     }
