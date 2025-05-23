@@ -50,6 +50,7 @@ use App\Http\Controllers\Dashboard\Company\GetCompanyDataController;
 use App\Http\Controllers\Dashboard\Employees\Get\GetEmployeesListController;
 use App\Http\Controllers\Dashboard\Employees\Get\GetEmployeeByIdController;
 use App\Http\Controllers\Dashboard\Turnos\Get\GetTurnosController;
+use App\Http\Controllers\Dashboard\Turnos\Get\GetTurnosByIdController;
 
 // Edit controllers
 
@@ -106,6 +107,7 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::post('/user/profile-image', [UpdateImageController::class, 'update']);
     Route::delete('/user/profile-image', [DeleteImageController::class, 'delete']);
     Route::get('/turnos', [GetTurnosController::class, 'getTurnos']);
+    Route::get('/turnos/{id}', [GetTurnosByIdController::class, 'getTurnoById']);
     Route::post('/turnos', [CreateTurnosController::class, 'createTurnos']);
     Route::put('/turnos/{id}', [EditTurnosController::class, 'updateTurnos']);
     Route::delete('/turnos/{id}', [DeleteTurnosController::class, 'deleteTurnos']);
