@@ -39,7 +39,7 @@ const Hr = () => {
                         <p className="text-sm sm:text-base">Este es el panel de control de TurnoMaster, donde podrás gestionar tus turnos y citas de manera eficiente.</p>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <Link to="/dashboard/turnos" className="bg-reyes hover:bg-reyes-active text-white p-4 rounded-none flex flex-col items-center justify-center w-full sm:w-10/12 mx-auto sm:ml-0 sm:mr-auto transition-colors">
+                        <Link to="/dashboard/turnos" className="dashboard-button text-white p-4 rounded-none flex flex-col items-center justify-center w-full sm:w-10/12 mx-auto sm:ml-0 sm:mr-auto transition-colors">
                             <div className="flex items-center">
                                 <div className="text-4xl mr-4">
                                     <FaCalendar />
@@ -51,7 +51,7 @@ const Hr = () => {
                             </div>
                         </Link>
                         
-                        <Link to="/dashboard/employees" className="bg-gray-500 text-white p-4 rounded-none flex flex-col items-center justify-center w-full sm:w-10/12 mx-auto sm:ml-0 sm:mr-auto hover:bg-gray-600 transition-colors">
+                        <Link to="/dashboard/employees" className="dashboard-button-secondary text-white p-4 rounded-none flex flex-col items-center justify-center w-full sm:w-10/12 mx-auto sm:ml-0 sm:mr-auto transition-colors">
                             <div className="flex items-center">
                                 <div className="text-4xl mr-4">
                                     <FaUsers />

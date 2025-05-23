@@ -89,7 +89,7 @@ const ListEmployees = () => {
         <div className="w-full sm:w-auto">
           <Link
             to="/dashboard/employees/create"
-            className="flex items-center justify-center w-full sm:w-auto text-white px-4 py-2 bg-reyes hover:bg-reyes-active transition-colors"
+            className="flex items-center justify-center w-full sm:w-auto text-white px-4 py-2 dashboard-button transition-colors"
           >
             <FaPlus className="mr-2" />
             Crear empleado
@@ -102,12 +102,12 @@ const ListEmployees = () => {
               placeholder="Buscar empleado..."
               value={searchInput}
               onChange={handleSearchInputChange}
-              className="flex-grow px-4 py-2 h-10 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+              className="flex-grow px-4 py-2 h-10 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
             />
             <button
               type="button"
               onClick={handleSearch}
-              className="flex items-center text-white px-4 py-2 h-10 min-h-[2.5rem] bg-reyes hover:bg-reyes-active transition-colors"
+              className="flex items-center text-white px-4 py-2 h-10 min-h-[2.5rem] dashboard-button transition-colors"
             >
               <FaSearch className="text-lg" />
             </button>
@@ -129,7 +129,7 @@ const ListEmployees = () => {
             <select
               value={selectedRole}
               onChange={handleRoleChange}
-              className="border border-gray-300 px-4 py-2 w-full sm:w-1/1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border border-gray-300 px-4 py-2 w-full sm:w-1/1 focus:ring-3 focus:ring-black focus:border-black hover:border-black"
             >
               <option value="Todos">Todos</option>
               {roles.map((role, index) => (
@@ -148,7 +148,7 @@ const ListEmployees = () => {
         ) : (
           <div className="max-h-96 overflow-y-auto">
             <table className="table-auto w-full border-collapse">
-              <thead className="sticky top-0 bg-reyes text-white uppercase text-sm tracking-wider">
+              <thead className="sticky top-0 dashboard-background text-white uppercase text-sm tracking-wider">
                 <tr>
                   <th className="px-4 py-3 text-left">Nombre</th>
                   <th className="px-4 py-3 text-left">RUT</th>
@@ -180,13 +180,13 @@ const ListEmployees = () => {
                     </td>
                     <td className="px-4 py-2">
                       <div className="flex space-x-2">
-                        <Link to={`/dashboard/employees/edit/${employee.id}`} className="bg-gray-600 text-white px-4 py-2 text-sm hover:bg-gray-700 transition-colors flex items-center">
+                        <Link to={`/dashboard/employees/edit/${employee.id}`} className="dashboard-button-secondary text-white px-4 py-2 text-sm transition-colors flex items-center">
                           <FaEdit className="mr-2" />
                           Editar
                         </Link>
                         <button
                           onClick={() => handleDeleteClick(employee)}
-                          className="text-white px-4 py-2 text-sm bg-reyes hover:bg-reyes-active transition-colors flex items-center"
+                          className="text-white px-4 py-2 text-sm dashboard-button transition-colors flex items-center"
                         >
                           <FaMinus className="mr-2" />
                           Eliminar

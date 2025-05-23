@@ -78,7 +78,7 @@ const Profile: React.FC = () => {
                                 />
                             </div>
                             <button 
-                                className="mt-4 text-white px-4 py-2 bg-reyes hover:bg-reyes-active transition-colors"
+                                className="mt-4 text-white px-4 py-2 dashboard-button transition-colors"
                                 onClick={() => setIsModalOpen(true)}
                             >
                                 Cambiar foto
@@ -111,13 +111,13 @@ const Profile: React.FC = () => {
                         {isSuccess && <p className="text-m mb-2">Imagen actualizada correctamente.</p>}
                         <div className="flex justify-end gap-2">
                             <button 
-                                className="px-4 py-2 bg-gray-300 hover:bg-gray-400"
+                                className="px-4 py-2 text-white dashboard-button-secondary transition-colors"
                                 onClick={() => setIsModalOpen(false)}
                             >
                                 Cerrar
                             </button>
                             <button 
-                                className="text-white px-4 py-2 bg-reyes hover:bg-reyes-active transition-colors"
+                                className="text-white px-4 py-2 dashboard-button transition-colors"
                                 onClick={async () => {
                                     try {
                                         await deleteImage();

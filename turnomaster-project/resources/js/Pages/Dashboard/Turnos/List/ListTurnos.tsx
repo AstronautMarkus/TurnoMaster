@@ -31,7 +31,7 @@ const ListTurnos = () => {
                 <div className="w-full sm:w-auto">
                     <Link
                         to="/dashboard/turnos/create"
-                        className="flex items-center justify-center w-full sm:w-auto text-white px-4 py-2 bg-reyes hover:bg-reyes-active transition-colors"
+                        className="flex items-center justify-center w-full sm:w-auto text-white px-4 py-2 dashboard-button transition-colors"
                     >
                         <FaPlus className="mr-2" />
                         Crear Turno
@@ -44,12 +44,12 @@ const ListTurnos = () => {
                             placeholder="Buscar turno..."
                             value={searchInput}
                             onChange={handleSearchInputChange}
-                            className="flex-grow px-4 py-2 h-10 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
+                            className="flex-grow px-4 py-2 h-10 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
                         />
                         <button
                             type="button"
                             onClick={handleSearch}
-                            className="flex items-center text-white px-4 py-2 h-10 min-h-[2.5rem] bg-reyes hover:bg-reyes-active transition-colors"
+                            className="flex items-center text-white px-4 py-2 h-10 min-h-[2.5rem] dashboard-button transition-colors"
                         >
                             <FaSearch className="text-lg" />
                         </button>
@@ -70,7 +70,7 @@ const ListTurnos = () => {
             <div className="bg-white shadow w-full overflow-x-auto">
                 <div className="max-h-96 overflow-y-auto">
                     <table className="table-auto w-full border-collapse">
-                        <thead className="sticky top-0 bg-reyes text-white uppercase text-sm tracking-wider">
+                        <thead className="sticky top-0 dashboard-background text-white uppercase text-sm tracking-wider">
                             <tr>
                                 <th className="px-4 py-3 text-left">Nombre</th>
                                 <th className="px-4 py-3 text-left">Descripción</th>
@@ -86,7 +86,7 @@ const ListTurnos = () => {
                         <tbody>
                             {loading ? (
                                 <tr>
-                                    <td colSpan={7} className="text-center py-4 text-gray-500">
+                                    <td colSpan={7} className="text-center py-4 text-black">
                                         Cargando turnos...
                                     </td>
                                 </tr>
@@ -101,7 +101,7 @@ const ListTurnos = () => {
                                         <td className="px-4 py-2">
                                             <Link
                                                 to={`/dashboard/turnos/${turno.id}/users`}
-                                                className="inline-block bg-gray-600 hover:bg-gray-700 text-white px-3 py-2 text-sm font-medium transition-colors"
+                                                className="inline-block dashboard-button-secondary text-white px-3 py-2 text-sm font-medium transition-colors"
                                                 style={{ minWidth: "40px", textAlign: "center" }}
                                             >
                                                 <span>Revisar lista</span>
@@ -115,12 +115,12 @@ const ListTurnos = () => {
                                         </td>
                                         <td className="px-4 py-2">
                                             <div className="flex space-x-2">
-                                                <Link to={`/dashboard/turnos/edit/${turno.id}`} className="bg-gray-600 text-white px-4 py-2 text-sm hover:bg-gray-700 transition-colors flex items-center">
+                                                <Link to={`/dashboard/turnos/edit/${turno.id}`} className="dashboard-button-secondary text-white px-4 py-2 text-sm transition-colors flex items-center">
                                                     <FaEdit className="mr-2" />
                                                     Editar
                                                 </Link>
                                                 <button
-                                                    className="text-white px-4 py-2 text-sm bg-reyes hover:bg-reyes-active transition-colors flex items-center"
+                                                    className="text-white px-4 py-2 text-sm dashboard-button transition-colors flex items-center"
                                                 >
                                                     <FaMinus className="mr-2" />
                                                     Eliminar

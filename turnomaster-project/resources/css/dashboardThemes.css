@@ -1,0 +1,70 @@
+.theme-reyes {
+  --bg: #1f1f1f;
+  --text: #eaeaea;
+  --accent: #891818;
+  --accent-hover: #7b1414;
+  --accent-light: #a33838;
+  --secondary: #3c3c3c;
+  --secondary-hover: #323232;
+  --secondary-light: #4a4a4a;
+  --success: #4caf50;
+  --success-hover: #45a049;
+  --success-light: #66bb6a;
+}
+
+.theme-reyes-blue {
+  --bg: #1a2238;
+  --text: #eaeaea;
+  --accent: #2176ff;
+  --accent-hover: #185abc;
+  --accent-light: #4f8cff;
+  --secondary: #283655;
+  --secondary-hover: #1d2540;
+  --secondary-light: #3a4972;
+  --success: #43d8c9;
+  --success-hover: #36b3a3;
+  --success-light: #6ee7da;
+}
+
+.dashboard-text{
+  color: var(--accent);
+}
+
+.dashboard-background{ 
+  background-color: var(--accent);
+}
+
+.dashboard-option{
+  background-color: var(--accent);
+}
+
+.dashboard-hover{
+  background-color: var(--accent-hover);
+}
+
+.dashboard-button{
+  background-color: var(--accent);
+}
+.dashboard-button:hover{
+  background-color: var(--accent-hover);
+}
+
+.dashboard-button-secondary{
+  background-color: var(--secondary);
+}
+.dashboard-button-secondary:hover{
+  background-color: var(--secondary-hover);
+}
+
+.dashboard-button-success{
+  background-color: var(--success);
+}
+
+.dashboard-button-success:hover{
+  background-color: var(--success-hover);
+}
+
+.dashboard-sidebar {
+  background-color: var(--bg);
+}
+

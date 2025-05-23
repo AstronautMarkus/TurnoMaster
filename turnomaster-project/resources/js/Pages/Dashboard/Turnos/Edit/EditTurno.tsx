@@ -132,7 +132,7 @@ const EditTurno = () => {
                                         name="name"
                                         value={form.name}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
+                                        className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
                                     />
                                     {getFieldError("name") && (
                                         <p className="text-red-500 text-sm">{getFieldError("name")}</p>
@@ -144,7 +144,7 @@ const EditTurno = () => {
                                         name="description"
                                         value={form.description}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
+                                        className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
                                     />
                                     {getFieldError("description") && (
                                         <p className="text-red-500 text-sm">{getFieldError("description")}</p>
@@ -162,7 +162,7 @@ const EditTurno = () => {
                                             value={form.startHour}
                                             onChange={handleChange}
                                             placeholder="HH"
-                                            className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
+                                            className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
                                             maxLength={2}
                                         />
                                         <span>:</span>
@@ -172,7 +172,7 @@ const EditTurno = () => {
                                             value={form.startMinute}
                                             onChange={handleChange}
                                             placeholder="MM"
-                                            className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
+                                            className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
                                             maxLength={2}
                                         />
                                     </div>
@@ -194,7 +194,7 @@ const EditTurno = () => {
                                             value={form.lunchHour}
                                             onChange={handleChange}
                                             placeholder="HH"
-                                            className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
+                                            className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
                                             maxLength={2}
                                         />
                                         <span>:</span>
@@ -204,7 +204,7 @@ const EditTurno = () => {
                                             value={form.lunchMinute}
                                             onChange={handleChange}
                                             placeholder="MM"
-                                            className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
+                                            className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
                                             maxLength={2}
                                         />
                                     </div>
@@ -226,7 +226,7 @@ const EditTurno = () => {
                                             value={form.endHour}
                                             onChange={handleChange}
                                             placeholder="HH"
-                                            className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
+                                            className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
                                             maxLength={2}
                                         />
                                         <span>:</span>
@@ -236,7 +236,7 @@ const EditTurno = () => {
                                             value={form.endMinute}
                                             onChange={handleChange}
                                             placeholder="MM"
-                                            className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
+                                            className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
                                             maxLength={2}
                                         />
                                     </div>
@@ -267,7 +267,7 @@ const EditTurno = () => {
                                     ? error
                                         ? 'bg-red-600'
                                         : 'bg-gray-400'
-                                    : 'bg-gray-600 hover:bg-gray-700'
+                                    : 'dashboard-button-secondary'
                             } flex items-center justify-center`}
                             disabled={loading}
                         >
@@ -287,13 +287,13 @@ const EditTurno = () => {
                 ) : null}
 
                 {calcularHorasTrabajadas() === "invalid" && (
-                    <div className="mb-2 font-bold text-red-700">
+                    <div className="mb-2 font-bold dashboard-text">
                         Este horario carece de lógica, por favor revise los campos.
                     </div>
                 )}
 
                 {calcularHorasTrabajadas() && calcularHorasTrabajadas() !== "invalid" && (
-                    <div className="mb-2 font-bold text-red-700">
+                    <div className="mb-2 font-bold dashboard-text">
                         Horas totales trabajadas: {calcularHorasTrabajadas()}
                     </div>
                 )}
@@ -304,7 +304,7 @@ const EditTurno = () => {
             </div>
 
             <div className="flex space-x-2 justify-end mt-4">
-                <Link to="/dashboard/turnos" className="text-white px-4 py-2 bg-reyes hover:bg-reyes-active transition-colors">Salir</Link>
+                <Link to="/dashboard/turnos" className="text-white px-4 py-2 dashboard-button transition-colors">Salir</Link>
             </div>
         </div>
     );

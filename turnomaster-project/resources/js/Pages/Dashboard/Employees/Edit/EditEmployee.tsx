@@ -124,7 +124,7 @@ const EditEmployee: React.FC = () => {
                                     value={formValues.first_name}
                                     onChange={(e) => handleChange('first_name', e.target.value)}
                                     placeholder="Ingrese un nombre"
-                                    className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
+                                    className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
                                     disabled={loading}
                                 />
                                 {errors.first_name && <p className="text-red-500 text-sm">{errors.first_name}</p>}
@@ -138,7 +138,7 @@ const EditEmployee: React.FC = () => {
                                     value={formValues.last_name}
                                     onChange={(e) => handleChange('last_name', e.target.value)}
                                     placeholder="Ingrese un apellido"
-                                    className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
+                                    className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
                                     disabled={loading}
                                 />
                                 {errors.last_name && <p className="text-red-500 text-sm">{errors.last_name}</p>}
@@ -152,7 +152,7 @@ const EditEmployee: React.FC = () => {
                                         name="rut"
                                         value={rut}
                                         onChange={(e) => handleRutChange(e.target.value)}
-                                        className="flex-grow px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
+                                        className="flex-grow px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
                                         placeholder="12345678"
                                         disabled={loading}
                                     />
@@ -163,7 +163,7 @@ const EditEmployee: React.FC = () => {
                                         name="rut_dv"
                                         value={rutDv}
                                         onChange={(e) => handleRutDvChange(e.target.value)}
-                                        className="w-12 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
+                                        className="w-12 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
                                         placeholder="k"
                                         disabled={loading}
                                     />
@@ -179,7 +179,7 @@ const EditEmployee: React.FC = () => {
                                     value={formValues.email}
                                     onChange={(e) => handleChange('email', e.target.value)}
                                     placeholder="Ingrese un correo electrónico"
-                                    className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
+                                    className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
                                     disabled={loading}
                                 />
                                 {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
@@ -191,7 +191,7 @@ const EditEmployee: React.FC = () => {
                                     name="role_id"
                                     value={formValues.role_id}
                                     onChange={(e) => handleChange('role_id', e.target.value)}
-                                    className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-reyes focus:border-reyes hover:border-reyes"
+                                    className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
                                     disabled={loading}
                                 >
                                     <option value="" disabled>Selecciona un rol</option>
@@ -207,9 +207,9 @@ const EditEmployee: React.FC = () => {
                             className={`mt-4 px-4 py-2 text-white ${
                                 loading
                                     ? error
-                                        ? 'bg-reyes'
+                                        ? 'bg-red-400'
                                         : 'bg-gray-400'
-                                    : 'bg-gray-600 hover:bg-gray-700'
+                                    : 'dashboard-button-secondary'
                             } flex items-center justify-center `}
                             disabled={loading}
                         >
@@ -220,7 +220,7 @@ const EditEmployee: React.FC = () => {
                 </>
             </div>
             <div className="flex space-x-2 justify-end mt-4">
-                <Link to="/dashboard/employees" className="text-white px-4 py-2 bg-reyes hover:bg-reyes-active transition-colors">Salir</Link>
+                <Link to="/dashboard/employees" className="text-white px-4 py-2 dashboard-button transition-colors">Salir</Link>
             </div>
         </div>
     );

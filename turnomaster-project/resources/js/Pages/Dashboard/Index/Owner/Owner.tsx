@@ -39,7 +39,7 @@ const Owner = () => {
                         <p className="text-sm sm:text-base">Este es el panel de control de TurnoMaster, donde podrás gestionar tus turnos y citas de manera eficiente.</p>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <Link to="/dashboard/turnos" className="bg-reyes hover:bg-reyes-active text-white p-4 rounded-none flex flex-col items-center justify-center w-full sm:w-10/12 mx-auto sm:ml-0 sm:mr-auto transition-colors">
+                        <Link to="/dashboard/turnos" className="dashboard-button text-white p-4 rounded-none flex flex-col items-center justify-center w-full sm:w-10/12 mx-auto sm:ml-0 sm:mr-auto transition-colors">
                             <div className="flex items-center">
                                 <div className="text-4xl mr-4">
                                     <FaCalendar />
@@ -51,7 +51,7 @@ const Owner = () => {
                             </div>
                         </Link>
                         
-                        <Link to="/dashboard/employees" className="bg-gray-500 text-white p-4 rounded-none flex flex-col items-center justify-center w-full sm:w-10/12 mx-auto sm:ml-0 sm:mr-auto hover:bg-gray-600 transition-colors">
+                        <Link to="/dashboard/employees" className="dashboard-button-secondary text-white p-4 rounded-none flex flex-col items-center justify-center w-full sm:w-10/12 mx-auto sm:ml-0 sm:mr-auto transition-colors">
                             <div className="flex items-center">
                                 <div className="text-4xl mr-4">
                                     <FaUsers />
@@ -65,16 +65,6 @@ const Owner = () => {
                     </div>
                 </div>
 
-                <div className="bg-white shadow-lg sm:p-6 flex flex-col">
-                    <div className="mb-6">
-                        <h3 className="text-xl font-bold text-gray-800 mb-2 text-center">Hora actual:</h3>
-                        <p className="text-lg text-gray-700 text-center">{currentTime.toLocaleTimeString()}</p>
-                    </div>
-                    <div className="pt-4 border-t border-gray-300">
-                        <h3 className="text-xl font-bold text-gray-800 mb-2 text-center">Próximo horario de entrada:</h3>
-                        <p className="text-lg text-gray-700 text-center">No hay horarios disponible.</p>
-                    </div>
-                </div>
             </div>
 
             <div className="flex flex-col mt-6">
@@ -90,9 +80,7 @@ const Owner = () => {
                                 <div className="w-48 h-48 bg-gray-200 overflow-hidden rounded">
                                     <img src={companyData.company.profile_image} alt="Empresa" className="object-cover w-full h-full" />
                                 </div>
-                                <button className="mt-4 text-white px-4 py-2 bg-gray-400 cursor-not-allowed" disabled>
-                                    Cambiar logo
-                                </button>
+                                
                                 <div className="flex-grow grid grid-cols-2 sm:grid-cols-4 gap-4">
                                     <div>
                                         <p className="text-lg font-bold">Nombre de la empresa:</p>

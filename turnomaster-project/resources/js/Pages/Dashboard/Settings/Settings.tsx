@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaUser} from 'react-icons/fa';
+import { FaUser, FaBrush} from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const Settings: React.FC = () => {
@@ -9,6 +9,12 @@ const Settings: React.FC = () => {
             title: 'Perfil',
             description: 'Gestiona la información de tu perfil y preferencias personales.',
             url:"/dashboard/profile"
+        },
+        {
+            icon: <FaBrush />,
+            title: 'Apariencia',
+            description: 'Personaliza la apariencia de la aplicación a tu gusto.',
+            url:"/dashboard/appearance"
         },
     ];
 
