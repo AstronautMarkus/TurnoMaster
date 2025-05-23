@@ -14,11 +14,6 @@ class Turnos extends Model
         'end_time',
         'company_id',
     ];
-
-    public function users()
-    {
-        return $this->hasMany(DashboardUser::class);
-    }
 }
 
 
