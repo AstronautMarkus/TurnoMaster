@@ -29,7 +29,7 @@ const useCreateTurno = (
     const [success, setSuccess] = useState<string | null>(null);
     const [validationErrors, setValidationErrors] = useState<ValidationErrors>({});
     const [formErrors, setFormErrors] = useState<string | null>(null);
-    const [fieldErrors, setFieldErrors] = useState<Record<string, string | null>>({});
+    const [fieldErrors, setFieldErrors] = useState<Record<string, string[] | null>>({});
 
     const handleFieldChange = (name: string, value: string) => {
         if (setForm && form) {
@@ -66,17 +66,14 @@ const useCreateTurno = (
         return { valid, errors };
     };
 
-    const getFieldError = (field: string) => {
+    const getFieldError = (field: string): string[] | null => {
         if (fieldErrors[field]) return fieldErrors[field];
         if (validationErrors) {
-            if (field === "name" && validationErrors.name) return validationErrors.name[0];
-            if (field === "description" && validationErrors.description) return validationErrors.description[0];
-            if (field === "startHour" && validationErrors.start_time) return validationErrors.start_time[0];
-            if (field === "startMinute" && validationErrors.start_time) return validationErrors.start_time[0];
-            if (field === "lunchHour" && validationErrors.lunch_time) return validationErrors.lunch_time[0];
-            if (field === "lunchMinute" && validationErrors.lunch_time) return validationErrors.lunch_time[0];
-            if (field === "endHour" && validationErrors.end_time) return validationErrors.end_time[0];
-            if (field === "endMinute" && validationErrors.end_time) return validationErrors.end_time[0];
+            if (field === "name" && validationErrors.name) return validationErrors.name;
+            if (field === "description" && validationErrors.description) return validationErrors.description;
+            if ((field === "startHour" || field === "startMinute") && validationErrors.start_time) return validationErrors.start_time;
+            if ((field === "lunchHour" || field === "lunchMinute") && validationErrors.lunch_time) return validationErrors.lunch_time;
+            if ((field === "endHour" || field === "endMinute") && validationErrors.end_time) return validationErrors.end_time;
         }
         return null;
     };
@@ -115,21 +112,25 @@ const useCreateTurno = (
         if (!form) return;
 
         let valid = true;
-        let errors: Record<string, string | null> = {};
-
+        let errors: Record<string, string[] | null> = {};
 
         if (!form.name.trim()) {
-            errors.name = "El nombre es obligatorio.";
+            errors.name = ["El nombre es obligatorio."];
             valid = false;
         }
         if (!form.description.trim()) {
-            errors.description = "La descripción es obligatoria.";
+            errors.description = ["La descripción es obligatoria."];
             valid = false;
         }
 
         const { valid: validFields, errors: fieldValidationErrors } = validateFields(form);
         if (!validFields) {
-            errors = { ...errors, ...fieldValidationErrors };
+            for (const key in fieldValidationErrors) {
+            if (fieldValidationErrors.hasOwnProperty(key)) {
+                const value = fieldValidationErrors[key];
+                if (value) errors[key] = [value];
+            }
+            }
             valid = false;
         }
         setFieldErrors(errors);
@@ -151,12 +152,13 @@ const useCreateTurno = (
             end_time,
         });
         if (result && result.errors) {
-            const backendFieldErrors: Record<string, string | null> = {};
-            if (result.errors.name) backendFieldErrors.name = result.errors.name[0];
-            if (result.errors.description) backendFieldErrors.description = result.errors.description[0];
-            if (result.errors.start_time) backendFieldErrors.start_time = result.errors.start_time[0];
-            if (result.errors.lunch_time) backendFieldErrors.lunch_time = result.errors.lunch_time[0];
-            if (result.errors.end_time) backendFieldErrors.end_time = result.errors.end_time[0];
+            const backendFieldErrors: Record<string, string[] | null> = {};
+            for (const key in result.errors) {
+            if (result.errors.hasOwnProperty(key)) {
+                const value = result.errors[key];
+                if (Array.isArray(value)) backendFieldErrors[key] = value;
+            }
+            }
             setFieldErrors(backendFieldErrors);
         }
     };

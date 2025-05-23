@@ -46,6 +46,48 @@ class CreateTurnosController extends Controller
             ], 422);
         }
 
+        $start = $request->start_time;
+        $lunch = $request->lunch_time;
+        $end = $request->end_time;
+
+
+        $timePattern = '/^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/';
+        $logicErrors = [];
+
+        if (!preg_match($timePattern, $start)) {
+            $logicErrors['start_time'][] = 'El formato de la hora de inicio es inválido.';
+        }
+        if (!preg_match($timePattern, $lunch)) {
+            $logicErrors['lunch_time'][] = 'El formato de la hora de almuerzo es inválido.';
+        }
+        if (!preg_match($timePattern, $end)) {
+            $logicErrors['end_time'][] = 'El formato de la hora de fin es inválido.';
+        }
+
+
+        if (empty($logicErrors)) {
+            $startMinutes = (int)substr($start,0,2)*60 + (int)substr($start,3,2);
+            $lunchMinutes = (int)substr($lunch,0,2)*60 + (int)substr($lunch,3,2);
+            $endMinutes = (int)substr($end,0,2)*60 + (int)substr($end,3,2);
+
+            if ($startMinutes >= $lunchMinutes) {
+                $logicErrors['lunch_time'][] = 'La hora de almuerzo debe ser después de la hora de inicio.';
+            }
+            if ($lunchMinutes >= $endMinutes) {
+                $logicErrors['end_time'][] = 'La hora de fin debe ser después de la hora de almuerzo.';
+            }
+            if ($startMinutes >= $endMinutes) {
+                $logicErrors['end_time'][] = 'La hora de fin debe ser después de la hora de inicio.';
+            }
+        }
+
+        if (!empty($logicErrors)) {
+            return response()->json([
+                'message' => 'La validación de los horarios ha fallado.',
+                'errors' => $logicErrors,
+            ], 422);
+        }
+
         $turno = Turnos::create([
             'name' => $request->name,
             'description' => $request->description,

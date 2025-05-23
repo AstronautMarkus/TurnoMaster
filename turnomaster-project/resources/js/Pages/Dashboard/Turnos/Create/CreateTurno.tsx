@@ -220,7 +220,18 @@ const CreateTurno = () => {
                                     </div>
                                     {(getFieldError("endHour") || getFieldError("endMinute")) && (
                                         <p className="text-red-500 text-sm">
-                                            {getFieldError("endHour") || getFieldError("endMinute")}
+                                            {getFieldError("endHour") && (
+                                                <>
+                                                    {getFieldError("endHour")}
+                                                    <br />
+                                                </>
+                                            )}
+                                            {getFieldError("endMinute") && (
+                                                <>
+                                                    {getFieldError("endMinute")}
+                                                    <br />
+                                                </>
+                                            )}
                                         </p>
                                     )}
                                 </div>
