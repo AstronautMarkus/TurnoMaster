@@ -34,11 +34,12 @@ class GetShiftUsersByIdController extends Controller
             ], 422);
         }
 
+        $perPage = $request->input('per_page', 10);
         $shiftUsers = ShiftUser::where('shift_id', $id)
-            ->get(['id', 'user_id', 'shift_id', 'days', 'is_active', 'created_by', 'created_at', 'updated_at']);
+            ->paginate($perPage, ['id', 'user_id', 'shift_id', 'days', 'is_active', 'created_by', 'created_at', 'updated_at']);
 
         // Get dashboard users data
-        $shiftUsersWithUserData = $shiftUsers->map(function ($shiftUser) {
+        $shiftUsersWithUserData = $shiftUsers->getCollection()->map(function ($shiftUser) {
             $dashboardUser = DashboardUser::where('id', $shiftUser->user_id)
                 ->select('first_name', 'last_name', 'rut', 'rut_dv', 'email', 'role_id')
                 ->first();
@@ -49,9 +50,29 @@ class GetShiftUsersByIdController extends Controller
             ];
         });
 
+        // Get Turno details
+        $turnoDetails = Turnos::where('id', $id)
+            ->where('company_id', $companyId)
+            ->select('name', 'description', 'start_time', 'lunch_time', 'end_time')
+            ->first();
+        
+        if (!$turnoDetails) {
+            return response()->json([
+                'message' => 'El turno no pertenece a la empresa o no existe.',
+                'errors' => [
+                    'shift_id' => ['El turno no pertenece a la empresa o no existe.']
+                ]
+            ], 422);
+        }
+
+        
+        $paginated = $shiftUsers->toArray();
+        $paginated['data'] = $shiftUsersWithUserData;
+
         return response()->json([
             'message' => 'Usuarios obtenidos correctamente.',
-            'data' => $shiftUsersWithUserData
+            'data' => $paginated,
+            'shift' => $turnoDetails
         ], 200);
 
     }
