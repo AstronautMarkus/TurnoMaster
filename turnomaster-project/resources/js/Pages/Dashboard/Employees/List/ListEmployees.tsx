@@ -228,27 +228,27 @@ const ListEmployees = () => {
 
       {showModal && employeeToDelete && (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50">
-          <div className="bg-white p-8 shadow-2xl border-4 border-red-700 w-full max-w-md">
+          <div className="bg-white p-8 shadow-2xl w-full max-w-md">
             <div className="flex items-center mb-4">
-              <span className="bg-red-700 text-white px-3 py-1 font-bold uppercase tracking-wider mr-3">⚠️Aviso</span>
-              <h2 className="text-xl font-extrabold text-red-800">Eliminar empleado</h2>
+              <span className="dashboard-background text-white px-3 py-1 font-bold uppercase tracking-wider mr-3">⚠️Aviso</span>
+              <h2 className="text-xl font-extrabold dashboard-text">Eliminar empleado</h2>
             </div>
             <p className="text-gray-800 mb-2">
               Está a punto de eliminar al empleado <span className="font-bold">{employeeToDelete.first_name} {employeeToDelete.last_name}</span>.
             </p>
             <p className="text-gray-700 mb-4">
-              Esta acción <span className="font-bold text-red-700">no se puede deshacer</span>. Todos los datos asociados a este empleado se perderán permanentemente.
+              Esta acción <span className="font-bold dashboard-text">no se puede deshacer</span>. Todos los datos asociados a este empleado se perderán permanentemente.
             </p>
             <div className="flex justify-end space-x-4 mt-6">
               <button
                 onClick={() => setShowModal(false)}
-                className="px-5 py-2 bg-gray-300 text-gray-800 font-semibold hover:bg-gray-400 transition-colors"
+                className="px-5 py-2 dashboard-button-secondary text-white font-semibold transition-colors"
                     >
                 Cancelar
                     </button>
                     <button
                 onClick={confirmDelete}
-                className="px-5 py-2 bg-red-700 text-white font-semibold hover:bg-red-800 transition-colors"
+                className="px-5 py-2 dashboard-button text-white font-semibold transition-colors"
                     >
                 Sí, borrar definitivamente
               </button>
