@@ -51,6 +51,7 @@ use App\Http\Controllers\Dashboard\Employees\Get\GetEmployeesListController;
 use App\Http\Controllers\Dashboard\Employees\Get\GetEmployeeByIdController;
 use App\Http\Controllers\Dashboard\Turnos\Get\GetTurnosController;
 use App\Http\Controllers\Dashboard\Turnos\Get\GetTurnosByIdController;
+use App\Http\Controllers\Dashboard\Turnos\ShiftUser\Get\GetShiftUsersByIdController;
 
 // Edit controllers
 
@@ -111,6 +112,7 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::post('/turnos', [CreateTurnosController::class, 'createTurnos']);
     Route::put('/turnos/{id}', [EditTurnosController::class, 'updateTurnos']);
     Route::delete('/turnos/{id}', [DeleteTurnosController::class, 'deleteTurnos']);
+    Route::get('/turnos/shift/{id}', [GetShiftUsersByIdController::class, 'getShiftUserById']);
 });
 
 Route::get('/assets/{path}', function ($path) {
