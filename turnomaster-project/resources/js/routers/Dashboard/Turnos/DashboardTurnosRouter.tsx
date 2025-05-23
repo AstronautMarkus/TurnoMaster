@@ -12,7 +12,7 @@ function DashboardTurnosRouter() {
             <Route path="/" element={<ListTurnos />} />
             <Route path="/create" element={<CreateTurno />} />
             <Route path="/edit/:id" element={<EditTurno />} />
-            <Route path="/:id/users" element={<UsersListTurno/>} />
+            <Route path="/:shiftId/users" element={<UsersListTurno />} />
         </Routes>
     );
 }
