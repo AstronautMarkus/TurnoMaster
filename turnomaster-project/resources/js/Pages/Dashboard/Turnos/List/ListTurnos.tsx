@@ -93,25 +93,25 @@ const ListTurnos = () => {
                             ) : turnos.length > 0 ? (
                                 turnos.map((turno, idx) => (
                                     <tr key={turno.id} className="hover:bg-gray-100 transition-colors">
-                                        <td className="px-4 py-2">{turno.name}</td>
-                                        <td className="px-4 py-2">{turno.description}</td>
-                                        <td className="px-4 py-2">{turno.start_time}</td>
-                                        <td className="px-4 py-2">{turno.lunch_time}</td>
-                                        <td className="px-4 py-2">{turno.end_time}</td>
+                                        <td className="px-4 py-2"><span>{turno.name}</span></td>
+                                        <td className="px-4 py-2"><span>{turno.description}</span></td>
+                                        <td className="px-4 py-2"><span>{turno.start_time}</span></td>
+                                        <td className="px-4 py-2"><span>{turno.lunch_time}</span></td>
+                                        <td className="px-4 py-2"><span>{turno.end_time}</span></td>
                                         <td className="px-4 py-2">
                                             <Link
                                                 to={`/dashboard/turnos/${turno.id}/users`}
                                                 className="inline-block bg-gray-600 hover:bg-gray-700 text-white px-3 py-2 text-sm font-medium transition-colors"
                                                 style={{ minWidth: "40px", textAlign: "center" }}
                                             >
-                                                Revisar lista
+                                                <span>Revisar lista</span>
                                             </Link>
                                         </td>
                                         <td className="px-4 py-2">
-                                            {new Date(turno.created_at).toLocaleString()}
+                                            <span>{new Date(turno.created_at).toLocaleString()}</span>
                                         </td>
                                         <td className="px-4 py-2">
-                                            {turno.updated_at ? new Date(turno.updated_at).toLocaleString() : '--'}
+                                            <span>{turno.updated_at ? new Date(turno.updated_at).toLocaleString() : '--'}</span>
                                         </td>
                                         <td className="px-4 py-2">
                                             <div className="flex space-x-2">
