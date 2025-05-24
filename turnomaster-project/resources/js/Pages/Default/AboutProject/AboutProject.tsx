@@ -9,7 +9,7 @@ const AboutProject = () => {
             <div className="mt-12 container mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-10">
               <div className="flex flex-col justify-center items-start space-y-4">
                 <div className="flex items-start mb-2">
-                  <div className="w-2 h-20 bg-[#e01d1d] mr-4"></div>
+                  <div className="w-2 h-20 bg-reyes-active mr-4"></div>
                     <div>
                       <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
                          Sobre TurnoMaster
@@ -26,8 +26,11 @@ const AboutProject = () => {
                    Una idea simple, pero efectiva. TurnoMaster permite a los trabajadores registrar sus horarios de entrada, colación y salida de manera rápida y sencilla, sin complicaciones. Con una interfaz intuitiva y fácil de usar, los usuarios pueden registrar su tiempo de trabajo en cuestión de segundos.
                   </p>
                 </div>
-                <div className="flex flex-col items-center border-2 border-gray-300">
-                  <img src="https://images.ctfassets.net/ihx0a8chifpc/GTlzd4xkx4LmWsG1Kw1BB/ad1834111245e6ee1da4372f1eb5876c/placeholder.com-1280x720.png?w=1920&q=60&fm=webp" alt="Personas" className="object-cover object-center w-full h-full shadow-lg"/>
+                <div className="flex flex-col items-center">
+                  <img src="/img/TurnoMasterScreenshots/turnos-turnomaster.png" className="object-cover object-center w-full h-full shadow-lg"/>
+                  <p className="text-sm text-gray-500 mt-2 text-center">
+                    Imagen referencial de la interfaz de TurnoMaster.
+                  </p>
                 </div>
               </div>
           </section>
