@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard\Employees\Get;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Users\DashboardUser;
+use App\Models\Shift\ShiftUser;
 use App\Models\Role;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
@@ -37,6 +38,11 @@ class GetEmployeesListController extends Controller
             $employee->profile_photo = $employee->profile_photo 
                 ? url("api/assets/{$employee->profile_photo}") 
                 : null;
+
+            $shiftCount = ShiftUser::where('user_id', $employee->id)->count();
+            $employee->has_shift = $shiftCount > 0;
+            $employee->shift_count = $shiftCount > 0 ? $shiftCount : null;
+
             return $employee;
         });
 
