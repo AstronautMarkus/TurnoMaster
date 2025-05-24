@@ -69,6 +69,52 @@ class CreateShiftUsersController extends Controller
             ], 422);
         }
 
+        $newDays = $request->days;
+
+        $existingShiftUsers = ShiftUser::where('user_id', $request->employee_id)->get();
+
+        foreach ($existingShiftUsers as $shiftUser) {
+            $existingDays = json_decode($shiftUser->days, true);
+
+
+            if (is_string($existingDays[0] ?? null)) {
+                foreach ($existingDays as $existingDay) {
+                    foreach ($newDays as $newDay) {
+                        if ($existingDay === $newDay) {
+                            return response()->json([
+                                'message' => 'El usuario ya tiene un turno asignado en el día: ' . $newDay . '.',
+                                'errors' => [
+                                    'days' => ['Solapamiento detectado en el día: ' . $newDay . '.']
+                                ]
+                            ], 422);
+                        }
+                    }
+                }
+            } else {
+
+                foreach ($existingDays as $existingDay) {
+                    foreach ($newDays as $newDay) {
+                        if (
+                            isset($existingDay['day'], $newDay['day']) &&
+                            $existingDay['day'] === $newDay['day']
+                        ) {
+                            if (
+                                ($newDay['start_time'] < $existingDay['end_time']) &&
+                                ($newDay['end_time'] > $existingDay['start_time'])
+                            ) {
+                                return response()->json([
+                                    'message' => 'Solapamiento en ' . $newDay['day'] . ' entre ' . $newDay['start_time'] . '-' . $newDay['end_time'],
+                                    'errors' => [
+                                        'days' => ['Solapamiento detectado en ' . $newDay['day'] . '.']
+                                    ]
+                                ], 422);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         $shift = ShiftUser::Create([
             'shift_id' => $request->shift_id,
             'user_id' => $request->employee_id,
