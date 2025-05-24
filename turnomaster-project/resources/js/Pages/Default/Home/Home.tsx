@@ -27,7 +27,7 @@ const HomePage = () => {
                         <div className="space-y-6 text-white">
 
                             <h2 className="text-2xl font-semibold">
-                                Facilita la gestión de turnos en tu empresa
+                                "Facilita la gestión de turnos en tu empresa"
                             </h2>
                             <h1 className="lg:text-6xl font-extrabold tracking-tight">
                                 TurnoMaster simplifica tus horarios
@@ -84,12 +84,12 @@ const HomePage = () => {
                                     </h2>
                                 </div>
                                 <p className="text-lg text-gray-700">
-                                    Gestiona turnos, empleados y cuentas de manera eficiente. Nuestra plataforma te ayuda a ahorrar tiempo y mejorar la organización de tu empresa.
+                                    Gestiona los turnos de tu empresa, personaliza los horarios de cada empleado y olvídate de los problemas de gestión. Con TurnoMaster, tú eres el maestro y tú controlas todo.
                                 </p>
-                                <ul className="list-disc pl-5 text-gray-700">
+                                <ul className="list-disc pl-5 text-black font-semibold text-xl">
                                     <li>Fácil de usar y configurar</li>
-                                    <li>Acceso para múltiples empleados</li>
-                                    <li>Control total de horarios y turnos</li>
+                                    <li>Personaliza el horario de cada empleado</li>
+                                    <li>Tú eres el maestro, tú controlas todo.</li>
                                 </ul>
                             </div>
 
@@ -114,23 +114,23 @@ const HomePage = () => {
                             </h2>
                         </div>
                         
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 justify-items-center">
-                            <div className="flex flex-col items-center shadow-md p-10 w-full h-full border-2 border-gray-300">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 justify-items-center ">
+                            <div className="flex flex-col items-center shadow-md p-10 w-full h-full border-2 border-gray-300 bg-white">
                                 <MdAssignmentAdd className="w-20 h-20 text-[#e01d1d] mb-6" />
                                 <h3 className="text-2xl font-semibold text-black mb-4">Gestión avanzada de usuarios</h3>
                                 <p className="text-lg text-gray-700 text-center">Crea y administra cuentas para cada miembro de tu equipo, garantizando control y seguridad en todo momento.</p>
                             </div>
-                            <div className="flex flex-col items-center shadow-md p-10 w-full h-full border-2 border-gray-300">
+                            <div className="flex flex-col items-center shadow-md p-10 w-full h-full border-2 border-gray-300 bg-white">
                                 <MdAvTimer className="w-20 h-20 text-[#e01d1d] mb-6" />
                                 <h3 className="text-2xl font-semibold text-black mb-4">Registro de actividad en tiempo real</h3>
                                 <p className="text-lg text-gray-700 text-center">Supervisa la asistencia y desempeño de tus empleados con información precisa y actualizada.</p>
                             </div>
-                            <div className="flex flex-col items-center shadow-md p-10 w-full h-full border-2 border-gray-300">
+                            <div className="flex flex-col items-center shadow-md p-10 w-full h-full border-2 border-gray-300 bg-white">
                                 <MdAssessment className="w-20 h-20 text-[#e01d1d] mb-6" />
                                 <h3 className="text-2xl font-semibold text-black mb-4">Estadísticas precisas y detalladas</h3>
                                 <p className="text-lg text-gray-700 text-center">Accede a reportes visuales y completos para tomar decisiones informadas y potenciar tu empresa.</p>
                             </div>
-                            <div className="flex flex-col items-center shadow-md p-10 w-full h-full border-2 border-gray-300">
+                            <div className="flex flex-col items-center shadow-md p-10 w-full h-full border-2 border-gray-300 bg-white">
                                 <FaHandshakeSimple className="w-20 h-20 text-[#e01d1d] mb-6" />
                                 <h3 className="text-2xl font-semibold text-black mb-4">Sin trámites innecesarios</h3>
                                 <p className="text-lg text-gray-700 text-center">Olvídate de procesos complejos. Gestiona todo de manera ágil, sencilla y eficiente.</p>
