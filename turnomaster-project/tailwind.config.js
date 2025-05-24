@@ -21,6 +21,8 @@ export default {
             colors: {
                 'reyes': "#891818",
                 'reyes-active': "#5c1010",
+                'reyes-light': "#e01d1d",
+                'reyes-light-active': "#a91a1a",
             },
         },
     },
