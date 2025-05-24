@@ -65,8 +65,11 @@ const Appearance = () => {
                         {message}
                     </div>
                 </div>
-                <div className="mt-8 md:mt-0 md:w-1/2 flex justify-center items-start">
-                    <DashboardPreview theme={selectedTheme} />
+                <div className="flex flex-col items-center md:w-1/2">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 mt-4">Previsualización de tema</h2>
+                    <div className="mt-0 flex justify-center items-start w-full">
+                        <DashboardPreview theme={selectedTheme} />
+                    </div>
                 </div>
             </div>
             <div className="flex space-x-2 justify-end mt-4">
