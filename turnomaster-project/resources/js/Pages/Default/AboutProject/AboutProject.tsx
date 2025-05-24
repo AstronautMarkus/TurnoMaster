@@ -9,7 +9,7 @@ const AboutProject = () => {
             <div className="mt-12 container mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-10">
               <div className="flex flex-col justify-center items-start space-y-4">
                 <div className="flex items-start mb-2">
-                  <div className="w-2 h-20 bg-reyes-active mr-4"></div>
+                  <div className="w-2 h-20 bg-reyes-light mr-4"></div>
                     <div>
                       <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
                          Sobre TurnoMaster
