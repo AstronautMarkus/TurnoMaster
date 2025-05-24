@@ -34,7 +34,7 @@ const PricingComparison: React.FC = () => {
                 <div className="mt-12 container mx-auto px-4 md:px-6">
                     <div className="flex flex-col justify-center items-center space-y-4">
                         <div className="flex mb-2 justify-center">
-                            <div className="w-2 h-10 bg-[#e01d1d] mr-4"></div>
+                            <div className="w-2 h-10 bg-reyes-light mr-4"></div>
                             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center">
                                 Planes y Precios de TurnoMaster
                             </h2>
@@ -50,7 +50,7 @@ const PricingComparison: React.FC = () => {
                                 <p className="text-gray-600">{plan.description}</p>
                                 <p className="text-2xl font-bold text-gray-900 mt-4">{isYearly ? plan.yearlyPrice : plan.price}</p>
                                 <Link to={`/product/${plan.slug}`}>
-                                    <button className="mt-4 bg-[#e01d1d] text-white py-2 px-4 hover:bg-[#a91a1a] transition-colors">
+                                    <button className="mt-4 bg-reyes-light text-white py-2 px-4 hover:bg-reyes-light-active transition-colors">
                                         {plan.buttonText}
                                     </button>
                                 </Link>
@@ -64,59 +64,61 @@ const PricingComparison: React.FC = () => {
                         </h2>
                     </div>
 
-                    <div className="mt-10 overflow-x-auto">
-                        <table className="min-w-full border border-gray-200">
-                            <thead>
-                                <tr>
-                                    <th className="px-4 py-2 border-b"></th>
-                                    {pricesFeatures.map((plan) => (
-                                        <th key={plan.slug} className="px-4 py-2 border-b text-center font-semibold">
-                                            {plan.title}
-                                        </th>
-                                    ))}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {allFeatures.map((feature, idx) => (
-                                    <tr key={feature}>
-                                        <td className="px-4 py-2 border-b">{feature}</td>
-                                        {pricesFeatures.map((plan) => {
-                                            const planFeature = plan.features.find(f => f === feature);
-                                            const isNegative = feature.trim().toLowerCase().startsWith("sin");
-                                            return (
-                                                <td key={plan.slug + idx} className="px-4 py-2 border-b text-center">
-                                                    {planFeature ? (
-                                                        isNegative ? (
-                                                            <FaXmark className="text-red-500 inline" />
-                                                        ) : (
-                                                            <FaCheck className="text-green-500 inline" />
-                                                        )
-                                                    ) : (
-                                                        <span className="text-gray-400">—</span>
-                                                    )}
-                                                </td>
-                                            );
-                                        })}
-                                    </tr>
-                                ))}
-
-                                <tr>
-                                    <td className="px-4 py-2 font-bold">Precio</td>
-                                    {pricesFeatures.map((plan) => (
-                                        <td key={plan.slug + "-price"} className="px-4 py-2 text-center font-bold">
-                                            {isYearly ? plan.yearlyPrice : plan.price}
-                                        </td>
-                                    ))}
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div className="flex justify-center mt-4">
+                    <div className="flex justify-end mt-4">
                             <button
-                                className="px-4 py-2 bg-gray-200 hover:bg-gray-300 transition"
+                                className="px-4 text-white py-2 bg-reyes-light hover:bg-reyes-light-active transition"
                                 onClick={togglePricing}
                             >
                                 {isYearly ? "Ver precios mensuales" : "Ver precios anuales"}
                             </button>
+                    </div>
+
+                    <div className="mt-10 overflow-x-auto bg-white shadow w-full">
+                        <div className="max-h-96 overflow-y-auto">
+                            <table className="min-w-full border border-gray-200 table-auto border-collapse">
+                                <thead className="sticky top-0 bg-reyes text-white uppercase text-sm tracking-wider">
+                                    <tr>
+                                        <th className="px-4 py-3 text-left"></th>
+                                        {pricesFeatures.map((plan) => (
+                                            <th key={plan.slug} className="px-4 py-3 text-center font-semibold">
+                                                {plan.title}
+                                            </th>
+                                        ))}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {allFeatures.map((feature, idx) => (
+                                        <tr key={feature} className="hover:bg-gray-100 transition-colors">
+                                            <td className="px-4 py-2 border-b">{feature}</td>
+                                            {pricesFeatures.map((plan:any) => {
+                                                const planFeature = plan.features.find((f: string) => f === feature);
+                                                const isNegative = feature.trim().toLowerCase().startsWith("sin");
+                                                return (
+                                                    <td key={plan.slug + idx} className="px-4 py-2 border-b text-center">
+                                                        {planFeature ? (
+                                                            isNegative ? (
+                                                                <FaXmark className="text-red-500 inline" />
+                                                            ) : (
+                                                                <FaCheck className="text-green-500 inline" />
+                                                            )
+                                                        ) : (
+                                                            <span className="text-gray-400">—</span>
+                                                        )}
+                                                    </td>
+                                                );
+                                            })}
+                                        </tr>
+                                    ))}
+                                    <tr className="hover:bg-gray-100 transition-colors">
+                                        <td className="px-4 py-2 font-bold">Precio</td>
+                                        {pricesFeatures.map((plan) => (
+                                            <td key={plan.slug + "-price"} className="px-4 py-2 text-center font-bold">
+                                                {isYearly ? plan.yearlyPrice : plan.price}
+                                            </td>
+                                        ))}
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
