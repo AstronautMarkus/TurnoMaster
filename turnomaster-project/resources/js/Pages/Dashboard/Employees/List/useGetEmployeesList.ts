@@ -9,6 +9,8 @@ interface Employee {
   email: string;
   role: string;
   image: string;
+  has_shift: boolean;
+  shift_count: number;
 }
 
 const getRandomNumber = () => Math.floor(Math.random() * 5) + 1;
@@ -66,6 +68,8 @@ const useGetEmployeesList = () => {
           email: employee.email,
           role: employee.role,
           image: employee.profile_photo || "/img/profile/default.png",
+          has_shift: employee.has_shift,
+          shift_count: employee.shift_count,
         }));
         setEmployees(employeesData);
 

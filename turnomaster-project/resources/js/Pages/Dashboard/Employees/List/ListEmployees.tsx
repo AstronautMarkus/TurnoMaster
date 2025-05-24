@@ -154,6 +154,9 @@ const ListEmployees = () => {
                   <th className="px-4 py-3 text-left">RUT</th>
                   <th className="px-4 py-3 text-left">Correo</th>
                   <th className="px-4 py-3 text-left">Rol</th>
+                  <th className="px-4 py-3 text-left">¿Tiene Turnos?</th>
+                  <th className="px-4 py-3 text-left">Turnos asignados</th>
+                  <th className="px-4 py-3 text-left">Turnos</th>
                   <th className="px-4 py-3 text-left">Acciones</th>
                 </tr>
               </thead>
@@ -179,6 +182,40 @@ const ListEmployees = () => {
                       <span>{employee.role}</span>
                     </td>
                     <td className="px-4 py-2">
+                      <span className="inline-flex items-center">
+                        {employee.has_shift ? "Sí" : "No"}
+                      </span>
+                    </td>
+                    <td className="px-4 py-2">
+                      <span className="inline-flex items-center">
+                        {employee.shift_count > 0 ? (
+                          <span>{employee.shift_count}</span>
+                        ) : (
+                          <span>--</span>
+                        )}
+                      </span>
+                    </td>
+                    <td className="px-4 py-2">
+                      <div className="flex space-x-2">
+                        <Link
+                          to={`/dashboard/employees/${employee.id}/assign-shifts`}
+                          className="dashboard-button text-white px-4 py-2 text-sm transition-colors flex items-center"
+                        >
+                          <FaPlus className="mr-2" />
+                          Asignar
+                        </Link>
+                        {employee.shift_count > 0 && (
+                          <Link
+                            to={`/dashboard/employees/${employee.id}/shifts`}
+                            className="dashboard-button-secondary text-white px-4 py-2 text-sm transition-colors flex items-center"
+                          >
+                            <FaSearch className="mr-2" />
+                            Listar
+                          </Link>
+                        )}
+                      </div>
+                    </td>
+                    <td className="px-4 py-2">
                       <div className="flex space-x-2">
                         <Link to={`/dashboard/employees/edit/${employee.id}`} className="dashboard-button-secondary text-white px-4 py-2 text-sm transition-colors flex items-center">
                           <FaEdit className="mr-2" />
@@ -197,7 +234,7 @@ const ListEmployees = () => {
                 ))}
                 {filteredEmployees.length === 0 && (
                   <tr>
-                    <td colSpan={5} className="text-center py-4 text-gray-500">No se encontraron empleados. Por favor, presione "Crear empleado".</td>
+                    <td colSpan={8} className="text-center py-4 text-gray-500">No se encontraron empleados. Por favor, presione "Crear empleado".</td>
                   </tr>
                 )}
               </tbody>
