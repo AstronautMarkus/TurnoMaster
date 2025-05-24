@@ -1,8 +1,21 @@
 import { Link } from 'react-router-dom';
 import HelmetHelper from '../../../hooks/HelmetHelper/HelmetHelper';
 import Faq from '../../../Components/Default/FAQ/Faq';
+import generalFAQ from '../../../Components/Default/FAQ/questions/general/generalFAQ';
+import employeesFAQ from '../../../Components/Default/FAQ/questions/employees/employeesFAQ';
+import ownersFAQ from '../../../Components/Default/FAQ/questions/owners/ownersFAQ';
+import { useState } from 'react';
+
+const faqOptions = [
+    { label: "Preguntas generales", value: "general", list: generalFAQ },
+    { label: "Preguntas para empleados", value: "employees", list: employeesFAQ },
+    { label: "Preguntas para dueños", value: "owners", list: ownersFAQ }
+];
 
 const FaqPage = () => {
+    const [selected, setSelected] = useState("general");
+    const currentFaq = faqOptions.find(opt => opt.value === selected)?.list || generalFAQ;
+
     return(
     <>
         <HelmetHelper path="/faq"/>
@@ -21,8 +34,24 @@ const FaqPage = () => {
                         </p>
                     </div>
                 </div>
+
+                <div className="flex justify-center mt-8 mb-4 space-x-4">
+                    {faqOptions.map(opt => (
+                        <button
+                            key={opt.value}
+                            className={`px-4 py-2 transition font-semibold ${
+                                selected === opt.value
+                                    ? "bg-reyes-light text-white shadow"
+                                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                            }`}
+                            onClick={() => setSelected(opt.value)}
+                        >
+                            {opt.label}
+                        </button>
+                    ))}
+                </div>
                 <div className='space-y-4'>
-                    <Faq />
+                    <Faq list={currentFaq} />
                 </div>
 
                 <div className='flex flex-col items-center mt-12 space-y-6'>
