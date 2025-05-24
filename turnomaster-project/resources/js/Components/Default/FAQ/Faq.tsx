@@ -1,4 +1,3 @@
-import React from "react";
 import { useFaq } from "./useFaq";
 
 const Faq = () => {
@@ -10,7 +9,7 @@ const Faq = () => {
         {faqs.map((faq:any, index:any) => (
           <div
             key={index}
-            className="border rounded-lg p-4 bg-white cursor-pointer hover:shadow-md transition"
+            className="border p-4 bg-white cursor-pointer hover:shadow-md transition transform hover:scale-105"
             onClick={() => toggleFaq(index)}
           >
             <div className="flex justify-between items-center">
