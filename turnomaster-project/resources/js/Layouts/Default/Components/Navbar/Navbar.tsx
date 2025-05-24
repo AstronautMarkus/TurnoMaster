@@ -138,7 +138,7 @@ export default function Navbar() {
   );
 
   return (
-    <nav className="bg-[#891818] shadow-lg py-4 px-6 sticky top-0 z-50">
+    <nav className="bg-reyes shadow-lg py-4 px-6 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
 
         <div className="flex items-center space-x-2">
