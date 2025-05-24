@@ -56,13 +56,13 @@ const EmployeesTurnosList = () => {
                         <table className="table-auto w-full border-collapse">
                             <thead className="sticky top-0 dashboard-background text-white uppercase text-sm tracking-wider">
                                 <tr>
-                                    <th className="px-4 py-3 text-left border-b">Nombre del Turno</th>
-                                    <th className="px-4 py-3 text-left border-b">Descripción</th>
-                                    <th className="px-4 py-3 text-left border-b">Días</th>
-                                    <th className="px-4 py-3 text-left border-b">Hora Inicio</th>
-                                    <th className="px-4 py-3 text-left border-b">Almuerzo</th>
-                                    <th className="px-4 py-3 text-left border-b">Hora Fin</th>
-                                    <th className="px-4 py-3 text-left border-b">Acciones</th>
+                                    <th className="px-4 py-3 text-left">Nombre del Turno</th>
+                                    <th className="px-4 py-3 text-left">Descripción</th>
+                                    <th className="px-4 py-3 text-left">Días</th>
+                                    <th className="px-4 py-3 text-left">Hora Inicio</th>
+                                    <th className="px-4 py-3 text-left">Almuerzo</th>
+                                    <th className="px-4 py-3 text-left">Hora Fin</th>
+                                    <th className="px-4 py-3 text-left">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -82,18 +82,18 @@ const EmployeesTurnosList = () => {
                                             key={item.shift_user.id}
                                             className={`transition-colors ${idx % 2 === 0 ? "bg-gray-50" : ""} hover:bg-gray-100`}
                                         >
-                                            <td className="px-4 py-2 border-b">{item.shift.name}</td>
-                                            <td className="px-4 py-2 border-b">{item.shift.description}</td>
-                                            <td className="px-4 py-2 border-b">
+                                            <td className="px-4 py-2">{item.shift.name}</td>
+                                            <td className="px-4 py-2">{item.shift.description}</td>
+                                            <td className="px-4 py-2">
                                                 {days.map(day => (
                                                     <span key={day} className="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded mr-1 text-xs">
                                                         {day}
                                                     </span>
                                                 ))}
                                             </td>
-                                            <td className="px-4 py-2 border-b">{item.shift.start_time}</td>
-                                            <td className="px-4 py-2 border-b">{item.shift.lunch_time}</td>
-                                            <td className="px-4 py-2 border-b">{item.shift.end_time}</td>
+                                            <td className="px-4 py-2">{item.shift.start_time}</td>
+                                            <td className="px-4 py-2">{item.shift.lunch_time}</td>
+                                            <td className="px-4 py-2">{item.shift.end_time}</td>
                                             <td className="px-4 py-2">
                                             <div className="flex space-x-2">
                                                 <Link to={`/dashboard/employees/${user?.id}/shift/${item.shift.id}/edit`} className="dashboard-button-secondary text-white px-4 py-2 text-sm transition-colors flex items-center">
