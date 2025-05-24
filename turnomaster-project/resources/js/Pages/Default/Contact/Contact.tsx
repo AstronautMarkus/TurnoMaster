@@ -124,7 +124,7 @@ const Contact = () => {
             <div className="relative container mx-auto max-w-7xl px-4 md:px-6 flex flex-col items-center gap-6">
                 <section className="relative w-full py-12 flex flex-col items-center">
                     <div className="flex flex-row items-start mb-2 w-full justify-center">
-                        <div className="bg-[#e01d1d] mr-4 self-stretch w-2"></div>
+                        <div className="bg-reyes-light mr-4 self-stretch w-2"></div>
                         <div>
                             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-left">
                                 Contáctanos
@@ -137,7 +137,7 @@ const Contact = () => {
                 </section>
                 <form
                     onSubmit={handleSubmit}
-                    className={`shadow-md mb-8 p-6 space-y-6 w-full max-w-5xl border-2 border-gray-300 ${isFormDisabled ? "opacity-60 pointer-events-none bg-gray-100" : ""}`}
+                    className={`shadow-md mb-8 p-6 space-y-6 w-full max-w-5xl border-2 bg-white border-gray-300 ${isFormDisabled ? "opacity-60 pointer-events-none bg-gray-300" : ""}`}
                 >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
@@ -147,7 +147,9 @@ const Contact = () => {
                                 name="name"
                                 value={formData.name}
                                 onChange={handleChange}
-                                className="w-full px-3 py-2 border shadow-sm focus:ring focus:ring-[#e01d1d]"
+                                className={`w-full px-3 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black ${
+                                    errors.name ? "border-red-500" : ""
+                                }`}
                                 disabled={isFormDisabled}
                             />
                             {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
@@ -159,7 +161,9 @@ const Contact = () => {
                                 name="last_name"
                                 value={formData.last_name}
                                 onChange={handleChange}
-                                className="w-full px-3 py-2 border shadow-sm focus:ring focus:ring-[#e01d1d]"
+                                className={`w-full px-3 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black ${
+                                    errors.last_name ? "border-red-500" : ""
+                                }`}
                                 disabled={isFormDisabled}
                             />
                             {errors.last_name && <p className="text-red-500 text-sm mt-1">{errors.last_name}</p>}
@@ -171,7 +175,9 @@ const Contact = () => {
                                 name="email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                className="w-full px-3 py-2 border shadow-sm focus:ring focus:ring-[#e01d1d]"
+                                className={`w-full px-3 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black ${
+                                    errors.email ? "border-red-500" : ""
+                                }`}
                                 disabled={isFormDisabled}
                             />
                             {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
@@ -183,7 +189,7 @@ const Contact = () => {
                                 name="cellphone"
                                 value={formData.cellphone}
                                 onChange={handleChange}
-                                className={`w-full px-3 py-2 border shadow-sm focus:ring focus:ring-[#e01d1d] ${
+                                className={`w-full px-3 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black ${
                                     errors.cellphone ? "border-red-500" : ""
                                 }`}
                                 disabled={isFormDisabled}
@@ -198,7 +204,7 @@ const Contact = () => {
                                 name="company"
                                 value={formData.company}
                                 onChange={handleChange}
-                                className="w-full px-3 py-2 border shadow-sm focus:ring focus:ring-[#e01d1d]"
+                                className="w-full px-3 py-2 border shadow-sm focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
                                 disabled={isFormDisabled}
                             />
                         </div>
@@ -208,7 +214,9 @@ const Contact = () => {
                                 name="message_category_id"
                                 value={formData.message_category_id}
                                 onChange={handleChange}
-                                className="w-full px-3 py-2 border shadow-sm focus:ring focus:ring-[#e01d1d]"
+                                className={`w-full px-3 py-2 border shadow-sm focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black ${
+                                    errors.message_category_id ? "border-red-500" : ""
+                                }`}
                                 disabled={isFormDisabled}
                             >
                                 <option value="">Selecciona una categoría</option>
@@ -232,7 +240,9 @@ const Contact = () => {
                             name="message"
                             value={formData.message}
                             onChange={handleChange}
-                            className="w-full px-3 py-4 border shadow-sm focus:ring focus:ring-[#e01d1d] text-base"
+                            className={`w-full px-3 py-4 border shadow-sm focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black text-base ${
+                                errors.message ? "border-red-500" : ""
+                            }`}
                             rows={6}
                             disabled={isFormDisabled}
                         />
@@ -244,12 +254,12 @@ const Contact = () => {
                             name="terms_accepted"
                             checked={formData.terms_accepted}
                             onChange={handleChange}
-                            className="mr-2 accent-[#e01d1d]"
+                            className={`mr-2 accent-reyes-light ${errors.terms_accepted ? "border-red-500 ring-2 ring-red-500" : ""}`}
                             disabled={isFormDisabled}
                         />
                         <div>
                             <label className="text-sm text-gray-700">
-                                Acepto los <Link to="/terms-and-conditions" target="_blank" className="text-[#e01d1d] underline">términos y condiciones</Link>
+                                Acepto los <Link to="/terms-and-conditions" target="_blank" className="text-reyes-light underline">términos y condiciones</Link>
                             </label>
                             {errors.terms_accepted && <p className="text-red-500 text-sm mt-1">{errors.terms_accepted}</p>}
                         </div>
@@ -261,7 +271,7 @@ const Contact = () => {
                     <div className="text-center">
                         <button
                             type="submit"
-                            className="inline-flex h-10 items-center justify-center bg-[#e01d1d] hover:bg-[#b21e1e] px-6 py-2 font-semibold text-white transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 text-base"
+                            className="inline-flex h-10 items-center justify-center bg-reyes-light hover:bg-reyes-light-active px-6 py-2 font-semibold text-white transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 text-base"
                             disabled={isFormDisabled}
                         >
                             {loadingCategories
