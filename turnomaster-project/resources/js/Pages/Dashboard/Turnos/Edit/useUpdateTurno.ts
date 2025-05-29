@@ -53,19 +53,23 @@ const useUpdateTurno = (
                 const turno = res.data;
 
                 const [startHour, startMinute] = (turno.start_time || "").split(":");
-                const [lunchHour, lunchMinute] = (turno.lunch_time || "").split(":");
+                const hasLunch = Boolean(turno.has_lunch);
+                let lunchHour = "";
+                let lunchMinute = "";
+                if (hasLunch && turno.lunch_time) {
+                    [lunchHour, lunchMinute] = turno.lunch_time.split(":");
+                }
                 const [endHour, endMinute] = (turno.end_time || "").split(":");
-                const hasLunch = turno.has_lunch ?? true;
 
                 setForm({
                     name: turno.name || "",
                     description: turno.description || "",
-                    startHour: startHour?.padStart(2, "0") || "",
-                    startMinute: startMinute?.padStart(2, "0") || "",
-                    lunchHour: lunchHour?.padStart(2, "0") || "",
-                    lunchMinute: lunchMinute?.padStart(2, "0") || "",
-                    endHour: endHour?.padStart(2, "0") || "",
-                    endMinute: endMinute?.padStart(2, "0") || "",
+                    startHour: startHour || "",
+                    startMinute: startMinute || "",
+                    lunchHour: hasLunch ? lunchHour || "" : "",
+                    lunchMinute: hasLunch ? lunchMinute || "" : "",
+                    endHour: endHour || "",
+                    endMinute: endMinute || "",
                     hasLunch: hasLunch,
                 });
             } catch (err: any) {
@@ -192,16 +196,25 @@ const useUpdateTurno = (
             setFormErrors(null);
         }
 
-        const payload: TurnoPayload = {
-            name: form.name,
-            description: form.description,
-            start_time: `${form.startHour}:${form.startMinute}`,
-            lunch_time: form.hasLunch ? `${form.lunchHour}:${form.lunchMinute}` : null,
-            end_time: `${form.endHour}:${form.endMinute}`,
-            has_lunch: form.hasLunch
-        };
+        // Payload with has_lunch validation
+        const payload: TurnoPayload | Omit<TurnoPayload, "lunch_time"> = form.hasLunch
+            ? {
+                name: form.name,
+                description: form.description,
+                start_time: `${form.startHour}:${form.startMinute}`,
+                lunch_time: `${form.lunchHour}:${form.lunchMinute}`,
+                end_time: `${form.endHour}:${form.endMinute}`,
+                has_lunch: true
+            }
+            : {
+                name: form.name,
+                description: form.description,
+                start_time: `${form.startHour}:${form.startMinute}`,
+                end_time: `${form.endHour}:${form.endMinute}`,
+                has_lunch: false
+            };
 
-        const result = await updateTurno(payload);
+        const result = await updateTurno(payload as TurnoPayload);
         if (result && result.errors) {
             const backendFieldErrors: Record<string, string[] | null> = {};
             for (const key in result.errors) {

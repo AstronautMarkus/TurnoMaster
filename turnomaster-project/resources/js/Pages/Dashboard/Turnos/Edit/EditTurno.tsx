@@ -39,6 +39,17 @@ const EditTurno = () => {
         }
     };
 
+    // Clean lunch fields if has_lunch is false
+    React.useEffect(() => {
+        if (!form.hasLunch && (form.lunchHour !== "" || form.lunchMinute !== "")) {
+            setForm((prev: typeof form) => ({
+                ...prev,
+                lunchHour: "",
+                lunchMinute: ""
+            }));
+        }
+    }, [form.hasLunch]);
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         handleValidateAndSubmit();
@@ -144,9 +155,25 @@ const EditTurno = () => {
                                     <div>
                                         <label className="block text-sm font-bold text-black">Hora de almuerzo *</label>
                                         <div className="flex gap-2">
-                                            <input type="text" name="lunchHour" value={form.lunchHour} onChange={handleChange} placeholder="HH" className="w-16 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black" maxLength={2} />
+                                            <input
+                                                type="text"
+                                                name="lunchHour"
+                                                value={form.hasLunch ? form.lunchHour : ""}
+                                                onChange={handleChange}
+                                                placeholder="HH"
+                                                className="w-16 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
+                                                maxLength={2}
+                                            />
                                             <span>:</span>
-                                            <input type="text" name="lunchMinute" value={form.lunchMinute} onChange={handleChange} placeholder="MM" className="w-16 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black" maxLength={2} />
+                                            <input
+                                                type="text"
+                                                name="lunchMinute"
+                                                value={form.hasLunch ? form.lunchMinute : ""}
+                                                onChange={handleChange}
+                                                placeholder="MM"
+                                                className="w-16 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
+                                                maxLength={2}
+                                            />
                                         </div>
                                     </div>
                                 )}
