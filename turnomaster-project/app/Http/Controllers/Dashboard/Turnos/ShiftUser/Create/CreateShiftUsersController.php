@@ -70,6 +70,55 @@ class CreateShiftUsersController extends Controller
         }
 
         $newDays = $request->days;
+
+        
+        $existingShiftUser = ShiftUser::where('user_id', $request->employee_id)
+            ->where('shift_id', $request->shift_id)
+            ->first();
+
+        if ($existingShiftUser) {
+          
+            $existingDays = json_decode($existingShiftUser->days, true) ?? [];
+            $orderedDaysOfWeek = [
+                'Lunes', 'Martes', 'Miércoles', 'Miercoles', 'Jueves', 'Viernes', 'Sábado', 'Sabado', 'Domingo'
+            ];
+            if (is_string($existingDays[0] ?? null)) {
+
+                $mergedDays = array_unique(array_merge($existingDays, $newDays));
+
+                usort($mergedDays, function ($a, $b) use ($orderedDaysOfWeek) {
+                    $posA = array_search($a, $orderedDaysOfWeek);
+                    $posB = array_search($b, $orderedDaysOfWeek);
+                    return ($posA === false ? 99 : $posA) <=> ($posB === false ? 99 : $posB);
+                });
+            } else {
+
+                $daysByKey = [];
+                foreach ($existingDays as $d) {
+                    if (isset($d['day'])) $daysByKey[$d['day'] . ($d['start_time'] ?? '') . ($d['end_time'] ?? '')] = $d;
+                }
+                foreach ($newDays as $d) {
+                    if (isset($d['day'])) $daysByKey[$d['day'] . ($d['start_time'] ?? '') . ($d['end_time'] ?? '')] = $d;
+                }
+                $mergedDays = array_values($daysByKey);
+
+                usort($mergedDays, function ($a, $b) use ($orderedDaysOfWeek) {
+                    $posA = array_search($a['day'], $orderedDaysOfWeek);
+                    $posB = array_search($b['day'], $orderedDaysOfWeek);
+                    return ($posA === false ? 99 : $posA) <=> ($posB === false ? 99 : $posB);
+                });
+            }
+            $existingShiftUser->days = json_encode($mergedDays);
+            $existingShiftUser->is_active = $request->is_active;
+            $existingShiftUser->save();
+
+            return response()->json([
+                'message' => 'Usuario asignado al turno exitosamente (actualizado).',
+                'user_id' => $request->employee_id,
+                'shift' => $existingShiftUser,
+            ], 200);
+        }
+
         $existingShiftUsers = ShiftUser::where('user_id', $request->employee_id)->get();
 
         foreach ($existingShiftUsers as $shiftUser) {
@@ -115,7 +164,26 @@ class CreateShiftUsersController extends Controller
         $shift = ShiftUser::Create([
             'shift_id' => $request->shift_id,
             'user_id' => $request->employee_id,
-            'days' => json_encode($request->days),
+
+            'days' => (function($days) {
+                $orderedDaysOfWeek = [
+                    'Lunes', 'Martes', 'Miércoles', 'Miercoles', 'Jueves', 'Viernes', 'Sábado', 'Sabado', 'Domingo'
+                ];
+                if (is_string($days[0] ?? null)) {
+                    usort($days, function ($a, $b) use ($orderedDaysOfWeek) {
+                        $posA = array_search($a, $orderedDaysOfWeek);
+                        $posB = array_search($b, $orderedDaysOfWeek);
+                        return ($posA === false ? 99 : $posA) <=> ($posB === false ? 99 : $posB);
+                    });
+                } else {
+                    usort($days, function ($a, $b) use ($orderedDaysOfWeek) {
+                        $posA = array_search($a['day'], $orderedDaysOfWeek);
+                        $posB = array_search($b['day'], $orderedDaysOfWeek);
+                        return ($posA === false ? 99 : $posA) <=> ($posB === false ? 99 : $posB);
+                    });
+                }
+                return json_encode($days);
+            })($request->days),
             'is_active' => $request->is_active
         ]);
 
@@ -186,19 +254,25 @@ class CreateShiftUsersController extends Controller
             }
 
             $newDays = $request->days;
-            // Buscar si ya existe un registro para este usuario y shift
+            $orderedDaysOfWeek = [
+                'Lunes', 'Martes', 'Miércoles', 'Miercoles', 'Jueves', 'Viernes', 'Sábado', 'Sabado', 'Domingo'
+            ];
+
+
             $existingShiftUser = ShiftUser::where('user_id', $employee_id)
                 ->where('shift_id', $request->shift_id)
                 ->first();
 
             if ($existingShiftUser) {
-                // Unir días previos y nuevos, evitando duplicados
                 $existingDays = json_decode($existingShiftUser->days, true) ?? [];
-                // Si los días son arrays simples (["Lunes", "Martes"]) o arrays de objetos
                 if (is_string($existingDays[0] ?? null)) {
                     $mergedDays = array_unique(array_merge($existingDays, $newDays));
+                    usort($mergedDays, function ($a, $b) use ($orderedDaysOfWeek) {
+                        $posA = array_search($a, $orderedDaysOfWeek);
+                        $posB = array_search($b, $orderedDaysOfWeek);
+                        return ($posA === false ? 99 : $posA) <=> ($posB === false ? 99 : $posB);
+                    });
                 } else {
-                    // Para arrays de objetos, unir por 'day' y evitar duplicados
                     $daysByKey = [];
                     foreach ($existingDays as $d) {
                         if (isset($d['day'])) $daysByKey[$d['day'] . ($d['start_time'] ?? '') . ($d['end_time'] ?? '')] = $d;
@@ -207,6 +281,11 @@ class CreateShiftUsersController extends Controller
                         if (isset($d['day'])) $daysByKey[$d['day'] . ($d['start_time'] ?? '') . ($d['end_time'] ?? '')] = $d;
                     }
                     $mergedDays = array_values($daysByKey);
+                    usort($mergedDays, function ($a, $b) use ($orderedDaysOfWeek) {
+                        $posA = array_search($a['day'], $orderedDaysOfWeek);
+                        $posB = array_search($b['day'], $orderedDaysOfWeek);
+                        return ($posA === false ? 99 : $posA) <=> ($posB === false ? 99 : $posB);
+                    });
                 }
                 $existingShiftUser->days = json_encode($mergedDays);
                 $existingShiftUser->is_active = $request->is_active;
@@ -255,10 +334,25 @@ class CreateShiftUsersController extends Controller
             }
 
             if (!$hasOverlap) {
+
+                $orderedDays = $newDays;
+                if (is_string($orderedDays[0] ?? null)) {
+                    usort($orderedDays, function ($a, $b) use ($orderedDaysOfWeek) {
+                        $posA = array_search($a, $orderedDaysOfWeek);
+                        $posB = array_search($b, $orderedDaysOfWeek);
+                        return ($posA === false ? 99 : $posA) <=> ($posB === false ? 99 : $posB);
+                    });
+                } else {
+                    usort($orderedDays, function ($a, $b) use ($orderedDaysOfWeek) {
+                        $posA = array_search($a['day'], $orderedDaysOfWeek);
+                        $posB = array_search($b['day'], $orderedDaysOfWeek);
+                        return ($posA === false ? 99 : $posA) <=> ($posB === false ? 99 : $posB);
+                    });
+                }
                 $shift = ShiftUser::Create([
                     'shift_id' => $request->shift_id,
                     'user_id' => $employee_id,
-                    'days' => json_encode($request->days),
+                    'days' => json_encode($orderedDays),
                     'is_active' => $request->is_active,
                 ]);
                 $createdShifts[] = [
