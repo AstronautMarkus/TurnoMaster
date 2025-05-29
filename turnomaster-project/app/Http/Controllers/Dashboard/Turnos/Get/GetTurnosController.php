@@ -35,6 +35,16 @@ class GetTurnosController extends Controller
             if ($item->created_at == $item->updated_at) {
                 $item->updated_at = null;
             }
+            // Format time fields to HH:MM
+            if ($item->start_time) {
+                $item->start_time = date('H:i', strtotime($item->start_time));
+            }
+            if ($item->lunch_time) {
+                $item->lunch_time = date('H:i', strtotime($item->lunch_time));
+            }
+            if ($item->end_time) {
+                $item->end_time = date('H:i', strtotime($item->end_time));
+            }
             return $item;
         });
 

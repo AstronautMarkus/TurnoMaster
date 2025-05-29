@@ -65,7 +65,17 @@ class GetShiftUsersByIdController extends Controller
             ], 422);
         }
 
-        
+        // Format time fields to HH:MM
+        if ($turnoDetails->start_time) {
+            $turnoDetails->start_time = date('H:i', strtotime($turnoDetails->start_time));
+        }
+        if ($turnoDetails->lunch_time) {
+            $turnoDetails->lunch_time = date('H:i', strtotime($turnoDetails->lunch_time));
+        }
+        if ($turnoDetails->end_time) {
+            $turnoDetails->end_time = date('H:i', strtotime($turnoDetails->end_time));
+        }
+
         $paginated = $shiftUsers->toArray();
         $paginated['data'] = $shiftUsersWithUserData;
 

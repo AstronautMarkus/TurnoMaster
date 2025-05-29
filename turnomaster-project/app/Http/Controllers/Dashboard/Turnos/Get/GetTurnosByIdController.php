@@ -31,6 +31,17 @@ class GetTurnosByIdController extends Controller
             $turno->updated_at = null;
         }
 
+        // Format time fields to HH:MM
+        if ($turno->start_time) {
+            $turno->start_time = date('H:i', strtotime($turno->start_time));
+        }
+        if ($turno->lunch_time) {
+            $turno->lunch_time = date('H:i', strtotime($turno->lunch_time));
+        }
+        if ($turno->end_time) {
+            $turno->end_time = date('H:i', strtotime($turno->end_time));
+        }
+
         return response()->json($turno);
     }
 }
