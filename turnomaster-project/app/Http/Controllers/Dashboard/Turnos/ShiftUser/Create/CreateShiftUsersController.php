@@ -12,19 +12,19 @@ use Firebase\JWT\Key;
 
 class CreateShiftUsersController extends Controller
 {
-    public function createShiftUsers(Request $request)
-    { 
+    public function createShiftUser(Request $request)
+    {
         $token = $request->bearerToken();
         $decoded = JWT::decode($token, new Key(env('JWT_SECRET'), 'HS256'));
         $userId = $decoded->user_id;
         $companyId = $decoded->company_id;
-      
+
         $validator = \Validator::make($request->all(), [
             'shift_id' => 'required|integer',
             'days' => 'required|array',
             'is_active' => 'required|boolean',
             'employee_id' => 'required|integer',
-        ],[
+        ], [
             'employee_id.required' => 'El campo employee_id es obligatorio.',
             'employee_id.integer' => 'El campo employee_id debe ser un número entero.',
             'shift_id.exists' => 'El campo shift_id no existe en los registros.',
@@ -70,12 +70,10 @@ class CreateShiftUsersController extends Controller
         }
 
         $newDays = $request->days;
-
         $existingShiftUsers = ShiftUser::where('user_id', $request->employee_id)->get();
 
         foreach ($existingShiftUsers as $shiftUser) {
             $existingDays = json_decode($shiftUser->days, true);
-
 
             if (is_string($existingDays[0] ?? null)) {
                 foreach ($existingDays as $existingDay) {
@@ -91,7 +89,6 @@ class CreateShiftUsersController extends Controller
                     }
                 }
             } else {
-
                 foreach ($existingDays as $existingDay) {
                     foreach ($newDays as $newDay) {
                         if (
@@ -128,6 +125,129 @@ class CreateShiftUsersController extends Controller
             'user_id' => $request->employee_id,
             'shift' => $shift,
         ], 201);
+    }
 
+    public function createShiftUsers(Request $request)
+    {
+        $token = $request->bearerToken();
+        $decoded = JWT::decode($token, new Key(env('JWT_SECRET'), 'HS256'));
+        $userId = $decoded->user_id;
+        $companyId = $decoded->company_id;
+
+        $validator = \Validator::make($request->all(), [
+            'shift_id' => 'required|integer',
+            'days' => 'required|array',
+            'is_active' => 'required|boolean',
+            'employee_ids' => 'required|array|min:1',
+            'employee_ids.*' => 'integer',
+        ], [
+            'employee_ids.required' => 'El campo employee_ids es obligatorio.',
+            'employee_ids.array' => 'El campo employee_ids debe ser un array.',
+            'employee_ids.*.integer' => 'Cada employee_id debe ser un número entero.',
+            'shift_id.exists' => 'El campo shift_id no existe en los registros.',
+            'shift_id.required' => 'El campo shift_id es obligatorio.',
+            'shift_id.integer' => 'El campo shift_id debe ser un número entero.',
+            'days.required' => 'El campo days es obligatorio.',
+            'days.array' => 'El campo days debe ser un array.',
+            'is_active.required' => 'El campo is_active es obligatorio.',
+            'is_active.boolean' => 'El campo is_active debe ser verdadero o falso.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'La validación ha fallado.',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $turno = Turnos::where('id', $request->shift_id)
+            ->where('company_id', $companyId)
+            ->first();
+
+        if (!$turno) {
+            return response()->json([
+                'message' => 'El turno no pertenece a la empresa o no existe.',
+                'errors' => [
+                    'shift_id' => ['El turno no pertenece a la empresa o no existe.']
+                ]
+            ], 422);
+        }
+
+        $problematicUsers = [];
+        $createdShifts = [];
+
+        foreach ($request->employee_ids as $employee_id) {
+            $employee = DashboardUser::where('id', $employee_id)
+                ->where('company_id', $companyId)
+                ->first();
+
+            if (!$employee) {
+                $problematicUsers[$employee_id][] = 'El empleado no pertenece a la empresa o no existe.';
+                continue;
+            }
+
+            $newDays = $request->days;
+            $existingShiftUsers = ShiftUser::where('user_id', $employee_id)->get();
+            $hasOverlap = false;
+
+            foreach ($existingShiftUsers as $shiftUser) {
+                $existingDays = json_decode($shiftUser->days, true);
+
+                if (is_string($existingDays[0] ?? null)) {
+                    foreach ($existingDays as $existingDay) {
+                        foreach ($newDays as $newDay) {
+                            if ($existingDay === $newDay) {
+                                $problematicUsers[$employee_id][] = 'Solapamiento detectado en el día: ' . $newDay . '.';
+                                $hasOverlap = true;
+                            }
+                        }
+                    }
+                } else {
+                    foreach ($existingDays as $existingDay) {
+                        foreach ($newDays as $newDay) {
+                            if (
+                                isset($existingDay['day'], $newDay['day']) &&
+                                $existingDay['day'] === $newDay['day']
+                            ) {
+                                if (
+                                    ($newDay['start_time'] < $existingDay['end_time']) &&
+                                    ($newDay['end_time'] > $existingDay['start_time'])
+                                ) {
+                                    $problematicUsers[$employee_id][] = 'Solapamiento detectado en ' . $newDay['day'] . '.';
+                                    $hasOverlap = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (!$hasOverlap) {
+                $shift = ShiftUser::Create([
+                    'shift_id' => $request->shift_id,
+                    'user_id' => $employee_id,
+                    'days' => json_encode($request->days),
+                    'is_active' => $request->is_active,
+                    'created_by' => $userId,
+                ]);
+                $createdShifts[] = [
+                    'user_id' => $employee_id,
+                    'shift' => $shift,
+                ];
+            }
+        }
+
+        if (!empty($problematicUsers)) {
+            return response()->json([
+                'message' => 'Algunos usuarios tienen solapamientos o errores.',
+                'errors' => $problematicUsers,
+                'created' => $createdShifts,
+            ], 422);
+        }
+
+        return response()->json([
+            'message' => 'Usuarios asignados exitosamente.',
+            'created' => $createdShifts,
+        ], 201);
     }
 }
