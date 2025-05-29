@@ -15,10 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('dashboard_users')->onDelete('cascade');
             $table->foreignId('shift_id')->constrained('turnos')->onDelete('cascade');
-
             $table->json('days');
             $table->boolean('is_active')->default(true);
-            $table->foreignId('created_by')->nullable()->constrained('dashboard_users')->nullOnDelete();
             $table->timestamps();
         });
     }

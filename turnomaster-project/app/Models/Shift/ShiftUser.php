@@ -14,8 +14,7 @@ class ShiftUser extends Model
         'user_id',
         'shift_id',
         'days',
-        'is_active',
-        'created_by'
+        'is_active'
     ];
 
     protected $casts = [
@@ -33,9 +32,5 @@ class ShiftUser extends Model
         return $this->belongsTo(Turnos::class);
     }
 
-    public function creator()
-    {
-        return $this->belongsTo(DashboardUser::class, 'created_by');
-    }
 }
 
