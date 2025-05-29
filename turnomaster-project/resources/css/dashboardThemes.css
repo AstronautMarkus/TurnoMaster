@@ -1,3 +1,7 @@
+/* ============================= */
+/* TURNOMASTER DASHBOARD THEMES  */
+/* ============================= */
+
 .theme-reyes {
   --bg: #1f1f1f;
   --text: #eaeaea;
@@ -10,6 +14,10 @@
   --success: #4caf50;
   --success-hover: #45a049;
   --success-light: #66bb6a;
+  --work-inicio: #762020;
+  --work-lunch: #363636;
+  --work-fin: #a90000;
+  --work-full: #d70000;
 }
 
 .theme-reyes-blue {
@@ -24,9 +32,13 @@
   --success: #43d8c9;
   --success-hover: #36b3a3;
   --success-light: #6ee7da;
+  --work-inicio: #305678;
+  --work-lunch: #4f8cff;
+  --work-fin: #7493ff;
+  --work-full: #2176ff;
 }
 
-.theme-ubuntu{
+.theme-ubuntu {
   --bg: #2c2c2c;
   --text: #eaeaea;
   --accent: #d75f00;
@@ -38,43 +50,50 @@
   --success: #4caf50;
   --success-hover: #45a049;
   --success-light: #66bb6a;
+  --work-inicio: #d75f00;
+  --work-lunch: #363636;
+  --work-fin: #9b3f17;
+  --work-full: #b65a00;
 }
 
-.dashboard-text{
+/* ============================= */
+/*        UI ELEMENTS            */
+/* ============================= */
+
+.dashboard-text {
   color: var(--accent);
 }
 
-.dashboard-background{ 
+.dashboard-background { 
   background-color: var(--accent);
 }
 
-.dashboard-option{
+.dashboard-option {
   background-color: var(--accent);
 }
 
-.dashboard-hover{
+.dashboard-hover {
   background-color: var(--accent-hover);
 }
 
-.dashboard-button{
+.dashboard-button {
   background-color: var(--accent);
 }
-.dashboard-button:hover{
+.dashboard-button:hover {
   background-color: var(--accent-hover);
 }
 
-.dashboard-button-secondary{
+.dashboard-button-secondary {
   background-color: var(--secondary);
 }
-.dashboard-button-secondary:hover{
+.dashboard-button-secondary:hover {
   background-color: var(--secondary-hover);
 }
 
-.dashboard-button-success{
+.dashboard-button-success {
   background-color: var(--success);
 }
-
-.dashboard-button-success:hover{
+.dashboard-button-success:hover {
   background-color: var(--success-hover);
 }
 
@@ -82,3 +101,35 @@
   background-color: var(--bg);
 }
 
+/* ============================= */
+/*     VIS TIMELINE CUSTOM      */
+/* ============================= */
+
+
+.vis-item.inicio-range {
+  background-color: var(--work-inicio);
+  color: white !important;
+}
+
+.vis-item.lunch-range {
+  background-color: var(--work-lunch);
+  color: white !important;
+}
+
+.vis-item.fin-range {
+  background-color: var(--work-fin);
+  color: white !important;
+}
+
+.vis-item.workday-range {
+  background-color: var(--work-full);
+  color: white !important;
+}
+
+
+.vis-timeline .vis-selected.inicio-range,
+.vis-timeline .vis-selected.lunch-range,
+.vis-timeline .vis-selected.fin-range,
+.vis-timeline .vis-selected.workday-range {
+  color: black !important;
+}
