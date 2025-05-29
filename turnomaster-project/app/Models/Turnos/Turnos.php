@@ -10,6 +10,7 @@ class Turnos extends Model
         'name',
         'description',
         'start_time',
+        'has_lunch',
         'lunch_time',
         'end_time',
         'company_id',

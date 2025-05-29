@@ -75,6 +75,7 @@ const ListTurnos = () => {
                                 <th className="px-4 py-3 text-left">Nombre</th>
                                 <th className="px-4 py-3 text-left">Descripción</th>
                                 <th className="px-4 py-3 text-left">Hora Inicio</th>
+                                <th className="px-4 py-3 text-left">Tiene almuerzo?</th>
                                 <th className="px-4 py-3 text-left">Hora Almuerzo</th>
                                 <th className="px-4 py-3 text-left">Hora Fin</th>
                                 <th className="px-4 py-3 text-left">Usuarios asignados</th>
@@ -96,7 +97,8 @@ const ListTurnos = () => {
                                         <td className="px-4 py-2"><span>{turno.name}</span></td>
                                         <td className="px-4 py-2"><span>{turno.description}</span></td>
                                         <td className="px-4 py-2"><span>{turno.start_time}</span></td>
-                                        <td className="px-4 py-2"><span>{turno.lunch_time}</span></td>
+                                        <td className="px-4 py-2"><span>{turno.has_lunch ? 'Sí' : 'No'}</span></td>
+                                        <td className="px-4 py-2"><span>{turno.lunch_time ?? '--'}</span></td>
                                         <td className="px-4 py-2"><span>{turno.end_time}</span></td>
                                         <td className="px-4 py-2">
                                             <Link

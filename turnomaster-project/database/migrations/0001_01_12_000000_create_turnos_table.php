@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->boolean('has_lunch')->default(true);
             $table->time('start_time');
             $table->time('lunch_time')->nullable();
             $table->time('end_time');

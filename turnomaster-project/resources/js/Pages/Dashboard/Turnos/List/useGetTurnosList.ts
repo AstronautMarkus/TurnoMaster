@@ -6,6 +6,7 @@ interface Turno {
   name: string;
   description: string;
   start_time: string;
+  has_lunch:boolean;
   lunch_time: string;
   end_time: string;
   company_id: number;
