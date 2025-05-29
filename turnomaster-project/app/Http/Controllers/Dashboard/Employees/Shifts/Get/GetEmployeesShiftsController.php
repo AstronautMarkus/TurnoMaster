@@ -53,7 +53,7 @@ class GetEmployeesShiftsController extends Controller
 
         
         $shiftUsers = ShiftUser::where('user_id', $id)
-            ->paginate($perPage, ['id', 'user_id', 'shift_id', 'days', 'is_active', 'created_by', 'created_at', 'updated_at']);
+            ->paginate($perPage, ['id', 'user_id', 'shift_id', 'days', 'is_active', 'created_at', 'updated_at']);
 
         
         $shiftUsersWithShiftData = $shiftUsers->getCollection()->map(function ($shiftUser) use ($companyId) {

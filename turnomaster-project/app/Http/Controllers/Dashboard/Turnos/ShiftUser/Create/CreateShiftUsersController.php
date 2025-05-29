@@ -116,8 +116,7 @@ class CreateShiftUsersController extends Controller
             'shift_id' => $request->shift_id,
             'user_id' => $request->employee_id,
             'days' => json_encode($request->days),
-            'is_active' => $request->is_active,
-            'created_by' => $userId,
+            'is_active' => $request->is_active
         ]);
 
         return response()->json([
@@ -187,6 +186,39 @@ class CreateShiftUsersController extends Controller
             }
 
             $newDays = $request->days;
+            // Buscar si ya existe un registro para este usuario y shift
+            $existingShiftUser = ShiftUser::where('user_id', $employee_id)
+                ->where('shift_id', $request->shift_id)
+                ->first();
+
+            if ($existingShiftUser) {
+                // Unir días previos y nuevos, evitando duplicados
+                $existingDays = json_decode($existingShiftUser->days, true) ?? [];
+                // Si los días son arrays simples (["Lunes", "Martes"]) o arrays de objetos
+                if (is_string($existingDays[0] ?? null)) {
+                    $mergedDays = array_unique(array_merge($existingDays, $newDays));
+                } else {
+                    // Para arrays de objetos, unir por 'day' y evitar duplicados
+                    $daysByKey = [];
+                    foreach ($existingDays as $d) {
+                        if (isset($d['day'])) $daysByKey[$d['day'] . ($d['start_time'] ?? '') . ($d['end_time'] ?? '')] = $d;
+                    }
+                    foreach ($newDays as $d) {
+                        if (isset($d['day'])) $daysByKey[$d['day'] . ($d['start_time'] ?? '') . ($d['end_time'] ?? '')] = $d;
+                    }
+                    $mergedDays = array_values($daysByKey);
+                }
+                $existingShiftUser->days = json_encode($mergedDays);
+                $existingShiftUser->is_active = $request->is_active;
+                $existingShiftUser->save();
+                $createdShifts[] = [
+                    'user_id' => $employee_id,
+                    'shift' => $existingShiftUser,
+                    'updated' => true,
+                ];
+                continue;
+            }
+
             $existingShiftUsers = ShiftUser::where('user_id', $employee_id)->get();
             $hasOverlap = false;
 
@@ -228,7 +260,6 @@ class CreateShiftUsersController extends Controller
                     'user_id' => $employee_id,
                     'days' => json_encode($request->days),
                     'is_active' => $request->is_active,
-                    'created_by' => $userId,
                 ]);
                 $createdShifts[] = [
                     'user_id' => $employee_id,

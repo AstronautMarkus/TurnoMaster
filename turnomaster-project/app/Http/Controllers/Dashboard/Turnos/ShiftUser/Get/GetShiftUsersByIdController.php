@@ -36,7 +36,7 @@ class GetShiftUsersByIdController extends Controller
 
         $perPage = $request->input('per_page', 10);
         $shiftUsers = ShiftUser::where('shift_id', $id)
-            ->paginate($perPage, ['id', 'user_id', 'shift_id', 'days', 'is_active', 'created_by', 'created_at', 'updated_at']);
+            ->paginate($perPage, ['id', 'user_id', 'shift_id', 'days', 'is_active', 'created_at', 'updated_at']);
 
         // Get dashboard users data
         $shiftUsersWithUserData = $shiftUsers->getCollection()->map(function ($shiftUser) {
