@@ -136,8 +136,11 @@ class EditTurnosController extends Controller
 
         $data = $request->only(['name', 'description', 'start_time', 'lunch_time', 'end_time']);
 
-        if ($request->has('has_lunch') && !$hasLunch) {
-            $data['lunch_time'] = null;
+        if ($request->has('has_lunch')) {
+            $data['has_lunch'] = $hasLunch ? 1 : 0;
+            if (!$hasLunch) {
+                $data['lunch_time'] = null;
+            }
         }
 
         if (empty($data)) {
