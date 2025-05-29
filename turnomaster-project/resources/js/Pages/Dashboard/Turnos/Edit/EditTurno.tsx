@@ -14,6 +14,7 @@ const EditTurno = () => {
         lunchMinute: "",
         endHour: "",
         endMinute: "",
+        hasLunch: true
     });
 
     const onlyNumbers = (value: string) => /^[0-9]{0,2}$/.test(value);
@@ -29,16 +30,7 @@ const EditTurno = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
-        if (
-            [
-                "startHour",
-                "startMinute",
-                "lunchHour",
-                "lunchMinute",
-                "endHour",
-                "endMinute",
-            ].includes(name)
-        ) {
+        if (["startHour", "startMinute", "lunchHour", "lunchMinute", "endHour", "endMinute"].includes(name)) {
             if (onlyNumbers(value)) {
                 handleFieldChange(name, value);
             }
@@ -56,52 +48,46 @@ const EditTurno = () => {
     const turnoTitle = useTurnoGraph(form, chartRef);
 
     const calcularHorasTrabajadas = () => {
-    const { startHour, startMinute, lunchHour, lunchMinute, endHour, endMinute } = form;
+        const { startHour, startMinute, lunchHour, lunchMinute, endHour, endMinute, hasLunch } = form;
 
-    if (
-        [startHour, startMinute, lunchHour, lunchMinute, endHour, endMinute].some(
-            v => v === "" || isNaN(Number(v))
-        )
-    ) return null;
+        if ([startHour, startMinute, endHour, endMinute].some(v => v === "" || isNaN(Number(v))) ||
+            (hasLunch && [lunchHour, lunchMinute].some(v => v === "" || isNaN(Number(v))))) return null;
 
-    const inicio = Number(startHour) * 60 + Number(startMinute);
-    const almuerzo = Number(lunchHour) * 60 + Number(lunchMinute);
-    const fin = Number(endHour) * 60 + Number(endMinute);
+        const inicio = Number(startHour) * 60 + Number(startMinute);
+        const fin = Number(endHour) * 60 + Number(endMinute);
+        const almuerzo = hasLunch ? Number(lunchHour) * 60 + Number(lunchMinute) : null;
 
-    if (inicio >= almuerzo || almuerzo >= fin) return "invalid";
+        if (hasLunch && (inicio >= almuerzo! || almuerzo! >= fin)) return "invalid";
 
-    const duracionTotal = fin - inicio;
-    const duracionAlmuerzo = 60;
-    const minutosTrabajados = duracionTotal - duracionAlmuerzo;
+        const duracionTotal = fin - inicio;
+        const duracionAlmuerzo = hasLunch ? 60 : 0;
+        const minutosTrabajados = duracionTotal - duracionAlmuerzo;
 
-    if (minutosTrabajados <= 0) return null;
+        const secretMessages = [
+            "¿Más de 16 horas? ¡Tus empleados no son robots! 🤖",
+            "¡Eso es explotación laboral nivel jefe final! 😅",
+            "¿Turno eterno? Recuerda que tus empleados también duermen. 💤",
+            "¡Cuidado! Así solo lograrás que renuncien... o se conviertan en vampiros. 🧛‍♂️",
+            "¿Buscas el récord Guinness de horas trabajadas? Tus empleados no te lo agradecerán. 🏆",
+            "¡Wow! ¿Un turno o una maratón? Mejor cuida a tu equipo. ❤️",
+            "Tus empleados necesitan descanso, no solo café. ☕",
+            "Recuerda: empleados felices, empresa feliz. ¡No los mates de cansancio! 😉",
+            "¡Eso no es un turno, es una condena! Dale un respiro a tu gente. 🌬️",
+            "Ese Turno no es tan master que digamos... 😅",
+            "Ni ChatGPT trabaja tanto. ¡Dale un respiro a tu equipo! 🤖"
+        ];
 
-    const secretMessages = [
-        "¿Más de 16 horas? ¡Tus empleados no son robots! 🤖",
-        "¡Eso es explotación laboral nivel jefe final! 😅",
-        "¿Turno eterno? Recuerda que tus empleados también duermen. 💤",
-        "¡Cuidado! Así solo lograrás que renuncien... o se conviertan en vampiros. 🧛‍♂️",
-        "¿Buscas el récord Guinness de horas trabajadas? Tus empleados no te lo agradecerán. 🏆",
-        "¡Wow! ¿Un turno o una maratón? Mejor cuida a tu equipo. ❤️",
-        "Tus empleados necesitan descanso, no solo café. ☕",
-        "Recuerda: empleados felices, empresa feliz. ¡No los mates de cansancio! 😉",
-        "¡Eso no es un turno, es una condena! Dale un respiro a tu gente. 🌬️",
-        "Ese Turno no es tan master que digamos... 😅",
-        "Ni ChatGPT trabaja tanto. ¡Dale un respiro a tu equipo! 🤖"
-    ];
+        if (duracionTotal > 16 * 60) {
+            return `${Math.floor(minutosTrabajados / 60)} hora${Math.floor(minutosTrabajados / 60) !== 1 ? "s" : ""}${minutosTrabajados % 60 > 0 ? ` ${minutosTrabajados % 60} minuto${minutosTrabajados % 60 !== 1 ? "s" : ""}` : ""} — ${secretMessages[Math.floor(Math.random() * secretMessages.length)]}`;
+        }
 
-    
-    if (duracionTotal > 16 * 60) {
-        return `${Math.floor(minutosTrabajados / 60)} hora${Math.floor(minutosTrabajados / 60) !== 1 ? "s" : ""}${minutosTrabajados % 60 > 0 ? ` ${minutosTrabajados % 60} minuto${minutosTrabajados % 60 !== 1 ? "s" : ""}` : ""} — ${secretMessages[Math.floor(Math.random() * secretMessages.length)]}`;
-    }
+        if (minutosTrabajados <= 0) return null;
 
+        const horas = Math.floor(minutosTrabajados / 60);
+        const minutos = minutosTrabajados % 60;
 
-    const horas = Math.floor(minutosTrabajados / 60);
-    const minutos = minutosTrabajados % 60;
-
-    return `${horas} hora${horas !== 1 ? "s" : ""}${minutos > 0 ? ` ${minutos} minuto${minutos !== 1 ? "s" : ""}` : ""}`;
-};
-
+        return `${horas} hora${horas !== 1 ? "s" : ""}${minutos > 0 ? ` ${minutos} minuto${minutos !== 1 ? "s" : ""}` : ""}`;
+    };
 
     return (
         <div className="p-6">
@@ -111,44 +97,36 @@ const EditTurno = () => {
             </h1>
             <div className="bg-white shadow-md w-full p-6 relative">
                 <>
-                    {success && (
-                        <div className="p-4 mb-4 text-sm text-black bg-green-400">
-                            {success}
-                        </div>
-                    )}
-                    {error && (
-                        <div className="p-4 mb-4 text-sm text-red-600 bg-red-100">
-                            {error}
-                        </div>
-                    )}
+                    {success && <div className="p-4 mb-4 text-sm text-black bg-green-400">{success}</div>}
+                    {error && <div className="p-4 mb-4 text-sm text-red-600 bg-red-100">{error}</div>}
+
                     <form onSubmit={handleSubmit} className="max-w-1xl">
                         <div className="flex flex-col md:flex-row gap-8">
-
                             <div className="flex-1 space-y-4">
                                 <div>
                                     <label className="block text-sm font-bold text-black">Nombre *</label>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        value={form.name}
-                                        onChange={handleChange}
-                                        className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
-                                    />
-                                    {getFieldError("name") && (
-                                        <p className="text-red-500 text-sm">{getFieldError("name")}</p>
-                                    )}
+                                    <input type="text" name="name" value={form.name} onChange={handleChange} className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black" />
+                                    {getFieldError("name") && <p className="text-red-500 text-sm">{getFieldError("name")}</p>}
                                 </div>
                                 <div>
                                     <label className="block text-sm font-bold text-black">Descripción *</label>
-                                    <textarea
-                                        name="description"
-                                        value={form.description}
-                                        onChange={handleChange}
-                                        className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
-                                    />
-                                    {getFieldError("description") && (
-                                        <p className="text-red-500 text-sm">{getFieldError("description")}</p>
-                                    )}
+                                    <textarea name="description" value={form.description} onChange={handleChange} className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black" />
+                                    {getFieldError("description") && <p className="text-red-500 text-sm">{getFieldError("description")}</p>}
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-bold text-black mb-1">¿Incluye hora de almuerzo?</label>
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-sm font-medium text-black">No</span>
+                                        <div
+                                            onClick={() => handleFieldChange("hasLunch", !form.hasLunch)}
+                                            className={`relative inline-flex h-6 w-11 items-center cursor-pointer transition-colors duration-300 ${form.hasLunch ? "dashboard-button-secondary" : "dashboard-button"}`}
+                                        >
+                                            <span
+                                                className={`inline-block h-4 w-4 transform bg-white transition-transform duration-300 ${form.hasLunch ? "translate-x-6" : "translate-x-1"}`}
+                                            />
+                                        </div>
+                                        <span className="text-sm font-medium text-black">Sí</span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -156,121 +134,35 @@ const EditTurno = () => {
                                 <div>
                                     <label className="block text-sm font-bold text-black">Hora de inicio *</label>
                                     <div className="flex gap-2">
-                                        <input
-                                            type="text"
-                                            name="startHour"
-                                            value={form.startHour}
-                                            onChange={handleChange}
-                                            placeholder="HH"
-                                            className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
-                                            maxLength={2}
-                                        />
+                                        <input type="text" name="startHour" value={form.startHour} onChange={handleChange} placeholder="HH" className="w-16 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black" maxLength={2} />
                                         <span>:</span>
-                                        <input
-                                            type="text"
-                                            name="startMinute"
-                                            value={form.startMinute}
-                                            onChange={handleChange}
-                                            placeholder="MM"
-                                            className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
-                                            maxLength={2}
-                                        />
+                                        <input type="text" name="startMinute" value={form.startMinute} onChange={handleChange} placeholder="MM" className="w-16 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black" maxLength={2} />
                                     </div>
-                                    {(getFieldError("startHour") || getFieldError("startMinute")) && (
-                                        <p className="text-red-500 text-sm">
-                                            {getFieldError("startHour") || getFieldError("startMinute")}
-                                        </p>
-                                    )}
                                 </div>
-                            </div>
 
-                            <div className="flex-1 space-y-4">
-                                <div>
-                                    <label className="block text-sm font-bold text-black">Hora de almuerzo *</label>
-                                    <div className="flex gap-2">
-                                        <input
-                                            type="text"
-                                            name="lunchHour"
-                                            value={form.lunchHour}
-                                            onChange={handleChange}
-                                            placeholder="HH"
-                                            className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
-                                            maxLength={2}
-                                        />
-                                        <span>:</span>
-                                        <input
-                                            type="text"
-                                            name="lunchMinute"
-                                            value={form.lunchMinute}
-                                            onChange={handleChange}
-                                            placeholder="MM"
-                                            className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
-                                            maxLength={2}
-                                        />
+                                {form.hasLunch && (
+                                    <div>
+                                        <label className="block text-sm font-bold text-black">Hora de almuerzo *</label>
+                                        <div className="flex gap-2">
+                                            <input type="text" name="lunchHour" value={form.lunchHour} onChange={handleChange} placeholder="HH" className="w-16 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black" maxLength={2} />
+                                            <span>:</span>
+                                            <input type="text" name="lunchMinute" value={form.lunchMinute} onChange={handleChange} placeholder="MM" className="w-16 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black" maxLength={2} />
+                                        </div>
                                     </div>
-                                    {(getFieldError("lunchHour") || getFieldError("lunchMinute")) && (
-                                        <p className="text-red-500 text-sm">
-                                            {getFieldError("lunchHour") || getFieldError("lunchMinute")}
-                                        </p>
-                                    )}
-                                </div>
-                            </div>
+                                )}
 
-                            <div className="flex-1 space-y-4">
                                 <div>
                                     <label className="block text-sm font-bold text-black">Hora de salida *</label>
                                     <div className="flex gap-2">
-                                        <input
-                                            type="text"
-                                            name="endHour"
-                                            value={form.endHour}
-                                            onChange={handleChange}
-                                            placeholder="HH"
-                                            className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
-                                            maxLength={2}
-                                        />
+                                        <input type="text" name="endHour" value={form.endHour} onChange={handleChange} placeholder="HH" className="w-16 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black" maxLength={2} />
                                         <span>:</span>
-                                        <input
-                                            type="text"
-                                            name="endMinute"
-                                            value={form.endMinute}
-                                            onChange={handleChange}
-                                            placeholder="MM"
-                                            className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
-                                            maxLength={2}
-                                        />
+                                        <input type="text" name="endMinute" value={form.endMinute} onChange={handleChange} placeholder="MM" className="w-16 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black" maxLength={2} />
                                     </div>
-                                    {(getFieldError("endHour") || getFieldError("endMinute")) && (
-                                        <p className="text-red-500 text-sm">
-                                            {getFieldError("endHour") && (
-                                                <>
-                                                    {getFieldError("endHour")}
-                                                    <br />
-                                                </>
-                                            )}
-                                            {getFieldError("endMinute") && (
-                                                <>
-                                                    {getFieldError("endMinute")}
-                                                    <br />
-                                                </>
-                                            )}
-                                        </p>
-                                    )}
                                 </div>
                             </div>
                         </div>
 
-                        <button
-                            type="submit"
-                            className={`mt-4 px-4 py-2 text-white ${
-                                loading
-                                    ? error
-                                        ? 'bg-red-600'
-                                        : 'bg-gray-400'
-                                    : 'dashboard-button-secondary'
-                            } flex items-center justify-center`}
-                            disabled={loading}
-                        >
+                        <button type="submit" className={`mt-4 px-4 py-2 text-white ${loading ? error ? 'bg-red-600' : 'bg-gray-400' : 'dashboard-button-secondary'} flex items-center justify-center`} disabled={loading}>
                             {!loading && !error && <FaPlus className="mr-2" />}
                             {loading ? (error ? 'Error' : 'Cargando...') : 'Actualizar turno'}
                         </button>
@@ -279,8 +171,7 @@ const EditTurno = () => {
             </div>
 
             <div className="bg-white shadow-md w-full p-6 relative mt-4">
-                <div className="mb-2 font-bold">Vista previa del turno</div>
-                {!form.startHour || !form.startMinute || !form.lunchHour || !form.lunchMinute || !form.endHour || !form.endMinute ? (
+                {!form.startHour || !form.startMinute || !form.endHour || !form.endMinute || (form.hasLunch && (!form.lunchHour || !form.lunchMinute)) ? (
                     <div className="text-gray-500 mb-4">
                         Para ver el gráfico, por favor rellene los campos de horario.
                     </div>
@@ -309,4 +200,5 @@ const EditTurno = () => {
         </div>
     );
 };
+
 export default EditTurno;

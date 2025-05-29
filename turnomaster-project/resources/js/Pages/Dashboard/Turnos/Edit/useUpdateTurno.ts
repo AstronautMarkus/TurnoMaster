@@ -5,8 +5,9 @@ type TurnoPayload = {
     name: string;
     description: string;
     start_time: string;
-    lunch_time: string;
+    lunch_time: string | null;
     end_time: string;
+    has_lunch: boolean;
 };
 
 type ValidationErrors = Record<string, string[]>;
@@ -21,6 +22,7 @@ const useUpdateTurno = (
         lunchMinute: string;
         endHour: string;
         endMinute: string;
+        hasLunch: boolean;
     },
     setForm?: (form: any) => void
 ) => {
@@ -31,14 +33,12 @@ const useUpdateTurno = (
     const [formErrors, setFormErrors] = useState<string | null>(null);
     const [fieldErrors, setFieldErrors] = useState<Record<string, string[] | null>>({});
 
-
     const getTurnoIdFromUrl = () => {
-
         const match = window.location.pathname.match(/turnos\/(?:edit\/)?(\d+)/);
         return match ? match[1] : null;
     };
-    const turnoId = getTurnoIdFromUrl();
 
+    const turnoId = getTurnoIdFromUrl();
 
     useEffect(() => {
         if (!turnoId || !setForm) return;
@@ -55,15 +55,18 @@ const useUpdateTurno = (
                 const [startHour, startMinute] = (turno.start_time || "").split(":");
                 const [lunchHour, lunchMinute] = (turno.lunch_time || "").split(":");
                 const [endHour, endMinute] = (turno.end_time || "").split(":");
+                const hasLunch = turno.has_lunch ?? true;
+
                 setForm({
                     name: turno.name || "",
                     description: turno.description || "",
-                    startHour: startHour ? startHour.padStart(2, "0") : "",
-                    startMinute: startMinute ? startMinute.padStart(2, "0") : "",
-                    lunchHour: lunchHour ? lunchHour.padStart(2, "0") : "",
-                    lunchMinute: lunchMinute ? lunchMinute.padStart(2, "0") : "",
-                    endHour: endHour ? endHour.padStart(2, "0") : "",
-                    endMinute: endMinute ? endMinute.padStart(2, "0") : "",
+                    startHour: startHour?.padStart(2, "0") || "",
+                    startMinute: startMinute?.padStart(2, "0") || "",
+                    lunchHour: lunchHour?.padStart(2, "0") || "",
+                    lunchMinute: lunchMinute?.padStart(2, "0") || "",
+                    endHour: endHour?.padStart(2, "0") || "",
+                    endMinute: endMinute?.padStart(2, "0") || "",
+                    hasLunch: hasLunch,
                 });
             } catch (err: any) {
                 setError(err?.response?.data?.message || "Error al obtener el turno");
@@ -72,10 +75,9 @@ const useUpdateTurno = (
             }
         };
         fetchTurno();
-
     }, [turnoId]);
 
-    const handleFieldChange = (name: string, value: string) => {
+    const handleFieldChange = (name: string, value: any) => {
         if (setForm && form) {
             setForm({ ...form, [name]: value });
             setFieldErrors({ ...fieldErrors, [name]: null });
@@ -87,26 +89,32 @@ const useUpdateTurno = (
         let errors: Record<string, string | null> = {};
         const hourFields = [
             { value: form.startHour, label: "Hora de inicio", name: "startHour" },
-            { value: form.lunchHour, label: "Hora de almuerzo", name: "lunchHour" },
             { value: form.endHour, label: "Hora de fin", name: "endHour" },
         ];
         const minuteFields = [
             { value: form.startMinute, label: "Minuto de inicio", name: "startMinute" },
-            { value: form.lunchMinute, label: "Minuto de almuerzo", name: "lunchMinute" },
             { value: form.endMinute, label: "Minuto de fin", name: "endMinute" },
         ];
+
+        if (form.hasLunch) {
+            hourFields.push({ value: form.lunchHour, label: "Hora de almuerzo", name: "lunchHour" });
+            minuteFields.push({ value: form.lunchMinute, label: "Minuto de almuerzo", name: "lunchMinute" });
+        }
+
         for (const field of hourFields) {
             if (!field.value || isNaN(Number(field.value)) || Number(field.value) < 0 || Number(field.value) > 23) {
                 errors[field.name] = `${field.label} debe ser un número entre 0 y 23.`;
                 valid = false;
             }
         }
+
         for (const field of minuteFields) {
             if (!field.value || isNaN(Number(field.value)) || Number(field.value) < 0 || Number(field.value) > 59) {
                 errors[field.name] = `${field.label} debe ser un número entre 0 y 59.`;
                 valid = false;
             }
         }
+
         return { valid, errors };
     };
 
@@ -118,10 +126,10 @@ const useUpdateTurno = (
             if ((field === "startHour" || field === "startMinute") && validationErrors.start_time) return validationErrors.start_time;
             if ((field === "lunchHour" || field === "lunchMinute") && validationErrors.lunch_time) return validationErrors.lunch_time;
             if ((field === "endHour" || field === "endMinute") && validationErrors.end_time) return validationErrors.end_time;
+            if (field === "hasLunch" && validationErrors.has_lunch) return validationErrors.has_lunch;
         }
         return null;
     };
-
 
     const updateTurno = async (payload: TurnoPayload) => {
         setLoading(true);
@@ -136,8 +144,6 @@ const useUpdateTurno = (
                 },
             });
             setSuccess(res.data?.message || "Turno actualizado exitosamente.");
-            setError(null);
-            setValidationErrors({});
             return { ok: true, message: res.data?.message };
         } catch (err: any) {
             if (err?.response?.status === 422) {
@@ -146,7 +152,6 @@ const useUpdateTurno = (
             } else {
                 setError(err?.response?.data?.message || "Error al actualizar el turno");
             }
-            setSuccess(null);
             return { ok: false, message: err?.response?.data?.message, errors: err?.response?.data?.errors };
         } finally {
             setLoading(false);
@@ -178,6 +183,7 @@ const useUpdateTurno = (
             }
             valid = false;
         }
+
         setFieldErrors(errors);
         if (!valid) {
             setFormErrors("Corrige los errores en los campos.");
@@ -186,23 +192,20 @@ const useUpdateTurno = (
             setFormErrors(null);
         }
 
-        const start_time = `${form.startHour}:${form.startMinute}`;
-        const lunch_time = `${form.lunchHour}:${form.lunchMinute}`;
-        const end_time = `${form.endHour}:${form.endMinute}`;
-        const result = await updateTurno({
+        const payload: TurnoPayload = {
             name: form.name,
             description: form.description,
-            start_time,
-            lunch_time,
-            end_time,
-        });
+            start_time: `${form.startHour}:${form.startMinute}`,
+            lunch_time: form.hasLunch ? `${form.lunchHour}:${form.lunchMinute}` : null,
+            end_time: `${form.endHour}:${form.endMinute}`,
+            has_lunch: form.hasLunch
+        };
+
+        const result = await updateTurno(payload);
         if (result && result.errors) {
             const backendFieldErrors: Record<string, string[] | null> = {};
             for (const key in result.errors) {
-                if (result.errors.hasOwnProperty(key)) {
-                    const value = result.errors[key];
-                    if (Array.isArray(value)) backendFieldErrors[key] = value;
-                }
+                if (Array.isArray(result.errors[key])) backendFieldErrors[key] = result.errors[key];
             }
             setFieldErrors(backendFieldErrors);
         }
