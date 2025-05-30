@@ -49,6 +49,12 @@ interface ApiResponse {
     user: User;
 }
 
+// Format RUT
+function formatRut(rut: number, rut_dv: string): string {
+    const rutStr = rut.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return `${rutStr}-${rut_dv}`;
+}
+
 export const useGetEmployeesTurnosList = (employeeId: number) => {
     const [loading, setLoading] = useState(true);
     const [shifts, setShifts] = useState<ShiftData[]>([]);
@@ -67,7 +73,12 @@ export const useGetEmployeesTurnosList = (employeeId: number) => {
                     },
                 });
                 setShifts(res.data.data.data);
-                setUser(res.data.user);
+                
+                const userData = res.data.user;
+                setUser({
+                    ...userData,
+                    rut: formatRut(userData.rut, userData.rut_dv) as unknown as any,
+                });
             } catch (err: any) {
                 setError("Error al obtener los turnos del empleado.");
             } finally {

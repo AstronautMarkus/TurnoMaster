@@ -18,6 +18,7 @@
   --work-lunch: #363636;
   --work-fin: #a90000;
   --work-full: #d70000;
+  --item: #762020;
 }
 
 .theme-reyes-blue {
@@ -36,6 +37,7 @@
   --work-lunch: #4f8cff;
   --work-fin: #7493ff;
   --work-full: #2176ff;
+  --item: #305678;
 }
 
 .theme-ubuntu {
@@ -54,6 +56,7 @@
   --work-lunch: #363636;
   --work-fin: #9b3f17;
   --work-full: #b65a00;
+  --item: #d75f00;
 }
 
 /* ============================= */
@@ -131,5 +134,14 @@
 .vis-timeline .vis-selected.lunch-range,
 .vis-timeline .vis-selected.fin-range,
 .vis-timeline .vis-selected.workday-range {
+  color: black !important;
+}
+
+.vis-item.item {
+  background-color: var(--item);
+  color: white !important;
+}
+
+.vis-selected.item{
   color: black !important;
 }
