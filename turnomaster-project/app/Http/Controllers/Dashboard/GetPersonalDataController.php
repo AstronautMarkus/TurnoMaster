@@ -64,8 +64,8 @@ class GetPersonalDataController extends Controller
                         'id' => $company->id,
                         'name' => $company->name,
                         'owner_email' => $company->owner_email,
-                        'logo' => $company->logo 
-                            ? url("api/assets/{$company->logo}") 
+                        'logo' => $company->profile_photo 
+                            ? url("api/assets/{$company->profile_photo}") 
                             : null,
                     ],
                     'role' => [
@@ -111,7 +111,7 @@ class GetPersonalDataController extends Controller
                         'name' => $company->name,
                         'owner_email' => $company->owner_email,
                         'logo' => $company->logo 
-                            ? url("api/assets/{$company->logo}") 
+                            ? url("api/assets/{$company->profile_photo}") 
                             : null,
                     ],
                     'role' => [
