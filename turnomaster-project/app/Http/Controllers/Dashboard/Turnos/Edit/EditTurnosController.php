@@ -283,7 +283,7 @@ class EditTurnosController extends Controller
                 ];
             }
             return response()->json([
-                'message' => 'Solapamiento detectado para usuarios asignados al turno.',
+                'message' => 'Se ha encontrado uno o más conflictos de horario al actualizar el horario del turno.',
                 'errors' => [
                     'users' => array_values($errors)
                 ]
