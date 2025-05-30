@@ -161,10 +161,10 @@ const UsersListTurno = () => {
 
                         {(modal.lastAssignStatus && modal.lastAssignMessage) && (
                             <div
-                                className={`mb-4 px-3 py-2 border ${
+                                className={`mb-4 px-3 py-2 ${
                                     modal.lastAssignStatus === "success"
-                                        ? "bg-green-100 text-green-800 border-green-400"
-                                        : "bg-red-100 text-red-700 border-red-400"
+                                        ? "dashboard-success text-black font-semibold"
+                                        : "dashboard-error text-white font-semibold"
                                 }`}
                             >
                                 <div className="font-semibold mb-1">{modal.lastAssignMessage}</div>
