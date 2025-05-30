@@ -32,6 +32,7 @@ const useUpdateTurno = (
     const [validationErrors, setValidationErrors] = useState<ValidationErrors>({});
     const [formErrors, setFormErrors] = useState<string | null>(null);
     const [fieldErrors, setFieldErrors] = useState<Record<string, string[] | null>>({});
+    const [backendError, setBackendError] = useState<any>(null);
 
     const getTurnoIdFromUrl = () => {
         const match = window.location.pathname.match(/turnos\/(?:edit\/)?(\d+)/);
@@ -140,6 +141,7 @@ const useUpdateTurno = (
         setError(null);
         setSuccess(null);
         setValidationErrors({});
+        setBackendError(null);
         const token = localStorage.getItem('token');
         try {
             const res = await axios.put(`/api/turnos/${turnoId}`, payload, {
@@ -150,13 +152,15 @@ const useUpdateTurno = (
             setSuccess(res.data?.message || "Turno actualizado exitosamente.");
             return { ok: true, message: res.data?.message };
         } catch (err: any) {
+            // Captura el error crudo del backend
+            setBackendError(err?.response?.data);
             if (err?.response?.status === 422) {
                 setError(err.response.data?.message || "La validación ha fallado.");
                 setValidationErrors(err.response.data?.errors || {});
             } else {
                 setError(err?.response?.data?.message || "Error al actualizar el turno");
             }
-            return { ok: false, message: err?.response?.data?.message, errors: err?.response?.data?.errors };
+            return { ok: false, message: err?.response?.data?.message, errors: err?.response?.data?.errors, raw: err?.response?.data };
         } finally {
             setLoading(false);
         }
@@ -228,6 +232,7 @@ const useUpdateTurno = (
         updateTurno,
         loading,
         error,
+        backendError,
         success,
         validationErrors,
         formErrors,

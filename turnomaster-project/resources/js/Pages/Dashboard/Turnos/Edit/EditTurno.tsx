@@ -23,6 +23,7 @@ const EditTurno = () => {
         loading,
         error,
         success,
+        backendError,
         handleFieldChange,
         handleValidateAndSubmit,
         getFieldError,
@@ -100,6 +101,12 @@ const EditTurno = () => {
         return `${horas} hora${horas !== 1 ? "s" : ""}${minutos > 0 ? ` ${minutos} minuto${minutos !== 1 ? "s" : ""}` : ""}`;
     };
 
+    // Extract user conflicts from backend error
+    const userConflicts: any[] =
+        (backendError && backendError.errors?.users) ||
+        (Array.isArray(backendError?.errors?.users) ? backendError.errors.users : []) ||
+        [];
+
     return (
         <div className="p-6">
             <h1 className="text-3xl sm:text-4xl font-bold text-left mb-6 mt-4 flex items-center gap-2">
@@ -109,8 +116,12 @@ const EditTurno = () => {
             <div className="bg-white shadow-md w-full p-6 relative">
                 <>
                     {success && <div className="p-4 mb-4 text-sm text-black bg-green-400">{success}</div>}
-                    {error && <div className="p-4 mb-4 text-sm text-red-600 bg-red-100">{error}</div>}
+                    {error && typeof error === "string" && (
+                        <div className="p-4 mb-4 text-sm text-red-600 bg-red-100">{error}</div>
+                    )}
 
+                    
+                
                     <form onSubmit={handleSubmit} className="max-w-1xl">
                         <div className="flex flex-col md:flex-row gap-8">
                             <div className="flex-1 space-y-4">
@@ -194,6 +205,51 @@ const EditTurno = () => {
                             {loading ? (error ? 'Error' : 'Cargando...') : 'Actualizar turno'}
                         </button>
                     </form>
+
+                    {Array.isArray(userConflicts) && userConflicts.length > 0 && (
+                        <div
+                            className="p-4 mb-4 text-sm text-red-700 bg-red-100 border border-red-300 rounded mt-4"
+                            style={{ maxHeight: 260, overflowY: "auto" }}
+                        >
+                            <div className="font-bold mb-2">
+                                Uno o mas usuarios tienen conflictos de solapamiento con este turno:
+                            </div>
+                            <ul className="space-y-2">
+                                {userConflicts.map((user, idx) => (
+                                    <li key={user.user_id || idx} className="mb-2">
+                                        <div className="font-semibold">
+                                            {user.user_name ? user.user_name : `Usuario ID ${user.user_id}`}
+                                        </div>
+                                        {Array.isArray(user.conflicts) && user.conflicts.length > 0 && (
+                                            <ul className="ml-4 list-disc">
+                                                {user.conflicts.map((conflict: any, cidx: number) => (
+                                                    <li key={cidx}>
+                                                        <span className="font-medium">
+                                                            Conflicto con turno: <strong>{conflict.conflict_with_turno}</strong>
+                                                        </span>
+                                                        {conflict.days && (
+                                                            <span>
+                                                                {" — "}
+                                                                {conflict.days.join(", ")}
+                                                            </span>
+                                                        )}
+                                                        {conflict.type && (
+                                                            <span className="ml-2 text-xs text-gray-600">
+                                                                [{conflict.type}]
+                                                            </span>
+                                                        )}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        )}
+                                    </li>
+                                ))}
+                            </ul>
+                            <div className="mt-2 text-xs text-gray-700 font-semibold">
+                                Por favor edita o reasigna estos usuarios para resolver el solapamiento.
+                            </div>
+                        </div>
+                    )}
                 </>
             </div>
 
