@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import useProfileData from './useProfileData';
 import useUpdateImage from './useUpdateImage';
 import AuthLoadingScreen from '../../../Components/Auth/LoadingScreen/AuthLoadingScreen';
-import { FaUserShield, FaUser } from 'react-icons/fa';
+import { FaUserShield, FaUser, FaCrown } from 'react-icons/fa';
 import { FaUserGear } from "react-icons/fa6";
 
 const Profile: React.FC = () => {
@@ -63,7 +63,7 @@ const Profile: React.FC = () => {
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium">Empresa</label>
-                                    <p className="font-bold">{user.company}</p>
+                                    <p className="font-bold">{user.company?.name}</p>
                                 </div>
                             </div>
                         </div>
@@ -138,7 +138,7 @@ const Profile: React.FC = () => {
 
             {user && (
                 <div className="mt-6 bg-white shadow-md sm:p-6">
-                    <h2 className="text-2xl font-semibold mb-4">Rol empleado en {user.company}</h2>
+                    <h2 className="text-2xl font-semibold mb-4">Rol empleado en {user.company?.name}</h2>
                     <div className="flex items-center gap-4">
                         <div className="text-4xl">
                             {user.role.id === 1 ? <FaUserShield /> : user.role.id === 3 ? <FaUser /> : <FaUserGear />}
@@ -148,6 +148,17 @@ const Profile: React.FC = () => {
                             <p>{user.role.description}</p>
                         </div>
                     </div>
+                    {user.email === user.company?.owner_email && (
+                        <div className="mt-6 p-4 dashboard-background-warning flex items-center gap-4">
+                            <div className="text-4xl">
+                                <FaCrown/>
+                            </div>
+                            <div>
+                                <h3 className="text-xl font-semibold mb-1 flex items-center">Dueño de la compañía</h3>
+                                <p className="text-gray-700">Este usuario es el dueño de la compañía <strong>{user.company?.name}</strong>.</p>
+                            </div>
+                        </div>
+                    )}
                 </div>
             )}
         </div>

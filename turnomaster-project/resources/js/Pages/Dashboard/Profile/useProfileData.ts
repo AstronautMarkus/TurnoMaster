@@ -10,6 +10,8 @@ interface UserRole {
 interface Company {
     id: number;
     name: string;
+    owner_email?: string;
+    logo?: string | null;
 }
 
 interface UserProfile {
@@ -18,16 +20,16 @@ interface UserProfile {
     email: string;
     role: UserRole;
     profile_photo: string;
-    companies: {
+    companies?: {
         owned: Company[];
     };
     rut: number;
     rut_dv: string;
     company_id: number;
     role_id: number;
-    created_at: string;
-    updated_at: string;
-    company: string;
+    created_at?: string;
+    updated_at?: string;
+    company: Company;
 }
 
 const useProfileData = () => {
