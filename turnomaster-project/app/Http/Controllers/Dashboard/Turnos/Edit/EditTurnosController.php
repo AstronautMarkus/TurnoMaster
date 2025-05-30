@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Dashboard\Turnos\Edit;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Turnos\Turnos;
+use App\Models\Shift\ShiftUser;
+use App\Models\Users\DashboardUser;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
@@ -136,6 +138,144 @@ class EditTurnosController extends Controller
 
         $data = $request->only(['name', 'description', 'start_time', 'lunch_time', 'end_time']);
 
+        if (empty($data)) {
+            return response()->json([
+                'message' => 'No se enviaron datos para actualizar.',
+            ], 400);
+        }
+
+        //--- START: Validation of overlaps for assigned users ---
+        $assignedUsers = ShiftUser::where('shift_id', $turno->id)->get();
+        $overlapConflicts = [];
+        $newDays = [];
+        // Get days from Turno
+        foreach ($assignedUsers as $shiftUser) {
+            $userId = $shiftUser->user_id;
+            $userDays = json_decode($shiftUser->days, true);
+
+            $isSimpleDays = is_string($userDays[0] ?? null);
+
+            if ($isSimpleDays) {
+                $editedDays = $userDays;
+            } else {
+                $editedDays = [];
+                foreach ($userDays as $d) {
+                    $editedDays[] = [
+                        'day' => $d['day'],
+                        'start_time' => $start,
+                        'end_time' => $end
+                    ];
+                }
+            }
+
+            // Find other active Turnos of the user (excluding the edited shift)
+            $otherShifts = ShiftUser::where('user_id', $userId)
+                ->where('shift_id', '!=', $turno->id)
+                ->get();
+
+            foreach ($otherShifts as $otherShift) {
+                $otherTurno = Turnos::find($otherShift->shift_id);
+                $otherDays = json_decode($otherShift->days, true);
+                $otherIsSimple = is_string($otherDays[0] ?? null);
+
+                if ($isSimpleDays && $otherIsSimple) {
+                    // Both are simple (just days)
+                    $overlapDays = array_intersect($editedDays, $otherDays);
+                    if (!empty($overlapDays)) {
+                        // For each matching day, compare time ranges
+                        foreach ($overlapDays as $day) {
+                            // Get hours of the edited shift
+                            $editedStart = $start;
+                            $editedEnd = $end;
+                            // Get hours from the other shift
+                            $otherStart = $otherTurno ? $otherTurno->start_time : '00:00:00';
+                            $otherEnd = $otherTurno ? $otherTurno->end_time : '23:59:59';
+
+                            // Compare overlapping hours
+                            if (
+                                ($editedStart < $otherEnd) &&
+                                ($editedEnd > $otherStart)
+                            ) {
+                                $overlapConflicts[] = [
+                                    'user_id' => $userId,
+                                    'user_name' => optional(DashboardUser::find($userId))->first_name . ' ' . optional(DashboardUser::find($userId))->last_name,
+                                    'conflict_with_turno' => $otherTurno ? $otherTurno->name : 'Desconocido',
+                                    'days' => [$day . ' (' . $editedStart . '-' . $editedEnd . ')'],
+                                    'type' => 'horario'
+                                ];
+                            }
+                        }
+                    }
+                } else {
+                    // At least one has a schedule
+                    $edited = $isSimpleDays ? array_map(function($d) use ($start, $end) {
+                        return ['day' => $d, 'start_time' => $start, 'end_time' => $end];
+                    }, $editedDays) : $editedDays;
+                    $other = $otherIsSimple ? array_map(function($d) use ($otherTurno) {
+                        return [
+                            'day' => $d,
+                            'start_time' => $otherTurno ? $otherTurno->start_time : '00:00:00',
+                            'end_time' => $otherTurno ? $otherTurno->end_time : '23:59:59'
+                        ];
+                    }, $otherDays) : $otherDays;
+
+                    foreach ($edited as $ed) {
+                        foreach ($other as $od) {
+                            if (
+                                isset($ed['day'], $od['day']) &&
+                                $ed['day'] === $od['day']
+                            ) {
+                                // Compare overlapping schedules
+                                if (
+                                    ($ed['start_time'] < $od['end_time']) &&
+                                    ($ed['end_time'] > $od['start_time'])
+                                ) {
+                                    $overlapConflicts[] = [
+                                        'user_id' => $userId,
+                                        'user_name' => optional(DashboardUser::find($userId))->name,
+                                        'conflict_with_turno' => $otherTurno ? $otherTurno->name : 'Desconocido',
+                                        'days' => [$ed['day'] . ' (' . $ed['start_time'] . '-' . $ed['end_time'] . ')'],
+                                        'type' => 'horario'
+                                    ];
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (!empty($overlapConflicts)) {
+            // Group conflicts by user
+            $errors = [];
+            foreach ($overlapConflicts as $conflict) {
+                $userId = $conflict['user_id'];
+                $userName = $conflict['user_name'] ?? null;
+                $key = $userId;
+                if (!isset($errors[$key])) {
+                    $errors[$key] = [
+                        'user_id' => $userId,
+                        'user_name' => $userName,
+                        'conflicts' => [],
+                    ];
+                }
+                $errors[$key]['conflicts'][] = [
+                    'conflict_with_turno' => $conflict['conflict_with_turno'],
+                    'days' => $conflict['days'],
+                    'type' => $conflict['type'],
+                ];
+            }
+            return response()->json([
+                'message' => 'Solapamiento detectado para usuarios asignados al turno.',
+                'errors' => [
+                    'users' => array_values($errors)
+                ]
+            ], 422);
+        }
+        // --- END: Validation of overlaps for assigned users ---
+
+
+
         if ($request->has('has_lunch')) {
             $data['has_lunch'] = $hasLunch ? 1 : 0;
             if (!$hasLunch) {
@@ -143,11 +283,6 @@ class EditTurnosController extends Controller
             }
         }
 
-        if (empty($data)) {
-            return response()->json([
-                'message' => 'No se enviaron datos para actualizar.',
-            ], 400);
-        }
 
         // Calculate total_hours if start_time and end_time are provided
         $startFinal = $request->has('start_time') ? $request->start_time : $turno->start_time;
