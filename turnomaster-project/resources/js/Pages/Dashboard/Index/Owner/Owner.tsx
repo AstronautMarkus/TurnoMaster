@@ -110,7 +110,7 @@ const Owner = () => {
                         ) : companyData && companyData.company ? (
                             <div className="flex flex-wrap items-center gap-6">
                                 <div className="w-48 h-48 bg-gray-200 overflow-hidden">
-                                    <img src={companyData.company.profile_image} alt="Empresa" className="object-cover w-full h-full" />
+                                    <img src={companyData.company.profile_photo} alt="Empresa" className="object-cover w-full h-full" />
                                 </div>
 
                                 <div className="flex-grow grid grid-cols-2 sm:grid-cols-4 gap-4 text-left">
