@@ -71,6 +71,11 @@ use App\Http\Controllers\User\Image\UpdateImageController;
 use App\Http\Controllers\User\Image\ServeImageController;
 use App\Http\Controllers\User\Image\DeleteImageController;
 
+// Company image controllers
+use App\Http\Controllers\Dashboard\Company\Images\Update\UpdateCompanyImageController;
+use App\Http\Controllers\Dashboard\Company\Images\Delete\DeleteCompanyImageController;
+use App\Http\Controllers\Dashboard\Company\Images\Serve\ServeCompanyImageController;
+
 
 Route::post('/create/demo-user', [CreateDemoUserController::class, 'createDemoUser']);
 Route::post('/create/employee', [CreateEmployeeController::class, 'createEmployee']);
@@ -113,6 +118,9 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::get('/employees/{id}/shifts', [GetEmployeesShiftsController::class, 'getEmployeeShiftsById']);
     Route::post('/user/profile-image', [UpdateImageController::class, 'update']);
     Route::delete('/user/profile-image', [DeleteImageController::class, 'delete']);
+    Route::post('/company/profile-image', [UpdateCompanyImageController::class, 'UpdateCompanyImage']);
+    Route::delete('/company/profile-image', [DeleteCompanyImageController::class, 'DeleteCompanyImage']);
+    Route::get('/company/{companyId}/profile-image', [ServeCompanyImageController::class, 'ServeCompanyImagea']);
     Route::get('/turnos', [GetTurnosController::class, 'getTurnos']);
     Route::get('/turnos/{id}', [GetTurnosByIdController::class, 'getTurnoById']);
     Route::post('/turnos', [CreateTurnosController::class, 'createTurnos']);
