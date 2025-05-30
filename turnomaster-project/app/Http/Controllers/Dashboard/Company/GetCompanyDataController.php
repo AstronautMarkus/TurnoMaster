@@ -46,7 +46,7 @@ class GetCompanyDataController extends Controller
                     'email' => $company->owner_email,
                     'created_at' => $company->created_at,
                     'updated_at' => $company->updated_at,
-                    'profile_photo' => url("api/assets/{$company->profile_photo}"),
+                    'profile_photo' => $company->profile_photo ? url("api/assets/{$company->profile_photo}") : null,
                 ],
                 'employees' => [
                     'total' => $adminEmployeesCount + $hrEmployeesCount + $employeesCount,
