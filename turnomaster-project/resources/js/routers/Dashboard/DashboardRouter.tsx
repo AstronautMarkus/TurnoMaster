@@ -9,6 +9,7 @@ import DashboardSettingsRouter from './Settings/DashboardSettingsRouter';
 
 import DashboardEmployeesRouter from './Employees/DashboardEmployeesRouter';
 import DashboardTurnosRouter from './Turnos/DashboardTurnosRouter';
+import ReportsRouter from './Reports/ReportsRouter';
 
 function DashboardRouter() {
     const location = useLocation();
@@ -30,6 +31,7 @@ function DashboardRouter() {
                             <Route path="/settings/*" element={<DashboardSettingsRouter />} />
                             <Route path="/employees/*" element={<DashboardEmployeesRouter />} />
                             <Route path="/turnos/*" element={<DashboardTurnosRouter />} />
+                            <Route path="/reports/*" element={<ReportsRouter />} />
                         </Routes>
                     </motion.div>
                 </AnimatePresence>
