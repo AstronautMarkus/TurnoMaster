@@ -4,6 +4,7 @@ import useUpdateImage from './useUpdateImage';
 import AuthLoadingScreen from '../../../Components/Auth/LoadingScreen/AuthLoadingScreen';
 import { FaUserShield, FaUser, FaCrown } from 'react-icons/fa';
 import { FaUserGear } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
 const Profile: React.FC = () => {
     const user = useProfileData();
@@ -161,6 +162,10 @@ const Profile: React.FC = () => {
                     )}
                 </div>
             )}
+            
+            <div className="flex space-x-2 justify-end mt-4">
+                <Link to="/dashboard/settings" className="text-white px-4 py-2 dashboard-button transition-colors">Salir</Link>
+            </div>
         </div>
     );
 };

@@ -1,6 +1,7 @@
 import React from 'react';
-import { FaUser, FaBrush} from 'react-icons/fa';
+import { FaUser, FaBrush, FaBuilding} from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+
 
 const Settings: React.FC = () => {
     const settingsOptions = [
@@ -16,6 +17,12 @@ const Settings: React.FC = () => {
             description: 'Personaliza la apariencia de la aplicación a tu gusto.',
             url:"/dashboard/settings/appearance"
         },
+        {
+            icon: <FaBuilding />,
+            title: 'Empresa',
+            description: 'Configura los detalles de tu empresa y gestiona la suscripción de TurnoMaster.',
+            url:"/dashboard/settings/company"
+        }
     ];
 
     return (

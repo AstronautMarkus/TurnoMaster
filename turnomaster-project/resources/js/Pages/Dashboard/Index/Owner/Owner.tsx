@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, JSX } from 'react';
 import { FaCalendar, FaUsers } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
+import { FaUserShield, FaUser, FaBuilding } from 'react-icons/fa';
+import { FaUserGear } from "react-icons/fa6";
+import { FiSettings } from 'react-icons/fi';
 import useGetCompanyDetails from './useGetCompanyDetails';
 
 const Owner = () => {
@@ -25,6 +28,32 @@ const Owner = () => {
             return "Buenas noches";
         }
     };
+
+    const InfoItem = ({ label, value }: { label: string; value: string }) => (
+    <div>
+        <p className="text-sm text-gray-500">{label}</p>
+        <p className="text-lg font-semibold">{value || 'N/A'}</p>
+    </div>
+    );
+
+    const CountItem = ({
+            label,
+            value,
+            icon,
+        }: {
+            label: string;
+            value: number;
+            icon?: JSX.Element;
+        }) => (
+        <div>
+            <p className="text-sm text-gray-500">{label}</p>
+            <p className="text-xl font-bold flex items-center gap-1">
+                {icon}
+                {value || 0}
+            </p>
+        </div>
+    );
+
 
     const greeting = getGreeting();
 
@@ -70,50 +99,29 @@ const Owner = () => {
             <div className="flex flex-col mt-6">
                 <div className="bg-white shadow-md sm:p-6">
                     <div className="mb-6 text-center">
-                        <h2 className="text-2xl font-semibold mb-4">Mi empresa</h2>
+                        <h2 className="text-2xl font-semibold mb-4 flex items-center justify-center gap-2">
+                            <FaBuilding/>
+                            Mi empresa
+                        </h2>
                         {loading ? (
                             <div className="flex items-center justify-center h-48">
                                 <p className="text-lg font-semibold">Cargando...</p>
                             </div>
                         ) : companyData && companyData.company ? (
                             <div className="flex flex-wrap items-center gap-6">
-                                <div className="w-48 h-48 bg-gray-200 overflow-hidden rounded">
+                                <div className="w-48 h-48 bg-gray-200 overflow-hidden">
                                     <img src={companyData.company.profile_image} alt="Empresa" className="object-cover w-full h-full" />
                                 </div>
-                                
-                                <div className="flex-grow grid grid-cols-2 sm:grid-cols-4 gap-4">
-                                    <div>
-                                        <p className="text-lg font-bold">Nombre de la empresa:</p>
-                                        <p className="font-normal">{companyData.company.name || 'N/A'}</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-lg font-bold">Creada por:</p>
-                                        <p className="font-normal">{companyData.company.email || 'N/A'}</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-lg font-bold">Fecha de registro:</p>
-                                        <p className="font-normal">{companyData.company.created_at || 'N/A'}</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-lg font-bold">Ultima modificación:</p>
-                                        <p className="font-normal">{companyData.company.updated_at || 'N/A'}</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-lg font-bold">Miembros totales:</p>
-                                        <p className="font-normal">{companyData.employees?.total || 0}</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-lg font-bold">Administradores:</p>
-                                        <p className="font-normal">{companyData.employees?.details?.admin || 0}</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-lg font-bold">Recursos Humanos:</p>
-                                        <p className="font-normal">{companyData.employees?.details?.hr || 0}</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-lg font-bold">Empleados:</p>
-                                        <p className="font-normal">{companyData.employees?.details?.employee || 0}</p>
-                                    </div>
+
+                                <div className="flex-grow grid grid-cols-2 sm:grid-cols-4 gap-4 text-left">
+                                    <InfoItem label="Nombre de la empresa:" value={companyData.company.name} />
+                                    <InfoItem label="Creada por:" value={companyData.company.email ?? ''} />
+                                    <InfoItem label="Fecha de registro:" value={companyData.company.created_at} />
+                                    <InfoItem label="Ultima modificación:" value={companyData.company.updated_at} />
+                                    <CountItem label="Miembros totales:" value={companyData.employees?.total} />
+                                    <CountItem label="Administradores:" value={companyData.employees?.details?.admin} icon={<FaUserShield className="dashboard-text inline-block mr-1" />} />
+                                    <CountItem label="Recursos Humanos:" value={companyData.employees?.details?.hr} icon={<FaUserGear className="dashboard-text-warning inline-block mr-1" />} />
+                                    <CountItem label="Empleados:" value={companyData.employees?.details?.employee} icon={<FaUser className="dashboard-text-success inline-block mr-1" />} />
                                 </div>
                             </div>
                         ) : (
@@ -122,6 +130,14 @@ const Owner = () => {
                             </div>
                         )}
                     </div>
+                </div>
+                <div className="flex justify-end mt-4">
+                    <Link to="/dashboard/settings/company"
+                        className="dashboard-button text-white font-semibold py-2 px-6 shadow transition-colors"
+                        type="button">
+                        <FiSettings className="inline-block mr-2" />
+                        Configurar
+                    </Link>
                 </div>
             </div>
 
