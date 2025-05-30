@@ -118,47 +118,49 @@ const UsersListTurno = () => {
                 </div>
             </div>
 
-            <div className="my-8">
-                <h2 className="text-lg font-bold mb-2">Mapa visual de días asignados</h2>
-                <div className="overflow-x-auto border">
-                    <table className="min-w-max w-full text-sm text-center">
-                        <thead>
-                            <tr>
-                                <th className="p-2 bg-gray-100">Empleado</th>
-                                {dayLabels.map(day => (
-                                    <th key={day} className="p-2 bg-gray-100">{day}</th>
-                                ))}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {users.map(({ user, shift_user }) => {
-                                let days: string[] = [];
-                                try { days = JSON.parse(shift_user.days); } catch {}
-                                const normalized = days.map(d => d.trim().toLowerCase());
-                                return (
-                                    <tr key={shift_user.id}>
-                                        <td className="p-2 text-white font-semibold dashboard-background">{user.first_name} {user.last_name}</td>
-                                        {dayLabels.map(label => {
-                                            const key = label.toLowerCase();
-                                            const isAssigned = normalized.includes(key);
-                                            return (
-                                                <td
-                                                    key={label}
-                                                    className={`p-2 ${isAssigned ? "dashboard-background-secondary text-white" : "bg-gray-200"}`}
-                                                >
-                                                    <div className="flex justify-center items-center">
-                                                        {isAssigned ? <FaCheck /> : ""}
-                                                    </div>
-                                                </td>
-                                            );
-                                        })}
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
+            {users.length > 0 && (
+                <div className="my-8">
+                    <h2 className="text-lg font-bold mb-2">Mapa visual de días asignados</h2>
+                    <div className="overflow-x-auto border">
+                        <table className="min-w-max w-full text-sm text-center">
+                            <thead>
+                                <tr>
+                                    <th className="p-2 bg-gray-100">Empleado</th>
+                                    {dayLabels.map(day => (
+                                        <th key={day} className="p-2 bg-gray-100">{day}</th>
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {users.map(({ user, shift_user }) => {
+                                    let days: string[] = [];
+                                    try { days = JSON.parse(shift_user.days); } catch {}
+                                    const normalized = days.map(d => d.trim().toLowerCase());
+                                    return (
+                                        <tr key={shift_user.id}>
+                                            <td className="p-2 text-white font-semibold dashboard-background">{user.first_name} {user.last_name}</td>
+                                            {dayLabels.map(label => {
+                                                const key = label.toLowerCase();
+                                                const isAssigned = normalized.includes(key);
+                                                return (
+                                                    <td
+                                                        key={label}
+                                                        className={`p-2 ${isAssigned ? "dashboard-background-secondary text-white" : "bg-gray-200"}`}
+                                                    >
+                                                        <div className="flex justify-center items-center">
+                                                            {isAssigned ? <FaCheck /> : ""}
+                                                        </div>
+                                                    </td>
+                                                );
+                                            })}
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            )}
 
 
             {pagination && pagination.total > 0 && (
