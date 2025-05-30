@@ -62,6 +62,15 @@ class GetEmployeesShiftsController extends Controller
                 ->select('id', 'name', 'description', 'start_time', 'lunch_time', 'end_time')
                 ->first();
 
+            // Format to HH:MM
+            if ($turno) {
+                foreach (['start_time', 'lunch_time', 'end_time'] as $field) {
+                    if (!empty($turno->$field)) {
+                        $turno->$field = date('H:i', strtotime($turno->$field));
+                    }
+                }
+            }
+
             $daysMap = [
                 'monday' => 'Lunes',
                 'tuesday' => 'Martes',
