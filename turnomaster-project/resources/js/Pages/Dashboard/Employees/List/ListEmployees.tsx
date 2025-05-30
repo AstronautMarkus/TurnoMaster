@@ -152,7 +152,7 @@ const ListEmployees = () => {
                 <tr>
                   <th className="px-4 py-3 text-left">Nombre</th>
                   <th className="px-4 py-3 text-left">RUT</th>
-                  <th className="px-4 py-3 text-left">Correo</th>
+                  <th className="px-4 py-3 text-left">Email</th>
                   <th className="px-4 py-3 text-left">Rol</th>
                   <th className="px-4 py-3 text-left">¿Tiene Turnos?</th>
                   <th className="px-4 py-3 text-left">Turnos asignados</th>
@@ -199,7 +199,7 @@ const ListEmployees = () => {
                       <div className="flex space-x-2">
                         <Link
                           to={`/dashboard/employees/${employee.id}/assign-shifts`}
-                          className="dashboard-button text-white px-4 py-2 text-sm transition-colors flex items-center"
+                          className="dashboard-button-secondary text-white px-4 py-2 text-sm transition-colors flex items-center"
                         >
                           <FaPlus className="mr-2" />
                           Asignar
@@ -207,7 +207,7 @@ const ListEmployees = () => {
                         {employee.shift_count > 0 && (
                           <Link
                             to={`/dashboard/employees/${employee.id}/shifts`}
-                            className="dashboard-button-secondary text-white px-4 py-2 text-sm transition-colors flex items-center"
+                            className="dashboard-button-success text-black font-semibold px-4 py-2 text-sm transition-colors flex items-center"
                           >
                             <FaSearch className="mr-2" />
                             Listar
@@ -217,7 +217,7 @@ const ListEmployees = () => {
                     </td>
                     <td className="px-4 py-2">
                       <div className="flex space-x-2">
-                        <Link to={`/dashboard/employees/edit/${employee.id}`} className="dashboard-button-secondary text-white px-4 py-2 text-sm transition-colors flex items-center">
+                        <Link to={`/dashboard/employees/edit/${employee.id}`} className="dashboard-button-warning text-white px-4 py-2 text-sm transition-colors flex items-center">
                           <FaEdit className="mr-2" />
                           Editar
                         </Link>

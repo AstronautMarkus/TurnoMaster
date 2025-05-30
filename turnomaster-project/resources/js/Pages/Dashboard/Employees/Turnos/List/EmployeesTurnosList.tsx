@@ -121,7 +121,7 @@ const EmployeesTurnosList = () => {
                                             <td className="px-4 py-2">{item.shift.end_time}</td>
                                             <td className="px-4 py-2">
                                             <div className="flex space-x-2">
-                                                <Link to={`/dashboard/employees/${user?.id}/shift/${item.shift.id}/edit`} className="dashboard-button-secondary text-white px-4 py-2 text-sm transition-colors flex items-center">
+                                                <Link to={`/dashboard/employees/${user?.id}/shift/${item.shift.id}/edit`} className="dashboard-button-warning text-white px-4 py-2 text-sm transition-colors flex items-center">
                                                   <FaEdit className="mr-2" />
                                                     Editar
                                                 </Link>

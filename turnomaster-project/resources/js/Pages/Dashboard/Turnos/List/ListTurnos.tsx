@@ -103,10 +103,10 @@ const ListTurnos = () => {
                                         <td className="px-4 py-2">
                                             <Link
                                                 to={`/dashboard/turnos/${turno.id}/users`}
-                                                className="inline-block dashboard-button-secondary text-white px-3 py-2 text-sm font-medium transition-colors"
-                                                style={{ minWidth: "40px", textAlign: "center" }}
+                                                className="dashboard-button-success text-black font-semibold px-4 py-2 text-sm transition-colors flex items-center justify-start"
                                             >
-                                                <span>Revisar lista</span>
+                                                <FaSearch className="mr-2" />
+                                                <span>Listar</span>
                                             </Link>
                                         </td>
                                         <td className="px-4 py-2">
@@ -117,7 +117,7 @@ const ListTurnos = () => {
                                         </td>
                                         <td className="px-4 py-2">
                                             <div className="flex space-x-2">
-                                                <Link to={`/dashboard/turnos/edit/${turno.id}`} className="dashboard-button-secondary text-white px-4 py-2 text-sm transition-colors flex items-center">
+                                                <Link to={`/dashboard/turnos/edit/${turno.id}`} className="dashboard-button-warning text-white px-4 py-2 text-sm transition-colors flex items-center">
                                                     <FaEdit className="mr-2" />
                                                     Editar
                                                 </Link>
