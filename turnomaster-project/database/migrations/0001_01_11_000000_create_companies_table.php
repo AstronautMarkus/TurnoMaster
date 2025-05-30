@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedBigInteger('subscription_id');
             $table->string('owner_email')->unique();
+            $table->string('profile_photo')->nullable();
             $table->timestamps();
             $table->foreign('subscription_id')->references('id')->on('subscriptions')->onDelete('cascade');
         });
