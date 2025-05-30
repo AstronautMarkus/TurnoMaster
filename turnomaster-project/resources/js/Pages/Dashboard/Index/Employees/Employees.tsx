@@ -1,20 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FaCalendar, FaBullhorn } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
-import useGetCompanyDetails from '../Owner/useGetCompanyDetails';
+import AttendanceWidget from '../getShift/getShift';
 
 const Employees = () => {
 
-    const [currentTime, setCurrentTime] = useState(new Date());
-    const { data: companyData, loading } = useGetCompanyDetails();
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentTime(new Date());
-        }, 1000);
-
-        return () => clearInterval(interval);
-    }, []);
+    const [currentTime] = useState(new Date());
 
     const getGreeting = () => {
         const hour = currentTime.getHours();
@@ -59,24 +50,16 @@ const Employees = () => {
                                     <FaBullhorn />
                                 </div>
                                 <div>
-                                    <h3 className="text-xl font-bold">Reportes</h3>
-                                    <p className="text-sm">Si necesitas reportar o justificar algo, hazlo aquí</p>
+                                    <h3 className="text-xl font-bold">Asistencia y Reportes</h3>
+                                    <p className="text-sm">Gestiona tu asistencia y reporta incidencias aquí</p>
                                 </div>
                             </div>
                         </Link>
                     </div>
                 </div>
 
-                <div className="bg-white shadow-lg sm:p-6 flex flex-col">
-                    <div className="mb-6">
-                        <h3 className="text-xl font-bold text-gray-800 mb-2 text-center">Hora actual:</h3>
-                        <p className="text-lg text-gray-700 text-center">{currentTime.toLocaleTimeString()}</p>
-                    </div>
-                    <div className="pt-4 border-t border-gray-300">
-                        <h3 className="text-xl font-bold text-gray-800 mb-2 text-center">Próximo horario de entrada:</h3>
-                        <p className="text-lg text-gray-700 text-center">No hay horarios disponible.</p>
-                    </div>
-                </div>
+                <AttendanceWidget />
+
             </div>
         </div>
     );

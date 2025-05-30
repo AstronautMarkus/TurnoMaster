@@ -1,10 +1,9 @@
-import React from 'react';
 import useRoleChecker from '../../../hooks/auth/useRoleChecker';
 import Owner from './Owner/Owner';
 import Hr from './Hr/Hr';
 import Employees from './Employees/Employees';
 
-const Index: React.FC = () => {
+const Index = () => {
     const userRole = useRoleChecker();
 
     switch (userRole) {
@@ -15,7 +14,7 @@ const Index: React.FC = () => {
         case 3:
             return <Employees />;
         default:
-            return <h1>Unauthorized</h1>;
+            return <h1>Usuario no autorizado</h1>;
     }
 };
 
