@@ -71,28 +71,85 @@ class CreateShiftUsersController extends Controller
 
         $newDays = $request->days;
 
-        
         $existingShiftUser = ShiftUser::where('user_id', $request->employee_id)
             ->where('shift_id', $request->shift_id)
             ->first();
 
         if ($existingShiftUser) {
-          
+           
+            // Check for overlapping days with other shifts for the same user
+
+            $otherShiftUsers = ShiftUser::where('user_id', $request->employee_id)
+                ->where('shift_id', '!=', $request->shift_id)
+                ->get();
+
+            $orderedDaysOfWeek = [
+                'Lunes', 'Martes', 'Miércoles', 'Miercoles', 'Jueves', 'Viernes', 'Sábado', 'Sabado', 'Domingo'
+            ];
+
+            foreach ($otherShiftUsers as $shiftUser) {
+                $existingDays = json_decode($shiftUser->days, true);
+
+                // Get turno name for overlap message
+                $overlapTurn = Turnos::find($shiftUser->shift_id);
+
+                $overlapDays = [];
+                if (is_string($existingDays[0] ?? null)) {
+                    foreach ($existingDays as $existingDay) {
+                        foreach ($newDays as $newDay) {
+                            if ($existingDay === $newDay) {
+                                $overlapDays[] = $newDay;
+                            }
+                        }
+                    }
+                    if (!empty($overlapDays)) {
+                        return response()->json([
+                            'message' => 'Error asignando el turno al usuario. Solapamiento detectado con el turno "' . ($overlapTurn->name ?? 'Desconocido') . '".',
+                            'errors' => [
+                                'days' => ['Solapamiento detectado en: ' . implode(', ', $overlapDays) . '.']
+                            ]
+                        ], 422);
+                    }
+                } else {
+                    foreach ($existingDays as $existingDay) {
+                        foreach ($newDays as $newDay) {
+                            if (
+                                isset($existingDay['day'], $newDay['day']) &&
+                                $existingDay['day'] === $newDay['day']
+                            ) {
+                                if (
+                                    ($newDay['start_time'] < $existingDay['end_time']) &&
+                                    ($newDay['end_time'] > $existingDay['start_time'])
+                                ) {
+                                    $overlapDays[] = $newDay['day'] . ' (' . $newDay['start_time'] . '-' . $newDay['end_time'] . ')';
+                                }
+                            }
+                        }
+                    }
+                    if (!empty($overlapDays)) {
+                        return response()->json([
+                            'message' => 'Solapamiento en los siguientes días y horarios con el turno "' . ($overlapTurn->name ?? 'Desconocido') . '": ' . implode(', ', $overlapDays),
+                            'errors' => [
+                                'days' => ['Solapamiento detectado en: ' . implode(', ', $overlapDays) . '.']
+                            ]
+                        ], 422);
+                    }
+                }
+            }
+
+
             $existingDays = json_decode($existingShiftUser->days, true) ?? [];
             $orderedDaysOfWeek = [
                 'Lunes', 'Martes', 'Miércoles', 'Miercoles', 'Jueves', 'Viernes', 'Sábado', 'Sabado', 'Domingo'
             ];
             if (is_string($existingDays[0] ?? null)) {
-
                 $mergedDays = array_unique(array_merge($existingDays, $newDays));
-
                 usort($mergedDays, function ($a, $b) use ($orderedDaysOfWeek) {
                     $posA = array_search($a, $orderedDaysOfWeek);
                     $posB = array_search($b, $orderedDaysOfWeek);
                     return ($posA === false ? 99 : $posA) <=> ($posB === false ? 99 : $posB);
                 });
             } else {
-
                 $daysByKey = [];
                 foreach ($existingDays as $d) {
                     if (isset($d['day'])) $daysByKey[$d['day'] . ($d['start_time'] ?? '') . ($d['end_time'] ?? '')] = $d;
@@ -101,7 +158,6 @@ class CreateShiftUsersController extends Controller
                     if (isset($d['day'])) $daysByKey[$d['day'] . ($d['start_time'] ?? '') . ($d['end_time'] ?? '')] = $d;
                 }
                 $mergedDays = array_values($daysByKey);
-
                 usort($mergedDays, function ($a, $b) use ($orderedDaysOfWeek) {
                     $posA = array_search($a['day'], $orderedDaysOfWeek);
                     $posB = array_search($b['day'], $orderedDaysOfWeek);
