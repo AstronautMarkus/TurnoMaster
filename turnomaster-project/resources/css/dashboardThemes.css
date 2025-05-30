@@ -62,6 +62,89 @@
   --item: #d75f00;
 }
 
+.theme-forest {
+  --bg: #1b2e20;
+  --text: #eaeaea;
+  --accent: #4caf50;
+  --accent-hover: #388e3c;
+  --secondary: #2e4635;
+  --secondary-hover: #24392c;
+  --success: #81c784;
+  --success-hover: #66bb6a;
+  --warning: #ff9800;
+  --warning-hover: #e68900;
+  --error: #e53935;
+  --error-hover: #c62828;
+  --work-inicio: #2e7d32;
+  --work-lunch: #1b5e20;
+  --work-fin: #388e3c;
+  --work-full: #4caf50;
+  --item: #2e7d32;
+}
+
+
+.theme-sakura {
+  --bg: #4a2c2a;
+  --text: #ffffff;
+  --accent: #ec407a;
+  --accent-hover: #d81b60;
+  --secondary: #6a3a3a;
+  --secondary-hover: #562f2f;
+  --success: #f8bbd0;
+  --success-hover: #f48fb1;
+  --warning: #ffb300;
+  --warning-hover: #ffa000;
+  --error: #e53935;
+  --error-hover: #c62828;
+  --work-inicio: #c2185b;
+  --work-lunch: #880e4f;
+  --work-fin: #ad1457;
+  --work-full: #d81b60;
+  --item: #c2185b;
+}
+
+.theme-carbon {
+  --bg: #212121;
+  --text: #eaeaea;
+  --accent: #757575;
+  --accent-hover: #616161;
+  --secondary: #3c3c3c;
+  --secondary-hover: #2f2f2f;
+  --success: #a5d6a7;
+  --success-hover: #81c784;
+  --warning: #ffa000;
+  --warning-hover: #ff8f00;
+  --error: #ef5350;
+  --error-hover: #e53935;
+  --work-inicio: #424242;
+  --work-lunch: #303030;
+  --work-fin: #616161;
+  --work-full: #757575;
+  --item: #424242;
+}
+
+
+.theme-ocean {
+  --bg: #003f5c;
+  --text: #eaeaea;
+  --accent: #00bcd4;
+  --accent-hover: #0097a7;
+  --secondary: #02506d;
+  --secondary-hover: #014059;
+  --success: #80deea;
+  --success-hover: #4dd0e1;
+  --warning: #ff7043;
+  --warning-hover: #f4511e;
+  --error: #e53935;
+  --error-hover: #c62828;
+  --work-inicio: #00796b;
+  --work-lunch: #004d40;
+  --work-fin: #00897b;
+  --work-full: #009688;
+  --item: #00796b;
+}
+
+
 /* ============================= */
 /*        UI ELEMENTS            */
 /* ============================= */

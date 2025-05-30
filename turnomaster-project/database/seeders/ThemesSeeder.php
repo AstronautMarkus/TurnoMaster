@@ -15,7 +15,12 @@ class ThemesSeeder extends Seeder
             ['name' => 'Reyes', 'slug' => 'reyes', 'description' => 'Elegante, clásico, funcional.'],
             ['name' => 'Reyes blue', 'slug' => 'reyes-blue', 'description' => 'Frescura y modernidad en cada detalle.'],
             ['name' => 'Ubuntu', 'slug' => 'ubuntu', 'description' => 'El naranja más vibrante.'],
+            ['name' => 'Forest', 'slug' => 'forest', 'description' => 'Donde la productividad florece como la naturaleza.'],
+            ['name' => 'Sakura', 'slug' => 'sakura', 'description' => 'Serenidad y belleza en cada jornada laboral.'],
+            ['name' => 'Carbon', 'slug' => 'carbon', 'description' => 'Minimalismo y seriedad para mentes enfocadas.'],
+            ['name' => 'Ocean', 'slug' => 'ocean', 'description' => 'Profundidad, claridad y calma para tu día a día.'],
         ]);
+
     }
 }
 
