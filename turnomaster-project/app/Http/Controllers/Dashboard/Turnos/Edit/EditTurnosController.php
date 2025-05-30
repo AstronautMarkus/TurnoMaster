@@ -145,6 +145,23 @@ class EditTurnosController extends Controller
         }
 
         //--- START: Validation of overlaps for assigned users ---
+
+        /*
+        |--------------------------------------------------------------------------
+        | Overlap validation when editing Turno
+        |--------------------------------------------------------------------------
+        |
+        | This block checks if the new schedule of the Turno overlaps with other
+        | Turnos assigned to the enrolled users. If at least one user has a schedule
+        | conflict, the change is cancelled.
+        |
+        | This simulates what happens in a university: changing the schedule of a
+        | subject with enrolled students may generate conflicts with other subjects.
+        | 
+        | This logic does not apply when creating a new Turno, since it has no assigned users.
+        |
+        */
+
         $assignedUsers = ShiftUser::where('shift_id', $turno->id)->get();
         $overlapConflicts = [];
         $newDays = [];
