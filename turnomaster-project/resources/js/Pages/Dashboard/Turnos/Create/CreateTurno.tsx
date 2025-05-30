@@ -97,8 +97,12 @@ const CreateTurno = () => {
             </h1>
             <div className="bg-white shadow-md w-full p-6 relative">
                 <>
-                    {success && <div className="p-4 mb-4 text-sm text-black bg-green-400">{success}</div>}
-                    {error && <div className="p-4 mb-4 text-sm text-red-600 bg-red-100">{error}</div>}
+                  {success && (
+                        <div className="p-4 mb-4 text-sm text-black font-semibold dashboard-success">{success}</div>
+                    )}
+                    {error && typeof error === "string" && (
+                        <div className="p-4 mb-4 text-sm text-white font-semibold dashboard-error">{error}</div>
+                )}
 
                     <form onSubmit={handleSubmit} className="max-w-1xl">
                         <div className="flex flex-col md:flex-row gap-8">

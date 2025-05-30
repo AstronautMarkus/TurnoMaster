@@ -115,9 +115,9 @@ const EditTurno = () => {
             </h1>
             <div className="bg-white shadow-md w-full p-6 relative">
                 <>
-                    {success && <div className="p-4 mb-4 text-sm text-black bg-green-400">{success}</div>}
+                    {success && <div className="p-4 mb-4 text-sm text-black font-semibold dashboard-success">{success}</div>}
                     {error && typeof error === "string" && (
-                        <div className="p-4 mb-4 text-sm text-red-600 bg-red-100">{error}</div>
+                        <div className="p-4 mb-4 text-sm text-white font-semibold dashboard-error">{error}</div>
                     )}
 
                     
@@ -200,7 +200,7 @@ const EditTurno = () => {
                             </div>
                         </div>
 
-                        <button type="submit" className={`mt-4 px-4 py-2 text-white ${loading ? error ? 'bg-red-600' : 'bg-gray-400' : 'dashboard-button-secondary'} flex items-center justify-center`} disabled={loading}>
+                        <button type="submit" className={`mt-4 px-4 py-2 text-white ${loading ? error ? 'dashboard-error' : 'bg-gray-400' : 'dashboard-button-secondary'} flex items-center justify-center`} disabled={loading}>
                             {!loading && !error && <FaPlus className="mr-2" />}
                             {loading ? (error ? 'Error' : 'Cargando...') : 'Actualizar turno'}
                         </button>
@@ -208,20 +208,20 @@ const EditTurno = () => {
 
                     {Array.isArray(userConflicts) && userConflicts.length > 0 && (
                         <div
-                            className="p-4 mb-4 text-sm text-red-700 bg-red-100 border border-red-300 rounded mt-4"
+                            className="p-4 mb-4 text-sm text-red-700 dashboard-error mt-4"
                             style={{ maxHeight: 260, overflowY: "auto" }}
                         >
-                            <div className="font-bold mb-2">
+                            <div className="font-bold mb-2 text-white">
                                 Uno o mas usuarios tienen conflictos de solapamiento con este turno:
                             </div>
                             <ul className="space-y-2">
                                 {userConflicts.map((user, idx) => (
                                     <li key={user.user_id || idx} className="mb-2">
-                                        <div className="font-semibold">
+                                        <div className="font-semibold text-white">
                                             {user.user_name ? user.user_name : `Usuario ID ${user.user_id}`}
                                         </div>
                                         {Array.isArray(user.conflicts) && user.conflicts.length > 0 && (
-                                            <ul className="ml-4 list-disc">
+                                            <ul className="ml-4 list-disc text-white">
                                                 {user.conflicts.map((conflict: any, cidx: number) => (
                                                     <li key={cidx}>
                                                         <span className="font-medium">
@@ -234,7 +234,7 @@ const EditTurno = () => {
                                                             </span>
                                                         )}
                                                         {conflict.type && (
-                                                            <span className="ml-2 text-xs text-gray-600">
+                                                            <span className="ml-2 text-xs text-white">
                                                                 [{conflict.type}]
                                                             </span>
                                                         )}
@@ -245,7 +245,7 @@ const EditTurno = () => {
                                     </li>
                                 ))}
                             </ul>
-                            <div className="mt-2 text-xs text-gray-700 font-semibold">
+                            <div className="mt-2 text-xs text-white font-semibold">
                                 Por favor edita o reasigna estos usuarios para resolver el solapamiento.
                             </div>
                         </div>
