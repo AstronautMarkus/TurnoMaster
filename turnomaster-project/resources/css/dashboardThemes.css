@@ -146,6 +146,26 @@
   --item: #00796b;
 }
 
+.theme-abbybot {
+  --bg: #1f2e1c;
+  --text: #fef9ec;
+  --accent: #c97c42;
+  --accent-hover: #a96230;
+  --secondary: #4f4a3f;
+  --secondary-hover: #3f3a32;
+  --success: #ffe082;
+  --success-hover: #ffd54f;
+  --warning: #ff8f00;
+  --warning-hover: #ef6c00;
+  --error: #d84315;
+  --error-hover: #bf360c;
+  --work-inicio: #5b8c5a;
+  --work-lunch: #3f5a3a;
+  --work-fin: #6d9e6d;
+  --work-full: #81c784;
+  --item: #5b8c5a;
+}
+
 
 /* ============================= */
 /*        UI ELEMENTS            */

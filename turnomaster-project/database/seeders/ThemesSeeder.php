@@ -19,6 +19,7 @@ class ThemesSeeder extends Seeder
             ['name' => 'Sakura', 'slug' => 'sakura', 'description' => 'Serenidad y belleza en cada jornada laboral.'],
             ['name' => 'Amethyst', 'slug' => 'amethyst', 'description' => 'Elegancia, concentración y estilo en cada detalle.'],
             ['name' => 'Ocean', 'slug' => 'ocean', 'description' => 'Profundidad, claridad y calma para tu día a día.'],
+            ['name' => 'AbbyBot', 'slug' => 'abbybot', 'description' => 'Nada que decir, mucho que hacer.'],
         ]);
 
     }
