@@ -116,7 +116,6 @@
   --warning-hover: #ffa000;
   --error: #ef5350;
   --error-hover: #e53935;
-
   --work-inicio: #6a1b9a;
   --work-lunch: #4a148c;
   --work-fin: #7b1fa2;
@@ -177,6 +176,10 @@
 
 .dashboard-background { 
   background-color: var(--accent);
+}
+
+.dashboard-background-secondary {
+  background-color: var(--secondary);
 }
 
 .dashboard-option {

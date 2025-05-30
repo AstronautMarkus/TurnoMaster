@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useGetTurnoDetailsList } from "./useGetTurnoDetailsList";
 import { FaUserPlus, FaCheckCircle, FaTimesCircle } from "react-icons/fa";
-import { FaXmark } from "react-icons/fa6";
+import { FaXmark, FaCheck } from "react-icons/fa6";
 import useAssignUsersToShift from "./useAssignUsersToShift";
 
 const dayMap: Record<string, string> = {
@@ -31,6 +31,8 @@ const UsersListTurno = () => {
 
     // Modal hook logic
     const modal = useAssignUsersToShift();
+    const dayLabels = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
+
 
     const renderDays = (daysJson: string) => {
         try {
@@ -43,8 +45,8 @@ const UsersListTurno = () => {
 
     return (
         <div className="p-6">
-            <h1 className="text-3xl sm:text-4xl font-bold text-left mb-6 mt-4 text-gray-800">Lista de usuarios</h1>
-            <p className="text-gray-600 mb-6 text-lg">Revisa los usuarios con  este turno asignado.</p>
+            <h1 className="text-3xl sm:text-4xl font-bold text-left mb-6 mt-4 text-gray-800">Lista de empleados de "{shift?.name || "-"}"</h1>
+            <p className="text-gray-600 mb-6 text-lg">Revisa los empleados con  este turno asignado.</p>
 
             <div className="flex justify-start mb-4">
                 <button
@@ -52,7 +54,7 @@ const UsersListTurno = () => {
                     onClick={modal.openModal}
                 >
                     <FaUserPlus className="mr-2" />
-                    Agregar usuario
+                    Agregar emplado
                 </button>
             </div>
 
@@ -100,7 +102,7 @@ const UsersListTurno = () => {
                                 </tr>
                             ) : users.length === 0 ? (
                                 <tr>
-                                    <td colSpan={4} className="px-4 py-3 text-center">No hay usuarios asignados.</td>
+                                    <td colSpan={4} className="px-4 py-3 text-center">No hay empleados asignados.</td>
                                 </tr>
                             ) : (
                                 users.map(({ shift_user, user }) => (
@@ -115,6 +117,49 @@ const UsersListTurno = () => {
                     </table>
                 </div>
             </div>
+
+            <div className="my-8">
+                <h2 className="text-lg font-bold mb-2">Mapa visual de días asignados</h2>
+                <div className="overflow-x-auto border">
+                    <table className="min-w-max w-full text-sm text-center">
+                        <thead>
+                            <tr>
+                                <th className="p-2 bg-gray-100">Empleado</th>
+                                {dayLabels.map(day => (
+                                    <th key={day} className="p-2 bg-gray-100">{day}</th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {users.map(({ user, shift_user }) => {
+                                let days: string[] = [];
+                                try { days = JSON.parse(shift_user.days); } catch {}
+                                const normalized = days.map(d => d.trim().toLowerCase());
+                                return (
+                                    <tr key={shift_user.id}>
+                                        <td className="p-2 text-white font-semibold dashboard-background">{user.first_name} {user.last_name}</td>
+                                        {dayLabels.map(label => {
+                                            const key = label.toLowerCase();
+                                            const isAssigned = normalized.includes(key);
+                                            return (
+                                                <td
+                                                    key={label}
+                                                    className={`p-2 ${isAssigned ? "dashboard-background-secondary text-white" : "bg-gray-200"}`}
+                                                >
+                                                    <div className="flex justify-center items-center">
+                                                        {isAssigned ? <FaCheck /> : ""}
+                                                    </div>
+                                                </td>
+                                            );
+                                        })}
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
 
             {pagination && pagination.total > 0 && (
                 <div className="flex justify-between items-center mt-4">
@@ -244,7 +289,7 @@ const UsersListTurno = () => {
                                             </li>
                                         ))}
                                         {modal.employees.length === 0 && (
-                                            <li className="text-gray-500 py-2">No hay usuarios disponibles.</li>
+                                            <li className="text-gray-500 py-2">No hay empleados disponibles.</li>
                                         )}
                                     </ul>
                                 )}
