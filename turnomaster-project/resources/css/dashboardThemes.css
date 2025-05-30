@@ -170,9 +170,29 @@
 /*        UI ELEMENTS            */
 /* ============================= */
 
+/* Text color variants */
+
 .dashboard-text {
   color: var(--accent);
 }
+
+.dashboard-text-secondary {
+  color: var(--secondary);
+}
+
+.dashboard-text-success {
+  color: var(--success);
+}
+
+.dashboard-text-warning {
+  color: var(--warning);
+}
+
+.dashboard-text-error {
+  color: var(--error);
+}
+
+/* Background color variants */
 
 .dashboard-background { 
   background-color: var(--accent);
@@ -182,13 +202,20 @@
   background-color: var(--secondary);
 }
 
-.dashboard-option {
-  background-color: var(--accent);
+.dashboard-background-success {
+  background-color: var(--success);
 }
 
-.dashboard-hover {
-  background-color: var(--accent-hover);
+.dashboard-background-warning {
+  background-color: var(--warning);
 }
+
+.dashboard-background-error {
+  background-color: var(--error);
+}
+
+
+/* Button color variants */
 
 .dashboard-button {
   background-color: var(--accent);
@@ -226,8 +253,20 @@
   background-color: var(--error-hover);
 }
 
+/* ============================= */
+/*  DASHBOARD SIDEBAR & RELATED  */
+/* ============================= */
+
 .dashboard-sidebar {
   background-color: var(--bg);
+}
+
+.dashboard-option {
+  background-color: var(--accent);
+}
+
+.dashboard-hover {
+  background-color: var(--accent-hover);
 }
 
 .dashboard-success{
