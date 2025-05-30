@@ -1,26 +1,27 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useGetTurnoDetailsList } from "./useGetTurnoDetailsList";
-import { FaXmark, FaUserPlus } from "react-icons/fa6";
+import { FaUserPlus, FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import { FaXmark } from "react-icons/fa6";
 import useAssignUsersToShift from "./useAssignUsersToShift";
 
 const dayMap: Record<string, string> = {
     monday: "Lunes",
     tuesday: "Martes",
-    wednesday: "Miércoles",
+    wednesday: "Miercoles",
     thursday: "Jueves",
     friday: "Viernes",
-    saturday: "Sábado",
+    saturday: "Sabado",
     sunday: "Domingo",
 };
 
 const daysOfWeek = [
     { key: "L", label: "Lunes" },
     { key: "M", label: "Martes" },
-    { key: "X", label: "Miércoles" },
+    { key: "X", label: "Miercoles" },
     { key: "J", label: "Jueves" },
     { key: "V", label: "Viernes" },
-    { key: "S", label: "Sábado" },
+    { key: "S", label: "Sabado" },
 ];
 
 const UsersListTurno = () => {
@@ -142,10 +143,10 @@ const UsersListTurno = () => {
                 <Link to="/dashboard/turnos" className="text-white px-4 py-2 dashboard-button transition-colors">Salir</Link>
             </div>
 
-            {/* Modal */}
+
             {modal.showModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-                    <div className="bg-white  shadow-lg w-full max-w-lg p-6 relative">
+                    <div className="bg-white shadow-lg w-full max-w-lg p-6 relative">
                         <button
                             className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
                             onClick={modal.closeModal}
@@ -156,20 +157,25 @@ const UsersListTurno = () => {
                             <FaUserPlus className="mr-2" />
                             Agregar usuario al turno
                         </h2>
-                        <div className="mb-4 flex gap-4">
-                            <button
-                                className={`px-4 py-2 ${modal.selectMode === "simple" ? "dashboard-button text-white" : "bg-gray-200 hover:bg-gray-300 text-gray-700"}`}
-                                onClick={() => { modal.setSelectMode("simple"); modal.setSelectedUsers([]); }}
+
+                        {(modal.lastAssignStatus && modal.lastAssignMessage) && (
+                            <div
+                                className={`mb-4 px-3 py-2 border ${
+                                    modal.lastAssignStatus === "success"
+                                        ? "bg-green-100 text-green-800 border-green-400"
+                                        : "bg-red-100 text-red-700 border-red-400"
+                                }`}
                             >
-                                Selección simple
-                            </button>
-                            <button
-                                className={`px-4 py-2 ${modal.selectMode === "multiple" ? "dashboard-button text-white" : "bg-gray-200 hover:bg-gray-300 text-gray-700"}`}
-                                onClick={() => { modal.setSelectMode("multiple"); modal.setSelectedUsers([]); }}
-                            >
-                                Selección múltiple
-                            </button>
-                        </div>
+                                <div className="font-semibold mb-1">{modal.lastAssignMessage}</div>
+                                {modal.lastAssignErrors && Array.isArray(modal.lastAssignErrors) && modal.lastAssignErrors.length > 0 && (
+                                    <ul className="list-disc pl-5">
+                                        {modal.lastAssignErrors.map((err, idx) => (
+                                            <li key={idx}>{err}</li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
+                        )}
                         <div className="mb-4">
                             <span className="font-semibold mr-2">Días:</span>
                             {daysOfWeek.map(day => (
@@ -184,12 +190,12 @@ const UsersListTurno = () => {
                             ))}
                         </div>
                         <div>
-                            <span className="font-semibold">Usuarios disponibles:</span>
+                            <span className="font-semibold">Empleados disponibles:</span>
                             <div className="mt-2 mb-2 flex gap-2">
                                 <input
                                     type="text"
-                                    className="w-full px-3 py-2 border focus:outline-none focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
-                                    placeholder="Buscar usuario por nombre..."
+                                    className="w-full px-3 py-2 border focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
+                                    placeholder="Buscar empleado por nombre..."
                                     value={modal.searchInput}
                                     onChange={modal.handleSearchInputChange}
                                     onKeyDown={e => { if (e.key === "Enter") modal.handleSearch(); }}
@@ -213,20 +219,27 @@ const UsersListTurno = () => {
                             <div className="mt-2 max-h-40 overflow-y-auto">
                                 {modal.employeesLoading ? (
                                     <div className="flex justify-center items-center py-8">
-                                        <span className="text-gray-500">Cargando usuarios...</span>
+                                        <span className="text-gray-500">Cargando empleados...</span>
                                     </div>
                                 ) : (
                                     <ul>
                                         {modal.employees.map(user => (
                                             <li key={user.id} className="flex items-center py-1">
                                                 <input
-                                                    type={modal.selectMode === "simple" ? "radio" : "checkbox"}
+                                                    type="radio"
                                                     name="user-select"
                                                     checked={modal.selectedUsers.includes(user.id)}
                                                     onChange={() => modal.handleUserSelect(user.id)}
                                                     className="mr-2"
                                                 />
                                                 <span>{user.first_name} {user.last_name}</span>
+                                                {/* Feedback icon */}
+                                                {modal.assignResults[user.id]?.status === "success" && (
+                                                    <FaCheckCircle className="ml-2 text-green-500" title="Asignado correctamente" />
+                                                )}
+                                                {modal.assignResults[user.id]?.status === "error" && (
+                                                    <FaTimesCircle className="ml-2 text-red-500" title="Error al asignar" />
+                                                )}
                                             </li>
                                         ))}
                                         {modal.employees.length === 0 && (
@@ -235,7 +248,7 @@ const UsersListTurno = () => {
                                     </ul>
                                 )}
                             </div>
-                            {/* Mini paginación */}
+
                             {modal.employeesPagination && modal.employeesPagination.total > 0 && (
                                 <div className="flex justify-between items-center mt-2">
                                     <span className="text-gray-700 text-xs">
@@ -264,14 +277,16 @@ const UsersListTurno = () => {
                             <button
                                 className="px-4 py-2 bg-gray-300 text-gray-700 hover:bg-gray-400 mr-2"
                                 onClick={modal.closeModal}
+                                disabled={modal.assignLoading}
                             >
                                 Cancelar
                             </button>
                             <button
                                 className="px-4 py-2 dashboard-button text-white"
-                                onClick={modal.closeModal}
+                                onClick={modal.assignUsers}
+                                disabled={modal.assignLoading || modal.selectedUsers.length === 0 || modal.selectedDays.length === 0}
                             >
-                                Asignar
+                                {modal.assignLoading ? "Asignando..." : "Asignar"}
                             </button>
                         </div>
                     </div>
