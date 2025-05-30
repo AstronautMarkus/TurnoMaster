@@ -1,19 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { FiChevronRight, FiGrid, FiSettings, FiUsers} from "react-icons/fi";
-import { FaCalendar } from "react-icons/fa";
+import { FaCalendar, FaClipboardCheck } from "react-icons/fa";
+import { FaBullhorn, FaAlignJustify } from "react-icons/fa6";
 import { Link, useLocation } from "react-router-dom";
+
+import useRoleChecker from "../../../../hooks/auth/useRoleChecker";
 
 interface ExpandedItems {
   [key: string]: boolean;
+}
+
+
+type SidebarLink = {
+  to?: string;
+  label: string;
+  icon?: React.ComponentType<any>;
+  subMenuKey?: string;
+  subLinks?: { to: string; label: string }[];
+};
+
+type SidebarSection = {
+  category: string;
+  links: SidebarLink[];
 }
 
 interface SidebarContentProps {
   expandedItems: ExpandedItems;
   toggleSubMenu: (key: string) => void;
   currentPath: string;
+  sidebarConfig: SidebarSection[];
 }
 
-const sidebarConfig = [
+const sidebarConfigOwner: SidebarSection[] = [
   {
     category: "Inicio",
     links: [
@@ -41,6 +59,100 @@ const sidebarConfig = [
           { to: "/dashboard/employees/create", label: "Crear empleado" },
         ],
       },
+    ],
+  },
+  {
+    category: "Ajustes",
+    links: [
+      { to: "/dashboard/settings", label: "Ajustes", icon: FiSettings },
+    ],
+  },
+];
+
+const sidebarConfigHr: SidebarSection[] = [
+  {
+    category: "Inicio",
+    links: [
+      { to: "/dashboard", label: "Menú Principal", icon: FiGrid },
+    ],
+  },
+  {
+    category: "Asistencia y Reportes",
+    links: [
+      { to: "/dashboard/reports", label: "Asistencia y Reportes", icon: FaBullhorn },
+    ],
+  },
+  {
+    category:"Registro de asistencia",
+    links: [
+    { to: "/dashboard/reports/turnos/register", label: "Registrar asistencia", icon: FaClipboardCheck },
+  ],
+  },
+  {
+    category:"Reportes y justificación",
+    links: [
+    { to: "/dashboard/reports/new", label: "Reportar petición", icon: FaAlignJustify },
+  ],
+  },
+  {
+    category: "Administración",
+    links: [
+      {
+        label: "Turnos",
+        icon: FaCalendar,
+        subMenuKey: "turnos",
+        subLinks: [
+          { to: "/dashboard/turnos", label: "Lista de turnos" },
+          { to: "/dashboard/turnos/create", label: "Crear turno" },
+        ],
+      },
+      {
+        label: "Empleados",
+        icon: FiUsers,
+        subMenuKey: "employees",
+        subLinks: [
+          { to: "/dashboard/employees", label: "Lista de empleados" },
+          { to: "/dashboard/employees/create", label: "Crear empleado" },
+        ],
+      },
+    ],
+  },
+  {
+    category: "Ajustes",
+    links: [
+      { to: "/dashboard/settings", label: "Ajustes", icon: FiSettings },
+    ],
+  },
+];
+
+const sidebarConfigEmployees: SidebarSection[] = [
+  {
+    category: "Inicio",
+    links: [
+      { to: "/dashboard", label: "Menú Principal", icon: FiGrid },
+    ],
+  },
+  {
+    category: "Asistencia y Reportes",
+    links: [
+      { to: "/dashboard/reports", label: "Asistencia y Reportes", icon: FaBullhorn },
+    ],
+  },
+  {
+    category:"Registro de asistencia",
+    links: [
+      { to: "/dashboard/reports/turnos/register", label: "Registrar asistencia", icon: FaClipboardCheck },
+    ],
+  },
+  {
+    category:"Reportes y justificación",
+    links: [
+      { to: "/dashboard/reports/new", label: "Reportar petición", icon: FaAlignJustify },
+    ],
+  },
+  {
+    category: "Ajustes",
+    links: [
       { to: "/dashboard/settings", label: "Ajustes", icon: FiSettings },
     ],
   },
@@ -50,6 +162,23 @@ export function Sidebar() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [expandedItems, setExpandedItems] = useState<ExpandedItems>({});
   const location = useLocation();
+  const roleId = useRoleChecker();
+
+
+  let sidebarConfig: SidebarSection[];
+  switch (roleId) {
+    case 1:
+      sidebarConfig = sidebarConfigOwner;
+      break;
+    case 2:
+      sidebarConfig = sidebarConfigHr;
+      break;
+    case 3:
+      sidebarConfig = sidebarConfigEmployees;
+      break;
+    default:
+      sidebarConfig = [];
+  }
 
   useEffect(() => {
     const handleToggle = (): void => setIsOpen(!isOpen);
@@ -94,6 +223,7 @@ export function Sidebar() {
               expandedItems={expandedItems}
               toggleSubMenu={toggleSubMenu}
               currentPath={location.pathname}
+              sidebarConfig={sidebarConfig}
             />
           </div>
         </div>
@@ -104,16 +234,19 @@ export function Sidebar() {
           expandedItems={expandedItems}
           toggleSubMenu={toggleSubMenu}
           currentPath={location.pathname}
+          sidebarConfig={sidebarConfig}
         />
       </div>
     </>
   );
 }
 
+
 function SidebarContent({
   expandedItems,
   toggleSubMenu,
   currentPath,
+  sidebarConfig,
 }: SidebarContentProps) {
   const [hoveredParent, setHoveredParent] = useState<string | null>(null);
   const [hoveredSingle, setHoveredSingle] = useState<string | null>(null);
