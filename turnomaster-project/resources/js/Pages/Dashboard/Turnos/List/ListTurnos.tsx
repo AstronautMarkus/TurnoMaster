@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
-import { FaCalendar, FaEdit, FaPlus, FaSearch} from "react-icons/fa";
+import { FaCalendar, FaEdit, FaSearch} from "react-icons/fa";
 import { FaMinus, FaXmark } from "react-icons/fa6";
+import { FaPlus } from 'react-icons/fa6';
 import useGetTurnosList from "./useGetTurnosList";
 
 const ListTurnos = () => {

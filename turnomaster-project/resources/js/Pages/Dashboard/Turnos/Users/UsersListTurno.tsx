@@ -46,7 +46,7 @@ const UsersListTurno = () => {
             <h1 className="text-3xl sm:text-4xl font-bold text-left mb-6 mt-4 text-gray-800">Lista de usuarios</h1>
             <p className="text-gray-600 mb-6 text-lg">Revisa los usuarios con  este turno asignado.</p>
 
-            <div className="flex justify-end mb-4">
+            <div className="flex justify-start mb-4">
                 <button
                     className="text-white px-4 py-2 dashboard-button flex items-center"
                     onClick={modal.openModal}
