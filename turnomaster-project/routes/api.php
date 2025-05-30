@@ -120,7 +120,6 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::delete('/turnos/{id}', [DeleteTurnosController::class, 'deleteTurnos']);
     Route::get('/turnos/shift/{id}', [GetShiftUsersByIdController::class, 'getShiftUserById']);
     Route::post('/turnos/shift', [CreateShiftUsersController::class, 'createShiftUser']);
-    Route::post('/turnos/shift/many', [CreateShiftUsersController::class, 'createShiftUsers']);
 });
 
 Route::get('/assets/{path}', function ($path) {
