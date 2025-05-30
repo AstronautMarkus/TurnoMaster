@@ -47,6 +47,7 @@ use App\Http\Controllers\Auth\Logout\LogoutController;
 // Get data controllers
 
 use App\Http\Controllers\Dashboard\GetPersonalDataController;
+use App\Http\Controllers\Dashboard\Personal\Get\GetPersonalShiftController;
 use App\Http\Controllers\Dashboard\Roles\GetRolesDataController;
 use App\Http\Controllers\Dashboard\Company\GetCompanyDataController;
 use App\Http\Controllers\Dashboard\Employees\Get\GetEmployeesListController;
@@ -111,6 +112,7 @@ Route::get('/themes', [GetThemesController::class, 'getThemesList']);
 
 Route::middleware(['jwt.auth'])->group(function () {
     Route::get('/me', [GetPersonalDataController::class, 'getPersonalData']);
+    Route::get('/me/next-shift', [GetPersonalShiftController::class, 'getPersonalShift']);
     Route::get('/company', [GetCompanyDataController::class, 'getCompanyData']);
     Route::put('/company', [EditCompanyDataController::class, 'editCompanyData']);
     Route::get('/employees', [GetEmployeesListController::class, 'getEmployeesList']);
