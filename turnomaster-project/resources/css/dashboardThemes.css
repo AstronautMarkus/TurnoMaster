@@ -7,18 +7,14 @@
   --text: #eaeaea;
   --accent: #891818;
   --accent-hover: #7b1414;
-  --accent-light: #a33838;
   --secondary: #3c3c3c;
   --secondary-hover: #323232;
-  --secondary-light: #4a4a4a;
   --success: #4caf50;
   --success-hover: #45a049;
-  --success-light: #66bb6a;
   --warning: #ff9800;
   --warning-hover: #e68900;
   --error: #f44336;
   --error-hover: #d32f2f;
-  --error-light: #ef9a9a;
   --work-inicio: #762020;
   --work-lunch: #363636;
   --work-fin: #a90000;
@@ -31,18 +27,14 @@
   --text: #eaeaea;
   --accent: #2176ff;
   --accent-hover: #185abc;
-  --accent-light: #4f8cff;
   --secondary: #283655;
   --secondary-hover: #1d2540;
-  --secondary-light: #3a4972;
   --success: #43d8c9;
   --success-hover: #36b3a3;
-  --success-light: #6ee7da;
   --warning: #ff9800;
   --warning-hover: #e68900;
   --error: #b34700;
   --error-hover: #8c3900;
-  --error-light: #d2691e;
   --work-inicio: #305678;
   --work-lunch: #4f8cff;
   --work-fin: #7493ff;
@@ -55,19 +47,14 @@
   --text: #eaeaea;
   --accent: #d75f00;
   --accent-hover: #b65a00;
-  --accent-light: #ff8700;
   --secondary: #3c3c3c;
   --secondary-hover: #323232;
-  --secondary-light: #4a4a4a;
   --success: #4caf50;
   --success-hover: #45a049;
-  --success-light: #66bb6a;
   --warning: #ff9800;
   --warning-hover: #e68900;
-  --warning-light: #ffb74d;
   --error: #f44336;
   --error-hover: #d32f2f;
-  --error-light: #ef9a9a;
   --work-inicio: #d75f00;
   --work-lunch: #363636;
   --work-fin: #9b3f17;
@@ -116,6 +103,21 @@
   background-color: var(--success-hover);
 }
 
+.dashboard-button-warning {
+  background-color: var(--warning);
+}
+.dashboard-button-warning:hover {
+  background-color: var(--warning-hover);
+}
+
+.dashboard-button-error {
+  background-color: var(--error);
+}
+
+.dashboard-button-error:hover {
+  background-color: var(--error-hover);
+}
+
 .dashboard-sidebar {
   background-color: var(--bg);
 }
@@ -133,7 +135,7 @@
 }
 
 /* ============================= */
-/*     VIS TIMELINE CUSTOM      */
+/*         VIS TIMELINE          */
 /* ============================= */
 
 
