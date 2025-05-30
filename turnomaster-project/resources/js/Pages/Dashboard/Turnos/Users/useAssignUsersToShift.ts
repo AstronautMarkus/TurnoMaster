@@ -108,7 +108,8 @@ const useAssignUsersToShift = () => {
             X: "Miercoles",
             J: "Jueves",
             V: "Viernes",
-            S: "Sabado"
+            S: "Sabado",
+            D: "Domingo"
         };
         const days = selectedDays.map(d => dayMap[d] || d);
         try {

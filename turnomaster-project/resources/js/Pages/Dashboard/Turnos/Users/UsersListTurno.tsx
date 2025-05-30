@@ -22,6 +22,7 @@ const daysOfWeek = [
     { key: "J", label: "Jueves" },
     { key: "V", label: "Viernes" },
     { key: "S", label: "Sabado" },
+    { key: "D", label: "Domingo" },
 ];
 
 const UsersListTurno = () => {
