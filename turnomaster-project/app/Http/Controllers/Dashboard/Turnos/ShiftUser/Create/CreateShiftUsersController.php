@@ -124,18 +124,25 @@ class CreateShiftUsersController extends Controller
         foreach ($existingShiftUsers as $shiftUser) {
             $existingDays = json_decode($shiftUser->days, true);
 
+            // Get turno name for overlap message
+            $overlapTurn = Turnos::find($shiftUser->shift_id);
+
+            $overlapDays = [];
             if (is_string($existingDays[0] ?? null)) {
                 foreach ($existingDays as $existingDay) {
                     foreach ($newDays as $newDay) {
                         if ($existingDay === $newDay) {
-                            return response()->json([
-                                'message' => 'El usuario ya tiene un turno asignado en el día: ' . $newDay . '.',
-                                'errors' => [
-                                    'days' => ['Solapamiento detectado en el día: ' . $newDay . '.']
-                                ]
-                            ], 422);
+                            $overlapDays[] = $newDay;
                         }
                     }
+                }
+                if (!empty($overlapDays)) {
+                    return response()->json([
+                        'message' => 'Error asignando el turno al usuario. Solapamiento detectado con el turno "' . ($overlapTurn->name ?? 'Desconocido') . '".',
+                        'errors' => [
+                            'days' => ['Solapamiento detectado en: ' . implode(', ', $overlapDays) . '.']
+                        ]
+                    ], 422);
                 }
             } else {
                 foreach ($existingDays as $existingDay) {
@@ -148,15 +155,18 @@ class CreateShiftUsersController extends Controller
                                 ($newDay['start_time'] < $existingDay['end_time']) &&
                                 ($newDay['end_time'] > $existingDay['start_time'])
                             ) {
-                                return response()->json([
-                                    'message' => 'Solapamiento en ' . $newDay['day'] . ' entre ' . $newDay['start_time'] . '-' . $newDay['end_time'],
-                                    'errors' => [
-                                        'days' => ['Solapamiento detectado en ' . $newDay['day'] . '.']
-                                    ]
-                                ], 422);
+                                $overlapDays[] = $newDay['day'] . ' (' . $newDay['start_time'] . '-' . $newDay['end_time'] . ')';
                             }
                         }
                     }
+                }
+                if (!empty($overlapDays)) {
+                    return response()->json([
+                        'message' => 'Solapamiento en los siguientes días y horarios con el turno "' . ($overlapTurn->name ?? 'Desconocido') . '": ' . implode(', ', $overlapDays),
+                        'errors' => [
+                            'days' => ['Solapamiento detectado en: ' . implode(', ', $overlapDays) . '.']
+                        ]
+                    ], 422);
                 }
             }
         }
