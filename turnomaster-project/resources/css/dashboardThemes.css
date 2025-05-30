@@ -103,25 +103,27 @@
   --item: #c2185b;
 }
 
-.theme-carbon {
-  --bg: #212121;
-  --text: #eaeaea;
-  --accent: #757575;
-  --accent-hover: #616161;
-  --secondary: #3c3c3c;
-  --secondary-hover: #2f2f2f;
+.theme-amethyst {
+  --bg: #1e1b23;
+  --text: #e3dce5;
+  --accent: #7e57c2;
+  --accent-hover: #673ab7;
+  --secondary: #322c3b;
+  --secondary-hover: #2b2533;
   --success: #a5d6a7;
   --success-hover: #81c784;
-  --warning: #ffa000;
-  --warning-hover: #ff8f00;
+  --warning: #ffb300;
+  --warning-hover: #ffa000;
   --error: #ef5350;
   --error-hover: #e53935;
-  --work-inicio: #424242;
-  --work-lunch: #303030;
-  --work-fin: #616161;
-  --work-full: #757575;
-  --item: #424242;
+
+  --work-inicio: #6a1b9a;
+  --work-lunch: #4a148c;
+  --work-fin: #7b1fa2;
+  --work-full: #8e24aa;
+  --item: #6a1b9a;
 }
+
 
 
 .theme-ocean {

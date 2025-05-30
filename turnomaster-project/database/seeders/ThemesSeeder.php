@@ -17,7 +17,7 @@ class ThemesSeeder extends Seeder
             ['name' => 'Ubuntu', 'slug' => 'ubuntu', 'description' => 'El naranja más vibrante.'],
             ['name' => 'Forest', 'slug' => 'forest', 'description' => 'Donde la productividad florece como la naturaleza.'],
             ['name' => 'Sakura', 'slug' => 'sakura', 'description' => 'Serenidad y belleza en cada jornada laboral.'],
-            ['name' => 'Carbon', 'slug' => 'carbon', 'description' => 'Minimalismo y seriedad para mentes enfocadas.'],
+            ['name' => 'Amethyst', 'slug' => 'amethyst', 'description' => 'Elegancia, concentración y estilo en cada detalle.'],
             ['name' => 'Ocean', 'slug' => 'ocean', 'description' => 'Profundidad, claridad y calma para tu día a día.'],
         ]);
 
