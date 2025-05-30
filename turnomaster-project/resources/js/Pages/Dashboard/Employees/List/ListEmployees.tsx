@@ -191,13 +191,7 @@ const ListEmployees = () => {
                         {employee.shift_count > 0 ? (
                           <span>{employee.shift_count}</span>
                         ) : (
-                            <button
-                            disabled
-                            className="dashboard-button-success text-black font-semibold px-4 py-2 text-sm transition-colors flex items-center opacity-50 cursor-not-allowed"
-                            >
-                            <FaSearch className="mr-2" />
-                            Listar
-                            </button>
+                            0
                         )}
                       </span>
                     </td>
