@@ -7,6 +7,12 @@ function useCompanySettings() {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
+    const [companyData, setCompanyData] = useState<any>(null);
+    const [employeesData, setEmployeesData] = useState<any>(null);
+    const [companyForm, setCompanyForm] = useState<any>({});
+    const [editingCompany, setEditingCompany] = useState(false);
+    const [updatingCompany, setUpdatingCompany] = useState(false);
+    const [companyUpdateMessage, setCompanyUpdateMessage] = useState<string | null>(null);
 
     useEffect(() => {
         axios.get("/api/company", {
@@ -15,10 +21,16 @@ function useCompanySettings() {
         .then(res => {
             setCompanyId(res.data.company?.id ?? null);
             setProfilePhotoUrl(res.data.company?.profile_photo ?? null);
+            setCompanyData(res.data.company);
+            setEmployeesData(res.data.employees);
+            setCompanyForm(res.data.company || {});
         })
         .catch(() => {
             setCompanyId(null);
             setProfilePhotoUrl(null);
+            setCompanyData(null);
+            setEmployeesData(null);
+            setCompanyForm({});
         });
     }, []);
 
@@ -71,6 +83,30 @@ function useCompanySettings() {
         setLoading(false);
     };
 
+    const handleCompanyUpdate = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setUpdatingCompany(true);
+        setCompanyUpdateMessage(null);
+        try {
+            const response = await axios.put("/api/company", {
+                name: companyForm.name
+            }, {
+                headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+            });
+            setCompanyUpdateMessage(response.data?.message || "Datos actualizados correctamente.");
+            setEditingCompany(false);
+            const res = await axios.get("/api/company", {
+                headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+            });
+            setCompanyData(res.data.company);
+            setEmployeesData(res.data.employees);
+            setCompanyForm(res.data.company || {});
+        } catch (err: any) {
+            setCompanyUpdateMessage("Error al actualizar los datos.");
+        }
+        setUpdatingCompany(false);
+    };
+
     return {
         companyId,
         profilePhotoUrl,
@@ -80,6 +116,15 @@ function useCompanySettings() {
         handleFileChange,
         handleUpload,
         handleDelete,
+        companyData,
+        employeesData,
+        companyForm,
+        setCompanyForm,
+        editingCompany,
+        setEditingCompany,
+        handleCompanyUpdate,
+        updatingCompany,
+        companyUpdateMessage
     };
 }
 

@@ -13,6 +13,7 @@ use App\Http\Controllers\Dashboard\Turnos\ShiftUser\Create\CreateShiftUsersContr
 
 // Update data controllers
 use App\Http\Controllers\Dashboard\Turnos\Edit\EditTurnosController;
+use App\Http\Controllers\Dashboard\Company\Edit\EditCompanyDataController;
 
 // Contact forms and help controllers
 
@@ -111,6 +112,7 @@ Route::get('/themes', [GetThemesController::class, 'getThemesList']);
 Route::middleware(['jwt.auth'])->group(function () {
     Route::get('/me', [GetPersonalDataController::class, 'getPersonalData']);
     Route::get('/company', [GetCompanyDataController::class, 'getCompanyData']);
+    Route::put('/company', [EditCompanyDataController::class, 'editCompanyData']);
     Route::get('/employees', [GetEmployeesListController::class, 'getEmployeesList']);
     Route::get('/employees/{id}', [GetEmployeeByIdController::class, 'getEmployeeById']);
     Route::put('/employees/{id}', [EditEmployeeController::class, 'editEmployee']);
