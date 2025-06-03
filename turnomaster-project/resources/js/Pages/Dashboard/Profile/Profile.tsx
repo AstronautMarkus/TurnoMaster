@@ -146,17 +146,17 @@ const Profile: React.FC = () => {
                         </div>
                         <div>
                             <p className="text-lg font-bold">{user.role.name}</p>
-                            <p>{user.role.description}</p>
+                            <p className="italic">{user.role.description}</p>
                         </div>
                     </div>
                     {user.email === user.company?.owner_email && (
-                        <div className="mt-6 p-4 dashboard-background-warning flex items-center gap-4">
-                            <div className="text-4xl">
+                        <div className="mt-6 p-4 dashboard-background-secondary flex items-center gap-4">
+                            <div className="text-4xl text-white">
                                 <FaCrown/>
                             </div>
                             <div>
-                                <h3 className="text-xl font-semibold mb-1 flex items-center">Dueño de la compañía</h3>
-                                <p className="text-gray-700">Este usuario es el dueño de la compañía <strong>{user.company?.name}</strong>.</p>
+                                <h3 className="text-xl font-semibold mb-1 flex items-center text-white">Dueño de la compañía</h3>
+                                <p className="text-white italic">Este usuario es el dueño de la compañía <strong>{user.company?.name}</strong>.</p>
                             </div>
                         </div>
                     )}
