@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaEye, FaEyeLowVision, FaUserTie } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import AuthLoadingScreen from "../../../../Components/Auth/LoadingScreen/AuthLoadingScreen";
+import LoadingScreen from "../../../../Components/LoadingScreen/LoadingScreen";
 
 const EmployeesLogin: React.FC = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
@@ -83,7 +83,7 @@ const EmployeesLogin: React.FC = () => {
         </div>
         {isLoading ? (
           <div className="flex items-center justify-center h-48">
-            <AuthLoadingScreen />
+            <LoadingScreen type="auth-login" />
           </div>
         ) : (
           <form onSubmit={handleSubmit}>
