@@ -107,16 +107,10 @@ const Profile: React.FC = () => {
                             onChange={handleImageChange} 
                             disabled={isLoading}
                         />
-                        {isLoading && <p className="text-sm text-gray-500 mb-2">Subiendo imagen...</p>}
-                        {error && <p className="text-sm text-red-500 mb-2">{error}</p>}
-                        {isSuccess && <p className="text-m mb-2">Imagen actualizada correctamente.</p>}
-                        <div className="flex justify-end gap-2">
-                            <button 
-                                className="px-4 py-2 text-white dashboard-button-secondary transition-colors"
-                                onClick={() => setIsModalOpen(false)}
-                            >
-                                Cerrar
-                            </button>
+                        {isLoading && <p className="text-sm dashboard-text mb-2">Subiendo imagen...</p>}
+                        {error && <strong className="text-sm dashboard-text-error mb-2">{error}</strong>}
+                        {isSuccess && <p className="text-m dashboard-text-success mb-2">Imagen actualizada correctamente.</p>}
+                        <div className="flex justify-end gap-2 mt-4">
                             <button 
                                 className="text-white px-4 py-2 dashboard-button transition-colors"
                                 onClick={async () => {
@@ -131,6 +125,12 @@ const Profile: React.FC = () => {
                                 disabled={isLoading}
                             >
                                 Borrar imagen
+                            </button>
+                            <button 
+                                className="px-4 py-2 text-white dashboard-button-secondary transition-colors"
+                                onClick={() => setIsModalOpen(false)}
+                            >
+                                Cerrar
                             </button>
                         </div>
                     </div>

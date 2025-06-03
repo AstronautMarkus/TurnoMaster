@@ -16,9 +16,22 @@ class UpdateImageController extends Controller
 {
     public function update(Request $request)
     {
-        $request->validate([
+
+        $validator = Validator::make($request->all(), [
             'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ], [
+            'profile_image.required' => 'La imagen de perfil es obligatoria.',
+            'profile_image.image' => 'El archivo debe ser una imagen.',
+            'profile_image.mimes' => 'La imagen debe ser de tipo: jpeg, png, jpg o gif.',
+            'profile_image.max' => 'La imagen no debe superar los 2MB.',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'La validación ha fallado.',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
 
         // Extract and decode the JWT token
         $token = $request->bearerToken();
