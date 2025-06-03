@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import useProfileData from './useProfileData';
 import useUpdateImage from './useUpdateImage';
-import AuthLoadingScreen from '../../../Components/Auth/LoadingScreen/AuthLoadingScreen';
+import LoadingScreen from '../../../Components/LoadingScreen/LoadingScreen';
 import { FaUserShield, FaUser, FaCrown } from 'react-icons/fa';
 import { FaUserGear } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
@@ -32,7 +32,7 @@ const Profile: React.FC = () => {
             <div className="flex gap-4">
                 {!user ? (
                     <div className="flex items-center justify-center w-full">
-                        <AuthLoadingScreen />
+                        <LoadingScreen theme='dashboard' />
                     </div>
                 ) : (
                     <>
