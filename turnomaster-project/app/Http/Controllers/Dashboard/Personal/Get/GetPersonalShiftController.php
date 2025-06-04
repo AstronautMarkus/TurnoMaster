@@ -66,7 +66,7 @@ class GetPersonalShiftController extends Controller
         }
 
         if (!$closestShift) {
-            return response()->json(['error' => 'No hay un shift asignado.'], 404);
+            return response()->json(['error' => 'No se encuentra un Turno asignado.'], 404);
         }
 
         $shift = [

@@ -13,6 +13,9 @@ const AttendanceWidget = () => {
     const [attendanceLoading, setAttendanceLoading] = useState<boolean>(false);
     const [attendanceMsg, setAttendanceMsg] = useState<string | null>(null);
 
+
+    const [canRegister, setCanRegister] = useState(false);
+
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentTime(new Date());
@@ -55,12 +58,47 @@ const AttendanceWidget = () => {
             });
     }, [nextShift]);
 
+    useEffect(() => {
+        if (!nextShift) return setCanRegister(false);
+        const interval = setInterval(() => {
+            const now = new Date();
+            const [startHour, startMinute] = nextShift.start_time.split(':').map(Number);
+            const shiftStart = new Date(now);
+            shiftStart.setHours(startHour, startMinute, 0, 0); // HH:MM:00
+            setCanRegister(now >= shiftStart);
+        }, 1000);
+        return () => clearInterval(interval);
+    }, [nextShift, currentTime]);
+
+    
+    const getHelperText = () => {
+        if (attendanceRegistered) return null;
+        if (!nextShift) return null;
+        const now = currentTime;
+        const [startHour, startMinute] = nextShift.start_time.split(':').map(Number);
+        const shiftStart = new Date(now);
+        shiftStart.setHours(startHour, startMinute, 0, 0); // HH:MM:00
+
+        if (now < shiftStart) {
+            const diffMs = shiftStart.getTime() - now.getTime();
+            const diffMin = Math.floor(diffMs / 60000);
+            const diffSec = Math.floor((diffMs % 60000) / 1000);
+
+            if (diffMin > 5) return "Aún falta para tu horario de entrada.";
+            if (diffMin > 1) return "Ya falta poco para poder registrar tu asistencia.";
+            if (diffMin === 1) return "¡Un minuto más y podrás registrar tu asistencia!";
+            if (diffMin === 0 && diffSec > 10) return "¡Ya casi! Espera unos segundos más...";
+            if (diffMin === 0 && diffSec <= 10) return "¡Prepárate! El botón se habilitará en breve.";
+        }
+        return null;
+    };
+
     const canRegisterAttendance = (() => {
         if (!nextShift || attendanceRegistered) return false;
         const now = currentTime;
         const [startHour, startMinute] = nextShift.start_time.split(':').map(Number);
         const shiftStart = new Date(now);
-        shiftStart.setHours(startHour, startMinute, 0, 0);
+        shiftStart.setHours(startHour, startMinute, 0, 0); // HH:MM:00
         return now >= shiftStart;
     })();
 
@@ -81,23 +119,27 @@ const AttendanceWidget = () => {
                 </p>
                 {attendanceChecked && nextShift && !shiftLoading && (
                     <div className="mt-4 flex flex-col items-center">
-                        <button
-                            className={`px-4 py-2 dashboard-button-success text-white font-bold disabled:bg-gray-400`}
-                            disabled={!canRegisterAttendance || attendanceLoading}
+                        <Link
+                            to="/dashboard/reports/turnos/register"
+                            className={`px-4 py-2 dashboard-button-success text-white font-bold disabled:bg-gray-400 ${(!canRegister || attendanceLoading || attendanceRegistered) ? 'pointer-events-none opacity-60' : ''}`}
+                            tabIndex={(!canRegister || attendanceLoading || attendanceRegistered) ? -1 : 0}
+                            aria-disabled={!canRegister || attendanceLoading || attendanceRegistered}
                         >
                             {attendanceLoading
                                 ? 'Registrando...'
                                 : attendanceRegistered
                                     ? 'Asistencia registrada'
                                     : 'Registrar asistencia'}
-                        </button>
+                        </Link>
                         {attendanceMsg && (
                             <p className="mt-2 text-sm text-green-600">{attendanceMsg}</p>
                         )}
-                        {!canRegisterAttendance && !attendanceRegistered && (
-                            <p className="mt-2 text-xs text-red-500">
-                                Solo puedes registrar asistencia a partir de la hora de entrada.
-                            </p>
+                        {!canRegister && !attendanceRegistered && (
+                            <>
+                                {getHelperText() && (
+                                    <p className="mt-1 text-xs font-bold mb-2 mt-2 text-gray-500">{getHelperText()}</p>
+                                )}
+                            </>
                         )}
                     </div>
                 )}
