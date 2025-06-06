@@ -41,11 +41,11 @@ const ReportsIndex: React.FC = () => {
                             <p className="text-gray-600 text-sm mb-2">
                                 Justifica una ausencia, solicita un cambio o revisa el historial de reportes realizados.
                             </p>
-                            <Link to="/dashboard/reports/new" className="dashboard-button-success text-white bg-yellow-600 hover:bg-yellow-700 p-3 flex items-center gap-3 transition-colors">
+                            <Link to="/dashboard/reports/report/new" className="dashboard-button-success text-white bg-yellow-600 hover:bg-yellow-700 p-3 flex items-center gap-3 transition-colors">
                                 <FaAlignJustify className="text-2xl" />
                                 <span>Reportar petición</span>
                             </Link>
-                            <Link to="/dashboard/reports/list" className="dashboard-button-success text-white bg-yellow-500 hover:bg-yellow-600 p-3 flex items-center gap-3 transition-colors">
+                            <Link to="/dashboard/reports/report/list" className="dashboard-button-success text-white bg-yellow-500 hover:bg-yellow-600 p-3 flex items-center gap-3 transition-colors">
                                 <FaRegListAlt className="text-2xl" />
                                 <span>Lista de reportes</span>
                             </Link>

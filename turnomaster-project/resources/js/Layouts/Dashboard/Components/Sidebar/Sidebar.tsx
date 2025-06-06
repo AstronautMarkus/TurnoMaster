@@ -79,20 +79,25 @@ const sidebarConfigHr: SidebarSection[] = [
   {
     category: "Asistencia y Reportes",
     links: [
-      { to: "/dashboard/reports", label: "Asistencia y Reportes", icon: FaBullhorn },
+      {
+        label: "Asistencia",
+        icon: FaClipboardCheck,
+        subMenuKey: "asistencia",
+        subLinks: [
+          { to: "/dashboard/reports/turnos/register", label: "Registrar asistencia" },
+          { to: "/dashboard/reports/turnos/review", label: "Ver asistencia" },
+        ],
+      },
+      {
+        label: "Reportes",
+        icon: FaBullhorn,
+        subMenuKey: "reportes",
+        subLinks: [
+          { to: "/dashboard/reports/report/list", label: "Ver reportes" },
+          { to: "/dashboard/reports/report/new", label: "Reportar petición" },
+        ],
+      },
     ],
-  },
-  {
-    category:"Registro de asistencia",
-    links: [
-    { to: "/dashboard/reports/turnos/register", label: "Registrar asistencia", icon: FaClipboardCheck },
-  ],
-  },
-  {
-    category:"Reportes y justificación",
-    links: [
-    { to: "/dashboard/reports/new", label: "Reportar petición", icon: FaAlignJustify },
-  ],
   },
   {
     category: "Administración",
