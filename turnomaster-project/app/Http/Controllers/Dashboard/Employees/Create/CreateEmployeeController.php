@@ -9,6 +9,7 @@ use App\Models\Companies;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Helpers\ActivityLogger;
 
 class CreateEmployeeController extends Controller
 {
@@ -95,6 +96,17 @@ class CreateEmployeeController extends Controller
             $message->to($user->email)
                     ->subject('Credenciales cuenta de empleado | TurnoMaster');
         });
+
+        // Log the activity
+
+        ActivityLogger::log(
+            $request,
+            'creó a',
+            'Se creó a ' . $user->first_name . ' como empleado',
+            $user
+        );
+
+        // End logging activity
 
         return response()->json([
             'message' => 'Cuenta de empleado creada exitosamente. Se ha enviado un correo electrónico a la dirección proporcionada con las credenciales de acceso.',
