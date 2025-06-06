@@ -147,8 +147,7 @@ const ListEmployees = () => {
                   <th className="px-4 py-3 text-left">RUT</th>
                   <th className="px-4 py-3 text-left">Email</th>
                   <th className="px-4 py-3 text-left">Rol</th>
-                  <th className="px-4 py-3 text-left">¿Tiene Turnos?</th>
-                  <th className="px-4 py-3 text-left">Turnos asignados</th>
+                  <th className="px-4 py-3 text-left">T. Asignados</th>
                   <th className="px-4 py-3 text-left">Turnos</th>
                   <th className="px-4 py-3 text-left">Acciones</th>
                 </tr>
@@ -172,21 +171,19 @@ const ListEmployees = () => {
                           <FaUserGear style={{ fontSize: "1.2em" }} />
                         )}
                       </span>
-                      <span>{employee.role}</span>
+                      <span>
+                        {employee.role === "Recursos Humanos (RR. HH.)" ? "RR.HH" : employee.role}
+                      </span>
                     </td>
                     <td className="px-4 py-2">
-                      <span className="inline-flex items-center">
+                      <span className="inline-flex items-center mr-2">
                         {employee.has_shift ? "Sí" : "No"}
                       </span>
-                    </td>
-                    <td className="px-4 py-2">
-                      <span className="inline-flex items-center">
-                        {employee.shift_count > 0 ? (
-                          <span>{employee.shift_count}</span>
-                        ) : (
-                            0
+                        {employee.shift_count > 0 && (
+                        <span className="inline-flex items-center">
+                          <span>({employee.shift_count})</span>
+                        </span>
                         )}
-                      </span>
                     </td>
                     <td className="px-4 py-2">
                       <div className="flex space-x-2">
