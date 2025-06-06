@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useGetTurnoDetailsList } from "./useGetTurnoDetailsList";
 import { FaUserPlus, FaCheckCircle, FaTimesCircle } from "react-icons/fa";
-import { FaXmark, FaCheck } from "react-icons/fa6";
+import { FaXmark, FaCheck, FaX } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
 import { FaEdit } from "react-icons/fa";
 import useAssignUsersToShift from "./useAssignUsersToShift";
@@ -164,10 +164,10 @@ const UsersListTurno = () => {
                                                 return (
                                                     <td
                                                         key={label}
-                                                        className={`p-2 ${isAssigned ? "dashboard-background-secondary text-white" : "bg-gray-200"}`}
+                                                        className={`p-2 ${isAssigned ? "dashboard-background-secondary text-white" : "dashboard-background-warning"}`}
                                                     >
                                                         <div className="flex justify-center items-center">
-                                                            {isAssigned ? <FaCheck /> : ""}
+                                                            {isAssigned ? <FaCheck /> : <FaX />}
                                                         </div>
                                                     </td>
                                                 );
