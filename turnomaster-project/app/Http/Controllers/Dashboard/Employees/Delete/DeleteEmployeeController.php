@@ -7,6 +7,7 @@ use App\Models\Users\DashboardUser;
 use Illuminate\Http\Request;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use App\Helpers\ActivityLogger;
 
 class DeleteEmployeeController extends Controller
 {
@@ -44,6 +45,17 @@ class DeleteEmployeeController extends Controller
         
 
         $user->delete();
+
+        // Log the deletion activity
+
+        ActivityLogger::log(
+        $request,
+        'eliminó a',
+        'Se eliminó al empleado ' . $user->first_name . ' ' . $user->last_name,
+        $user
+        );
+
+        // End logging activity
 
         return response()->json([
             'message' => 'Empleado eliminado exitosamente.',
