@@ -42,3 +42,6 @@ export default function useDashboardTheme() {
 
     return theme;
 }
+
+// ⚠️ This hook is sacred. If someone sets an invalid theme, everything resets and goes back to 'reyes'.
+// Because in this system, ugly themes are NOT allowed. 🧼

@@ -8,13 +8,13 @@ import { FaUserShield, FaUser } from 'react-icons/fa';
 import { FaUserGear } from "react-icons/fa6";
 import { FiUsers } from "react-icons/fi";
 import { FaXmark } from "react-icons/fa6";
+import DeleteEmployeeAlert from "./DeleteEmployeeAlert/DeleteEmployeeAlert";
 
 const ListEmployees = () => {
   const { employees, roles, page, setPage, totalPages, loading, setSearchName } = useGetEmployeesList();
   const [selectedRole, setSelectedRole] = useState<string>("Todos");
-  const [showModal, setShowModal] = useState(false);
-  const [employeeToDelete, setEmployeeToDelete] = useState<{ id: number; first_name: string; last_name: string } | null>(null);
   const [searchInput, setSearchInput] = useState<string>("");
+  const [employeeToDelete, setEmployeeToDelete] = useState<{ id: number; first_name: string; last_name: string } | null>(null);
 
   const handleRoleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedRole(event.target.value);
@@ -22,31 +22,7 @@ const ListEmployees = () => {
 
   const handleDeleteClick = (employee: { id: number; first_name: string; last_name: string }) => {
     setEmployeeToDelete(employee);
-    setShowModal(true);
   };
-
-  const confirmDelete = async () => {
-    if (employeeToDelete) {
-      try {
-        const token = localStorage.getItem('token');
-        await axios.delete(`/api/employees/${employeeToDelete.id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setShowModal(false);
-        setEmployeeToDelete(null);
-
-        const index = employees.findIndex(emp => emp.id === employeeToDelete.id);
-        if (index !== -1) {
-          employees.splice(index, 1);
-        }
-      } catch (error) {
-        console.error("Error deleting employee:", error);
-      }
-    }
-  };
-
 
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);
@@ -263,35 +239,17 @@ const ListEmployees = () => {
         </div>
       </div>
 
-      {showModal && employeeToDelete && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50">
-          <div className="bg-white p-8 shadow-2xl w-full max-w-md">
-            <div className="flex items-center mb-4">
-              <span className="dashboard-background text-white px-3 py-1 font-bold uppercase tracking-wider mr-3">⚠️Aviso</span>
-              <h2 className="text-xl font-extrabold dashboard-text">Eliminar empleado</h2>
-            </div>
-            <p className="text-gray-800 mb-2">
-              Está a punto de eliminar al empleado <span className="font-bold">{employeeToDelete.first_name} {employeeToDelete.last_name}</span>.
-            </p>
-            <p className="text-gray-700 mb-4">
-              Esta acción <span className="font-bold dashboard-text">no se puede deshacer</span>. Todos los datos asociados a este empleado se perderán permanentemente.
-            </p>
-            <div className="flex justify-end space-x-4 mt-6">
-              <button
-                onClick={() => setShowModal(false)}
-                className="px-5 py-2 dashboard-button-secondary text-white font-semibold transition-colors"
-                    >
-                Cancelar
-                    </button>
-                    <button
-                onClick={confirmDelete}
-                className="px-5 py-2 dashboard-button text-white font-semibold transition-colors"
-                    >
-                Sí, borrar definitivamente
-              </button>
-            </div>
-          </div>
-        </div>
+      {employeeToDelete && (
+        <DeleteEmployeeAlert
+          employee={employeeToDelete}
+          onDeleted={() => {
+            const index = employees.findIndex(emp => emp.id === employeeToDelete.id);
+            if (index !== -1) {
+              employees.splice(index, 1);
+            }
+            setEmployeeToDelete(null);
+          }}
+        />
       )}
     </div>
   );
