@@ -19,6 +19,10 @@ const useAssignUsersToShift = () => {
     const [lastAssignErrors, setLastAssignErrors] = useState<string[] | null>(null);
     const { shiftId } = useParams<{ shiftId: string }>();
 
+    const [isActiveSwitch, setIsActiveSwitch] = useState(true);
+
+    const toggleIsActiveSwitch = () => setIsActiveSwitch(v => !v);
+
     const fetchEmployees = async (page = 1, searchName = "") => {
         setEmployeesLoading(true);
         try {
@@ -51,6 +55,7 @@ const useAssignUsersToShift = () => {
         setLastAssignStatus(null);
         setLastAssignMessage(null);
         setLastAssignErrors(null);
+        setIsActiveSwitch(true);
         fetchEmployees(1, "");
     };
 
@@ -116,7 +121,7 @@ const useAssignUsersToShift = () => {
             let body: any = {
                 shift_id: Number(shiftId),
                 days,
-                is_active: false,
+                is_active: isActiveSwitch,
                 employee_id: selectedUsers[0]
             };
             const res = await axios.post("/api/turnos/shift/", body, {
@@ -183,6 +188,9 @@ const useAssignUsersToShift = () => {
         lastAssignStatus,
         lastAssignMessage,
         lastAssignErrors,
+        isActiveSwitch,
+        setIsActiveSwitch,
+        toggleIsActiveSwitch,
     };
 };
 

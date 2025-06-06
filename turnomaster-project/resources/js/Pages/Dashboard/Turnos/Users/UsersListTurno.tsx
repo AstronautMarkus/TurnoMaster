@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useGetTurnoDetailsList } from "./useGetTurnoDetailsList";
 import { FaUserPlus, FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { FaXmark, FaCheck } from "react-icons/fa6";
+import { FaMinus } from "react-icons/fa6";
+import { FaEdit } from "react-icons/fa";
 import useAssignUsersToShift from "./useAssignUsersToShift";
 
 const dayMap: Record<string, string> = {
@@ -89,6 +91,7 @@ const UsersListTurno = () => {
                                 <th className="px-4 py-3 text-left">Nombre</th>
                                 <th className="px-4 py-3 text-left">Días aplicados</th>
                                 <th className="px-4 py-3 text-left">¿Está activo?</th>
+                                <th className="px-4 py-3 text-left">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -110,6 +113,22 @@ const UsersListTurno = () => {
                                         <td className="px-4 py-3">{user.first_name} {user.last_name}</td>
                                         <td className="px-4 py-3">{renderDays(shift_user.days)}</td>
                                         <td className="px-4 py-3">{shift_user.is_active ? "Sí" : "No"}</td>
+                                        <td className="px-4 py-3 flex gap-2">
+                                            <button
+                                                className="text-white px-4 py-2 text-sm dashboard-button-warning transition-colors flex items-center"
+                                                title="Editar"
+                                            >
+                                                <FaEdit className="mr-2" />
+                                                Editar
+                                            </button>
+                                            <button
+                                                className="text-white px-4 py-2 text-sm dashboard-button transition-colors flex items-center"
+                                                title="Eliminar"
+                                            >
+                                                <FaMinus className="mr-2" />
+                                                Eliminar
+                                            </button>
+                                        </td>
                                     </tr>
                                 ))
                             )}
@@ -237,8 +256,17 @@ const UsersListTurno = () => {
                                 </button>
                             ))}
                         </div>
+                        
+                        
                         <div>
                             <span className="font-semibold">Empleados disponibles:</span>
+
+                            {modal.search && (
+                                <div className="mt-2 text-sm text-gray-500">
+                                    Resultados para: <span className="font-semibold">{modal.search}</span>
+                                </div>
+                            )}
+
                             <div className="mt-2 mb-2 flex gap-2">
                                 <input
                                     type="text"
@@ -281,7 +309,6 @@ const UsersListTurno = () => {
                                                     className="mr-2"
                                                 />
                                                 <span>{user.first_name} {user.last_name}</span>
-                                                {/* Feedback icon */}
                                                 {modal.assignResults[user.id]?.status === "success" && (
                                                     <FaCheckCircle className="ml-2 text-green-500" title="Asignado correctamente" />
                                                 )}
@@ -295,6 +322,26 @@ const UsersListTurno = () => {
                                         )}
                                     </ul>
                                 )}
+                            </div>
+
+                            <div className="mb-4 flex flex-col items-center justify-center">
+                                <span className="mt-2 font-semibold text-center">Activar turno inmediatamente</span>
+                                <div className="flex items-center">
+                                    <span className="text-sm font-medium text-black mr-4">No</span>
+                                    <div
+                                        onClick={modal.toggleIsActiveSwitch}
+                                        className={`relative inline-flex h-6 w-11 items-center cursor-pointer transition-colors duration-300 ${
+                                            modal.isActiveSwitch ? "dashboard-button-secondary" : "dashboard-button"
+                                        }`}
+                                    >
+                                        <span
+                                            className={`inline-block h-4 w-4 transform bg-white transition-transform duration-300 ${
+                                                modal.isActiveSwitch ? "translate-x-6" : "translate-x-1"
+                                            }`}
+                                        />
+                                    </div>
+                                    <span className="text-sm font-medium text-black ml-4">Sí</span>
+                                </div>
                             </div>
 
                             {modal.employeesPagination && modal.employeesPagination.total > 0 && (
