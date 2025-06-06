@@ -3,8 +3,7 @@ import useRoleChecker from '../../../hooks/auth/useRoleChecker';
 import Owner from './Owner/Owner';
 import Hr from './Hr/Hr';
 import Employees from './Employees/Employees';
-import Swal from 'sweetalert2';
-import 'sweetalert2/dist/sweetalert2.min.css';
+import UnauthorizedAlert from './UnauthorizedAlert/UnauthorizedAlert';
 
 const Index = () => {
     const userRole = useRoleChecker();
@@ -14,24 +13,13 @@ const Index = () => {
         const params = new URLSearchParams(window.location.search);
         if (params.has('unauthorized')) {
             setShowToast(true);
-            Swal.fire({
-                toast: true,
-                position: 'bottom-right',
-                icon: 'warning',
-                title: 'Acceso denegado',
-                text: 'No tienes autorización para acceder a esta sección. Has sido redirigido a la página principal.',
-                showConfirmButton: false,
-                showCloseButton: true,
-                timer: 4000,
-                timerProgressBar: true,
-                color: '#000',
-            });
             setTimeout(() => setShowToast(false), 4000);
         }
     }, []);
 
     return (
         <>
+            {showToast && <UnauthorizedAlert />}
             {(() => {
                 switch (userRole) {
                     case 1:
