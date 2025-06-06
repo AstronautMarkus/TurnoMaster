@@ -15,6 +15,15 @@ const UnauthorizedAlert = () => {
             timer: 4000,
             timerProgressBar: true,
             color: '#000',
+            didOpen: () => {
+            const swalContainer = Swal.getPopup();
+            if (swalContainer) {
+                const progressBar = swalContainer.querySelector('.swal2-timer-progress-bar') as HTMLElement;
+                if (progressBar) {
+                progressBar.style.background = '#f8bb86';
+                }
+            }
+            },
         });
     }, []);
 
