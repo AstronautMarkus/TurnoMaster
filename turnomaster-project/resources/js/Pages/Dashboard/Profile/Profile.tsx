@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import useProfileData from './useProfileData';
 import useUpdateImage from './useUpdateImage';
-import AuthLoadingScreen from '../../../Components/Auth/LoadingScreen/AuthLoadingScreen';
-import { FaUserShield, FaUser } from 'react-icons/fa';
+import LoadingScreen from '../../../Components/LoadingScreen/LoadingScreen';
+import { FaUserShield, FaUser, FaCrown } from 'react-icons/fa';
 import { FaUserGear } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
 const Profile: React.FC = () => {
     const user = useProfileData();
@@ -31,7 +32,7 @@ const Profile: React.FC = () => {
             <div className="flex gap-4">
                 {!user ? (
                     <div className="flex items-center justify-center w-full">
-                        <AuthLoadingScreen />
+                        <LoadingScreen theme='dashboard' />
                     </div>
                 ) : (
                     <>
@@ -63,7 +64,7 @@ const Profile: React.FC = () => {
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium">Empresa</label>
-                                    <p className="font-bold">{user.company}</p>
+                                    <p className="font-bold">{user.company?.name}</p>
                                 </div>
                             </div>
                         </div>
@@ -78,7 +79,7 @@ const Profile: React.FC = () => {
                                 />
                             </div>
                             <button 
-                                className="mt-4 text-white px-4 py-2 bg-[#a91e1e] hover:bg-[#891818] transition-colors"
+                                className="mt-4 text-white px-4 py-2 dashboard-button transition-colors"
                                 onClick={() => setIsModalOpen(true)}
                             >
                                 Cambiar foto
@@ -106,18 +107,12 @@ const Profile: React.FC = () => {
                             onChange={handleImageChange} 
                             disabled={isLoading}
                         />
-                        {isLoading && <p className="text-sm text-gray-500 mb-2">Subiendo imagen...</p>}
-                        {error && <p className="text-sm text-red-500 mb-2">{error}</p>}
-                        {isSuccess && <p className="text-m mb-2">Imagen actualizada correctamente.</p>}
-                        <div className="flex justify-end gap-2">
+                        {isLoading && <p className="text-sm dashboard-text mb-2">Subiendo imagen...</p>}
+                        {error && <strong className="text-sm dashboard-text-error mb-2">{error}</strong>}
+                        {isSuccess && <p className="text-m dashboard-text-success mb-2">Imagen actualizada correctamente.</p>}
+                        <div className="flex justify-end gap-2 mt-4">
                             <button 
-                                className="px-4 py-2 bg-gray-300 hover:bg-gray-400"
-                                onClick={() => setIsModalOpen(false)}
-                            >
-                                Cerrar
-                            </button>
-                            <button 
-                                className="text-white px-4 py-2 bg-[#a91e1e] hover:bg-[#891818] transition-colors"
+                                className="text-white px-4 py-2 dashboard-button transition-colors"
                                 onClick={async () => {
                                     try {
                                         await deleteImage();
@@ -131,6 +126,12 @@ const Profile: React.FC = () => {
                             >
                                 Borrar imagen
                             </button>
+                            <button 
+                                className="px-4 py-2 text-white dashboard-button-secondary transition-colors"
+                                onClick={() => setIsModalOpen(false)}
+                            >
+                                Cerrar
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -138,18 +139,33 @@ const Profile: React.FC = () => {
 
             {user && (
                 <div className="mt-6 bg-white shadow-md sm:p-6">
-                    <h2 className="text-2xl font-semibold mb-4">Rol empleado en {user.company}</h2>
+                    <h2 className="text-2xl font-semibold mb-4">Rol empleado en {user.company?.name}</h2>
                     <div className="flex items-center gap-4">
                         <div className="text-4xl">
                             {user.role.id === 1 ? <FaUserShield /> : user.role.id === 3 ? <FaUser /> : <FaUserGear />}
                         </div>
                         <div>
                             <p className="text-lg font-bold">{user.role.name}</p>
-                            <p>{user.role.description}</p>
+                            <p className="italic">{user.role.description}</p>
                         </div>
                     </div>
+                    {user.email === user.company?.owner_email && (
+                        <div className="mt-6 p-4 dashboard-background-secondary flex items-center gap-4">
+                            <div className="text-4xl text-white">
+                                <FaCrown/>
+                            </div>
+                            <div>
+                                <h3 className="text-xl font-semibold mb-1 flex items-center text-white">Dueño de la compañía</h3>
+                                <p className="text-white italic">Este usuario es el dueño de la compañía <strong>{user.company?.name}</strong>.</p>
+                            </div>
+                        </div>
+                    )}
                 </div>
             )}
+            
+            <div className="flex space-x-2 justify-end mt-4">
+                <Link to="/dashboard/settings" className="text-white px-4 py-2 dashboard-button transition-colors">Salir</Link>
+            </div>
         </div>
     );
 };

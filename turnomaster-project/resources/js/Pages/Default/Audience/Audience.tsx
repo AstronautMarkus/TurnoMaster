@@ -1,7 +1,7 @@
-import React from 'react';
 import { FaBriefcase, FaBuilding, FaRocket } from 'react-icons/fa';
+import HelmetHelper from '../../../hooks/HelmetHelper/HelmetHelper';
 
-const Audience: React.FC = () => {
+const Audience = () => {
     const categories = [
         {
             title: 'Pequeñas y Medianas Empresas',
@@ -24,6 +24,8 @@ const Audience: React.FC = () => {
     ];
 
     return (
+    <>
+        <HelmetHelper path="/turnomaster-audience" />
         <div className="p-6 bg-gray-100 min-h-screen">
             <div className="max-w-6xl mx-auto">
 
@@ -84,6 +86,7 @@ const Audience: React.FC = () => {
                 </div>
             </div>
         </div>
+    </>
     );
 };
 

@@ -5,9 +5,15 @@ use Illuminate\Support\Facades\Route;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
-// Create users controllers
+// Create data controllers
 use App\Http\Controllers\DemoUser\Create\CreateDemoUserController;
 use App\Http\Controllers\Dashboard\Employees\Create\CreateEmployeeController;
+use App\Http\Controllers\Dashboard\Turnos\Create\CreateTurnosController;
+use App\Http\Controllers\Dashboard\Turnos\ShiftUser\Create\CreateShiftUsersController;
+
+// Update data controllers
+use App\Http\Controllers\Dashboard\Turnos\Edit\EditTurnosController;
+use App\Http\Controllers\Dashboard\Company\Edit\EditCompanyDataController;
 
 // Contact forms and help controllers
 
@@ -41,10 +47,16 @@ use App\Http\Controllers\Auth\Logout\LogoutController;
 // Get data controllers
 
 use App\Http\Controllers\Dashboard\GetPersonalDataController;
+use App\Http\Controllers\Dashboard\Personal\Get\GetPersonalShiftController;
 use App\Http\Controllers\Dashboard\Roles\GetRolesDataController;
 use App\Http\Controllers\Dashboard\Company\GetCompanyDataController;
 use App\Http\Controllers\Dashboard\Employees\Get\GetEmployeesListController;
 use App\Http\Controllers\Dashboard\Employees\Get\GetEmployeeByIdController;
+use App\Http\Controllers\Dashboard\Turnos\Get\GetTurnosController;
+use App\Http\Controllers\Dashboard\Turnos\Get\GetTurnosByIdController;
+use App\Http\Controllers\Dashboard\Turnos\ShiftUser\Get\GetShiftUsersByIdController;
+use App\Http\Controllers\Dashboard\Themes\GetThemesController;
+use App\Http\Controllers\Dashboard\Employees\Shifts\Get\GetEmployeesShiftsController;
 
 // Edit controllers
 
@@ -53,12 +65,18 @@ use App\Http\Controllers\Dashboard\Employees\Edit\EditEmployeeController;
 // Delete controllers
 
 use App\Http\Controllers\Dashboard\Employees\Delete\DeleteEmployeeController;
+use App\Http\Controllers\Dashboard\Turnos\Delete\DeleteTurnosController;
 
 // Image controllers
 
 use App\Http\Controllers\User\Image\UpdateImageController;
 use App\Http\Controllers\User\Image\ServeImageController;
 use App\Http\Controllers\User\Image\DeleteImageController;
+
+// Company image controllers
+use App\Http\Controllers\Dashboard\Company\Images\Update\UpdateCompanyImageController;
+use App\Http\Controllers\Dashboard\Company\Images\Delete\DeleteCompanyImageController;
+use App\Http\Controllers\Dashboard\Company\Images\Serve\ServeCompanyImageController;
 
 
 Route::post('/create/demo-user', [CreateDemoUserController::class, 'createDemoUser']);
@@ -88,17 +106,32 @@ Route::get('/validate-reset-token/{token}', [ValidateTokenController::class, 'va
 
 Route::get('/roles', [GetRolesDataController::class, 'getRoles']);
 
+Route::get('/themes', [GetThemesController::class, 'getThemesList']);
+
 // Protected routes
 
 Route::middleware(['jwt.auth'])->group(function () {
     Route::get('/me', [GetPersonalDataController::class, 'getPersonalData']);
+    Route::get('/me/next-shift', [GetPersonalShiftController::class, 'getPersonalShift']);
     Route::get('/company', [GetCompanyDataController::class, 'getCompanyData']);
+    Route::put('/company', [EditCompanyDataController::class, 'editCompanyData']);
     Route::get('/employees', [GetEmployeesListController::class, 'getEmployeesList']);
     Route::get('/employees/{id}', [GetEmployeeByIdController::class, 'getEmployeeById']);
     Route::put('/employees/{id}', [EditEmployeeController::class, 'editEmployee']);
     Route::delete('/employees/{id}', [DeleteEmployeeController::class, 'deleteEmployee']);
+    Route::get('/employees/{id}/shifts', [GetEmployeesShiftsController::class, 'getEmployeeShiftsById']);
     Route::post('/user/profile-image', [UpdateImageController::class, 'update']);
     Route::delete('/user/profile-image', [DeleteImageController::class, 'delete']);
+    Route::post('/company/profile-image', [UpdateCompanyImageController::class, 'UpdateCompanyImage']);
+    Route::delete('/company/profile-image', [DeleteCompanyImageController::class, 'DeleteCompanyImage']);
+    Route::get('/company/{companyId}/profile-image', [ServeCompanyImageController::class, 'ServeCompanyImagea']);
+    Route::get('/turnos', [GetTurnosController::class, 'getTurnos']);
+    Route::get('/turnos/{id}', [GetTurnosByIdController::class, 'getTurnoById']);
+    Route::post('/turnos', [CreateTurnosController::class, 'createTurnos']);
+    Route::put('/turnos/{id}', [EditTurnosController::class, 'updateTurnos']);
+    Route::delete('/turnos/{id}', [DeleteTurnosController::class, 'deleteTurnos']);
+    Route::get('/turnos/shift/{id}', [GetShiftUsersByIdController::class, 'getShiftUserById']);
+    Route::post('/turnos/shift', [CreateShiftUsersController::class, 'createShiftUser']);
 });
 
 Route::get('/assets/{path}', function ($path) {

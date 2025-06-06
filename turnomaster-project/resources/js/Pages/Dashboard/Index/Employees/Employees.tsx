@@ -1,20 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FaCalendar, FaBullhorn } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
-import useGetCompanyDetails from '../Owner/useGetCompanyDetails';
+import AttendanceWidget from '../getShift/getShift';
 
 const Employees = () => {
 
-    const [currentTime, setCurrentTime] = useState(new Date());
-    const { data: companyData, loading } = useGetCompanyDetails();
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentTime(new Date());
-        }, 1000);
-
-        return () => clearInterval(interval);
-    }, []);
+    const [currentTime] = useState(new Date());
 
     const getGreeting = () => {
         const hour = currentTime.getHours();
@@ -41,7 +32,7 @@ const Employees = () => {
                         <p className="text-sm sm:text-base">Este es el panel de control de TurnoMaster, donde podrás gestionar tus turnos y citas de manera eficiente.</p>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <Link to="/dashboard/turnos" className="bg-[#891818] text-white p-4 rounded-none flex flex-col items-center justify-center w-full sm:w-10/12 mx-auto sm:ml-0 sm:mr-auto hover:bg-[#a91a1a] transition-colors">
+                        <Link to="/dashboard/turnos" className="dashboard-button text-white p-4 rounded-none flex flex-col items-center justify-center w-full sm:w-10/12 mx-auto sm:ml-0 sm:mr-auto transition-colors">
                             <div className="flex items-center">
                                 <div className="text-4xl mr-4">
                                     <FaCalendar />
@@ -53,30 +44,22 @@ const Employees = () => {
                             </div>
                         </Link>
                         
-                        <Link to="/dashboard/reports" className="bg-[#006400] text-white p-4 rounded-none flex flex-col items-center justify-center w-full sm:w-10/12 mx-auto sm:ml-0 sm:mr-auto hover:bg-[#008000] transition-colors">
+                        <Link to="/dashboard/reports" className="dashboard-button-success text-white p-4 rounded-none flex flex-col items-center justify-center w-full sm:w-10/12 mx-auto sm:ml-0 sm:mr-auto transition-colors">
                             <div className="flex items-center">
                                 <div className="text-4xl mr-4">
                                     <FaBullhorn />
                                 </div>
                                 <div>
-                                    <h3 className="text-xl font-bold">Reportes</h3>
-                                    <p className="text-sm">Si necesitas reportar o justificar algo, hazlo aquí</p>
+                                    <h3 className="text-xl font-bold">Asistencia y Reportes</h3>
+                                    <p className="text-sm">Gestiona tu asistencia y reporta incidencias aquí</p>
                                 </div>
                             </div>
                         </Link>
                     </div>
                 </div>
 
-                <div className="bg-white shadow-lg sm:p-6 flex flex-col">
-                    <div className="mb-6">
-                        <h3 className="text-xl font-bold text-gray-800 mb-2 text-center">Hora actual:</h3>
-                        <p className="text-lg text-gray-700 text-center">{currentTime.toLocaleTimeString()}</p>
-                    </div>
-                    <div className="pt-4 border-t border-gray-300">
-                        <h3 className="text-xl font-bold text-gray-800 mb-2 text-center">Próximo horario de entrada:</h3>
-                        <p className="text-lg text-gray-700 text-center">No hay horarios disponible.</p>
-                    </div>
-                </div>
+                <AttendanceWidget />
+
             </div>
         </div>
     );

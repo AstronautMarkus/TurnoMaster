@@ -1,15 +1,11 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-    FaShieldAlt,
-    FaLock,
-    FaUserSecret,
-    FaBug,
-    FaCodeBranch
-} from 'react-icons/fa';
+import { FaShieldAlt, FaLock, FaUserSecret,FaBug, FaCodeBranch} from 'react-icons/fa';
+import HelmetHelper from '../../../hooks/HelmetHelper/HelmetHelper';
 
-const SecurityPrivacy: React.FC = () => {
+const SecurityPrivacy = () => {
     return (
+    <>
+        <HelmetHelper path="/security-privacy"/>  
         <section className="min-h-screen py-10 px-6">
             <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-12">
@@ -71,6 +67,7 @@ const SecurityPrivacy: React.FC = () => {
 
             </div>
         </section>
+    </>
     );
 };
 

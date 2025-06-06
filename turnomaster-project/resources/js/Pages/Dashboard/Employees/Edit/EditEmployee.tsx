@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import useEditEmployee from './useEditEmployee';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import {FaEdit} from 'react-icons/fa';
 
 const EditEmployee: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -81,7 +82,10 @@ const EditEmployee: React.FC = () => {
 
     return (
         <div className="p-6">
-            <h1 className="text-3xl sm:text-4xl font-bold text-left mb-6 mt-4">Editar empleado</h1>
+            <h1 className="text-3xl sm:text-4xl font-bold text-left mb-6 mt-4 flex items-center gap-2">
+                <FaEdit />
+                Editar empleado
+            </h1>
             <div className="bg-white shadow-md w-full p-6 relative">
                 <>
                     {submissionMessage && (
@@ -112,33 +116,35 @@ const EditEmployee: React.FC = () => {
                     >
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label htmlFor="first_name" className="block text-sm font-medium text-gray-700">Nombre</label>
+                                <label htmlFor="first_name" className="block text-sm font-bold text-black">Nombre</label>
                                 <input
                                     type="text"
                                     id="first_name"
                                     name="first_name"
                                     value={formValues.first_name}
                                     onChange={(e) => handleChange('first_name', e.target.value)}
-                                    className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                    placeholder="Ingrese un nombre"
+                                    className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
                                     disabled={loading}
                                 />
                                 {errors.first_name && <p className="text-red-500 text-sm">{errors.first_name}</p>}
                             </div>
                             <div>
-                                <label htmlFor="last_name" className="block text-sm font-medium text-gray-700">Apellido</label>
+                                <label htmlFor="last_name" className="block text-sm font-bold text-black">Apellido</label>
                                 <input
                                     type="text"
                                     id="last_name"
                                     name="last_name"
                                     value={formValues.last_name}
                                     onChange={(e) => handleChange('last_name', e.target.value)}
-                                    className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                    placeholder="Ingrese un apellido"
+                                    className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
                                     disabled={loading}
                                 />
                                 {errors.last_name && <p className="text-red-500 text-sm">{errors.last_name}</p>}
                             </div>
                             <div>
-                                <label htmlFor="rut" className="block text-sm font-medium text-gray-700">RUT</label>
+                                <label htmlFor="rut" className="block text-sm font-bold text-black">RUT</label>
                                 <div className="flex items-center space-x-2">
                                     <input
                                         type="text"
@@ -146,7 +152,7 @@ const EditEmployee: React.FC = () => {
                                         name="rut"
                                         value={rut}
                                         onChange={(e) => handleRutChange(e.target.value)}
-                                        className="flex-grow px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                        className="flex-grow px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
                                         placeholder="12345678"
                                         disabled={loading}
                                     />
@@ -157,7 +163,7 @@ const EditEmployee: React.FC = () => {
                                         name="rut_dv"
                                         value={rutDv}
                                         onChange={(e) => handleRutDvChange(e.target.value)}
-                                        className="w-12 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                        className="w-12 px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
                                         placeholder="k"
                                         disabled={loading}
                                     />
@@ -165,26 +171,27 @@ const EditEmployee: React.FC = () => {
                                 {errors.rut_general && <p className="text-red-500 text-sm">{errors.rut_general}</p>}
                             </div>
                             <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                                <label htmlFor="email" className="block text-sm font-bold text-black">Correo Electrónico</label>
                                 <input
                                     type="email"
                                     id="email"
                                     name="email"
                                     value={formValues.email}
                                     onChange={(e) => handleChange('email', e.target.value)}
-                                    className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                    placeholder="Ingrese un correo electrónico"
+                                    className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
                                     disabled={loading}
                                 />
                                 {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
                             </div>
                             <div>
-                                <label htmlFor="role_id" className="block text-sm font-medium text-gray-700">Rol</label>
+                                <label htmlFor="role_id" className="block text-sm font-bold text-black">Rol</label>
                                 <select
                                     id="role_id"
                                     name="role_id"
                                     value={formValues.role_id}
                                     onChange={(e) => handleChange('role_id', e.target.value)}
-                                    className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                                    className="w-full px-4 py-2 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
                                     disabled={loading}
                                 >
                                     <option value="" disabled>Selecciona un rol</option>
@@ -200,19 +207,20 @@ const EditEmployee: React.FC = () => {
                             className={`mt-4 px-4 py-2 text-white ${
                                 loading
                                     ? error
-                                        ? 'bg-red-600'
-                                        : 'bg-blue-400'
-                                    : 'bg-blue-600 hover:bg-blue-700'
-                            }`}
+                                        ? 'bg-red-400'
+                                        : 'bg-gray-400'
+                                    : 'dashboard-button-secondary'
+                            } flex items-center justify-center `}
                             disabled={loading}
                         >
-                            {loading ? (error ? 'Error' : 'Cargando...') : 'Guardar'}
+                            {!loading && !error && <FaEdit className="mr-2" />}
+                            {loading ? (error ? 'Error' : 'Cargando...') : 'Editar empleado'}
                         </button>
                     </form>
                 </>
             </div>
             <div className="flex space-x-2 justify-end mt-4">
-                <Link to="/dashboard/employees" className="text-white px-4 py-2 bg-[#a91e1e] hover:bg-[#891818] transition-colors">Salir</Link>
+                <Link to="/dashboard/employees" className="text-white px-4 py-2 dashboard-button transition-colors">Salir</Link>
             </div>
         </div>
     );

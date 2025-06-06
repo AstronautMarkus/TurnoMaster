@@ -1,21 +1,31 @@
 import React, { useState, useRef, useEffect, MouseEvent } from "react";
-import { FiLogOut, FiSettings, FiUser,  FiMenu} from "react-icons/fi";
+import { FiLogOut, FiSettings, FiUser, FiMenu } from "react-icons/fi";
+import { FaUserShield, FaUser } from 'react-icons/fa';
+import { FaUserGear } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
 import { LogoutModal } from "./LogoutModal";
 import { useHandleLogout } from "../../../../../hooks/useHandleLogout";
+import axios from "axios";
 
 export function UserNav() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [showLogoutModal, setShowLogoutModal] = useState<boolean>(false);
+  const [userData, setUserData] = useState<any>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const navigate = useNavigate();
   const handleLogout = useHandleLogout();
 
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
-  const userName = user.name || "Usuario";
-  const userEmail = user.email || "email@ejemplo.com";
-  const userImage = user.profile_photo || "/img/profile/default.png";
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    axios.get("/api/me", {
+      headers: {
+        Authorization: token ? `Bearer ${token}` : undefined,
+      },
+    })
+      .then(res => setUserData(res.data))
+      .catch(() => setUserData(null));
+  }, []);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent): void {
@@ -30,6 +40,23 @@ export function UserNav() {
     };
   }, []);
 
+  const userName = userData
+    ? `${userData.user.first_name} ${userData.user.last_name}`
+    : "Usuario";
+  const userEmail = userData?.user?.email || "email@ejemplo.com";
+  const userImage =
+    userData?.user?.profile_photo ||
+    "/img/profile/default.png";
+  const userRoleId = userData?.role?.id;
+
+  
+  let RoleIcon = FaUser;
+  if (userRoleId === 1) {
+    RoleIcon = FaUserShield;
+  } else if (userRoleId === 2) {
+    RoleIcon = FaUserGear;
+  }
+
   return (
     <div className="relative" ref={dropdownRef}>
       <button
@@ -38,12 +65,14 @@ export function UserNav() {
       >
         <div className="h-8 w-8 rounded-full overflow-hidden bg-slate-600">
           <img
-        src={userImage}
-        alt="Profile"
-        className="h-full w-full object-cover"
+            src={userImage}
+            alt="Profile"
+            className="h-full w-full object-cover"
           />
         </div>
-        <span className="hidden text-sm font-medium md:inline-block">
+        <span className="hidden text-sm font-medium md:inline-block flex items-center gap-1">
+          
+          <RoleIcon className="inline-block mr-1" />
           {userName}
         </span>
       </button>
@@ -59,7 +88,7 @@ export function UserNav() {
             <div className="border-t border-gray-200"></div>
             
             <div className="py-1">
-              <Link to="/dashboard/profile" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              <Link to="/dashboard/settings/profile" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                 <FiUser className="mr-2 h-4 w-4 text-gray-500" /> Perfil
               </Link>
               <Link to="/dashboard/settings" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">

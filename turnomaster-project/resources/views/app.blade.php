@@ -3,12 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <title>{{ config('app.name', 'TurnoMaster') }}</title>
-
-        <link rel="shortcut icon" href="/img/logo/TurnoMaster.svg" type="image/x-icon">
-        
-
+        <link rel="shortcut icon" href="/img/logo/TurnoMasterBlack.svg" type="image/x-icon">
         @viteReactRefresh
         @vite(['resources/js/main.tsx'])
     </head>

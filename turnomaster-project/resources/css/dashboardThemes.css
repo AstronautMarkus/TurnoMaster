@@ -1,0 +1,324 @@
+/* ============================= */
+/* TURNOMASTER DASHBOARD THEMES  */
+/* ============================= */
+
+.theme-reyes {
+  --bg: #1f1f1f;
+  --text: #eaeaea;
+  --accent: #891818;
+  --accent-hover: #7b1414;
+  --secondary: #3c3c3c;
+  --secondary-hover: #323232;
+  --success: #4caf50;
+  --success-hover: #45a049;
+  --warning: #ff9800;
+  --warning-hover: #e68900;
+  --error: #f44336;
+  --error-hover: #d32f2f;
+  --work-inicio: #762020;
+  --work-lunch: #363636;
+  --work-fin: #a90000;
+  --work-full: #d70000;
+  --item: #762020;
+}
+
+.theme-reyes-blue {
+  --bg: #1a2238;
+  --text: #eaeaea;
+  --accent: #2176ff;
+  --accent-hover: #185abc;
+  --secondary: #283655;
+  --secondary-hover: #1d2540;
+  --success: #43d8c9;
+  --success-hover: #36b3a3;
+  --warning: #ff9800;
+  --warning-hover: #e68900;
+  --error: #b34700;
+  --error-hover: #8c3900;
+  --work-inicio: #305678;
+  --work-lunch: #4f8cff;
+  --work-fin: #7493ff;
+  --work-full: #2176ff;
+  --item: #305678;
+}
+
+.theme-ubuntu {
+  --bg: #2c2c2c;
+  --text: #eaeaea;
+  --accent: #d75f00;
+  --accent-hover: #b65a00;
+  --secondary: #3c3c3c;
+  --secondary-hover: #323232;
+  --success: #4caf50;
+  --success-hover: #45a049;
+  --warning: #ff9800;
+  --warning-hover: #e68900;
+  --error: #f44336;
+  --error-hover: #d32f2f;
+  --work-inicio: #d75f00;
+  --work-lunch: #363636;
+  --work-fin: #9b3f17;
+  --work-full: #b65a00;
+  --item: #d75f00;
+}
+
+.theme-forest {
+  --bg: #1b2e20;
+  --text: #eaeaea;
+  --accent: #4caf50;
+  --accent-hover: #388e3c;
+  --secondary: #2e4635;
+  --secondary-hover: #24392c;
+  --success: #81c784;
+  --success-hover: #66bb6a;
+  --warning: #ff9800;
+  --warning-hover: #e68900;
+  --error: #e53935;
+  --error-hover: #c62828;
+  --work-inicio: #2e7d32;
+  --work-lunch: #1b5e20;
+  --work-fin: #388e3c;
+  --work-full: #4caf50;
+  --item: #2e7d32;
+}
+
+
+.theme-sakura {
+  --bg: #4a2c2a;
+  --text: #ffffff;
+  --accent: #ec407a;
+  --accent-hover: #d81b60;
+  --secondary: #6a3a3a;
+  --secondary-hover: #562f2f;
+  --success: #f8bbd0;
+  --success-hover: #f48fb1;
+  --warning: #ffb300;
+  --warning-hover: #ffa000;
+  --error: #e53935;
+  --error-hover: #c62828;
+  --work-inicio: #c2185b;
+  --work-lunch: #880e4f;
+  --work-fin: #ad1457;
+  --work-full: #d81b60;
+  --item: #c2185b;
+}
+
+.theme-amethyst {
+  --bg: #1e1b23;
+  --text: #e3dce5;
+  --accent: #7e57c2;
+  --accent-hover: #673ab7;
+  --secondary: #322c3b;
+  --secondary-hover: #2b2533;
+  --success: #a5d6a7;
+  --success-hover: #81c784;
+  --warning: #ffb300;
+  --warning-hover: #ffa000;
+  --error: #ef5350;
+  --error-hover: #e53935;
+  --work-inicio: #6a1b9a;
+  --work-lunch: #4a148c;
+  --work-fin: #7b1fa2;
+  --work-full: #8e24aa;
+  --item: #6a1b9a;
+}
+
+
+
+.theme-ocean {
+  --bg: #003f5c;
+  --text: #eaeaea;
+  --accent: #00bcd4;
+  --accent-hover: #0097a7;
+  --secondary: #02506d;
+  --secondary-hover: #014059;
+  --success: #80deea;
+  --success-hover: #4dd0e1;
+  --warning: #ff7043;
+  --warning-hover: #f4511e;
+  --error: #e53935;
+  --error-hover: #c62828;
+  --work-inicio: #00796b;
+  --work-lunch: #004d40;
+  --work-fin: #00897b;
+  --work-full: #009688;
+  --item: #00796b;
+}
+
+.theme-abbybot {
+  --bg: #1f2e1c;
+  --text: #fef9ec;
+  --accent: #c97c42;
+  --accent-hover: #a96230;
+  --secondary: #4f4a3f;
+  --secondary-hover: #3f3a32;
+  --success: #ffe082;
+  --success-hover: #ffd54f;
+  --warning: #ff8f00;
+  --warning-hover: #ef6c00;
+  --error: #d84315;
+  --error-hover: #bf360c;
+  --work-inicio: #5b8c5a;
+  --work-lunch: #3f5a3a;
+  --work-fin: #6d9e6d;
+  --work-full: #81c784;
+  --item: #5b8c5a;
+}
+
+
+/* ============================= */
+/*        UI ELEMENTS            */
+/* ============================= */
+
+/* Text color variants */
+
+.dashboard-text {
+  color: var(--accent);
+}
+
+.dashboard-text-secondary {
+  color: var(--secondary);
+}
+
+.dashboard-text-success {
+  color: var(--success);
+}
+
+.dashboard-text-warning {
+  color: var(--warning);
+}
+
+.dashboard-text-error {
+  color: var(--error);
+}
+
+/* Background color variants */
+
+.dashboard-background { 
+  background-color: var(--accent);
+}
+
+.dashboard-background-secondary {
+  background-color: var(--secondary);
+}
+
+.dashboard-background-success {
+  background-color: var(--success);
+}
+
+.dashboard-background-warning {
+  background-color: var(--warning);
+}
+
+.dashboard-background-error {
+  background-color: var(--error);
+}
+
+
+/* Button color variants */
+
+.dashboard-button {
+  background-color: var(--accent);
+}
+.dashboard-button:hover {
+  background-color: var(--accent-hover);
+}
+
+.dashboard-button-secondary {
+  background-color: var(--secondary);
+}
+.dashboard-button-secondary:hover {
+  background-color: var(--secondary-hover);
+}
+
+.dashboard-button-success {
+  background-color: var(--success);
+}
+.dashboard-button-success:hover {
+  background-color: var(--success-hover);
+}
+
+.dashboard-button-warning {
+  background-color: var(--warning);
+}
+.dashboard-button-warning:hover {
+  background-color: var(--warning-hover);
+}
+
+.dashboard-button-error {
+  background-color: var(--error);
+}
+
+.dashboard-button-error:hover {
+  background-color: var(--error-hover);
+}
+
+/* ============================= */
+/*  DASHBOARD SIDEBAR & RELATED  */
+/* ============================= */
+
+.dashboard-sidebar {
+  background-color: var(--bg);
+}
+
+.dashboard-option {
+  background-color: var(--accent);
+}
+
+.dashboard-hover {
+  background-color: var(--accent-hover);
+}
+
+.dashboard-success{
+  background-color: var(--success);
+}
+
+.dashboard-warning {
+  background-color: var(--warning);
+}
+
+.dashboard-error{
+  background-color: var(--error);
+}
+
+/* ============================= */
+/*         VIS TIMELINE          */
+/* ============================= */
+
+
+.vis-item.inicio-range {
+  background-color: var(--work-inicio);
+  color: white !important;
+}
+
+.vis-item.lunch-range {
+  background-color: var(--work-lunch);
+  color: white !important;
+}
+
+.vis-item.fin-range {
+  background-color: var(--work-fin);
+  color: white !important;
+}
+
+.vis-item.workday-range {
+  background-color: var(--work-full);
+  color: white !important;
+}
+
+
+.vis-timeline .vis-selected.inicio-range,
+.vis-timeline .vis-selected.lunch-range,
+.vis-timeline .vis-selected.fin-range,
+.vis-timeline .vis-selected.workday-range {
+  color: black !important;
+}
+
+.vis-item.item {
+  background-color: var(--item);
+  color: white !important;
+}
+
+.vis-selected.item{
+  color: black !important;
+}

@@ -37,7 +37,11 @@ const useUpdateImage = () => {
             setIsSuccess(true);
             return newProfilePhotoUrl;
         } catch (err: any) {
-            setError(err.response?.data?.message || 'Error actualizando la foto de perfil.');
+            if (err.response?.status === 422 && err.response?.data?.errors?.profile_image) {
+                setError(err.response.data.errors.profile_image[0]);
+            } else {
+                setError(err.response?.data?.message || 'Error actualizando la foto de perfil.');
+            }
             throw err;
         } finally {
             setIsLoading(false);

@@ -41,10 +41,18 @@ class EditEmployeeController extends Controller
             'first_name', 'last_name', 'rut', 'rut_dv', 'email', 'role_id'
         ]);
 
-        if (empty(array_filter($data))) {
+        
+        $allEmpty = true;
+        foreach ($data as $value) {
+            if (!is_null($value) && $value !== '') {
+                $allEmpty = false;
+                break;
+            }
+        }
+        if ($allEmpty) {
             return response()->json([
-                'message' => 'Debe proporcionar al menos un campo para actualizar.',
-            ], 422);
+                'message' => 'No se ha realizado ningún cambio.',
+            ], 200);
         }
 
         $user = DashboardUser::find($id);
@@ -55,7 +63,18 @@ class EditEmployeeController extends Controller
             ], 404);
         }
 
-        $user->update($data);
+        
+        $filteredData = array_filter($data, function ($value) {
+            return !is_null($value) && $value !== '';
+        });
+
+        if (empty($filteredData)) {
+            return response()->json([
+                'message' => 'No se ha realizado ningún cambio.',
+            ], 200);
+        }
+
+        $user->update($filteredData);
 
         return response()->json([
             'message' => 'Empleado actualizado exitosamente.',

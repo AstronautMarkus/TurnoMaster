@@ -1,18 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { FiChevronRight, FiGrid, FiSettings, FiUsers, FiClock, FiBarChart2 } from "react-icons/fi";
+import { FiChevronRight, FiGrid, FiSettings, FiUsers} from "react-icons/fi";
+import { FaCalendar, FaClipboardCheck } from "react-icons/fa";
+import { FaBullhorn, FaAlignJustify } from "react-icons/fa6";
 import { Link, useLocation } from "react-router-dom";
+
+import useRoleChecker from "../../../../hooks/auth/useRoleChecker";
 
 interface ExpandedItems {
   [key: string]: boolean;
+}
+
+
+type SidebarLink = {
+  to?: string;
+  label: string;
+  icon?: React.ComponentType<any>;
+  subMenuKey?: string;
+  subLinks?: { to: string; label: string }[];
+};
+
+type SidebarSection = {
+  category: string;
+  links: SidebarLink[];
 }
 
 interface SidebarContentProps {
   expandedItems: ExpandedItems;
   toggleSubMenu: (key: string) => void;
   currentPath: string;
+  sidebarConfig: SidebarSection[];
 }
 
-const sidebarConfig = [
+const sidebarConfigOwner: SidebarSection[] = [
   {
     category: "Inicio",
     links: [
@@ -23,6 +42,15 @@ const sidebarConfig = [
     category: "Administración",
     links: [
       {
+        label: "Turnos",
+        icon: FaCalendar,
+        subMenuKey: "turnos",
+        subLinks: [
+          { to: "/dashboard/turnos", label: "Lista de turnos" },
+          { to: "/dashboard/turnos/create", label: "Crear turno" },
+        ],
+      },
+      {
         label: "Empleados",
         icon: FiUsers,
         subMenuKey: "employees",
@@ -31,6 +59,100 @@ const sidebarConfig = [
           { to: "/dashboard/employees/create", label: "Crear empleado" },
         ],
       },
+    ],
+  },
+  {
+    category: "Ajustes",
+    links: [
+      { to: "/dashboard/settings", label: "Ajustes", icon: FiSettings },
+    ],
+  },
+];
+
+const sidebarConfigHr: SidebarSection[] = [
+  {
+    category: "Inicio",
+    links: [
+      { to: "/dashboard", label: "Menú Principal", icon: FiGrid },
+    ],
+  },
+  {
+    category: "Asistencia y Reportes",
+    links: [
+      { to: "/dashboard/reports", label: "Asistencia y Reportes", icon: FaBullhorn },
+    ],
+  },
+  {
+    category:"Registro de asistencia",
+    links: [
+    { to: "/dashboard/reports/turnos/register", label: "Registrar asistencia", icon: FaClipboardCheck },
+  ],
+  },
+  {
+    category:"Reportes y justificación",
+    links: [
+    { to: "/dashboard/reports/new", label: "Reportar petición", icon: FaAlignJustify },
+  ],
+  },
+  {
+    category: "Administración",
+    links: [
+      {
+        label: "Turnos",
+        icon: FaCalendar,
+        subMenuKey: "turnos",
+        subLinks: [
+          { to: "/dashboard/turnos", label: "Lista de turnos" },
+          { to: "/dashboard/turnos/create", label: "Crear turno" },
+        ],
+      },
+      {
+        label: "Empleados",
+        icon: FiUsers,
+        subMenuKey: "employees",
+        subLinks: [
+          { to: "/dashboard/employees", label: "Lista de empleados" },
+          { to: "/dashboard/employees/create", label: "Crear empleado" },
+        ],
+      },
+    ],
+  },
+  {
+    category: "Ajustes",
+    links: [
+      { to: "/dashboard/settings", label: "Ajustes", icon: FiSettings },
+    ],
+  },
+];
+
+const sidebarConfigEmployees: SidebarSection[] = [
+  {
+    category: "Inicio",
+    links: [
+      { to: "/dashboard", label: "Menú Principal", icon: FiGrid },
+    ],
+  },
+  {
+    category: "Asistencia y Reportes",
+    links: [
+      { to: "/dashboard/reports", label: "Asistencia y Reportes", icon: FaBullhorn },
+    ],
+  },
+  {
+    category:"Registro de asistencia",
+    links: [
+      { to: "/dashboard/reports/turnos/register", label: "Registrar asistencia", icon: FaClipboardCheck },
+    ],
+  },
+  {
+    category:"Reportes y justificación",
+    links: [
+      { to: "/dashboard/reports/new", label: "Reportar petición", icon: FaAlignJustify },
+    ],
+  },
+  {
+    category: "Ajustes",
+    links: [
       { to: "/dashboard/settings", label: "Ajustes", icon: FiSettings },
     ],
   },
@@ -40,6 +162,23 @@ export function Sidebar() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [expandedItems, setExpandedItems] = useState<ExpandedItems>({});
   const location = useLocation();
+  const roleId = useRoleChecker();
+
+
+  let sidebarConfig: SidebarSection[];
+  switch (roleId) {
+    case 1:
+      sidebarConfig = sidebarConfigOwner;
+      break;
+    case 2:
+      sidebarConfig = sidebarConfigHr;
+      break;
+    case 3:
+      sidebarConfig = sidebarConfigEmployees;
+      break;
+    default:
+      sidebarConfig = [];
+  }
 
   useEffect(() => {
     const handleToggle = (): void => setIsOpen(!isOpen);
@@ -77,34 +216,41 @@ export function Sidebar() {
           onClick={() => setIsOpen(false)}
         >
           <div
-            className="w-64 h-full bg-[#1f1f1f] text-white p-4 transform transition-transform duration-200 ease-in-out"
+            className="w-64 h-full dashboard-sidebar text-white p-4 transform transition-transform duration-200 ease-in-out"
             onClick={(e: React.MouseEvent) => e.stopPropagation()}
           >
             <SidebarContent
               expandedItems={expandedItems}
               toggleSubMenu={toggleSubMenu}
               currentPath={location.pathname}
+              sidebarConfig={sidebarConfig}
             />
           </div>
         </div>
       )}
 
-      <div className="hidden md:block w-64 bg-[#1f1f1f] text-white border-r border-[#1f1f1f] h-screen sticky top-0">
+      <div className="hidden md:block w-64 dashboard-sidebar text-white h-screen sticky top-0">
         <SidebarContent
           expandedItems={expandedItems}
           toggleSubMenu={toggleSubMenu}
           currentPath={location.pathname}
+          sidebarConfig={sidebarConfig}
         />
       </div>
     </>
   );
 }
 
+
 function SidebarContent({
   expandedItems,
   toggleSubMenu,
   currentPath,
+  sidebarConfig,
 }: SidebarContentProps) {
+  const [hoveredParent, setHoveredParent] = useState<string | null>(null);
+  const [hoveredSingle, setHoveredSingle] = useState<string | null>(null);
+
   const isSubMenuActive = (subLinks: { to: string }[]) =>
     subLinks.some((subLink) => currentPath.startsWith(subLink.to));
 
@@ -112,7 +258,7 @@ function SidebarContent({
     <>
       <div className="flex items-center justify-start py-4 px-4">
         <Link to="/dashboard" className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded bg-[#891818] flex items-center justify-center">
+          <div className="h-8 w-8 rounded dashboard-background flex items-center justify-center">
             <img src="/img/logo/TurnoMasterWhite.svg" className="h-6 w-6" />
           </div>
           <div className="flex flex-col">
@@ -133,12 +279,17 @@ function SidebarContent({
                 link.subMenuKey ? (
                   <li key={link.label}>
                     <button
-                      className={`flex items-center justify-between w-full gap-2 px-3 py-2 rounded-md text-sm ${
-                        isSubMenuActive(link.subLinks || [])
-                          ? "bg-[#891818] text-white"
-                          : "text-slate-200 hover:bg-[#891818]"
-                      }`}
+                      className={`flex items-center justify-between w-full gap-2 px-3 py-2 rounded-md text-sm
+                        ${
+                          isSubMenuActive(link.subLinks || [])
+                            ? "dashboard-option text-white"
+                            : hoveredParent === link.subMenuKey
+                            ? "dashboard-hover text-white"
+                            : "text-slate-200"
+                        } hover:dashboard-hover`}
                       onClick={() => toggleSubMenu(link.subMenuKey!)}
+                      onMouseEnter={() => setHoveredParent(link.subMenuKey!)}
+                      onMouseLeave={() => setHoveredParent(null)}
                     >
                       <div className="flex items-center gap-2">
                         {link.icon && <link.icon className="h-4 w-4" />}
@@ -158,8 +309,8 @@ function SidebarContent({
                               to={subLink.to}
                               className={`flex items-center px-3 py-2 rounded-md text-sm ${
                                 currentPath === subLink.to
-                                  ? "text-white font-bold"
-                                  : "text-slate-300 hover:text-white"
+                                  ? "text-white font-bold dashboard-option"
+                                  : "text-slate-300 hover:dashboard-option"
                               }`}
                             >
                               {subLink.label}
@@ -176,9 +327,13 @@ function SidebarContent({
                         to={link.to}
                         className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm ${
                           currentPath === link.to
-                            ? "bg-[#891818] text-white"
-                            : "text-slate-200 hover:bg-[#891818]"
-                        }`}
+                            ? "dashboard-option text-white"
+                            : hoveredSingle === link.to
+                            ? "dashboard-hover text-white"
+                            : "text-slate-200"
+                        } hover:dashboard-hover`}
+                        onMouseEnter={() => setHoveredSingle(link.to!)}
+                        onMouseLeave={() => setHoveredSingle(null)}
                       >
                         {link.icon && <link.icon className="h-4 w-4" />}
                         <span>{link.label}</span>

@@ -18,6 +18,12 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'reyes': "#891818",
+                'reyes-active': "#5c1010",
+                'reyes-light': "#e01d1d",
+                'reyes-light-active': "#a91a1a",
+            },
         },
     },
 

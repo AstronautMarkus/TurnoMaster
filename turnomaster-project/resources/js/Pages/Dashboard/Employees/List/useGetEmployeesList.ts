@@ -9,6 +9,8 @@ interface Employee {
   email: string;
   role: string;
   image: string;
+  has_shift: boolean;
+  shift_count: number;
 }
 
 const getRandomNumber = () => Math.floor(Math.random() * 5) + 1;
@@ -18,19 +20,41 @@ const getRandomImage = () => {
   return `/img/profile/default${randomNumber}.png`;
 };
 
+const formatChileanRut = (rut: string | number, dv: string) => {
+  const rutStr = typeof rut === "number" ? rut.toString() : rut;
+  let result = "";
+  let i = rutStr.length;
+  let count = 0;
+  while (i > 0) {
+    i--;
+    result = rutStr[i] + result;
+    count++;
+    if (count === 3 && i !== 0) {
+      result = "." + result;
+      count = 0;
+    }
+  }
+  return `${result}-${dv}`;
+};
+
 const useGetEmployeesList = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [roles, setRoles] = useState<string[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [searchName, setSearchName] = useState<string>("");
 
   useEffect(() => {
     const fetchEmployees = async () => {
       setLoading(true);
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(`/api/employees?page=${page}`, {
+        let url = `/api/employees?page=${page}`;
+        if (searchName) {
+          url += `&name=${encodeURIComponent(searchName)}`;
+        }
+        const response = await axios.get(url, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -40,10 +64,12 @@ const useGetEmployeesList = () => {
           id: employee.id,
           first_name: employee.first_name,
           last_name: employee.last_name,
-          rut: `${employee.rut}-${employee.rut_dv}`,
+          rut: formatChileanRut(employee.rut, employee.rut_dv),
           email: employee.email,
           role: employee.role,
           image: employee.profile_photo || "/img/profile/default.png",
+          has_shift: employee.has_shift,
+          shift_count: employee.shift_count,
         }));
         setEmployees(employeesData);
 
@@ -59,9 +85,9 @@ const useGetEmployeesList = () => {
     };
 
     fetchEmployees();
-  }, [page]);
+  }, [page, searchName]);
 
-  return { employees, roles, page, setPage, totalPages, loading };
+  return { employees, roles, page, setPage, totalPages, loading, setSearchName };
 };
 
 export default useGetEmployeesList;

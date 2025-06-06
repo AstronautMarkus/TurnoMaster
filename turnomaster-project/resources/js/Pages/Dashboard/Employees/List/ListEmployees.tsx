@@ -2,12 +2,19 @@ import React, { useState } from "react";
 import useGetEmployeesList from "./useGetEmployeesList";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { FaPlus, FaMinus } from "react-icons/fa6";
+import { FaSearch, FaEdit } from "react-icons/fa";
+import { FaUserShield, FaUser } from 'react-icons/fa';
+import { FaUserGear } from "react-icons/fa6";
+import { FiUsers } from "react-icons/fi";
+import { FaXmark } from "react-icons/fa6";
 
-const ListEmployees: React.FC = () => {
-  const { employees, roles, page, setPage, totalPages, loading } = useGetEmployeesList();
+const ListEmployees = () => {
+  const { employees, roles, page, setPage, totalPages, loading, setSearchName } = useGetEmployeesList();
   const [selectedRole, setSelectedRole] = useState<string>("Todos");
   const [showModal, setShowModal] = useState(false);
   const [employeeToDelete, setEmployeeToDelete] = useState<{ id: number; first_name: string; last_name: string } | null>(null);
+  const [searchInput, setSearchInput] = useState<string>("");
 
   const handleRoleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedRole(event.target.value);
@@ -40,6 +47,24 @@ const ListEmployees: React.FC = () => {
     }
   };
 
+
+  const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(e.target.value);
+  };
+
+
+  const handleSearch = () => {
+    setPage(1);
+    setSearchName(searchInput.trim());
+  };
+
+
+  const handleClearSearch = () => {
+    setSearchInput("");
+    setPage(1);
+    setSearchName("");
+  };
+
   const filteredEmployees = selectedRole === "Todos"
     ? employees
     : employees.filter((employee) => employee.role === selectedRole);
@@ -54,29 +79,64 @@ const ListEmployees: React.FC = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-3xl sm:text-4xl font-bold text-left mb-6 mt-4 text-gray-800">Lista de empleados</h1>
+      <h1 className="text-3xl sm:text-4xl font-bold text-left mb-6 mt-4 text-gray-800 flex items-center">
+        <FiUsers className="mr-3" />
+        Lista de empleados
+      </h1>
+      <p className="text-gray-600 mb-6 text-lg">Aquí puedes gestionar los empleados de tu empresa.</p>
 
-      <div className="flex justify-between items-center mb-4">
-        <div className="flex space-x-2">
-          <Link to="/dashboard/employees/create" className="text-white px-4 py-2 bg-[#a91e1e] hover:bg-[#891818] transition-colors">Crear empleado</Link>
-        </div>
-        <input
-          type="text"
-          placeholder="Buscar empleado..."
-          className="border border-gray-300 rounded px-4 py-2 w-full sm:w-1/3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-        <div className="flex items-center space-x-2">
-          <span className="text-gray-700 font-medium w-64">Filtrar por rol:</span>
-          <select
-            value={selectedRole}
-            onChange={handleRoleChange}
-            className="border border-gray-300 rounded px-4 py-2 w-full sm:w-1/1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center mb-4">
+        <div className="w-full sm:w-auto">
+          <Link
+            to="/dashboard/employees/create"
+            className="flex items-center justify-center w-full sm:w-auto text-white px-4 py-2 dashboard-button transition-colors"
           >
-            <option value="Todos">Todos</option>
-            {roles.map((role, index) => (
-              <option key={index} value={role}>{role}</option>
-            ))}
-          </select>
+            <FaPlus className="mr-2" />
+            Crear empleado
+          </Link>
+        </div>
+        <div className="flex flex-col gap-2 w-full sm:w-1/3">
+          <div className="flex items-center space-x-2 w-full">
+            <input
+              type="text"
+              placeholder="Buscar empleado..."
+              value={searchInput}
+              onChange={handleSearchInputChange}
+              className="flex-grow px-4 py-2 h-10 focus:outline-none focus:ring-3 focus:ring-black focus:border-black hover:border-black"
+            />
+            <button
+              type="button"
+              onClick={handleSearch}
+              className="flex items-center text-white px-4 py-2 h-10 min-h-[2.5rem] dashboard-button transition-colors"
+            >
+              <FaSearch className="text-lg" />
+            </button>
+            {searchInput && (
+              <button
+                type="button"
+                onClick={handleClearSearch}
+                className="flex items-center text-white px-2 py-2 h-10 min-h-[2.5rem] bg-gray-500 hover:bg-gray-600 transition-colors"
+                title="Limpiar búsqueda"
+              >
+                <FaXmark className="text-lg" />
+              </button>
+            )}
+          </div>
+        </div>
+        <div className="flex flex-col w-full sm:w-auto">
+          <div className="flex items-center space-x-2">
+            <span className="text-gray-700 font-medium w-64 sm:w-auto">Filtrar por rol:</span>
+            <select
+              value={selectedRole}
+              onChange={handleRoleChange}
+              className="border border-gray-300 px-4 py-2 w-full sm:w-1/1 focus:ring-3 focus:ring-black focus:border-black hover:border-black"
+            >
+              <option value="Todos">Todos</option>
+              {roles.map((role, index) => (
+                <option key={index} value={role}>{role}</option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
@@ -88,12 +148,15 @@ const ListEmployees: React.FC = () => {
         ) : (
           <div className="max-h-96 overflow-y-auto">
             <table className="table-auto w-full border-collapse">
-              <thead className="sticky top-0 bg-[#7c1d1d] text-white uppercase text-sm tracking-wider">
+              <thead className="sticky top-0 dashboard-background text-white uppercase text-sm tracking-wider">
                 <tr>
                   <th className="px-4 py-3 text-left">Nombre</th>
                   <th className="px-4 py-3 text-left">RUT</th>
-                  <th className="px-4 py-3 text-left">Correo</th>
+                  <th className="px-4 py-3 text-left">Email</th>
                   <th className="px-4 py-3 text-left">Rol</th>
+                  <th className="px-4 py-3 text-left">¿Tiene Turnos?</th>
+                  <th className="px-4 py-3 text-left">Turnos asignados</th>
+                  <th className="px-4 py-3 text-left">Turnos</th>
                   <th className="px-4 py-3 text-left">Acciones</th>
                 </tr>
               </thead>
@@ -101,20 +164,69 @@ const ListEmployees: React.FC = () => {
                 {filteredEmployees.map((employee, index) => (
                   <tr key={index} className="hover:bg-gray-100 transition-colors">
                     <td className="px-4 py-2 flex items-center space-x-4">
-                      <img src={employee.image} className="w-12 h-12" />
+                      <img src={employee.image} className="w-12 h-12 rounded-full" />
                       <span>{employee.first_name} {employee.last_name}</span>
                     </td>
-                    <td className="px-4 py-2">{employee.rut}</td>
-                    <td className="px-4 py-2">{employee.email}</td>
-                    <td className="px-4 py-2">{employee.role}</td>
+                    <td className="px-4 py-2"><span>{employee.rut}</span></td>
+                    <td className="px-4 py-2"><span>{employee.email}</span></td>
+                    <td className="px-4 py-2">
+                      <span className="inline-flex items-center" style={{ marginRight: "0.5rem" }}>
+                        {employee.role === "Admin" ? (
+                          <FaUserShield style={{ fontSize: "1.2em" }} />
+                        ) : employee.role === "Empleado" ? (
+                          <FaUser style={{ fontSize: "1.2em" }} />
+                        ) : (
+                          <FaUserGear style={{ fontSize: "1.2em" }} />
+                        )}
+                      </span>
+                      <span>{employee.role}</span>
+                    </td>
+                    <td className="px-4 py-2">
+                      <span className="inline-flex items-center">
+                        {employee.has_shift ? "Sí" : "No"}
+                      </span>
+                    </td>
+                    <td className="px-4 py-2">
+                      <span className="inline-flex items-center">
+                        {employee.shift_count > 0 ? (
+                          <span>{employee.shift_count}</span>
+                        ) : (
+                            0
+                        )}
+                      </span>
+                    </td>
                     <td className="px-4 py-2">
                       <div className="flex space-x-2">
-                        <Link to={`/dashboard/employees/edit/${employee.id}`} className="bg-blue-600 text-white px-4 py-2 text-sm hover:bg-blue-700 transition-colors">Editar</Link>
+                        <Link
+                          to={`/dashboard/employees/${employee.id}/assign-shifts`}
+                          className="dashboard-button-secondary text-white px-4 py-2 text-sm transition-colors flex items-center"
+                        >
+                          <FaPlus className="mr-2" />
+                          Asignar
+                        </Link>
+                        {employee.shift_count > 0 && (
+                          <Link
+                            to={`/dashboard/employees/${employee.id}/shifts`}
+                            className="dashboard-button-success text-black font-semibold px-4 py-2 text-sm transition-colors flex items-center"
+                          >
+                            <FaSearch className="mr-2" />
+                            Listar
+                          </Link>
+                        )}
+                      </div>
+                    </td>
+                    <td className="px-4 py-2">
+                      <div className="flex space-x-2">
+                        <Link to={`/dashboard/employees/edit/${employee.id}`} className="dashboard-button-warning text-white px-4 py-2 text-sm transition-colors flex items-center">
+                          <FaEdit className="mr-2" />
+                          Editar
+                        </Link>
                         <button
                           onClick={() => handleDeleteClick(employee)}
-                          className="bg-red-700 text-white px-4 py-2 text-sm hover:bg-red-800 transition-colors"
+                          className="text-white px-4 py-2 text-sm dashboard-button transition-colors flex items-center"
                         >
-                          Borrar
+                          <FaMinus className="mr-2" />
+                          Eliminar
                         </button>
                       </div>
                     </td>
@@ -122,7 +234,7 @@ const ListEmployees: React.FC = () => {
                 ))}
                 {filteredEmployees.length === 0 && (
                   <tr>
-                    <td colSpan={5} className="text-center py-4 text-gray-500">No se encontraron empleados. Por favor, presione "Crear empleado".</td>
+                    <td colSpan={8} className="text-center py-4 text-gray-500">No se encontraron empleados. Por favor, presione "Crear empleado".</td>
                   </tr>
                 )}
               </tbody>
@@ -152,21 +264,30 @@ const ListEmployees: React.FC = () => {
       </div>
 
       {showModal && employeeToDelete && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded shadow-lg">
-            <h2 className="text-lg font-bold mb-4">¿Está seguro de que desea borrar a {employeeToDelete.first_name} {employeeToDelete.last_name}?</h2>
-            <div className="flex justify-end space-x-4">
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50">
+          <div className="bg-white p-8 shadow-2xl w-full max-w-md">
+            <div className="flex items-center mb-4">
+              <span className="dashboard-background text-white px-3 py-1 font-bold uppercase tracking-wider mr-3">⚠️Aviso</span>
+              <h2 className="text-xl font-extrabold dashboard-text">Eliminar empleado</h2>
+            </div>
+            <p className="text-gray-800 mb-2">
+              Está a punto de eliminar al empleado <span className="font-bold">{employeeToDelete.first_name} {employeeToDelete.last_name}</span>.
+            </p>
+            <p className="text-gray-700 mb-4">
+              Esta acción <span className="font-bold dashboard-text">no se puede deshacer</span>. Todos los datos asociados a este empleado se perderán permanentemente.
+            </p>
+            <div className="flex justify-end space-x-4 mt-6">
               <button
                 onClick={() => setShowModal(false)}
-                className="px-4 py-2 bg-gray-300 text-gray-700 hover:bg-gray-400 transition-colors"
-              >
+                className="px-5 py-2 dashboard-button-secondary text-white font-semibold transition-colors"
+                    >
                 Cancelar
-              </button>
-              <button
+                    </button>
+                    <button
                 onClick={confirmDelete}
-                className="px-4 py-2 bg-red-700 text-white hover:bg-red-800 transition-colors"
-              >
-                Sí, borrar
+                className="px-5 py-2 dashboard-button text-white font-semibold transition-colors"
+                    >
+                Sí, borrar definitivamente
               </button>
             </div>
           </div>
