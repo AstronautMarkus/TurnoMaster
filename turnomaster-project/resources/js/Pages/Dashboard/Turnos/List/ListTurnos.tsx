@@ -4,11 +4,14 @@ import { FaCalendar, FaEdit, FaSearch} from "react-icons/fa";
 import { FaMinus, FaXmark } from "react-icons/fa6";
 import { FaPlus } from 'react-icons/fa6';
 import useGetTurnosList from "./useGetTurnosList";
+import 'sweetalert2/dist/sweetalert2.min.css';
+import DeleteTurnoAlert from "./DeleteTurnoAlert/DeleteTurnoAlert";
 
 const ListTurnos = () => {
     const { turnos, page, setPage, totalPages, loading, searchName, search, clearSearch} = useGetTurnosList();
 
     const [searchInput, setSearchInput] = useState<string>("");
+    const [deleteTurnoName, setDeleteTurnoName] = useState<string | null>(null);
 
     const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => { setSearchInput(e.target.value); };
 
@@ -19,6 +22,14 @@ const ListTurnos = () => {
     const handlePrevious = () => { if (page > 1) setPage(page - 1); };
 
     const handleNext = () => { if (page < totalPages) setPage(page + 1); };
+
+    const handleDeleteVisual = (turnoName: string) => {
+        setDeleteTurnoName(turnoName);
+    };
+
+    const handleDeleteAlertClose = () => {
+        setDeleteTurnoName(null);
+    };
 
     return (
         <div className="p-6">
@@ -124,6 +135,8 @@ const ListTurnos = () => {
                                                 </Link>
                                                 <button
                                                     className="text-white px-4 py-2 text-sm dashboard-button transition-colors flex items-center"
+                                                    type="button"
+                                                    onClick={() => handleDeleteVisual(turno.name)}
                                                 >
                                                     <FaMinus className="mr-2" />
                                                     Eliminar
@@ -163,6 +176,12 @@ const ListTurnos = () => {
                 </button>
                 </div>
             </div>
+            {deleteTurnoName && (
+                <DeleteTurnoAlert
+                    turnoName={deleteTurnoName}
+                    onClose={handleDeleteAlertClose}
+                />
+            )}
         </div>
     );
 };
