@@ -171,6 +171,11 @@ const sidebarConfigEmployees: SidebarSection[] = [
 export function Sidebar() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [expandedItems, setExpandedItems] = useState<ExpandedItems>({});
+  // Leer isCollapsed desde sessionStorage al inicializar
+  const [isCollapsed, setIsCollapsed] = useState<boolean>(() => {
+    const stored = sessionStorage.getItem("sidebar-collapsed");
+    return stored === "true";
+  });
   const location = useLocation();
   const roleId = useRoleChecker();
 
@@ -211,6 +216,21 @@ export function Sidebar() {
     };
   }, []);
 
+
+  useEffect(() => {
+    sessionStorage.setItem("sidebar-collapsed", isCollapsed.toString());
+  }, [isCollapsed]);
+
+  useEffect(() => {
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === "sidebar-collapsed") {
+        setIsCollapsed(e.newValue === "true");
+      }
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
+  }, []);
+
   const toggleSubMenu = (key: string): void => {
     setExpandedItems((prev) => ({
       ...prev,
@@ -239,13 +259,32 @@ export function Sidebar() {
         </div>
       )}
 
-      <div className="hidden md:block w-64 dashboard-sidebar text-white h-screen sticky top-0">
-        <SidebarContent
-          expandedItems={expandedItems}
-          toggleSubMenu={toggleSubMenu}
-          currentPath={location.pathname}
-          sidebarConfig={sidebarConfig}
-        />
+      <div
+        className={`hidden md:flex flex-col dashboard-sidebar text-white h-screen sticky top-0 transition-all duration-200
+          ${isCollapsed ? "w-20" : "w-64"}
+          relative
+        `}
+      >
+        <div className="flex-1 overflow-y-auto">
+          <SidebarContent
+            expandedItems={expandedItems}
+            toggleSubMenu={toggleSubMenu}
+            currentPath={location.pathname}
+            sidebarConfig={sidebarConfig}
+            isCollapsed={isCollapsed}
+            setIsCollapsed={setIsCollapsed}
+          />
+        </div>
+        <div className="flex justify-center items-center py-2 border-t border-slate-700">
+          <button
+            className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-slate-700 transition bg-slate-800 border border-slate-700"
+            onClick={() => setIsCollapsed((prev) => !prev)}
+            title={isCollapsed ? "Expandir menú" : "Encoger menú"}
+            type="button"
+          >
+            <FiChevronRight className={`transition-transform ${isCollapsed ? "-rotate-180" : ""}`} />
+          </button>
+        </div>
       </div>
     </>
   );
@@ -257,37 +296,50 @@ function SidebarContent({
   toggleSubMenu,
   currentPath,
   sidebarConfig,
-}: SidebarContentProps) {
+  isCollapsed = false,
+  setIsCollapsed,
+}: SidebarContentProps & { isCollapsed?: boolean; setIsCollapsed?: (v: boolean) => void }) {
   const [hoveredParent, setHoveredParent] = useState<string | null>(null);
   const [hoveredSingle, setHoveredSingle] = useState<string | null>(null);
+  const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
 
   const isSubMenuActive = (subLinks: { to: string }[]) =>
     subLinks.some((subLink) => currentPath.startsWith(subLink.to));
 
+
+  const handleDropdownLeave = () => setDropdownOpen(null);
+
   return (
     <>
-      <div className="flex items-center justify-start py-4 px-4">
+      <div className={`flex items-center justify-start py-4 px-4 ${isCollapsed ? "justify-center" : ""}`}>
         <Link to="/dashboard" className="flex items-center gap-3">
           <div className="h-8 w-8 rounded dashboard-background flex items-center justify-center">
             <img src="/img/logo/TurnoMasterWhite.svg" className="h-6 w-6" />
           </div>
-          <div className="flex flex-col">
-            <span className="font-bold text-sm text-white">TurnoMaster</span>
-            <span className="text-xs text-slate-300">Panel de trabajo</span>
-          </div>
+          {!isCollapsed && (
+            <div className="flex flex-col">
+              <span className="font-bold text-sm text-white">TurnoMaster</span>
+              <span className="text-xs text-slate-300">Panel de trabajo</span>
+            </div>
+          )}
         </Link>
       </div>
 
-      <div className="p-4">
+      <div className={`p-4 ${isCollapsed ? "px-2" : ""}`}>
         {sidebarConfig.map((section) => (
           <div key={section.category} className="mb-6">
-            <h3 className="text-xs font-medium text-slate-300 mb-2">
-              {section.category}
-            </h3>
+            {!isCollapsed && (
+              <h3 className="text-xs font-medium text-slate-300 mb-2">
+                {section.category}
+              </h3>
+            )}
             <ul className="space-y-1">
               {section.links.map((link) =>
                 link.subMenuKey ? (
-                  <li key={link.label}>
+                  <li
+                    key={link.label}
+                    className="relative"
+                  >
                     <button
                       className={`flex items-center justify-between w-full gap-2 px-3 py-2 rounded-md text-sm
                         ${
@@ -296,22 +348,61 @@ function SidebarContent({
                             : hoveredParent === link.subMenuKey
                             ? "dashboard-hover text-white"
                             : "text-slate-200"
-                        } hover:dashboard-hover`}
-                      onClick={() => toggleSubMenu(link.subMenuKey!)}
+                        } hover:dashboard-hover
+                        ${isCollapsed ? "justify-center px-2" : ""}
+                      `}
+                      onClick={() => {
+                        if (isCollapsed && setIsCollapsed) {
+                          setIsCollapsed(false);
+                          setTimeout(() => toggleSubMenu(link.subMenuKey!), 200);
+                        } else {
+                          toggleSubMenu(link.subMenuKey!);
+                        }
+                      }}
                       onMouseEnter={() => setHoveredParent(link.subMenuKey!)}
                       onMouseLeave={() => setHoveredParent(null)}
+                      tabIndex={0}
                     >
-                      <div className="flex items-center gap-2">
-                        {link.icon && <link.icon className="h-4 w-4" />}
-                        <span>{link.label}</span>
+                      <div className={`flex items-center gap-2 ${isCollapsed ? "justify-center w-full" : ""}`}>
+                        {link.icon && <link.icon className="h-5 w-5" />}
+                        {!isCollapsed && <span>{link.label}</span>}
+
+                        {isCollapsed && (
+                          <FiChevronRight className="h-4 w-4 ml-1 opacity-70" />
+                        )}
                       </div>
-                      <FiChevronRight
-                        className={`h-4 w-4 transition-transform ${
-                          expandedItems[link.subMenuKey] ? "rotate-90" : ""
-                        }`}
-                      />
+
+                      {!isCollapsed && (
+                        <FiChevronRight
+                          className={`h-4 w-4 transition-transform ${
+                            expandedItems[link.subMenuKey] ? "rotate-90" : ""
+                          }`}
+                        />
+                      )}
                     </button>
-                    {expandedItems[link.subMenuKey] && (
+                    {isCollapsed && dropdownOpen === link.subMenuKey && (
+                      <ul
+                        className="absolute left-full top-1/2 -translate-y-1/2 ml-2 min-w-[180px] bg-slate-800 border border-slate-700 rounded shadow-lg z-50"
+                        onMouseEnter={() => setDropdownOpen(link.subMenuKey!)}
+                        onMouseLeave={handleDropdownLeave}
+                      >
+                        {link.subLinks?.map((subLink) => (
+                          <li key={subLink.to}>
+                            <Link
+                              to={subLink.to}
+                              className={`flex items-center px-4 py-2 rounded-md text-sm whitespace-nowrap ${
+                                currentPath === subLink.to
+                                  ? "text-white font-bold dashboard-option"
+                                  : "text-slate-300 hover:dashboard-option"
+                              }`}
+                            >
+                              {subLink.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    {!isCollapsed && expandedItems[link.subMenuKey] && (
                       <ul className="mt-1 ml-6 space-y-1 border-l border-slate-600 pl-2">
                         {link.subLinks?.map((subLink) => (
                           <li key={subLink.to}>
@@ -341,12 +432,14 @@ function SidebarContent({
                             : hoveredSingle === link.to
                             ? "dashboard-hover text-white"
                             : "text-slate-200"
-                        } hover:dashboard-hover`}
+                        } hover:dashboard-hover
+                        ${isCollapsed ? "justify-center px-2" : ""}
+                        `}
                         onMouseEnter={() => setHoveredSingle(link.to!)}
                         onMouseLeave={() => setHoveredSingle(null)}
                       >
-                        {link.icon && <link.icon className="h-4 w-4" />}
-                        <span>{link.label}</span>
+                        {link.icon && <link.icon className="h-5 w-5" />}
+                        {!isCollapsed && <span>{link.label}</span>}
                       </Link>
                     )}
                   </li>
