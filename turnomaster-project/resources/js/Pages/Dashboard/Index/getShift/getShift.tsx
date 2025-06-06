@@ -93,35 +93,30 @@ const AttendanceWidget = () => {
         return null;
     };
 
-    const canRegisterAttendance = (() => {
-        if (!nextShift || attendanceRegistered) return false;
-        const now = currentTime;
-        const [startHour, startMinute] = nextShift.start_time.split(':').map(Number);
-        const shiftStart = new Date(now);
-        shiftStart.setHours(startHour, startMinute, 0, 0); // HH:MM:00
-        return now >= shiftStart;
-    })();
-
     return (
         <div className="bg-white shadow-lg sm:p-6 flex flex-col min-w-[300px] max-w-xs mx-auto mt-4 lg:mt-0">
-            <div className="mb-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-2 text-center">Hora actual:</h3>
-                <p className="text-lg text-gray-700 text-center">{currentTime.toLocaleTimeString()}</p>
+            <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between">
+                <div className="w-full">
+                    <h3 className="text-xl font-bold text-gray-800 mb-2 text-center mt-4 md:text-left">Hora actual:</h3>
+                    <p className="text-lg text-gray-700 text-center md:text-left">{currentTime.toLocaleTimeString()}</p>
+                </div>
             </div>
-            <div className="pt-4 border-t border-gray-300">
-                <h3 className="text-xl font-bold text-gray-800 mb-2 text-center">Próximo horario de entrada:</h3>
-                <p className="text-lg text-gray-700 text-center">
-                    {shiftLoading
-                        ? 'Cargando...'
-                        : nextShift
-                            ? nextShift.start_time
-                            : shiftError || 'No hay horarios asignados'}
-                </p>
+            <div className="pt-4 border-t border-gray-300 flex flex-col md:flex-row md:items-center md:justify-between">
+                <div className="w-full">
+                    <h3 className="text-xl font-bold text-gray-800 mb-2 text-center md:text-left">Próximo horario de entrada:</h3>
+                    <p className="text-lg text-gray-700 text-center md:text-left">
+                        {shiftLoading
+                            ? 'Cargando...'
+                            : nextShift
+                                ? nextShift.start_time
+                                : shiftError || 'No hay horarios asignados'}
+                    </p>
+                </div>
                 {attendanceChecked && nextShift && !shiftLoading && (
-                    <div className="mt-4 flex flex-col items-center">
+                    <div className="mt-4 flex flex-col items-center md:items-start w-full">
                         <Link
                             to="/dashboard/reports/turnos/register"
-                            className={`px-4 py-2 dashboard-button-success text-white font-bold disabled:bg-gray-400 ${(!canRegister || attendanceLoading || attendanceRegistered) ? 'pointer-events-none opacity-60' : ''}`}
+                            className={`px-4 py-2 dashboard-button-success text-white font-bold disabled:bg-gray-400 ${(!canRegister || attendanceLoading || attendanceRegistered) ? 'pointer-events-none opacity-60' : ''} w-auto`}
                             tabIndex={(!canRegister || attendanceLoading || attendanceRegistered) ? -1 : 0}
                             aria-disabled={!canRegister || attendanceLoading || attendanceRegistered}
                         >
@@ -132,12 +127,12 @@ const AttendanceWidget = () => {
                                     : 'Registrar asistencia'}
                         </Link>
                         {attendanceMsg && (
-                            <p className="mt-2 text-sm text-green-600">{attendanceMsg}</p>
+                            <p className="mt-2 text-sm text-green-600 text-center md:text-left">{attendanceMsg}</p>
                         )}
                         {!canRegister && !attendanceRegistered && (
                             <>
                                 {getHelperText() && (
-                                    <p className="mt-1 text-xs font-bold mb-2 mt-2 text-gray-500">{getHelperText()}</p>
+                                    <p className="mt-1 text-xs font-bold mb-2 mt-2 text-gray-500 text-center md:text-left">{getHelperText()}</p>
                                 )}
                             </>
                         )}
