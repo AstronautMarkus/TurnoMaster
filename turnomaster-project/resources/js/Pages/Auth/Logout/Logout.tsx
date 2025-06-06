@@ -16,6 +16,7 @@ const Logout: React.FC = () => {
           localStorage.removeItem("token");
           localStorage.removeItem("user");
           localStorage.removeItem("theme");
+          sessionStorage.removeItem("sidebar-collapsed");
 
           setMessage("Sesión cerrada correctamente.");
           setStatus("success");
