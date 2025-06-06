@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import useGetEmployeesList from "./useGetEmployeesList";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { FaPlus, FaMinus } from "react-icons/fa6";
 import { FaSearch, FaEdit } from "react-icons/fa";
 import { FaUserShield, FaUser } from 'react-icons/fa';
@@ -249,6 +248,7 @@ const ListEmployees = () => {
             }
             setEmployeeToDelete(null);
           }}
+          onCancel={() => setEmployeeToDelete(null)}
         />
       )}
     </div>

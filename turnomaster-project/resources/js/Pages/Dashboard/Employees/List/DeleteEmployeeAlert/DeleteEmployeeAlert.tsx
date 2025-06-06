@@ -6,9 +6,10 @@ import useDashboardTheme from "../../../../../hooks/themes/useDashboardTheme";
 interface DeleteEmployeeAlertProps {
   employee: { id: number; first_name: string; last_name: string };
   onDeleted?: () => void;
+  onCancel?: () => void;
 }
 
-const DeleteEmployeeAlert: React.FC<DeleteEmployeeAlertProps> = ({ employee, onDeleted }) => {
+const DeleteEmployeeAlert: React.FC<DeleteEmployeeAlertProps> = ({ employee, onDeleted, onCancel }) => {
   const theme = useDashboardTheme();
 
   useEffect(() => {
@@ -143,6 +144,7 @@ const DeleteEmployeeAlert: React.FC<DeleteEmployeeAlertProps> = ({ employee, onD
                 if (swalCancelFinal) {
                   swalCancelFinal.addEventListener('click', () => {
                     Swal.close();
+                    if (onCancel) onCancel();
                   });
                 }
               },
@@ -153,11 +155,15 @@ const DeleteEmployeeAlert: React.FC<DeleteEmployeeAlertProps> = ({ employee, onD
         if (swalCancel) {
           swalCancel.addEventListener('click', () => {
             Swal.close();
+            if (onCancel) onCancel();
           });
         }
       },
     });
-  }, [employee, theme]);
+    return () => {
+      Swal.close();
+    };
+  }, [employee, theme, onCancel]);
 
   return null;
 };
