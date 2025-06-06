@@ -21,9 +21,9 @@ const ListEmployees = () => {
   const { employees, roles, page, setPage, totalPages, loading, setSearchName } = useGetEmployeesList();
   const [selectedRole, setSelectedRole] = useState<string>("Todos");
   const [searchInput, setSearchInput] = useState<string>("");
-  const [employeeToDelete, setEmployeeToDelete] = useState<{ id: number; first_name: string; last_name: string } | null>(null);
-
+  const [employeeToDelete, setEmployeeToDelete] = useState<{ id: number; first_name: string; last_name: string; shift_count: number } | null>(null);
   
+    
   let userType: string | undefined = undefined;
   let userId: number | undefined = undefined;
   const token = localStorage.getItem('token');
@@ -32,12 +32,12 @@ const ListEmployees = () => {
     userType = payload.user_type;
     userId = payload.user_id;
   }
-
+  
   const handleRoleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedRole(event.target.value);
   };
-
-  const handleDeleteClick = (employee: { id: number; first_name: string; last_name: string }) => {
+  
+  const handleDeleteClick = (employee: { id: number; first_name: string; last_name: string; shift_count: number }) => {
     setEmployeeToDelete(employee);
   };
 
@@ -221,7 +221,12 @@ const ListEmployees = () => {
                           </button>
                         ) : (
                           <button
-                            onClick={() => handleDeleteClick(employee)}
+                            onClick={() => handleDeleteClick({
+                              id: employee.id,
+                              first_name: employee.first_name,
+                              last_name: employee.last_name,
+                              shift_count: employee.shift_count
+                            })}
                             className="text-white px-4 py-2 text-sm dashboard-button transition-colors flex items-center"
                           >
                             <FaMinus className="mr-2" />

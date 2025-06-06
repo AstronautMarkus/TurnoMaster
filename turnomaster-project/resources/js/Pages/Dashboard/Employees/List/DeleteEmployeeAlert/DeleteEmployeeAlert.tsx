@@ -4,7 +4,7 @@ import axios from "axios";
 import useDashboardTheme from "../../../../../hooks/themes/useDashboardTheme";
 
 interface DeleteEmployeeAlertProps {
-  employee: { id: number; first_name: string; last_name: string };
+  employee: { id: number; first_name: string; last_name: string; shift_count: number };
   onDeleted?: () => void;
   onCancel?: () => void;
 }
@@ -18,12 +18,11 @@ const DeleteEmployeeAlert: React.FC<DeleteEmployeeAlertProps> = ({ employee, onD
       html: `
         <div class="theme-${theme} p-2">
           <div class="flex flex-col items-center mb-2">
-            <div class="flex items-center justify-center w-14 h-14 rounded-full bg-yellow-100 mb-2">
-              <svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" />
-              </svg>
+            <div class="flex items-center justify-center w-16 h-16 rounded-full dashboard-background-error mb-2">
+                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" />
+                </svg>
             </div>
-            <h2 class="text-xl font-bold text-yellow-700 mb-1">¿Estás seguro?</h2>
             <p class="text-gray-800 text-center mb-2">
               Vas a eliminar a <span class="font-bold">${employee.first_name} ${employee.last_name}</span>.
             </p>
@@ -47,14 +46,19 @@ const DeleteEmployeeAlert: React.FC<DeleteEmployeeAlertProps> = ({ employee, onD
               html: `
                 <div class="theme-${theme} p-2">
                   <div class="flex flex-col items-center mb-2">
-                    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-red-100 mb-2">
-                      <svg class="w-10 h-10 text-red-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <div class="flex items-center justify-center w-16 h-16 rounded-full dashboard-background-error mb-2">
+                      <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" />
                       </svg>
                     </div>
-                    <h2 class="text-2xl font-bold text-red-700 mb-1">Confirmar eliminación</h2>
+                    <h2 class="text-2xl font-bold dashboard-text mb-1">Confirmar eliminación</h2>
                     <p class="text-gray-800 text-center mb-2">
-                      Esta acción es <span class="font-bold text-red-600">irreversible</span>.
+                      Esta acción es <span class="font-bold dashboard-text-error">irreversible</span><br/><br/>
+                      ${employee.shift_count > 0
+                        ? `<span class="font-bold">${employee.first_name} ${employee.last_name}</span> tiene asignado <span class="font-bold">${employee.shift_count} turno${employee.shift_count > 1 ? 's' : ''}</span>, si eliminas este empleado, sus registros de turnos también serán eliminados.<br/><br/>`
+                        : ''
+                      }
+                      ¿Estás seguro de que deseas continuar?
                     </p>
                   </div>
                   <div class="flex justify-center space-x-4 mt-4">
