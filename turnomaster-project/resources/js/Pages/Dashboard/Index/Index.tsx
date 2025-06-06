@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import useRoleChecker from '../../../hooks/auth/useRoleChecker';
-import { FaCircleXmark } from "react-icons/fa6";
 import Owner from './Owner/Owner';
 import Hr from './Hr/Hr';
 import Employees from './Employees/Employees';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 const Index = () => {
     const userRole = useRoleChecker();
@@ -13,23 +14,24 @@ const Index = () => {
         const params = new URLSearchParams(window.location.search);
         if (params.has('unauthorized')) {
             setShowToast(true);
+            Swal.fire({
+                toast: true,
+                position: 'bottom-right',
+                icon: 'warning',
+                title: 'Acceso denegado',
+                text: 'No tienes autorización para acceder a esta sección. Has sido redirigido a la página principal.',
+                showConfirmButton: false,
+                showCloseButton: true,
+                timer: 4000,
+                timerProgressBar: true,
+                color: '#000',
+            });
             setTimeout(() => setShowToast(false), 4000);
         }
     }, []);
 
     return (
         <>
-            {showToast && (
-                <div className="fixed bottom-5 right-5 z-50 dashboard-background-error text-white px-6 py-4 shadow-lg rounded-lg flex items-start gap-3 animate-fade-in min-w-[320px]">
-                    <div className="mt-1 text-2xl">
-                        <FaCircleXmark />
-                    </div>
-                    <div>
-                        <h2 className="font-bold text-lg mb-1">Acceso denegado</h2>
-                        <p className="text-sm mb-1">No tienes autorización para acceder a esta sección.</p>
-                    </div>
-                </div>
-            )}
             {(() => {
                 switch (userRole) {
                     case 1:
