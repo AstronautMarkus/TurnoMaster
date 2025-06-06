@@ -2,18 +2,36 @@ import React, { useState } from "react";
 import useGetEmployeesList from "./useGetEmployeesList";
 import { Link } from "react-router-dom";
 import { FaPlus, FaMinus } from "react-icons/fa6";
-import { FaSearch, FaEdit } from "react-icons/fa";
+import { FaSearch, FaEdit, FaLock } from "react-icons/fa";
 import { FaUserShield, FaUser } from 'react-icons/fa';
 import { FaUserGear } from "react-icons/fa6";
 import { FiUsers } from "react-icons/fi";
 import { FaXmark } from "react-icons/fa6";
 import DeleteEmployeeAlert from "./DeleteEmployeeAlert/DeleteEmployeeAlert";
 
+function parseJwt(token: string) {
+  try {
+    return JSON.parse(atob(token.split('.')[1]));
+  } catch (e) {
+    return {};
+  }
+}
+
 const ListEmployees = () => {
   const { employees, roles, page, setPage, totalPages, loading, setSearchName } = useGetEmployeesList();
   const [selectedRole, setSelectedRole] = useState<string>("Todos");
   const [searchInput, setSearchInput] = useState<string>("");
   const [employeeToDelete, setEmployeeToDelete] = useState<{ id: number; first_name: string; last_name: string } | null>(null);
+
+  
+  let userType: string | undefined = undefined;
+  let userId: number | undefined = undefined;
+  const token = localStorage.getItem('token');
+  if (token) {
+    const payload = parseJwt(token);
+    userType = payload.user_type;
+    userId = payload.user_id;
+  }
 
   const handleRoleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedRole(event.target.value);
@@ -196,13 +214,23 @@ const ListEmployees = () => {
                           <FaEdit className="mr-2" />
                           Editar
                         </Link>
-                        <button
-                          onClick={() => handleDeleteClick(employee)}
-                          className="text-white px-4 py-2 text-sm dashboard-button transition-colors flex items-center"
-                        >
-                          <FaMinus className="mr-2" />
-                          Eliminar
-                        </button>
+                        {userType === "employee" && userId === employee.id ? (
+                          <button
+                            className="bg-gray-400 cursor-not-allowed text-white px-4 py-2 text-sm flex items-center"
+                            disabled
+                          >
+                            <FaLock className="mr-2" />
+                            Bloqueado
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => handleDeleteClick(employee)}
+                            className="text-white px-4 py-2 text-sm dashboard-button transition-colors flex items-center"
+                          >
+                            <FaMinus className="mr-2" />
+                            Eliminar
+                          </button>
+                        )}
                       </div>
                     </td>
                   </tr>
