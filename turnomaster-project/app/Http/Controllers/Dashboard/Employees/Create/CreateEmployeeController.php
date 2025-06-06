@@ -70,8 +70,8 @@ class CreateEmployeeController extends Controller
         $temporaryPassword = \Str::random(10);
 
         $user = DashboardUser::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
+            'first_name' => ucfirst($request->first_name),
+            'last_name' => ucfirst($request->last_name),
             'rut' => $request->rut,
             'rut_dv' => $request->rut_dv,
             'email' => $request->email,

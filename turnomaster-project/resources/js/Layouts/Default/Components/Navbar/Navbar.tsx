@@ -60,7 +60,7 @@ export default function Navbar() {
         <Link
           key={feature.path}
           to={feature.path}
-          className="block px-4 py-2 text-gray-800 hover:bg-[#891818] hover:text-white transition-colors duration-300"
+          className="block px-4 py-2 text-gray-800 hover:bg-gray-400 hover:text-white transition-colors"
           onClick={() => setIsDropdownOpen(false)}
         >
           {feature.name}
@@ -73,24 +73,24 @@ export default function Navbar() {
     <div className="relative" ref={accessDropdownRef}>
       <button
         onClick={() => setIsAccessDropdownOpen(!isAccessDropdownOpen)}
-        className="flex items-center text-white text-lg px-4 py-2 rounded-full border border-white transition-colors hover:bg-white hover:text-black w-full md:w-auto"
+        className="flex items-center text-white text-lg px-4 py-2 rounded border border-white transition-colors hover:bg-white hover:text-black w-full md:w-auto"
       >
         <FaUser className="mr-2" />
         <span>Acceder</span>
         <FaAngleDown className="ml-2" />
       </button>
       {isAccessDropdownOpen && (
-        <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg border-2 border-[#891818]">
+        <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg">
           <div className="py-1">
             <Link
               to="/auth/login/companies"
-              className="flex items-center px-4 py-2 text-gray-800 hover:bg-[#891818] hover:text-white transition-colors duration-300"
+              className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-400 hover:text-white transition-colors duration-300"
             >
               <FaBuilding className="mr-2" /> <span>Empresas</span>
             </Link>
             <Link
               to="/auth/login/employees"
-              className="flex items-center px-4 py-2 text-gray-800 hover:bg-[#891818] hover:text-white transition-colors duration-300"
+              className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-400 hover:text-white transition-colors duration-300"
             >
               <FaUserTie className="mr-2" /> <span>Empleados</span>
             </Link>
@@ -113,17 +113,17 @@ export default function Navbar() {
         <FaAngleDown className="ml-1" />
       </button>
       {isUserDropdownOpen && (
-        <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg border-2 border-[#891818]">
+        <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg">
           <div className="py-1">
             <Link
               to="/dashboard"
-              className="block px-4 py-2 text-gray-800 hover:bg-[#891818] hover:text-white transition-colors duration-300"
+              className="block px-4 py-2 text-gray-800 hover:bg-gray-400 hover:text-white transition-colors duration-300"
               onClick={() => setIsUserDropdownOpen(false)}
             >
               Dashboard
             </Link>
             <button
-              className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-[#891818] hover:text-white transition-colors duration-300"
+              className="block px-4 py-2 text-gray-800 hover:bg-gray-400 hover:text-white transition-colors duration-300"
               onClick={() => {
                 setIsUserDropdownOpen(false);
                 setIsLogoutModalOpen(true);
@@ -138,7 +138,7 @@ export default function Navbar() {
   );
 
   return (
-    <nav className="bg-[#891818] shadow-lg py-4 px-6 sticky top-0 z-50">
+    <nav className="bg-reyes shadow-lg py-4 px-6 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
 
         <div className="flex items-center space-x-2">
@@ -150,7 +150,8 @@ export default function Navbar() {
 
 
         <div className="hidden md:flex items-center space-x-8">
-          {renderLink("/prices", "Precios")}
+          {renderLink("/prices", "Planes y precios")}
+          {renderLink("/about-project", "Sobre el proyecto")}
 
           <div className="relative" ref={dropdownRef}>
             <button
@@ -160,14 +161,12 @@ export default function Navbar() {
               Características <FaAngleDown className="ml-2" />
             </button>
             {isDropdownOpen && (
-              <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg border-2 border-[#891818]">
+              <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg">
                 {renderDropdownItems(features)}
               </div>
             )}
           </div>
 
-          {renderLink("/clients", "Clientes")}
-          {renderLink("/about-project", "Sobre el proyecto")}
           {renderLink("/contact", "Contacto")}
         </div>
 
@@ -179,7 +178,7 @@ export default function Navbar() {
             <>
               <Link
                 to="/auth/register-demo"
-                className="flex items-center text-white text-lg px-4 py-2 rounded-full border border-white transition-colors hover:bg-white hover:text-black"
+                className="flex items-center text-white text-lg px-4 py-2 rounded border border-white transition-colors hover:bg-white hover:text-black"
               >
                 <FaGift className="mr-2" /> <span>Prueba Gratis</span>
               </Link>
@@ -198,7 +197,8 @@ export default function Navbar() {
 
       {isOpen && (
         <div className="md:hidden mt-4 space-y-2">
-          {renderLink("/prices", "Precios")}
+          {renderLink("/prices", "Planes y precios")}
+          {renderLink("/about-project", "Sobre el proyecto")}
 
           <div className="relative" ref={dropdownRef}>
             <button
@@ -208,14 +208,12 @@ export default function Navbar() {
               Características <FaAngleDown className="ml-2" />
             </button>
             {isDropdownOpen && (
-              <div className="mt-2 w-full bg-white rounded-md shadow-lg border-2 border-[#891818]">
+              <div className="mt-2 w-full bg-white rounded-md shadow-lg">
                 {renderDropdownItems(features)}
               </div>
             )}
           </div>
-
-          {renderLink("/clients", "Clientes")}
-          {renderLink("/about-project", "Sobre el proyecto")}
+          
           {renderLink("/contact", "Contacto")}
 
           {isAuthenticated ? (
@@ -224,7 +222,7 @@ export default function Navbar() {
             <>
               <Link
                 to="/auth/register-demo"
-                className="flex items-center text-white text-lg px-4 py-2 rounded-full border border-white transition-colors hover:bg-white hover:text-black"
+                className="flex items-center text-white text-lg px-4 py-2 rounded border border-white transition-colors hover:bg-white hover:text-black"
               >
                 <FaGift className="mr-2" /> <span>Prueba Gratis</span>
               </Link>

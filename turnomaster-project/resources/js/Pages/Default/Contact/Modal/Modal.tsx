@@ -13,17 +13,17 @@ const Modal: React.FC<ModalProps> = ({ isOpen, message, isError, onClose }) => {
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
             <div
-                className={`bg-white rounded-lg shadow-lg p-6 transform transition-transform duration-300 ${
+                className={`bg-white shadow-lg p-6 transform transition-transform duration-300 ${
                     isOpen ? "scale-100 opacity-100" : "scale-95 opacity-0"
                 }`}
             >
-                <h2 className={`text-lg font-bold mb-4 ${isError ? "text-red-600" : "text-green-600"}`}>
+                <h2 className={`text-lg font-bold mb-4 text-reyes-light`}>
                     {isError ? "Error" : "Éxito"}
                 </h2>
                 <p className="text-gray-700 mb-4">{message}</p>
                 <button
                     onClick={onClose}
-                    className="px-4 py-2 bg-[#5C5AD6] text-white rounded-lg hover:bg-[#4b4ac8] transition"
+                    className="px-4 py-2 text-white bg-reyes-light hover:bg-reyes-light-active transition"
                 >
                     Cerrar
                 </button>

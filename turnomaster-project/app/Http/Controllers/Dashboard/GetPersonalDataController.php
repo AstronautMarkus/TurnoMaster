@@ -60,7 +60,14 @@ class GetPersonalDataController extends Controller
                         'is_trial' => $user->is_trial,
                         'expires_at' => $user->expires_at,
                     ],
-                    'company' => $company->name,
+                    'company' => [
+                        'id' => $company->id,
+                        'name' => $company->name,
+                        'owner_email' => $company->owner_email,
+                        'logo' => $company->profile_photo 
+                            ? url("api/assets/{$company->profile_photo}") 
+                            : null,
+                    ],
                     'role' => [
                         'id' => $role->id,
                         'name' => $role->name,
@@ -99,7 +106,14 @@ class GetPersonalDataController extends Controller
                         'role_id' => $user->role_id,
                         'expires_at' => $user->expires_at,
                     ],
-                    'company' => $company->name,
+                    'company' => [
+                        'id' => $company->id,
+                        'name' => $company->name,
+                        'owner_email' => $company->owner_email,
+                        'logo' => $company->logo 
+                            ? url("api/assets/{$company->profile_photo}") 
+                            : null,
+                    ],
                     'role' => [
                         'id' => $role->id,
                         'name' => $role->name,

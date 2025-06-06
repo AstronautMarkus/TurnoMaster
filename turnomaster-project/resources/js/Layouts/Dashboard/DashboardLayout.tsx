@@ -3,16 +3,15 @@ import { Sidebar } from "./Components/Sidebar/Sidebar";
 import { Navbar } from "./Components/Navbar/Navbar";
 import useTrialChecker from "../../hooks/auth/useTrialChecker";
 import DemoAccountNotifier from "./Components/DemoAccountNotifier/DemoAccountNotifier";
+import useDashboardTheme from "../../hooks/themes/useDashboardTheme";
+import '../../../css/dashboardThemes.css';
 
-interface LayoutProps {
-  children: ReactNode;
-}
-
-const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const DashboardLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
   const useTrial = useTrialChecker();
+  const theme = useDashboardTheme();
 
   return (
-    <div className="flex min-h-screen flex-col md:flex-row bg-gradient-to-b from-gray-100 to-gray-300">
+    <div className={`theme-${theme} flex min-h-screen flex-col md:flex-row bg-gradient-to-b from-gray-100 to-gray-300`}>
       <Sidebar />
       <div className="flex flex-col flex-1 w-full">
         <Navbar />
@@ -27,5 +26,6 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
       </div>
     </div>
   );
-}
+};
+
 export default DashboardLayout;

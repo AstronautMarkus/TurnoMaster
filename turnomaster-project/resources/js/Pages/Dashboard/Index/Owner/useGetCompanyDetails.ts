@@ -8,7 +8,7 @@ interface CompanyDetails {
         email: string | null;
         created_at: string;
         updated_at: string;
-        profile_image: string;
+        profile_photo: string;
     };
     employees: {
         total: number;
