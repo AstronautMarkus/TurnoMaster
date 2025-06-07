@@ -26,11 +26,13 @@ const ListEmployees = () => {
     
   let userType: string | undefined = undefined;
   let userId: number | undefined = undefined;
+  let userRoleId: number | undefined = undefined;
   const token = localStorage.getItem('token');
   if (token) {
     const payload = parseJwt(token);
     userType = payload.user_type;
     userId = payload.user_id;
+    userRoleId = payload.role_id;
   }
   
   const handleRoleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -68,6 +70,24 @@ const ListEmployees = () => {
 
   const handleNext = () => {
     if (page < totalPages) setPage(page + 1);
+  };
+
+  // Permisos para editar/eliminar
+  const canEditOrDelete = (employee: any) => {
+    if (userType === "company") return true;
+    if (userType === "employee") {
+      if (userRoleId === 1) {
+        // admin (1) can edit/delete anyone except other admins
+        return employee.role_id !== 1;
+      }
+      if (userRoleId === 2) {
+        // rrhh (2) only can edit/delete employees (3)
+        return employee.role_id === 3;
+      }
+      // Employees (3) cannot edit or delete anyone
+      return false;
+    }
+    return false;
   };
 
   return (
@@ -207,30 +227,42 @@ const ListEmployees = () => {
                     </td>
                     <td className="px-4 py-2">
                       <div className="flex space-x-2">
-                        <Link to={`/dashboard/employees/edit/${employee.id}`} className="dashboard-button-warning text-white px-4 py-2 text-sm transition-colors flex items-center">
-                          <FaEdit className="mr-2" />
-                          Editar
-                        </Link>
-                        {userType === "employee" && userId === employee.id ? (
+                        {canEditOrDelete(employee) ? (
+                          <>
+                            <Link to={`/dashboard/employees/edit/${employee.id}`} className="dashboard-button-warning text-white px-4 py-2 text-sm transition-colors flex items-center">
+                              <FaEdit className="mr-2" />
+                              Editar
+                            </Link>
+                            {userType === "employee" && userId === employee.id ? (
+                              <button
+                                className="bg-gray-400 cursor-not-allowed text-white px-4 py-2 text-sm flex items-center"
+                                disabled
+                              >
+                                <FaLock className="mr-2" />
+                                Bloqueado
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() => handleDeleteClick({
+                                  id: employee.id,
+                                  first_name: employee.first_name,
+                                  last_name: employee.last_name,
+                                  shift_count: employee.shift_count
+                                })}
+                                className="text-white px-4 py-2 text-sm dashboard-button transition-colors flex items-center"
+                              >
+                                <FaMinus className="mr-2" />
+                                Eliminar
+                              </button>
+                            )}
+                          </>
+                        ) : (
                           <button
                             className="bg-gray-400 cursor-not-allowed text-white px-4 py-2 text-sm flex items-center"
                             disabled
                           >
                             <FaLock className="mr-2" />
-                            Bloqueado
-                          </button>
-                        ) : (
-                          <button
-                            onClick={() => handleDeleteClick({
-                              id: employee.id,
-                              first_name: employee.first_name,
-                              last_name: employee.last_name,
-                              shift_count: employee.shift_count
-                            })}
-                            className="text-white px-4 py-2 text-sm dashboard-button transition-colors flex items-center"
-                          >
-                            <FaMinus className="mr-2" />
-                            Eliminar
+                            Sin permiso
                           </button>
                         )}
                       </div>

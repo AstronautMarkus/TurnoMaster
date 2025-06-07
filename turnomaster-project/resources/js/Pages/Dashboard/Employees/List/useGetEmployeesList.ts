@@ -11,6 +11,7 @@ interface Employee {
   image: string;
   has_shift: boolean;
   shift_count: number;
+  role_id: number;
 }
 
 const getRandomNumber = () => Math.floor(Math.random() * 5) + 1;
@@ -67,6 +68,7 @@ const useGetEmployeesList = () => {
           rut: formatChileanRut(employee.rut, employee.rut_dv),
           email: employee.email,
           role: employee.role,
+          role_id: employee.role_id,
           image: employee.profile_photo || "/img/profile/default.png",
           has_shift: employee.has_shift,
           shift_count: employee.shift_count,
