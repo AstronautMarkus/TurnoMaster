@@ -105,8 +105,6 @@ Route::post('/reset-password/employees', [ResetPasswordEmployeesController::clas
 
 Route::get('/validate-reset-token/{token}', [ValidateTokenController::class, 'validateToken']);
 
-Route::get('/roles', [GetRolesDataController::class, 'getRoles']);
-
 Route::get('/themes', [GetThemesController::class, 'getThemesList']);
 
 // Protected routes
@@ -133,6 +131,7 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::delete('/turnos/{id}', [DeleteTurnosController::class, 'deleteTurnos']);
     Route::get('/turnos/shift/{id}', [GetShiftUsersByIdController::class, 'getShiftUserById']);
     Route::post('/turnos/shift', [CreateShiftUsersController::class, 'createShiftUser']);
+    Route::get('/roles', [GetRolesDataController::class, 'getRoles']);
 });
 
 Route::get('/activity-logs', [ActivityLogController::class, 'getActivityLog']);
