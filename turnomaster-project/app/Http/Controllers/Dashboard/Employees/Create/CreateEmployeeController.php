@@ -32,15 +32,15 @@ class CreateEmployeeController extends Controller
                 ], 403);
             }
 
-            // if user is rh (2), they can  create another rh (2) or employee (3) not admin (1)
-            if ($jwtRoleId == 2 && !in_array($requestedRoleId, [2, 3])) {
+            // if user is rh (2), they can only create employees (3)
+            if ($jwtRoleId == 2 && $requestedRoleId != 3) {
                 return response()->json([
                     'message' => 'No tienes permisos para crear este tipo de usuario.'
                 ], 403);
             }
 
-            // if user is admin (1), they can create all of them (1, 2, 3)
-            if ($jwtRoleId == 1 && !in_array($requestedRoleId, [1, 2])) {
+            // if user is admin (1), they can create rh (2) and employee (3), not admin (1)
+            if ($jwtRoleId == 1 && !in_array($requestedRoleId, [2, 3])) {
                 return response()->json([
                     'message' => 'No tienes permisos para crear este tipo de usuario.'
                 ], 403);
