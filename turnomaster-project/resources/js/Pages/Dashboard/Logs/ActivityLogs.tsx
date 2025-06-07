@@ -28,18 +28,20 @@ export default function ActivityLogs() {
     customEndDate: string = endDate
   ) => {
     setLoading(true);
+    const token = localStorage.getItem("token");
     axios
       .get("/api/activity-logs", {
-        params: {
-          page: customPage,
-          start_date: customStartDate || undefined,
-          end_date: customEndDate || undefined,
-        },
+      params: {
+        page: customPage,
+        start_date: customStartDate || undefined,
+        end_date: customEndDate || undefined,
+      },
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
       })
       .then((res) => {
-        setLogs(res.data.data);
-        setTotalPages(res.data.last_page);
-        setLoading(false);
+      setLogs(res.data.data);
+      setTotalPages(res.data.last_page);
+      setLoading(false);
       });
   };
 

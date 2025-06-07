@@ -132,9 +132,9 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::get('/turnos/shift/{id}', [GetShiftUsersByIdController::class, 'getShiftUserById']);
     Route::post('/turnos/shift', [CreateShiftUsersController::class, 'createShiftUser']);
     Route::get('/roles', [GetRolesDataController::class, 'getRoles']);
+    Route::get('/activity-logs', [ActivityLogController::class, 'getActivityLog']);
 });
 
-Route::get('/activity-logs', [ActivityLogController::class, 'getActivityLog']);
 
 Route::get('/assets/{path}', function ($path) {
     if (!Storage::exists($path)) {
