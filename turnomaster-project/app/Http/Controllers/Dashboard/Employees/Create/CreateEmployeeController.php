@@ -99,10 +99,13 @@ class CreateEmployeeController extends Controller
 
         // Log the activity
 
+        $role = Role::find($user->role_id);
+        $roleName = $role ? $role->name : 'desconocido';
+
         ActivityLogger::log(
             $request,
             'creó a',
-            'Se creó a ' . $user->first_name . ' como empleado',
+            'Se creó a ' . $user->first_name . ' con el rol de ' . $roleName . '.',
             $user
         );
 
