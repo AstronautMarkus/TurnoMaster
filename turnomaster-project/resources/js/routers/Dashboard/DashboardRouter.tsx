@@ -13,6 +13,8 @@ import ReportsRouter from './Reports/ReportsRouter';
 
 import ActivityLogs from '../../Pages/Dashboard/Logs/ActivityLogs';
 
+import ProtectedRoute from '../../Layouts/Dashboard/Components/ProtectedRoute/ProtectedRoute';
+
 function DashboardRouter() {
     const location = useLocation();
 
@@ -34,7 +36,11 @@ function DashboardRouter() {
                             <Route path="/employees/*" element={<DashboardEmployeesRouter />} />
                             <Route path="/turnos/*" element={<DashboardTurnosRouter />} />
                             <Route path="/reports/*" element={<ReportsRouter />} />
-                            <Route path="/logs/activity" element={<ActivityLogs />} />
+                            <Route path="/logs/activity" element={
+                                <ProtectedRoute allowedRoles={[1]}>
+                                    <ActivityLogs />
+                                </ProtectedRoute>
+                            } />
                         </Routes>
                     </motion.div>
                 </AnimatePresence>

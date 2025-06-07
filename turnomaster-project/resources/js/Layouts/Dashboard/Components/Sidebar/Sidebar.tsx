@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FiChevronRight, FiGrid, FiSettings, FiUsers} from "react-icons/fi";
 import { FaCalendar, FaClipboardCheck } from "react-icons/fa";
-import { FaBullhorn, FaAlignJustify } from "react-icons/fa6";
+import { FaBullhorn, FaBook } from "react-icons/fa6";
 import { Link, useLocation } from "react-router-dom";
 
 import useRoleChecker from "../../../../hooks/auth/useRoleChecker";
@@ -58,6 +58,11 @@ const sidebarConfigOwner: SidebarSection[] = [
           { to: "/dashboard/employees", label: "Lista de empleados" },
           { to: "/dashboard/employees/create", label: "Crear empleado" },
         ],
+      },
+      {
+        to: "/dashboard/logs/activity",
+        label: "Registro de actividades",
+        icon: FaBook,
       },
     ],
   },
@@ -119,7 +124,7 @@ const sidebarConfigHr: SidebarSection[] = [
           { to: "/dashboard/employees", label: "Lista de empleados" },
           { to: "/dashboard/employees/create", label: "Crear empleado" },
         ],
-      },
+      }
     ],
   },
   {
