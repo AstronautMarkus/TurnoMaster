@@ -19,6 +19,7 @@ class DeleteEmployeeController extends Controller
         $userType = $decoded->user_type;
         $userId = $decoded->user_id;
         $companyId = $decoded->company_id;
+        $RoleId = $decoded->role_id ?? null;
 
         $user = DashboardUser::find($id);
 
@@ -28,21 +29,47 @@ class DeleteEmployeeController extends Controller
             ], 404);
         }
 
+        // Nobody can delete themselves
+        if ($userId == $id) {
+            return response()->json([
+                'message' => 'No puedes eliminarte a ti mismo.',
+            ], 403);
+        }
+
+        // Only 'company' and 'employee' types can delete with restrictions
         if ($userType === 'employee') {
-            
-            if ($userId == $id) {
-                return response()->json([
-                    'message' => 'No puedes eliminarte a ti mismo.',
-                ], 403);
-            }
-            
+            // Check if user belongs to the same company
             if ($user->company_id != $companyId) {
                 return response()->json([
                     'message' => 'No tienes permiso para eliminar empleados de otra empresa.',
                 ], 403);
             }
+
+            // Admin (1) can delete rh and employees but not other admins
+            if ($RoleId == 1) {
+                if ($user->role_id == 1) {
+                    return response()->json([
+                        'message' => 'No puedes eliminar a otro administrador.',
+                    ], 403);
+                }
+            }
+            // RH (2) can delete employees (3) but not other RH or admins
+            elseif ($RoleId == 2) {
+                if ($user->role_id != 3) {
+                    return response()->json([
+                        'message' => 'No tienes permiso para eliminar este tipo de usuario.',
+                    ], 403);
+                }
+            }
+            // Employee (3) cannot delete anyone
+            elseif ($RoleId == 3) {
+                return response()->json([
+                    'message' => 'No tienes permisos para eliminar empleados.',
+                ], 403);
+            }
         }
-        
+
+        // If user type is 'company', they can delete any employee, it's the owner of the company
 
         $user->delete();
 
