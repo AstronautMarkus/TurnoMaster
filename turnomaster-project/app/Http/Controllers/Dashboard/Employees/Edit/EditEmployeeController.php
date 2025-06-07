@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Dashboard\Employees\Edit;
 use App\Http\Controllers\Controller;
 use App\Models\Users\DashboardUser;
 use Illuminate\Http\Request;
+use App\Models\Role;
+use App\Helpers\ActivityLogger;
 
 class EditEmployeeController extends Controller
 {
@@ -74,7 +76,49 @@ class EditEmployeeController extends Controller
             ], 200);
         }
 
+        // Start updating the user and logging the changes
+
+        $original = $user->replicate();
         $user->update($filteredData);
+
+        $fieldLabels = [ // Define labels for fields to be logged
+            'first_name' => 'Nombre',
+            'last_name'  => 'Apellido',
+            'rut'        => 'RUT',
+            'rut_dv'     => 'Dígito Verificador',
+            'email'      => 'Correo',
+            'role_id'    => 'Rol',
+        ];
+
+        $changes = [];
+
+        foreach ($filteredData as $key => $newValue) {
+            $oldValue = $original->$key;
+
+            if ($oldValue != $newValue) {
+                if ($key === 'role_id') {
+                    $oldValue = Role::find($oldValue)?->name ?? $oldValue;
+                    $newValue = Role::find($newValue)?->name ?? $newValue;
+                }
+
+                $label = $fieldLabels[$key] ?? ucfirst($key);
+                $changes[] = "$label: '$oldValue' → '$newValue'";
+            }
+        }
+
+        if (!empty($changes)) {
+            $description = "Se editaron los siguientes campos del empleado {$user->first_name} {$user->last_name}: " . implode(', ', $changes);
+
+            ActivityLogger::log(
+                $request,
+                'modificó a',
+                $description,
+                $user
+            );
+        }
+
+        // End logging activity
+        
 
         return response()->json([
             'message' => 'Empleado actualizado exitosamente.',
