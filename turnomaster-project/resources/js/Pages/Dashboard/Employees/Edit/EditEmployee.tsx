@@ -4,6 +4,7 @@ import useEditEmployee from './useEditEmployee';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import {FaEdit} from 'react-icons/fa';
+import { set } from 'date-fns';
 
 const EditEmployee: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -96,8 +97,18 @@ const EditEmployee: React.FC = () => {
 
                 setRut(employee.rut);
                 setRutDv(employee.rut_dv);
-            } catch (err) {
-                setError('Error al cargar los datos del empleado. Por favor, intente más tarde.');
+            } catch (err: any) {
+                if (err.response?.status === 404) {
+                    setError(err.response.data?.error || 'Empleado no encontrado');
+                } 
+                if (err.response?.status === 403) {
+                    setError('No tienes permiso para editar este empleado.');
+                    window.location.href = '/dashboard/employees?cross_company';
+                    return;
+                }
+                else {
+                    setError('Error al cargar los datos del empleado. Por favor, intente más tarde.');
+                }
             } finally {
                 setLoading(false);
             }

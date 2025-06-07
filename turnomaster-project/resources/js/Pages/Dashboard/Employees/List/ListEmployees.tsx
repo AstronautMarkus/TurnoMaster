@@ -9,6 +9,7 @@ import { FiUsers } from "react-icons/fi";
 import { FaXmark } from "react-icons/fa6";
 import DeleteEmployeeAlert from "./DeleteEmployeeAlert/DeleteEmployeeAlert";
 import AccesDeniedAlert from "./AccesDeniedAlert/AccesDeniedAlert";
+import CrossCompanyAlert from "./CrossCompanyAlert/CrossCompanyAlert";
 
 function parseJwt(token: string) {
   try {
@@ -25,6 +26,7 @@ const ListEmployees = () => {
   const [employeeToDelete, setEmployeeToDelete] = useState<{ id: number; first_name: string; last_name: string; shift_count: number } | null>(null);
   const location = useLocation();
   const showAccessDenied = new URLSearchParams(location.search).has("unauthorized");
+  const showCrossCompany = new URLSearchParams(location.search).has("cross_company");
   
     
   let userType: string | undefined = undefined;
@@ -95,6 +97,7 @@ const ListEmployees = () => {
   return (
     <div className="p-6">
       {showAccessDenied && <AccesDeniedAlert />}
+      {showCrossCompany && <CrossCompanyAlert />}
       <h1 className="text-3xl sm:text-4xl font-bold text-left mb-6 mt-4 text-gray-800 flex items-center">
         <FiUsers className="mr-3" />
         Lista de empleados
