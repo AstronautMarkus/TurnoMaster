@@ -87,6 +87,9 @@ const useEditEmployee = () => {
                 if (error.response?.status === 422) {
                     return { type: 'error', message: error.response.data.message };
                 }
+                if (error.response?.status === 403) {
+                    return { type: 'error', message: error.response.data.message };
+                }
                 return { type: 'error', message: 'Ocurrió un error inesperado. Por favor, intente más tarde.' };
             }
         }
