@@ -7,11 +7,20 @@ use App\Models\Users\DashboardUser;
 use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Helpers\ActivityLogger;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 class EditEmployeeController extends Controller
 {
     public function editEmployee(Request $request, $id)
     {
+        // Obtener el usuario autenticado desde el JWT
+        $token = $request->bearerToken();
+        $decoded = null;
+        if ($token) {
+            $decoded = JWT::decode($token, new Key(env('JWT_SECRET'), 'HS256'));
+        }
+
         $validator = \Validator::make($request->all(), [
             'first_name' => 'nullable|string|max:255',
             'last_name' => 'nullable|string|max:255',
@@ -43,7 +52,6 @@ class EditEmployeeController extends Controller
             'first_name', 'last_name', 'rut', 'rut_dv', 'email', 'role_id'
         ]);
 
-        
         $allEmpty = true;
         foreach ($data as $value) {
             if (!is_null($value) && $value !== '') {
@@ -65,7 +73,51 @@ class EditEmployeeController extends Controller
             ], 404);
         }
 
+        // Validate user type and permissions
+        if (isset($decoded->user_type) && $decoded->user_type === 'employee') {
+            $jwtRoleId = $decoded->role_id ?? null;
+            $requestedRoleId = $data['role_id'] ?? null;
+
+            // If user try to change their own role_id
+            if ($user->id == $decoded->sub && array_key_exists('role_id', $data) && $data['role_id'] !== null && $data['role_id'] != $jwtRoleId) {
+                return response()->json([
+                    'message' => 'No puedes cambiarte tu rol asignado.',
+                ], 403);
+            }
+
+            // If the user is an employee (3), they cannot edit any employee
+            if ($jwtRoleId == 3) {
+                return response()->json([
+                    'message' => 'No tienes permisos para editar empleados.',
+                ], 403);
+            }
+
+            // If user is a hr (2), they cannot change the role of an employee
+            if ($jwtRoleId == 2 && array_key_exists('role_id', $data) && $data['role_id'] !== null) {
+                return response()->json([
+                    'message' => 'No tienes permisos para cambiar el rol de un empleado.',
+                ], 403);
+            }
+
+            // If user is admin (1), they can change roles but with restrictions
+            if ($jwtRoleId == 1) {
+                // They cannot remove their own admin role
+                if ($user->id == $decoded->sub && array_key_exists('role_id', $data) && $data['role_id'] !== null && $data['role_id'] != 1) {
+                    return response()->json([
+                        'message' => 'No puedes quitarte el rol de administrador.',
+                    ], 403);
+                }
+                // They cannot assign admin role to another user
+                if ($user->id != $decoded->sub && array_key_exists('role_id', $data) && $data['role_id'] == 1) {
+                    return response()->json([
+                        'message' => 'No puedes asignar el rol de administrador a otro usuario.',
+                    ], 403);
+                }
+            }
+        }
+        // Si el usuario es company, puede hacer cualquier cambio (sin restricciones)
         
+
         $filteredData = array_filter($data, function ($value) {
             return !is_null($value) && $value !== '';
         });
