@@ -15,6 +15,14 @@ const EditEmployee: React.FC = () => {
     const [error, setError] = useState('');
     const [submissionMessage, setSubmissionMessage] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
+    function parseJwt(token: string) {
+        try {
+            return JSON.parse(atob(token.split('.')[1]));
+        } catch (e) {
+            return {};
+        }
+    }
+
     useEffect(() => {
         const fetchRoles = async () => {
             setLoading(true);
@@ -45,6 +53,37 @@ const EditEmployee: React.FC = () => {
                 handleChange('rut_dv', employee.rut_dv, true); 
                 handleChange('email', employee.email);
                 handleChange('role_id', employee.role_id.toString());
+
+                
+                let userType, userId, userRoleId;
+                if (token) {
+                    const payload = parseJwt(token);
+                    userType = payload.user_type;
+                    userId = payload.user_id;
+                    userRoleId = payload.role_id;
+                }
+                let unauthorized = false;
+                if (userType === "company") {
+                    // can edit anyone
+                } else if (userType === "employee") {
+                    if (userRoleId === 1) {
+                        // admin (1) can not edit another admins
+                        if (employee.role_id === 1) unauthorized = true;
+                    } else if (userRoleId === 2) {
+                        // rrhh (2) only can edit employees
+                        if (employee.role_id !== 3) unauthorized = true;
+                    } else {
+                        // empleados (3) can not edit anyone
+                        unauthorized = true;
+                    }
+                } else {
+                    unauthorized = true;
+                }
+                if (unauthorized) {
+                    window.location.href = '/dashboard/employees?unauthorized';
+                    return;
+                }
+                
 
                 const rolesResponse = await axios.get('/api/roles', {
                     headers: { Authorization: `Bearer ${token}` },
