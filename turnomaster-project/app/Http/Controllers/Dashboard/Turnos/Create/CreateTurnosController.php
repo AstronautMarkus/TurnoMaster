@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Turnos\Turnos;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use App\Helpers\ActivityLogger;
 
 class CreateTurnosController extends Controller
 {
@@ -105,6 +106,35 @@ class CreateTurnosController extends Controller
         'company_id' => $userCompany,
         'total_hours' => $totalWorkedHours,
     ]);
+
+    // Variables for activity log
+
+    $turnoName = $turno->name;
+    $startTime = $turno->start_time;
+    $endTime = $turno->end_time;
+    $lunchTime = $turno->lunch_time;
+
+    if ($hasLunch) {
+        $descripcion = 'Se creó el turno ' . $turnoName .
+            ' con el horario de entrada a las ' . $startTime .
+            ', almuerzo a las ' . $lunchTime .
+            ', y salida a las ' . $endTime . '.';
+    } else {
+        $descripcion = 'Se creó el turno ' . $turnoName .
+            ' con el horario de entrada a las ' . $startTime .
+            ', salida a las ' . $endTime .
+            ' sin horario de almuerzo asignado.';
+    }
+
+    // Logging the activity
+    ActivityLogger::log(
+        $request,
+        'creó el turno',
+        $descripcion,
+        $turno 
+    );
+
+    // Return success response
 
     return response()->json([
         'message' => 'Turno creado exitosamente.',
