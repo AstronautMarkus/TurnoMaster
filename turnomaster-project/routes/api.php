@@ -57,6 +57,7 @@ use App\Http\Controllers\Dashboard\Turnos\Get\GetTurnosByIdController;
 use App\Http\Controllers\Dashboard\Turnos\ShiftUser\Get\GetShiftUsersByIdController;
 use App\Http\Controllers\Dashboard\Themes\GetThemesController;
 use App\Http\Controllers\Dashboard\Employees\Shifts\Get\GetEmployeesShiftsController;
+use App\Http\Controllers\Audit\ActivityLogController;
 
 // Edit controllers
 
@@ -133,6 +134,8 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::get('/turnos/shift/{id}', [GetShiftUsersByIdController::class, 'getShiftUserById']);
     Route::post('/turnos/shift', [CreateShiftUsersController::class, 'createShiftUser']);
 });
+
+Route::get('/activity-logs', [ActivityLogController::class, 'getActivityLog']);
 
 Route::get('/assets/{path}', function ($path) {
     if (!Storage::exists($path)) {
