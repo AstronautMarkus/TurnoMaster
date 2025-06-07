@@ -10,11 +10,45 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Helpers\ActivityLogger;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 class CreateEmployeeController extends Controller
-{
+{    
     public function createEmployee(Request $request)
     {
+        $token = $request->bearerToken();
+        $decoded = JWT::decode($token, new Key(env('JWT_SECRET'), 'HS256'));
+
+        // Validate user type and role permissions
+        if (isset($decoded->user_type) && $decoded->user_type === 'employee') {
+            $jwtRoleId = $decoded->role_id ?? null;
+            $requestedRoleId = $request->role_id;
+
+            // if user is employee (3), they cannot create any users
+            if ($jwtRoleId == 3) {
+                return response()->json([
+                    'message' => 'No tienes permisos para crear usuarios.'
+                ], 403);
+            }
+
+            // if user is rh (2), they can  create another rh (2) or employee (3) not admin (1)
+            if ($jwtRoleId == 2 && !in_array($requestedRoleId, [2, 3])) {
+                return response()->json([
+                    'message' => 'No tienes permisos para crear este tipo de usuario.'
+                ], 403);
+            }
+
+            // if user is admin (1), they can create all of them (1, 2, 3)
+            if ($jwtRoleId == 1 && !in_array($requestedRoleId, [1, 2])) {
+                return response()->json([
+                    'message' => 'No tienes permisos para crear este tipo de usuario.'
+                ], 403);
+            }
+        }
+        
+        // if user type is company, do not validate
+
         $validator = \Validator::make($request->all(), [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
