@@ -16,6 +16,7 @@ interface EmployeeData {
     rut_dv: string;
     email: string;
     role: EmployeeRole;
+    profile_photo: string;
 }
 
 interface ShiftUser {

@@ -21,7 +21,7 @@ class GetEmployeesShiftsController extends Controller
 
         $dashboardUser = DashboardUser::where('id', $id)
             ->where('company_id', $companyId)
-            ->select('id', 'first_name', 'last_name', 'rut', 'rut_dv', 'email', 'role_id')
+            ->select('id', 'first_name', 'last_name', 'rut', 'rut_dv', 'email', 'role_id', 'profile_photo')
             ->first();
 
         if (!$dashboardUser) {
@@ -46,6 +46,7 @@ class GetEmployeesShiftsController extends Controller
             'rut' => $dashboardUser->rut,
             'rut_dv' => $dashboardUser->rut_dv,
             'email' => $dashboardUser->email,
+            'profile_photo' => $dashboardUser->profile_photo ? url('api/assets/' . ltrim($dashboardUser->profile_photo, '/')) : null,
             'role' => $role
         ];
 
