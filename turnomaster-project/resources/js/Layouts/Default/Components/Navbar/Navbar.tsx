@@ -60,7 +60,7 @@ export default function Navbar() {
         <Link
           key={feature.path}
           to={feature.path}
-          className="block px-4 py-2 text-gray-800 hover:bg-gray-400 hover:text-white transition-colors"
+          className="block px-4 py-2 hover:bg-gray-100 transition-colors"
           onClick={() => setIsDropdownOpen(false)}
         >
           {feature.name}
@@ -113,24 +113,26 @@ export default function Navbar() {
         <FaAngleDown className="ml-1" />
       </button>
       {isUserDropdownOpen && (
-        <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg">
+        <div className="absolute left-0 mt-2 w-48 bg-white shadow-lg">
           <div className="py-1">
-            <Link
-              to="/dashboard"
-              className="block px-4 py-2 text-gray-800 hover:bg-gray-400 hover:text-white transition-colors duration-300"
+            <a
+              href="/dashboard"
+              className="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:text-black transition-colors"
               onClick={() => setIsUserDropdownOpen(false)}
             >
               Dashboard
-            </Link>
-            <button
-              className="block px-4 py-2 text-gray-800 hover:bg-gray-400 hover:text-white transition-colors duration-300"
+            </a>
+            <a
+              role="button"
+              tabIndex={0}
+              className="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:text-black transition-colors cursor-pointer"
               onClick={() => {
                 setIsUserDropdownOpen(false);
                 setIsLogoutModalOpen(true);
               }}
             >
               Cerrar sesión
-            </button>
+            </a>
           </div>
         </div>
       )}
@@ -161,7 +163,7 @@ export default function Navbar() {
               Características <FaAngleDown className="ml-2" />
             </button>
             {isDropdownOpen && (
-              <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg">
+              <div className="absolute left-0 mt-2 w-48 bg-white shadow-lg">
                 {renderDropdownItems(features)}
               </div>
             )}
@@ -208,7 +210,7 @@ export default function Navbar() {
               Características <FaAngleDown className="ml-2" />
             </button>
             {isDropdownOpen && (
-              <div className="mt-2 w-full bg-white rounded-md shadow-lg">
+              <div className="mt-2 w-full bg-white shadow-lg">
                 {renderDropdownItems(features)}
               </div>
             )}
