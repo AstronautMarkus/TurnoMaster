@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, MouseEvent } from "react";
 import { FiLogOut, FiSettings, FiUser, FiMenu } from "react-icons/fi";
 import { FaUserShield, FaUser } from 'react-icons/fa';
-import { FaUserGear } from "react-icons/fa6";
+import { FaUserGear, FaAngleUp, FaAngleDown } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
 import { LogoutModal } from "./LogoutModal";
 import { useHandleLogout } from "../../../../../hooks/useHandleLogout";
@@ -71,10 +71,14 @@ export function UserNav() {
           />
         </div>
         <span className="hidden text-sm font-medium md:inline-block flex items-center gap-1">
-          
           <RoleIcon className="inline-block mr-1" />
           {userName}
         </span>
+        {isOpen ? (
+          <FaAngleUp className="ml-1" />
+        ) : (
+          <FaAngleDown className="ml-1" />
+        )}
       </button>
 
       {isOpen && (
