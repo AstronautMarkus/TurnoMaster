@@ -89,7 +89,7 @@ const Footer: React.FC = () => {
           <div className="text-center py-6">
           <p className="text-gray-400">
             © {new Date().getFullYear()} {"TurnoMaster"}. Todos los derechos reservados. creado por 
-            <a href="https://www.reyesandfriends.cl" target="_blank" className="inline-flex items-center ml-1"> <img  src="/img/logo/reyesandfriends.svg"  alt="reyesandfriends.cl" className="mx-2 h-7" /></a>
+            <a href="https://reyesandfriends.cl" target="_blank" className="inline-flex items-center ml-1"> <img  src="/img/logo/reyesandfriends.svg"  alt="reyesandfriends.cl" className="mx-2 h-7" /></a>
             .
           </p>
         </div>
