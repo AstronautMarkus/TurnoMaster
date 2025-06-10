@@ -77,7 +77,11 @@ export default function Navbar() {
       >
         <FaUser className="mr-2" />
         <span>Acceder</span>
-        <FaAngleDown className="ml-2" />
+        {isAccessDropdownOpen ? (
+          <FaAngleUp className="ml-2" />
+        ) : (
+          <FaAngleDown className="ml-2" />
+        )}
       </button>
       {isAccessDropdownOpen && (
         <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg">
@@ -110,7 +114,11 @@ export default function Navbar() {
           <img src={userImage} alt="Profile" className="h-full w-full object-cover" />
         </div>
         <span className="font-medium">{`${userData.name}`}</span>
-        <FaAngleDown className="ml-1" />
+        {isUserDropdownOpen ? (
+          <FaAngleUp className="ml-1" />
+        ) : (
+          <FaAngleDown className="ml-1" />
+        )}
       </button>
       {isUserDropdownOpen && (
         <div className="absolute left-0 mt-2 w-48 bg-white shadow-lg">
@@ -160,7 +168,12 @@ export default function Navbar() {
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               className="flex items-center text-white text-lg hover:underline transition-colors duration-300"
             >
-              Características <FaAngleDown className="ml-2" />
+              Características{" "}
+              {isDropdownOpen ? (
+                <FaAngleUp className="ml-2" />
+              ) : (
+                <FaAngleDown className="ml-2" />
+              )}
             </button>
             {isDropdownOpen && (
               <div className="absolute left-0 mt-2 w-48 bg-white shadow-lg">
@@ -207,7 +220,12 @@ export default function Navbar() {
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               className="flex items-center w-full py-2 text-white text-lg hover:underline transition-colors duration-300"
             >
-              Características <FaAngleDown className="ml-2" />
+              Características{" "}
+              {isDropdownOpen ? (
+                <FaAngleUp className="ml-2" />
+              ) : (
+                <FaAngleDown className="ml-2" />
+              )}
             </button>
             {isDropdownOpen && (
               <div className="mt-2 w-full bg-white shadow-lg">
