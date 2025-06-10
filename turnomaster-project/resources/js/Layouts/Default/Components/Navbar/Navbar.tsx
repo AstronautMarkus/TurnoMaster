@@ -84,17 +84,17 @@ export default function Navbar() {
         )}
       </button>
       {isAccessDropdownOpen && (
-        <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg">
+        <div className="absolute left-0 mt-2 w-48 bg-white shadow-lg">
           <div className="py-1">
             <Link
               to="/auth/login/companies"
-              className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-400 hover:text-white transition-colors duration-300"
+              className="flex items-center px-4 py-2 hover:bg-gray-100 transition-colors"
             >
               <FaBuilding className="mr-2" /> <span>Empresas</span>
             </Link>
             <Link
               to="/auth/login/employees"
-              className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-400 hover:text-white transition-colors duration-300"
+              className="flex items-center px-4 py-2 hover:bg-gray-100 transition-colors"
             >
               <FaUserTie className="mr-2" /> <span>Empleados</span>
             </Link>
