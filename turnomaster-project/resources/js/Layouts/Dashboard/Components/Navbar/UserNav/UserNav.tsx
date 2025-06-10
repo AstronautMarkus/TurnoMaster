@@ -63,6 +63,10 @@ export function UserNav() {
         className="flex items-center gap-2"
         onClick={() => setIsOpen(!isOpen)}
       >
+        <span className="md:hidden text-base font-semibold flex items-center gap-2 justify-center mx-auto">
+          <RoleIcon className="inline-block mr-2 text-lg" />
+          {userName}
+        </span>
         <div className="h-8 w-8 rounded-full overflow-hidden bg-slate-600">
           <img
             src={userImage}
