@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
-        
         * {
             font-family: 'Roboto', sans-serif;
         }
@@ -92,10 +91,8 @@
         }
 
         .footer {
-            background-color: #121212;
             padding: 20px;
             text-align: center;
-            border-top: 1px solid #2B2B2B;
         }
 
         .footer p {
@@ -137,7 +134,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjAwIiB6b29tQW5kUGFuPSJtYWduaWZ5IiB2aWV3Qm94PSIwIDAgNDUwIDQ0OS45OTk5ODQiIGhlaWdodD0iNjAwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0IiB2ZXJzaW9uPSIxLjAiPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgdHJhbnNmb3JtPSJtYXRyaXgoMC43NSwgLTAuMDAwMDAwMDAwMDAwMDAwNTU4LCAwLjAwMDAwMDAwMDAwMDAwMDU1OCwgMC43NSwgMzYuMzUyMzA0LCAxMjkuNTA0MTMyKSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgZD0iTSAyMS40OTkwMTMgMjEuNDk5NzAxIEwgMTI1LjMzMjM1NCAyMS40OTk3MDEgIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iNDMiIHN0cm9rZS1vcGFjaXR5PSIxIiBzdHJva2UtbWl0ZXJsaW1pdD0iNCIvPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgdHJhbnNmb3JtPSJtYXRyaXgoMC43NSwgLTAuMDAwMDAwMDAwMDAwMDAwOTMsIDAuMDAwMDAwMDAwMDAwMDAwOTMsIDAuNzUsIDE1OC41MzUxMTMsIDEyOS41MDQxMzIpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBkPSJNIDIxLjUwMDA1OSAyMS40OTk3MDEgTCA2Ni4xOTc5NzkgMjEuNDk5NzAxICIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjQzIiBzdHJva2Utb3BhY2l0eT0iMSIgc3Ryb2tlLW1pdGVybGltaXQ9IjQiLz48cGF0aCBzdHJva2UtbGluZWNhcD0icm91bmQiIHRyYW5zZm9ybT0ibWF0cml4KDAuNzUsIDAuMDAwMDAwMDAwMDAwMDAwMzYxLCAtMC4wMDAwMDAwMDAwMDAwMDAzNjEsIDAuNzUsIDIzNi40MDIyNDYsIDEyOS41MDQxMzIpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBkPSJNIDIxLjQ5OTAxMyAyMS40OTk3MDEgTCAyMTQuODI4MjcyIDIxLjQ5OTcwMSAiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSI0MyIgc3Ryb2tlLW9wYWNpdHk9IjEiIHN0cm9rZS1taXRlcmxpbWl0PSI0Ii8+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjc1LCAtMC4wMDAwMDAwMDAwMDAwMDAxODYsIDAuMDAwMDAwMDAwMDAwMDAwMTg2LCAwLjc1LCAzNi4zNTIzMDQsIDE4Mi40MTgwMzQpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBkPSJNIDIxLjQ5OTAxMyAyMS40OTk5MTUgTCA0ODEuNTYxNTQ5IDIxLjQ5OTkxNSAiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSI0MyIgc3Ryb2tlLW9wYWNpdHk9IjEiIHN0cm9rZS1taXRlcmxpbWl0PSI0Ii8+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjc1LCAwLjAwMDAwMDAwMDAwMDAwMDQwNywgLTAuMDAwMDAwMDAwMDAwMDAwNDA3LCAwLjc1LCAzNi4zNTIzMDQsIDIzNS4zMzE5MzQpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBkPSJNIDIxLjQ5OTAxMyAyMS41MDAxMzIgTCAzOTcuMDc3MTY3IDIxLjUwMDEzMiAiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSI0MyIgc3Ryb2tlLW9wYWNpdHk9IjEiIHN0cm9rZS1taXRlcmxpbWl0PSI0Ii8+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjc1LCAwLCAwLCAwLjc1LCAzNTkuOTk4OTU1LCAyMzUuMzMxOTM0KSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgZD0iTSAyMS41MDEzOTUgMjEuNTAwMTMyIEwgNTAuMDMyNjQ3IDIxLjUwMDEzMiAiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSI0MyIgc3Ryb2tlLW9wYWNpdHk9IjEiIHN0cm9rZS1taXRlcmxpbWl0PSI0Ii8+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjc1LCAwLCAwLCAwLjc1LCAxODMuMDk2OTk1LCAyODguMjQ1ODA3KSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgZD0iTSAyMS41MDA4ODQgMjEuNTAwMzg0IEwgMjg0Ljk4MDA3MSAyMS41MDAzODQgIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iNDMiIHN0cm9rZS1vcGFjaXR5PSIxIiBzdHJva2UtbWl0ZXJsaW1pdD0iNCIvPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgdHJhbnNmb3JtPSJtYXRyaXgoMC43NSwgMCwgMCwgMC43NSwgMzYuMzUyMzA0LCAyODguMjQ1ODA3KSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgZD0iTSAyMS40OTkwMTMgMjEuNTAwMzg0IEwgMTU4Ljg4OTY0OSAyMS41MDAzODQgIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iNDMiIHN0cm9rZS1vcGFjaXR5PSIxIiBzdHJva2UtbWl0ZXJsaW1pdD0iNCIvPjwvc3ZnPg=="  alt="logo" style="width: 50px; height: auto;">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjAwIiB6b29tQW5kUGFuPSJtYWduaWZ5IiB2aWV3Qm94PSIwIDAgNDUwIDQ0OS45OTk5ODQiIGhlaWdodD0iNjAwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0IiB2ZXJzaW9uPSIxLjAiPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgdHJhbnNmb3JtPSJtYXRyaXgoMC43NSwgLTAuMDAwMDAwMDAwMDAwMDAwNTU4LCAwLjAwMDAwMDAwMDAwMDAwMDU1OCwgMC43NSwgMzYuMzUyMzA0LCAxMjkuNTA0MTMyKSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgZD0iTSAyMS40OTkwMTMgMjEuNDk5NzAxIEwgMTI1LjMzMjM1NCAyMS40OTk3MDEgIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iNDMiIHN0cm9rZS1vcGFjaXR5PSIxIiBzdHJva2UtbWl0ZXJsaW1pdD0iNCIvPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgdHJhbnNmb3JtPSJtYXRyaXgoMC43NSwgLTAuMDAwMDAwMDAwMDAwMDAwOTMsIDAuMDAwMDAwMDAwMDAwMDAwOTMsIDAuNzUsIDE1OC41MzUxMTMsIDEyOS41MDQxMzIpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBkPSJNIDIxLjUwMDA1OSAyMS40OTk3MDEgTCA2Ni4xOTc5NzkgMjEuNDk5NzAxICIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjQzIiBzdHJva2Utb3BhY2l0eT0iMSIgc3Ryb2tlLW1pZGVybGltaXQ9IjQiLz48cGF0aCBzdHJva2UtbGluZWNhcD0icm91bmQiIHRyYW5zZm9ybT0ibWF0cml4KDAuNzUsIDAuMDAwMDAwMDAwMDAwMDAwMzYxLCAtMC4wMDAwMDAwMDAwMDAwMDAzNjEsIDAuNzUsIDIzNi40MDIyNDYsIDEyOS41MDQxMzIpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBkPSJNIDIxLjQ5OTAxMyAyMS40OTk3MDEgTCAyMTQuODI4MjcyIDIxLjQ5OTcwMSAiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSI0MyIgc3Ryb2tlLW9wYWNpdHk9IjEiIHN0cm9rZS1taXRlcmxpbWl0PSI0Ii8+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjc1LCAtMC4wMDAwMDAwMDAwMDAwMDAxODYsIDAuMDAwMDAwMDAwMDAwMDAwMTg2LCAwLjc1LCAzNi4zNTIzMDQsIDE4Mi40MTgwMzQpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBkPSJNIDIxLjQ5OTAxMyAyMS40OTk5MTUgTCA0ODEuNTYxNTQ5IDIxLjQ5OTkxNSAiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSI0MyIgc3Ryb2tlLW9wYWNpdHk9IjEiIHN0cm9rZS1taXRlcmxpbWl0PSI0Ii8+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjc1LCAwLjAwMDAwMDAwMDAwMDAwMDQwNywgLTAuMDAwMDAwMDAwMDAwMDAwNDA3LCAwLjc1LCAzNi4zNTIzMDQsIDIzNS4zMzE5MzQpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBkPSJNIDIxLjQ5OTAxMyAyMS41MDAxMzIgTCAzOTcuMDc3MTY3IDIxLjUwMDEzMiAiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSI0MyIgc3Ryb2tlLW9wYWNpdHk9IjEiIHN0cm9rZS1taXRlcmxpbWl0PSI0Ii8+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjc1LCAwLCAwLCAwLjc1LCAzNTkuOTk4OTU1LCAyMzUuMzMxOTM0KSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgZD0iTSAyMS41MDEzOTUgMjEuNTAwMTMyIEwgNTAuMDMyNjQ3IDIxLjUwMDEzMiAiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSI0MyIgc3Ryb2tlLW9wYWNpdHk9IjEiIHN0cm9rZS1taXRlcmxpbWl0PSI0Ii8+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjc1LCAwLCAwLCAwLjc1LCAxODMuMDk2OTk1LCAyODguMjQ1ODA3KSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgZD0iTSAyMS41MDA4ODQgMjEuNTAwMzg0IEwgMjg0Ljk4MDA3MSAyMS41MDAzODQgIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iNDMiIHN0cm9rZS1vcGFjaXR5PSIxIiBzdHJva2UtbWl0ZXJsaW1pdD0iNCIvPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgdHJhbnNmb3JtPSJtYXRyaXgoMC43NSwgMCwgMCwgMC43NSwgMzYuMzUyMzA0LCAyODguMjQ1ODA3KSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgZD0iTSAyMS40OTkwMTMgMjEuNTAwMzg0IEwgMTU4Ljg4OTY0OSAyMS41MDAzODQgIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iNDMiIHN0cm9rZS1vcGFjaXR5PSIxIiBzdHJva2UtbWl0ZXJsaW1pdD0iNCIvPjwvc3ZnPg=="  alt="logo" style="width: 50px; height: auto;">
             <h2 style="color: #FFFFFF; font-size: 20px; margin: 0;">TurnoMaster</h2>
         </div>
 
@@ -145,43 +142,41 @@
             <h1>¡Hola, {{ $name }}!</h1>
             <p>¡Estamos emocionados de darte la bienvenida a TurnoMaster! 🚀</p>
             <p>
-                Has sido registrado como empleado en {{ $companyName }}, registrada en TurnoMaster. A continuación, encontrarás los detalles de tu cuenta.
+            Has sido registrado como empleado en {{ $companyName }}, registrada en TurnoMaster. A continuación, encontrarás los detalles de tu cuenta.
             </p>
 
             <div class="info-box">
-                <p><strong>Correo electrónico:</strong> {{ $email }}</p>
-                <p><strong>Contraseña:</strong> {{ $password }}</p>
-                <p><strong>Nombre de la empresa:</strong> {{ $companyName }}</p>
+            <p><strong>Correo electrónico:</strong> {{ $email }}</p>
+            <p><strong>Contraseña:</strong> {{ $password }}</p>
+            <p><strong>Nombre de la empresa:</strong> {{ $companyName }}</p>
             </div>
 
             <p>
-                Esta contraseña es generada automáticamente y puedes cambiarla en cualquier momento desde tu perfil dentro de la aplicación.
+            Esta contraseña es generada automáticamente y puedes cambiarla en cualquier momento desde tu perfil dentro de la aplicación (Deberías hacerlo).
             </p>
 
             <p>
-                Para Acceder a tu cuenta, haz clic en el siguiente botón:
+            Para acceder a tu cuenta, haz clic en el siguiente botón e ingresa tus credenciales:
             </p>
 
             <a href="{{ $loginUrl }}" class="button">
-                Acceder a mi cuenta
+            Acceder a mi cuenta
             </a>
 
             <p>
-                Dentro de nuestro panel debes presionar la opción "Empleados" como se muestra en la siguiente imagen: 
+            Si tienes alguna duda o necesitas ayuda, no dudes en contactarnos a través de nuestro correo de soporte.
             </p>
-
-            <img src="/img/help/empleados_info.png" alt="Instrucciones" style="width: 100%; max-width: 200px; border-radius: 8px; margin-bottom: 20px;">
-
-            <p>
-                Si tienes alguna duda o necesitas ayuda, no dudes en contactarnos a través de nuestro correo de soporte.
-            </p>
-
         </div>
 
         <div class="footer">
             <p><strong>TurnoMaster</strong> - Sistema de Gestión de Turnos</p>
-            <p>Creado por <a href="https://www.reyesandfriends.cl" style="color: #E3003D;">Reyes&Friends</a></p>
-            <p>Soporte: <a href="mailto:soporte@turnomaster.com" style="color: #E3003D;">soporte@turnomaster.com</a></p>
+            <p>
+                Creado por 
+                <a href="https://reyesandfriends.cl" target="_blank" style="color: #E3003D; display: inline-flex; align-items: center; text-decoration: none;">
+                    <img src="https://reyesandfriends.cl/img/reyesandfriends-logo.svg" alt="Reyes&Friends" style="height: 20px; width: auto; margin-right: 6px; vertical-align: middle;">
+                </a>
+            </p>
+            <p>Soporte: <a href="mailto:soporte@turnomaster.com" style="color: #E3003D; text-decoration: none;">soporte@turnomaster.com</a></p>
             <p class="disclaimer">
                 © {{ date('Y') }} TurnoMaster. Todos los derechos reservados.
             </p>

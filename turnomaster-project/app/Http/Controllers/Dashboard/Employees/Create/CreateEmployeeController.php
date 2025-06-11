@@ -115,7 +115,7 @@ class CreateEmployeeController extends Controller
             'company_id' => $request->company_id,
         ]);
 
-        $loginUrl = url('/auth/login/'); 
+        $loginUrl = url('/auth/login/employees'); 
 
         $company = Companies::find($request->company_id);
         $companyName = $company->name;
