@@ -77,27 +77,27 @@ export default function ActivityLogs() {
               Registro de Actividades
       </h1>
 
-      <div className="flex items-end space-x-4 mb-4">
+      <div className="flex flex-col sm:flex-row sm:items-end sm:space-x-4 space-y-3 sm:space-y-0 mb-4">
         <div>
           <label className="block text-sm font-semibold mb-1">Desde</label>
           <input
-            type="date"
-            className="border px-2 py-1"
-            value={startDate}
-            onChange={e => setStartDate(e.target.value)}
+        type="date"
+        className="border px-2 py-1 w-full"
+        value={startDate}
+        onChange={e => setStartDate(e.target.value)}
           />
         </div>
         <div>
           <label className="block text-sm font-semibold mb-1">Hasta</label>
           <input
-            type="date"
-            className="border px-2 py-1"
-            value={endDate}
-            onChange={e => setEndDate(e.target.value)}
+        type="date"
+        className="border px-2 py-1 w-full"
+        value={endDate}
+        onChange={e => setEndDate(e.target.value)}
           />
         </div>
         <button
-          className="dashboard-button-secondary flex items-center px-4 py-2 text-white text-sm"
+          className="dashboard-button-secondary flex items-center px-4 py-2 text-white text-sm w-full sm:w-auto"
           onClick={handleFilter}
           disabled={!startDate || !endDate}
         >
@@ -105,10 +105,10 @@ export default function ActivityLogs() {
         </button>
         {(startDate && endDate) && (
           <button
-            className="ml-2 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white text-sm"
-            onClick={handleClearFilter}
+        className="ml-0 sm:ml-2 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white text-sm w-full sm:w-auto"
+        onClick={handleClearFilter}
           >
-            Limpiar filtro
+        Limpiar filtro
           </button>
         )}
       </div>
