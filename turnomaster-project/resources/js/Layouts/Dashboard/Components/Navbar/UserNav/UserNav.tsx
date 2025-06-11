@@ -2,10 +2,9 @@ import React, { useState, useRef, useEffect, MouseEvent } from "react";
 import { FiLogOut, FiSettings, FiUser, FiMenu } from "react-icons/fi";
 import { FaUserShield, FaUser } from 'react-icons/fa';
 import { FaUserGear, FaAngleUp, FaAngleDown } from "react-icons/fa6";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { LogoutModal } from "./LogoutModal";
 import { useHandleLogout } from "../../../../../hooks/useHandleLogout";
-import axios from "axios";
 
 export function UserNav() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -13,18 +12,20 @@ export function UserNav() {
   const [userData, setUserData] = useState<any>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-  const navigate = useNavigate();
   const handleLogout = useHandleLogout();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    axios.get("/api/me", {
-      headers: {
-        Authorization: token ? `Bearer ${token}` : undefined,
-      },
-    })
-      .then(res => setUserData(res.data))
-      .catch(() => setUserData(null));
+    const userStr = localStorage.getItem("user");
+    if (userStr) {
+      try {
+        const user = JSON.parse(userStr);
+        setUserData({ user });
+      } catch {
+        setUserData(null);
+      }
+    } else {
+      setUserData(null);
+    }
   }, []);
 
   useEffect(() => {
@@ -33,7 +34,6 @@ export function UserNav() {
         setIsOpen(false);
       }
     }
-
     document.addEventListener("mousedown", handleClickOutside as unknown as EventListener);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside as unknown as EventListener);
@@ -41,12 +41,13 @@ export function UserNav() {
   }, []);
 
   const userName = userData
-    ? `${userData.user.first_name} ${userData.user.last_name}`
+    ? userData.user.name
     : "Usuario";
   const userEmail = userData?.user?.email || "email@ejemplo.com";
   const userImage =
-    userData?.user?.profile_photo ||
-    "/img/profile/default.png";
+    userData?.user?.profile_photo
+      ? userData.user.profile_photo
+      : "/img/profile/default.png";
   const userRoleId = userData?.role?.id;
 
   
