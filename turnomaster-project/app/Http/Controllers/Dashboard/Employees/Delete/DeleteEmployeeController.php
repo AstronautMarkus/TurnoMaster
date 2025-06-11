@@ -30,7 +30,7 @@ class DeleteEmployeeController extends Controller
         }
 
         // Nobody can delete themselves
-        if ($userId == $id) {
+        if ($userId == $id && $userType == 'employee') {
             ActivityLogger::log(
                 $request,
                 'intentó eliminarse a sí mismo',
