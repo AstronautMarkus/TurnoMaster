@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaEye, FaEyeSlash } from 'react-icons/fa6';
-import AuthLoadingScreen from '../../../../Components/Auth/LoadingScreen/AuthLoadingScreen';
+import LoadingScreen from '../../../../Components/LoadingScreen/LoadingScreen';
 import axios from 'axios';
 
 const CompaniesResetPassword: React.FC = () => {
@@ -112,7 +112,7 @@ const CompaniesResetPassword: React.FC = () => {
             </div>
             {isLoading ? (
               <div className="flex items-center justify-center h-48">
-                <AuthLoadingScreen />
+                <LoadingScreen type="auth-reset-password" />
               </div>
             ) : (
               <form onSubmit={handleSubmit}>

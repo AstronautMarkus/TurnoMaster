@@ -1,5 +1,5 @@
 interface LoadingScreenProps {
-    type?: "auth-login" | "auth-register";
+    type?: "auth-login" | "auth-register" | "auth-reset-password" | "auth-forgot-password";
     theme?: "dashboard";
 }
 
@@ -9,7 +9,11 @@ const LoadingScreen = ({ type, theme }: LoadingScreenProps) => {
         message = "Iniciando sesión...";
     } else if (type === "auth-register") {
         message = "Registrando usuario...";
-    }
+    } else if (type === "auth-reset-password") {
+        message = "Restableciendo contraseña...";
+    } else if (type === "auth-forgot-password") {
+        message = "Enviando correo de recuperación...";
+    } 
 
     const dotClass =
         theme === "dashboard"

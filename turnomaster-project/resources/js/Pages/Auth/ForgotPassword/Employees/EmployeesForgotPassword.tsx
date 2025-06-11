@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft, FaUserTie } from 'react-icons/fa6';
-import AuthLoadingScreen from '../../../../Components/Auth/LoadingScreen/AuthLoadingScreen';
+import LoadingScreen from '../../../../Components/LoadingScreen/LoadingScreen';
 import axios from 'axios';
 
 const EmployeesForgotPassword: React.FC = () => {
@@ -56,7 +56,7 @@ const EmployeesForgotPassword: React.FC = () => {
               <h2 className="font-semibold">(Empleados)</h2>
             </div>
             {isLoading ? (
-              <AuthLoadingScreen />
+              <LoadingScreen type='auth-forgot-password' />
             ) : (
               <>
               <div className="mb-4">
