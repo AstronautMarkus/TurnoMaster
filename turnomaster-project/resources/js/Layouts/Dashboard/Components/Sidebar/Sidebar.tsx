@@ -371,12 +371,10 @@ function SidebarContent({
                       <div className={`flex items-center gap-2 ${isCollapsed ? "justify-center w-full" : ""}`}>
                         {link.icon && <link.icon className="h-5 w-5" />}
                         {!isCollapsed && <span>{link.label}</span>}
-
-                        {isCollapsed && (
-                          <FiChevronRight className="h-4 w-4 ml-1 opacity-70" />
-                        )}
                       </div>
-
+                      {isCollapsed && (
+                        <FiChevronRight className="h-4 w-4 ml-1 opacity-70" />
+                      )}
                       {!isCollapsed && (
                         <FiChevronRight
                           className={`h-4 w-4 transition-transform ${
@@ -431,7 +429,7 @@ function SidebarContent({
                     {link.to && (
                       <Link
                         to={link.to}
-                        className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm ${
+                        className={`flex items-center justify-between w-full gap-2 px-3 py-2 rounded-md text-sm ${
                           currentPath === link.to
                             ? "dashboard-option text-white"
                             : hoveredSingle === link.to
@@ -443,8 +441,13 @@ function SidebarContent({
                         onMouseEnter={() => setHoveredSingle(link.to!)}
                         onMouseLeave={() => setHoveredSingle(null)}
                       >
-                        {link.icon && <link.icon className="h-5 w-5" />}
-                        {!isCollapsed && <span>{link.label}</span>}
+                        <div className={`flex items-center gap-2 ${isCollapsed ? "justify-center w-full" : ""}`}>
+                          {link.icon && <link.icon className="h-5 w-5" />}
+                          {!isCollapsed && <span>{link.label}</span>}
+                        </div>
+                        {isCollapsed && (
+                          <span className="h-4 w-4 ml-1" />
+                        )}
                       </Link>
                     )}
                   </li>
