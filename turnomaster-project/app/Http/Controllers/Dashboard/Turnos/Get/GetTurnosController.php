@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard\Turnos\Get;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Turnos\Turnos;
+use App\Models\Shift\ShiftUser;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
@@ -45,6 +46,7 @@ class GetTurnosController extends Controller
             if ($item->end_time) {
                 $item->end_time = date('H:i', strtotime($item->end_time));
             }
+            $item->assigned_users_count = ShiftUser::where('shift_id', $item->id)->count();
             return $item;
         });
 
