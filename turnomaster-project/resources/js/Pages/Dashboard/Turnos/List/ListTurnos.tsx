@@ -12,6 +12,11 @@ const ListTurnos = () => {
 
     const [searchInput, setSearchInput] = useState<string>("");
     const [deleteTurno, setDeleteTurno] = useState<any | null>(null);
+    const [localTurnos, setLocalTurnos] = useState<any[]>([]);
+
+    React.useEffect(() => {
+        setLocalTurnos(turnos);
+    }, [turnos]);
 
     const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => { setSearchInput(e.target.value); };
 
@@ -32,6 +37,10 @@ const ListTurnos = () => {
 
     const handleDeleteAlertClose = () => {
         setDeleteTurno(null);
+    };
+
+    const handleTurnoDeleted = (id: number) => {
+        setLocalTurnos(prev => prev.filter(t => t.id !== id));
     };
 
     return (
@@ -105,8 +114,8 @@ const ListTurnos = () => {
                                         Cargando turnos...
                                     </td>
                                 </tr>
-                            ) : turnos.length > 0 ? (
-                                turnos.map((turno, idx) => (
+                            ) : localTurnos.length > 0 ? (
+                                localTurnos.map((turno, idx) => (
                                     <tr key={turno.id} className="hover:bg-gray-100 transition-colors">
                                         <td className="px-4 py-2"><span>{turno.name}</span></td>
                                         <td className="px-4 py-2"><span>{turno.description}</span></td>
@@ -177,6 +186,7 @@ const ListTurnos = () => {
                 <DeleteTurnoAlert
                     turno={deleteTurno}
                     onClose={handleDeleteAlertClose}
+                    onDeleted={handleTurnoDeleted}
                 />
             )}
         </div>
