@@ -6,6 +6,8 @@ import { FaPlus } from 'react-icons/fa6';
 import useGetTurnosList from "./useGetTurnosList";
 import 'sweetalert2/dist/sweetalert2.min.css';
 import DeleteTurnoAlert from "./DeleteTurnoAlert/DeleteTurnoAlert";
+import { Tooltip } from 'react-tooltip'
+import 'react-tooltip/dist/react-tooltip.css'
 
 const ListTurnos = () => {
     const { turnos, page, setPage, totalPages, loading, searchName, search, clearSearch} = useGetTurnosList();
@@ -97,16 +99,65 @@ const ListTurnos = () => {
                         <thead className="sticky top-0 dashboard-background text-white uppercase text-sm tracking-wider">
                             <tr>
                                 <th className="px-4 py-3 text-left">Nombre</th>
-                                <th className="px-4 py-3 text-left">Desc</th>
-                                <th className="px-4 py-3 text-left">H. Inicio</th>
-                                <th className="px-4 py-3 text-left">Alm?</th>
-                                <th className="px-4 py-3 text-left">H. Alm</th>
-                                <th className="px-4 py-3 text-left">H. Fin</th>
-                                <th className="px-4 py-3 text-left">Empleados</th>
-                                <th className="px-4 py-3 text-left">Creado</th>
+                                <th
+                                    className="px-4 py-3 text-left"
+                                    data-tooltip-id="desc-tooltip"
+                                    data-tooltip-content="Descripción del turno"
+                                >
+                                    Desc
+                                </th>
+                                <th
+                                    className="px-4 py-3 text-left"
+                                    data-tooltip-id="hinicio-tooltip"
+                                    data-tooltip-content="Horario de inicio del turno"
+                                >
+                                    H. Inicio
+                                </th>
+                                <th
+                                    className="px-4 py-3 text-left"
+                                    data-tooltip-id="alm-tooltip"
+                                    data-tooltip-content="¿Este turno tiene activado el almuerzo?"
+                                >
+                                    Alm?
+                                </th>
+                                <th
+                                    className="px-4 py-3 text-left"
+                                    data-tooltip-id="halm-tooltip"
+                                    data-tooltip-content="Horario de almuerzo (si aplica)"
+                                >
+                                    H. Alm
+                                </th>
+                                <th
+                                    className="px-4 py-3 text-left"
+                                    data-tooltip-id="hfin-tooltip"
+                                    data-tooltip-content="Horario de fin del turno"
+                                >
+                                    H. Fin
+                                </th>
+                                <th
+                                    className="px-4 py-3 text-left"
+                                    data-tooltip-id="empleados-tooltip"
+                                    data-tooltip-content="Empleados asignados a este turno"
+                                >
+                                    Empleados
+                                </th>
+                                <th
+                                    className="px-4 py-3 text-left"
+                                    data-tooltip-id="creado-tooltip"
+                                    data-tooltip-content="Fecha de creación del turno"
+                                >
+                                    Creado
+                                </th>
                                 <th className="px-4 py-3 text-left">Editar / Eliminar</th>
                             </tr>
                         </thead>
+                        <Tooltip id="desc-tooltip" />
+                        <Tooltip id="hinicio-tooltip" />
+                        <Tooltip id="alm-tooltip" />
+                        <Tooltip id="halm-tooltip" />
+                        <Tooltip id="hfin-tooltip" />
+                        <Tooltip id="empleados-tooltip" />
+                        <Tooltip id="creado-tooltip" />
                         <tbody>
                             {loading ? (
                                 <tr>
@@ -137,16 +188,25 @@ const ListTurnos = () => {
                                         </td>
                                         <td className="px-4 py-2">
                                             <div className="flex space-x-2">
-                                                <Link to={`/dashboard/turnos/edit/${turno.id}`} className="dashboard-button-warning text-white px-4 py-2 text-sm transition-colors flex items-center">
+                                                <Link
+                                                    to={`/dashboard/turnos/edit/${turno.id}`}
+                                                    className="dashboard-button-warning text-white px-4 py-2 text-sm transition-colors flex items-center"
+                                                    data-tooltip-id={`edit-tooltip-${turno.id}`}
+                                                    data-tooltip-content="Editar turno"
+                                                >
                                                     <FaEdit />
                                                 </Link>
+                                                <Tooltip id={`edit-tooltip-${turno.id}`} />
                                                 <button
                                                     className="text-white px-4 py-2 text-sm dashboard-button transition-colors flex items-center"
                                                     type="button"
                                                     onClick={() => handleDeleteVisual(turno)}
+                                                    data-tooltip-id={`delete-tooltip-${turno.id}`}
+                                                    data-tooltip-content="Eliminar turno"
                                                 >
                                                     <FaTimes />
                                                 </button>
+                                                <Tooltip id={`delete-tooltip-${turno.id}`} />
                                             </div>
                                         </td>
                                     </tr>

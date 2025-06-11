@@ -10,6 +10,8 @@ import { FaXmark } from "react-icons/fa6";
 import DeleteEmployeeAlert from "./DeleteEmployeeAlert/DeleteEmployeeAlert";
 import AccesDeniedAlert from "./AccesDeniedAlert/AccesDeniedAlert";
 import CrossCompanyAlert from "./CrossCompanyAlert/CrossCompanyAlert";
+import { Tooltip } from 'react-tooltip'
+import 'react-tooltip/dist/react-tooltip.css'
 
 function parseJwt(token: string) {
   try {
@@ -170,14 +172,42 @@ const ListEmployees = () => {
               <thead className="sticky top-0 dashboard-background text-white uppercase text-sm tracking-wider">
                 <tr>
                   <th className="px-4 py-3 text-left">Nombre</th>
-                  <th className="px-4 py-3 text-left">RUT</th>
+                  <th
+                    className="px-4 py-3 text-left"
+                    data-tooltip-id="rut-tooltip"
+                    data-tooltip-content="Rol Único Tributario"
+                  >
+                    RUT
+                  </th>
                   <th className="px-4 py-3 text-left">Email</th>
-                  <th className="px-4 py-3 text-left">Rol</th>
-                  <th className="px-4 py-3 text-left">T. Asignados</th>
-                  <th className="px-4 py-3 text-left">A. Turnos</th>
+                  <th
+                    className="px-4 py-3 text-left"
+                    data-tooltip-id="rol-tooltip"
+                    data-tooltip-content="Rol del empleado en la empresa"
+                  >
+                    Rol
+                  </th>
+                  <th
+                    className="px-4 py-3 text-left"
+                    data-tooltip-id="tasignados-tooltip"
+                    data-tooltip-content="¿Tiene turnos asignados? (y cuántos)"
+                  >
+                    T. Asignados
+                  </th>
+                  <th
+                    className="px-4 py-3 text-left"
+                    data-tooltip-id="aturnos-tooltip"
+                    data-tooltip-content="Asignar o listar turnos del empleado"
+                  >
+                    A. Turnos
+                  </th>
                   <th className="px-4 py-3 text-left">Editar / Eliminar</th>
                 </tr>
               </thead>
+              <Tooltip id="rut-tooltip" />
+              <Tooltip id="rol-tooltip" />
+              <Tooltip id="tasignados-tooltip" />
+              <Tooltip id="aturnos-tooltip" />
               <tbody>
                 {filteredEmployees.map((employee, index) => (
                   <tr key={index} className="hover:bg-gray-100 transition-colors">
@@ -234,13 +264,21 @@ const ListEmployees = () => {
                       <div className="flex space-x-2">
                         {canEditOrDelete(employee) ? (
                           <>
-                            <Link to={`/dashboard/employees/edit/${employee.id}`} className="dashboard-button-warning text-white px-4 py-2 text-sm transition-colors flex items-center">
+                            <Link
+                              to={`/dashboard/employees/edit/${employee.id}`}
+                              className="dashboard-button-warning text-white px-4 py-2 text-sm transition-colors flex items-center"
+                              data-tooltip-id={`edit-employee-tooltip-${employee.id}`}
+                              data-tooltip-content="Editar empleado"
+                            >
                               <FaEdit />
                             </Link>
+                            <Tooltip id={`edit-employee-tooltip-${employee.id}`} />
                             {userType === "employee" && userId === employee.id ? (
                               <button
                                 className="bg-gray-400 cursor-not-allowed text-white px-4 py-2 text-sm flex items-center"
                                 disabled
+                                data-tooltip-id={`lock-employee-tooltip-${employee.id}`}
+                                data-tooltip-content="No puedes eliminarte a ti mismo"
                               >
                                 <FaLock />
                               </button>
@@ -253,19 +291,26 @@ const ListEmployees = () => {
                                   shift_count: employee.shift_count
                                 })}
                                 className="text-white px-4 py-2 text-sm dashboard-button transition-colors flex items-center"
+                                data-tooltip-id={`delete-employee-tooltip-${employee.id}`}
+                                data-tooltip-content="Eliminar empleado"
                               >
                                 <FaMinus />
                               </button>
                             )}
+                            <Tooltip id={`delete-employee-tooltip-${employee.id}`} />
+                            <Tooltip id={`lock-employee-tooltip-${employee.id}`} />
                           </>
                         ) : (
                           <button
                             className="bg-gray-400 cursor-not-allowed text-white px-4 py-2 text-sm flex items-center"
                             disabled
+                            data-tooltip-id={`lock-employee-tooltip-${employee.id}`}
+                            data-tooltip-content="No tienes permisos para editar o eliminar este empleado"
                           >
                             <FaLock />
                           </button>
                         )}
+                        <Tooltip id={`lock-employee-tooltip-${employee.id}`} />
                       </div>
                     </td>
                   </tr>
