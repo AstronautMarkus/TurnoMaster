@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Auth\ResetPassword\Employees;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use App\Models\Users\DashboardUser;
 use App\Models\Users\PasswordHistories\Employees\PasswordHistoriesEmployees;
+use App\Models\Users\PasswordResets\Employees\PasswordResetsEmployees;
 use Carbon\Carbon;
 
 class ResetPasswordEmployeesController extends Controller
@@ -30,7 +30,9 @@ class ResetPasswordEmployeesController extends Controller
                 'confirm_password.same' => 'La confirmación de la contraseña no coincide.',
             ]);
 
-            $record = DB::table('password_resets')->where('token', $request->token)->first();
+            $record = PasswordResetsEmployees::where('token', $request->token)
+                ->where('revoked', false)
+                ->first();
 
             if (!$record) {
                 return response()->json(['message' => 'Token inválido o expirado.'], 400);
@@ -38,7 +40,8 @@ class ResetPasswordEmployeesController extends Controller
 
             $expiresAt = Carbon::parse($record->created_at)->addMinutes(60);
             if (Carbon::now()->greaterThan($expiresAt)) {
-                DB::table('password_resets')->where('token', $request->token)->delete();
+                $record->revoked = true;
+                $record->save();
                 return response()->json(['message' => 'El token ha expirado.'], 400);
             }
 
@@ -72,7 +75,8 @@ class ResetPasswordEmployeesController extends Controller
             $user->password = Hash::make($request->password);
             $user->save();
 
-            DB::table('password_resets')->where('email', $user->email)->delete();
+            $record->revoked = true;
+            $record->save();
 
             Log::info("Contraseña actualizada para el usuario: {$user->email}");
 
