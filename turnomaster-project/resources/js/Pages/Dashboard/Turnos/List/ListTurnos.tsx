@@ -11,7 +11,7 @@ const ListTurnos = () => {
     const { turnos, page, setPage, totalPages, loading, searchName, search, clearSearch} = useGetTurnosList();
 
     const [searchInput, setSearchInput] = useState<string>("");
-    const [deleteTurnoName, setDeleteTurnoName] = useState<string | null>(null);
+    const [deleteTurno, setDeleteTurno] = useState<any | null>(null);
 
     const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => { setSearchInput(e.target.value); };
 
@@ -23,12 +23,15 @@ const ListTurnos = () => {
 
     const handleNext = () => { if (page < totalPages) setPage(page + 1); };
 
-    const handleDeleteVisual = (turnoName: string) => {
-        setDeleteTurnoName(turnoName);
+    const handleDeleteVisual = (turno: any) => {
+        setDeleteTurno({
+            ...turno,
+            assigned_users_count: turno.assigned_users_count,
+        });
     };
 
     const handleDeleteAlertClose = () => {
-        setDeleteTurnoName(null);
+        setDeleteTurno(null);
     };
 
     return (
@@ -127,15 +130,13 @@ const ListTurnos = () => {
                                             <div className="flex space-x-2">
                                                 <Link to={`/dashboard/turnos/edit/${turno.id}`} className="dashboard-button-warning text-white px-4 py-2 text-sm transition-colors flex items-center">
                                                     <FaEdit />
-                                                    
                                                 </Link>
                                                 <button
                                                     className="text-white px-4 py-2 text-sm dashboard-button transition-colors flex items-center"
                                                     type="button"
-                                                    onClick={() => handleDeleteVisual(turno.name)}
+                                                    onClick={() => handleDeleteVisual(turno)}
                                                 >
                                                     <FaTimes />
-                                                    
                                                 </button>
                                             </div>
                                         </td>
@@ -172,9 +173,9 @@ const ListTurnos = () => {
                 </button>
                 </div>
             </div>
-            {deleteTurnoName && (
+            {deleteTurno && (
                 <DeleteTurnoAlert
-                    turnoName={deleteTurnoName}
+                    turno={deleteTurno}
                     onClose={handleDeleteAlertClose}
                 />
             )}

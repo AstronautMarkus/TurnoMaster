@@ -12,6 +12,7 @@ interface Turno {
   company_id: number;
   created_at: string;
   updated_at: string;
+  assigned_users_count: number;
 }
 
 const useGetTurnosList = () => {
