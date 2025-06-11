@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Dashboard\Turnos\Delete;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Turnos\Turnos;
+use App\Models\Shift\ShiftUser;
+use App\Models\Shift\UserShiftAttendance;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
@@ -22,6 +24,9 @@ class DeleteTurnosController extends Controller
                 'message' => 'El turno no existe o no pertenece a esta empresa.',
             ], 404);
         }
+
+        UserShiftAttendance::where('shift_id', $turno->id)->delete();
+        ShiftUser::where('shift_id', $turno->id)->delete();
         $turno->delete();
 
         return response()->json([
