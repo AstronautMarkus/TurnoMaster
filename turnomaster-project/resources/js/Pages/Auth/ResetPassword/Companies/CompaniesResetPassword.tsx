@@ -19,7 +19,7 @@ const CompaniesResetPassword: React.FC = () => {
   const [showInvalidTokenModal, setShowInvalidTokenModal] = useState(false);
 
   useEffect(() => {
-    axios.get(`/api/validate-reset-token/${token}`)
+    axios.get(`/api/validate-reset-token/company/${token}`)
       .then(response => {
         if (!response.data.valid) {
           setError('Token inválido o expirado.');
@@ -76,120 +76,127 @@ const CompaniesResetPassword: React.FC = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl p-12 px-6 md:px-28 shadow-2xl w-full max-w-sm md:max-w-lg mx-auto mt-10">
-      {showInvalidTokenModal ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-11/12 max-w-md">
-            <h2 className="text-xl font-bold text-gray-800 mb-4">Token Inválido</h2>
-            <p className="text-gray-700 mb-6">El token para restablecer la contraseña es inválido o ha expirado.</p>
-            <div className="flex justify-end gap-4">
-              <button
-                onClick={() => navigate('/auth/login')}
-                className="px-4 py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-900"
-              >
-                Ir a Login
-              </button>
-              <button
-                onClick={() => navigate('/')}
-                className="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400"
-              >
-                Ir al Inicio
-              </button>
+    <div className="flex flex-col md:flex-row items-center justify-center min-h-screen w-full">
+      <div className="bg-white p-8 md:p-12 w-full max-w-md md:max-w-lg">
+        {showInvalidTokenModal ? (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-white p-8 w-full max-w-md">
+              <h2 className="text-xl font-bold text-gray-800 mb-4">Token Inválido</h2>
+              <p className="text-gray-700 mb-6">El token para restablecer la contraseña es inválido o ha expirado.</p>
+              <div className="flex justify-end gap-4">
+                <button
+                  onClick={() => navigate('/auth/login')}
+                  className="px-4 py-2 bg-[#e01d1d] text-white hover:bg-[#b21e1e]"
+                >
+                  Ir a Login
+                </button>
+                <button
+                  onClick={() => navigate('/')}
+                  className="px-4 py-2 bg-gray-200 text-gray-800 hover:bg-gray-300"
+                >
+                  Ir al Inicio
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      ) : (
-        <>
-          <div className="flex items-center justify-center mb-6">
-            <img src="/img/logo/TurnoMaster.svg" alt="Logo" className="w-14 h-14 mr-4" />
-            <h2 className="text-2xl font-bold text-gray-800">Restablecer contraseña</h2>
-          </div>
-
-          {isLoading ? (
-            <AuthLoadingScreen />
-          ) : (
-            <form onSubmit={handleSubmit}>
-              <input type="hidden" value={token} />
-
-              <div className="mb-4">
-                <label className="block mb-2 text-sm font-medium text-gray-700">
-                  Nueva Contraseña
-                </label>
-                <div className="relative">
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder="Ingrese una nueva contraseña"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-3 flex items-center text-gray-500"
-                  >
-                    {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
-                  </button>
-                </div>
-                {passwordError && (
-                  <p className="mt-2 text-sm text-red-600">{passwordError}</p>
-                )}
+        ) : (
+          <>
+            <div className="flex items-center justify-center">
+              <img src="/img/logo/TurnoMasterRed.svg" alt="Logo" className="w-12 h-12 mr-3" />
+              <h2 className="text-2xl font-semibold flex items-center">
+                Restablecer contraseña
+              </h2>
+            </div>
+            <div className="flex items-center justify-center mb-6">
+              <span className="font-semibold">(Empresas)</span>
+            </div>
+            {isLoading ? (
+              <div className="flex items-center justify-center h-48">
+                <AuthLoadingScreen />
               </div>
-
-              <div className="mb-4">
-                <label className="block mb-2 text-sm font-medium text-gray-700">
-                  Confirmar Contraseña
-                </label>
-                <div className="relative">
-                  <input
-                    type={showConfirmPassword ? 'text' : 'password'}
-                    placeholder="Confirme su contraseña"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute inset-y-0 right-3 flex items-center text-gray-500"
-                  >
-                    {showConfirmPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
-                  </button>
+            ) : (
+              <form onSubmit={handleSubmit}>
+                <input type="hidden" value={token} />
+                <div className="mb-4">
+                  <label className="block mb-2 text-sm font-medium">
+                    Nueva Contraseña
+                  </label>
+                  <div className="relative">
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      placeholder="Ingrese una nueva contraseña"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+                    >
+                      {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+                    </button>
+                  </div>
+                  {passwordError && (
+                    <p className="mt-2 text-sm text-red-600">{passwordError}</p>
+                  )}
                 </div>
-                {confirmPasswordError && (
-                  <p className="mt-2 text-sm text-red-600">{confirmPasswordError}</p>
+                <div className="mb-4">
+                  <label className="block mb-2 text-sm font-medium">
+                    Confirmar Contraseña
+                  </label>
+                  <div className="relative">
+                    <input
+                      type={showConfirmPassword ? 'text' : 'password'}
+                      placeholder="Confirme su contraseña"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      className="w-full px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-[#e01d1d] focus:border-[#e01d1d] hover:border-[#e01d1d]"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+                    >
+                      {showConfirmPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+                    </button>
+                  </div>
+                  {confirmPasswordError && (
+                    <p className="mt-2 text-sm text-red-600">{confirmPasswordError}</p>
+                  )}
+                </div>
+                {error && (
+                  <div className="mb-4 text-m text-red-600 bg-red-100 border border-red-400 p-2 text-center">
+                    {error}
+                  </div>
                 )}
-              </div>
-
-              {error && (
-                <p className="mb-4 text-sm text-red-600 text-center">{error}</p>
-              )}
-              {successMessage && (
-                <p className="mb-4 text-sm text-green-600 text-center">{successMessage}</p>
-              )}
-
-              <button
-                type="submit"
-                className="w-full px-4 py-2 text-white bg-blue-800 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                Restablecer Contraseña
-              </button>
-
-              <div className="mt-6 text-center">
-                <Link
-                  to="/auth/login"
-                  className="text-sm text-gray-600 hover:text-blue-700 flex justify-center items-center gap-2"
+                {successMessage && (
+                  <div className="mb-4 text-m text-green-600 bg-green-100 border border-green-400 p-2 text-center">
+                    {successMessage}
+                  </div>
+                )}
+                <button
+                  type="submit"
+                  className="w-full px-4 py-2 bg-[#e01d1d] hover:bg-[#b21e1e] text-white focus:outline-none focus:ring-2 focus:ring-[#e01d1d]"
                 >
-                  <FaArrowLeft />
-                  Volver al inicio de sesión
-                </Link>
-              </div>
-            </form>
-          )}
-        </>
-      )}
+                  Restablecer Contraseña
+                </button>
+                <div className="mt-6 text-center">
+                  <Link
+                    to="/auth/login"
+                    className="text-sm text-gray-600 hover:text-[#e01d1d] flex justify-center items-center gap-2"
+                  >
+                    <FaArrowLeft />
+                    Volver al inicio de sesión
+                  </Link>
+                </div>
+              </form>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 };

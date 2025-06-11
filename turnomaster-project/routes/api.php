@@ -33,7 +33,9 @@ use App\Http\Controllers\Auth\ResetPassword\Employees\ResetPasswordEmployeesCont
 
 use App\Http\Controllers\Auth\Token\TokenController;
 use App\Http\Controllers\Auth\Token\GenericTokenController;
-use App\Http\Controllers\Auth\ValidateTokenController;
+
+use App\Http\Controllers\Auth\Token\Validate\Company\CompanyValidateTokenController;
+use App\Http\Controllers\Auth\Token\Validate\Employees\EmployeesValidateTokenController;
 
 // Login controllers
 
@@ -103,11 +105,14 @@ Route::post('/forgot-password/employees', [ForgotPasswordEmployeesController::cl
 Route::post('/reset-password/companies', [ResetPasswordCompaniesController::class, 'resetPassword']);
 Route::post('/reset-password/employees', [ResetPasswordEmployeesController::class, 'resetPassword']);
 
-Route::get('/validate-reset-token/{token}', [ValidateTokenController::class, 'validateToken']);
-
 Route::get('/themes', [GetThemesController::class, 'getThemesList']);
 
-// Protected routes
+// Validate Reset token routes
+
+Route::get('/validate-reset-token/company/{token}', [CompanyValidateTokenController::class, 'validateCompaniesToken']);
+Route::get('/validate-reset-token/employees/{token}', [EmployeesValidateTokenController::class, 'validateEmployeesToken']);
+
+// Protected routes with JWT authentication
 
 Route::middleware(['jwt.auth'])->group(function () {
     Route::get('/me', [GetPersonalDataController::class, 'getPersonalData']);

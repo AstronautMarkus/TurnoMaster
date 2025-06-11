@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
+use App\Models\Users\PasswordResets\Companies\PasswordResetsCompanies;
 
 class ForgotPasswordCompaniesController extends Controller
 {
@@ -31,13 +32,23 @@ class ForgotPasswordCompaniesController extends Controller
                 ], 404);
             }
 
+            $previousToken = PasswordResetsCompanies::where('email', $user->email)
+                ->where('revoked', false)
+                ->first();
+
+            if ($previousToken) {
+                $previousToken->revoked = true;
+                $previousToken->save();
+            }
+
             $token = Str::random(60);
 
-            DB::table('password_resets')->updateOrInsert(
+            PasswordResetsCompanies::updateOrCreate(
                 ['email' => $user->email],
                 [
                     'token' => $token,
                     'created_at' => Carbon::now(),
+                    'revoked' => false,
                 ]
             );
 
