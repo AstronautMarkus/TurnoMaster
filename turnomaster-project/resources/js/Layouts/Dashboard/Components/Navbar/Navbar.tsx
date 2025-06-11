@@ -17,7 +17,7 @@ export function Navbar(){
         <UserNav />
         <button
           onClick={toggleSidebar}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-md text-white hover:bg-slate-700 md:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-md text-white md:hidden"
         >
           <FiMenu className="h-6 w-6" />
           <span className="sr-only"></span>
