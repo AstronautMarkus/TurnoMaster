@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { FaCircleInfo } from "react-icons/fa6";
 import { FaTimes } from "react-icons/fa";
 
 const DemoAccountNotifier: React.FC = () => {
-    const [isInfoVisible, setIsInfoVisible] = useState(false);
     const [isNotifierVisible, setIsNotifierVisible] = useState(true);
 
     useEffect(() => {
@@ -12,10 +10,6 @@ const DemoAccountNotifier: React.FC = () => {
             setIsNotifierVisible(false);
         }
     }, []);
-
-    const toggleInfo = () => {
-        setIsInfoVisible(!isInfoVisible);
-    };
 
     const closeNotifier = () => {
         setIsNotifierVisible(false);
@@ -27,27 +21,21 @@ const DemoAccountNotifier: React.FC = () => {
     }
 
     return (
-        <div className="relative bg-blue-100 text-blue-800 rounded-lg p-4 flex items-center justify-center shadow-md w-64 space-x-2">
-            <span className="font-semibold text-sm">Cuenta de pruebas</span>
+        <div className="relative dashboard-background-error text-white md:p-4 p-2 flex flex-col items-start justify-center shadow-md w-full max-w-xs md:w-80 md:max-w-full mx-auto md:mx-0 md:ml-auto md:mr-0">
             <button
-                onClick={toggleInfo}
-                className="text-blue-800 hover:text-blue-600 focus:outline-none"
-                aria-label="Información sobre la cuenta de pruebas"
-            >
-                <FaCircleInfo className="w-5 h-5" />
-            </button>
-            <button
+                className="absolute top-2 right-2 text-white hover:text-gray-900"
                 onClick={closeNotifier}
-                className="absolute top-2 right-2 text-blue-800 hover:text-blue-600 focus:outline-none"
-                aria-label="Cerrar notificador"
-            >
-                <FaTimes className="w-4 h-4" />
+                aria-label="Cerrar">
+                <FaTimes />
             </button>
-            {isInfoVisible && (
-                <div className="absolute bottom-full mb-2 right-0 transform translate-x-0 bg-white border border-gray-200 rounded-lg shadow-lg p-4 w-64 text-sm text-gray-700 z-50">
-                    Esta cuenta es solamente para fines de demostración. Se pueden realizar todas las funciones pero ninguna de las operaciones servirá para producción. Para realizar operaciones reales, por favor, adquirir una cuenta en el apartado de "Precios".
-                </div>
-            )}
+            <span className="font-semibold text-base">Cuenta de pruebas</span>
+            <div className="w-full border-b-2 border-white-400 my-2" />
+            <span className="text-xs text-white">
+                Esta cuenta es solo para demostración. Ninguna operación será guardada luego del periodo de prueba.
+                <br />
+                <br />
+                Si deseas realizar operaciones reales, por favor <a href="/prices" target="_blank" className="text-white font-bold underline">Adquiere una suscripción</a>.
+            </span>
         </div>
     );
 };
