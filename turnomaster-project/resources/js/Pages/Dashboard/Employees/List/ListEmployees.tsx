@@ -3,7 +3,7 @@ import useGetEmployeesList from "./useGetEmployeesList";
 import { Link, useLocation } from "react-router-dom";
 import { FaPlus, FaMinus } from "react-icons/fa6";
 import { FaSearch, FaEdit, FaLock } from "react-icons/fa";
-import { FaUserShield, FaUser } from 'react-icons/fa';
+import { FaUserShield, FaUser, FaTimes } from 'react-icons/fa';
 import { FaUserGear } from "react-icons/fa6";
 import { FiUsers } from "react-icons/fi";
 import { FaXmark } from "react-icons/fa6";
@@ -174,8 +174,8 @@ const ListEmployees = () => {
                   <th className="px-4 py-3 text-left">Email</th>
                   <th className="px-4 py-3 text-left">Rol</th>
                   <th className="px-4 py-3 text-left">T. Asignados</th>
-                  <th className="px-4 py-3 text-left">Turnos</th>
-                  <th className="px-4 py-3 text-left">Acciones</th>
+                  <th className="px-4 py-3 text-left">A. Turnos</th>
+                  <th className="px-4 py-3 text-left">Editar / Eliminar</th>
                 </tr>
               </thead>
               <tbody>
@@ -217,8 +217,7 @@ const ListEmployees = () => {
                           to={`/dashboard/employees/${employee.id}/assign-shifts`}
                           className="dashboard-button-secondary text-white px-4 py-2 text-sm transition-colors flex items-center"
                         >
-                          <FaPlus className="mr-2" />
-                          Asignar
+                          <FaPlus />
                         </Link>
                         {employee.shift_count > 0 && (
                           <Link
@@ -236,16 +235,14 @@ const ListEmployees = () => {
                         {canEditOrDelete(employee) ? (
                           <>
                             <Link to={`/dashboard/employees/edit/${employee.id}`} className="dashboard-button-warning text-white px-4 py-2 text-sm transition-colors flex items-center">
-                              <FaEdit className="mr-2" />
-                              Editar
+                              <FaEdit />
                             </Link>
                             {userType === "employee" && userId === employee.id ? (
                               <button
                                 className="bg-gray-400 cursor-not-allowed text-white px-4 py-2 text-sm flex items-center"
                                 disabled
                               >
-                                <FaLock className="mr-2" />
-                                Bloqueado
+                                <FaLock />
                               </button>
                             ) : (
                               <button
@@ -257,8 +254,7 @@ const ListEmployees = () => {
                                 })}
                                 className="text-white px-4 py-2 text-sm dashboard-button transition-colors flex items-center"
                               >
-                                <FaMinus className="mr-2" />
-                                Eliminar
+                                <FaMinus />
                               </button>
                             )}
                           </>
@@ -267,8 +263,7 @@ const ListEmployees = () => {
                             className="bg-gray-400 cursor-not-allowed text-white px-4 py-2 text-sm flex items-center"
                             disabled
                           >
-                            <FaLock className="mr-2" />
-                            Sin permiso
+                            <FaLock />
                           </button>
                         )}
                       </div>

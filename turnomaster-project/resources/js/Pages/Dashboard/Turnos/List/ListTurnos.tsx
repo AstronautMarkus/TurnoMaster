@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
-import { FaCalendar, FaEdit, FaSearch} from "react-icons/fa";
-import { FaMinus, FaXmark } from "react-icons/fa6";
+import { FaCalendar, FaEdit, FaSearch, FaTimes} from "react-icons/fa";
+import { FaXmark, } from "react-icons/fa6";
 import { FaPlus } from 'react-icons/fa6';
 import useGetTurnosList from "./useGetTurnosList";
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -85,15 +85,14 @@ const ListTurnos = () => {
                         <thead className="sticky top-0 dashboard-background text-white uppercase text-sm tracking-wider">
                             <tr>
                                 <th className="px-4 py-3 text-left">Nombre</th>
-                                <th className="px-4 py-3 text-left">Descripción</th>
-                                <th className="px-4 py-3 text-left">Hora Inicio</th>
-                                <th className="px-4 py-3 text-left">Tiene almuerzo?</th>
-                                <th className="px-4 py-3 text-left">Hora Almuerzo</th>
-                                <th className="px-4 py-3 text-left">Hora Fin</th>
-                                <th className="px-4 py-3 text-left">Usuarios asignados</th>
-                                <th className="px-4 py-3 text-left">Fecha creación</th>
-                                <th className="px-4 py-3 text-left">Fecha actualización</th>
-                                <th className="px-4 py-3 text-left">Acciones</th>
+                                <th className="px-4 py-3 text-left">Desc</th>
+                                <th className="px-4 py-3 text-left">H. Inicio</th>
+                                <th className="px-4 py-3 text-left">Alm?</th>
+                                <th className="px-4 py-3 text-left">H. Alm</th>
+                                <th className="px-4 py-3 text-left">H. Fin</th>
+                                <th className="px-4 py-3 text-left">Empleados</th>
+                                <th className="px-4 py-3 text-left">Creado</th>
+                                <th className="px-4 py-3 text-left">Editar / Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -125,21 +124,18 @@ const ListTurnos = () => {
                                             <span>{new Date(turno.created_at).toLocaleString()}</span>
                                         </td>
                                         <td className="px-4 py-2">
-                                            <span>{turno.updated_at ? new Date(turno.updated_at).toLocaleString() : '--'}</span>
-                                        </td>
-                                        <td className="px-4 py-2">
                                             <div className="flex space-x-2">
                                                 <Link to={`/dashboard/turnos/edit/${turno.id}`} className="dashboard-button-warning text-white px-4 py-2 text-sm transition-colors flex items-center">
-                                                    <FaEdit className="mr-2" />
-                                                    Editar
+                                                    <FaEdit />
+                                                    
                                                 </Link>
                                                 <button
                                                     className="text-white px-4 py-2 text-sm dashboard-button transition-colors flex items-center"
                                                     type="button"
                                                     onClick={() => handleDeleteVisual(turno.name)}
                                                 >
-                                                    <FaMinus className="mr-2" />
-                                                    Eliminar
+                                                    <FaTimes />
+                                                    
                                                 </button>
                                             </div>
                                         </td>
