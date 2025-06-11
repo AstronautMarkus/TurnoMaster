@@ -92,10 +92,8 @@
         }
 
         .footer {
-            background-color: #121212;
             padding: 20px;
             text-align: center;
-            border-top: 1px solid #2B2B2B;
         }
 
         .footer p {
@@ -121,6 +119,20 @@
             margin-top: 15px;
         }
 
+        .alert-message {
+            color:rgb(255, 255, 255);
+            font-weight: 500;
+            padding: 14px 18px;
+            border-radius: 6px;
+            margin-bottom: 22px;
+            font-size: 16px;
+        }
+
+        .alert-message strong {
+            color: #E3003D;
+            font-weight: 600;
+        }
+
         @media only screen and (max-width: 600px) {
             .container {
                 width: 100%;
@@ -137,7 +149,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjAwIiB6b29tQW5kUGFuPSJtYWduaWZ5IiB2aWV3Qm94PSIwIDAgNDUwIDQ0OS45OTk5ODQiIGhlaWdodD0iNjAwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0IiB2ZXJzaW9uPSIxLjAiPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgdHJhbnNmb3JtPSJtYXRyaXgoMC43NSwgLTAuMDAwMDAwMDAwMDAwMDAwNTU4LCAwLjAwMDAwMDAwMDAwMDAwMDU1OCwgMC43NSwgMzYuMzUyMzA0LCAxMjkuNTA0MTMyKSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgZD0iTSAyMS40OTkwMTMgMjEuNDk5NzAxIEwgMTI1LjMzMjM1NCAyMS40OTk3MDEgIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iNDMiIHN0cm9rZS1vcGFjaXR5PSIxIiBzdHJva2UtbWl0ZXJsaW1pdD0iNCIvPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgdHJhbnNmb3JtPSJtYXRyaXgoMC43NSwgLTAuMDAwMDAwMDAwMDAwMDAwOTMsIDAuMDAwMDAwMDAwMDAwMDAwOTMsIDAuNzUsIDE1OC41MzUxMTMsIDEyOS41MDQxMzIpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBkPSJNIDIxLjUwMDA1OSAyMS40OTk3MDEgTCA2Ni4xOTc5NzkgMjEuNDk5NzAxICIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjQzIiBzdHJva2Utb3BhY2l0eT0iMSIgc3Ryb2tlLW1pdGVybGltaXQ9IjQiLz48cGF0aCBzdHJva2UtbGluZWNhcD0icm91bmQiIHRyYW5zZm9ybT0ibWF0cml4KDAuNzUsIDAuMDAwMDAwMDAwMDAwMDAwMzYxLCAtMC4wMDAwMDAwMDAwMDAwMDAzNjEsIDAuNzUsIDIzNi40MDIyNDYsIDEyOS41MDQxMzIpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBkPSJNIDIxLjQ5OTAxMyAyMS40OTk3MDEgTCAyMTQuODI4MjcyIDIxLjQ5OTcwMSAiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSI0MyIgc3Ryb2tlLW9wYWNpdHk9IjEiIHN0cm9rZS1taXRlcmxpbWl0PSI0Ii8+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjc1LCAtMC4wMDAwMDAwMDAwMDAwMDAxODYsIDAuMDAwMDAwMDAwMDAwMDAwMTg2LCAwLjc1LCAzNi4zNTIzMDQsIDE4Mi40MTgwMzQpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBkPSJNIDIxLjQ5OTAxMyAyMS40OTk5MTUgTCA0ODEuNTYxNTQ5IDIxLjQ5OTkxNSAiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSI0MyIgc3Ryb2tlLW9wYWNpdHk9IjEiIHN0cm9rZS1taXRlcmxpbWl0PSI0Ii8+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjc1LCAwLjAwMDAwMDAwMDAwMDAwMDQwNywgLTAuMDAwMDAwMDAwMDAwMDAwNDA3LCAwLjc1LCAzNi4zNTIzMDQsIDIzNS4zMzE5MzQpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBkPSJNIDIxLjQ5OTAxMyAyMS41MDAxMzIgTCAzOTcuMDc3MTY3IDIxLjUwMDEzMiAiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSI0MyIgc3Ryb2tlLW9wYWNpdHk9IjEiIHN0cm9rZS1taXRlcmxpbWl0PSI0Ii8+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjc1LCAwLCAwLCAwLjc1LCAzNTkuOTk4OTU1LCAyMzUuMzMxOTM0KSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgZD0iTSAyMS41MDEzOTUgMjEuNTAwMTMyIEwgNTAuMDMyNjQ3IDIxLjUwMDEzMiAiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSI0MyIgc3Ryb2tlLW9wYWNpdHk9IjEiIHN0cm9rZS1taXRlcmxpbWl0PSI0Ii8+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjc1LCAwLCAwLCAwLjc1LCAxODMuMDk2OTk1LCAyODguMjQ1ODA3KSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgZD0iTSAyMS41MDA4ODQgMjEuNTAwMzg0IEwgMjg0Ljk4MDA3MSAyMS41MDAzODQgIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iNDMiIHN0cm9rZS1vcGFjaXR5PSIxIiBzdHJva2UtbWl0ZXJsaW1pdD0iNCIvPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgdHJhbnNmb3JtPSJtYXRyaXgoMC43NSwgMCwgMCwgMC43NSwgMzYuMzUyMzA0LCAyODguMjQ1ODA3KSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgZD0iTSAyMS40OTkwMTMgMjEuNTAwMzg0IEwgMTU4Ljg4OTY0OSAyMS41MDAzODQgIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iNDMiIHN0cm9rZS1vcGFjaXR5PSIxIiBzdHJva2UtbWl0ZXJsaW1pdD0iNCIvPjwvc3ZnPg=="  alt="logo" style="width: 50px; height: auto;">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjAwIiB6b29tQW5kUGFuPSJtYWduaWZ5IiB2aWV3Qm94PSIwIDAgNDUwIDQ0OS45OTk5ODQiIGhlaWdodD0iNjAwIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0IiB2ZXJzaW9uPSIxLjAiPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgdHJhbnNmb3JtPSJtYXRyaXgoMC43NSwgLTAuMDAwMDAwMDAwMDAwMDAwNTU4LCAwLjAwMDAwMDAwMDAwMDAwMDU1OCwgMC43NSwgMzYuMzUyMzA0LCAxMjkuNTA0MTMyKSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgZD0iTSAyMS40OTkwMTMgMjEuNDk5NzAxIEwgMTI1LjMzMjM1NCAyMS40OTk3MDEgIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iNDMiIHN0cm9rZS1vcGFjaXR5PSIxIiBzdHJva2UtbWl0ZXJsaW1pdD0iNCIvPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgdHJhbnNmb3JtPSJtYXRyaXgoMC43NSwgLTAuMDAwMDAwMDAwMDAwMDAwOTMsIDAuMDAwMDAwMDAwMDAwMDAwOTMsIDAuNzUsIDE1OC41MzUxMTMsIDEyOS41MDQxMzIpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBkPSJNIDIxLjUwMDA1OSAyMS40OTk3MDEgTCA2Ni4xOTc5NzkgMjEuNDk5NzAxICIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjQzIiBzdHJva2Utb3BhY2l0eT0iMSIgc3Ryb2tlLW1pZGVybGltaXQ9IjQiLz48cGF0aCBzdHJva2UtbGluZWNhcD0icm91bmQiIHRyYW5zZm9ybT0ibWF0cml4KDAuNzUsIDAuMDAwMDAwMDAwMDAwMDAwMzYxLCAtMC4wMDAwMDAwMDAwMDAwMDAzNjEsIDAuNzUsIDIzNi40MDIyNDYsIDEyOS41MDQxMzIpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBkPSJNIDIxLjQ5OTAxMyAyMS40OTk3MDEgTCAyMTQuODI4MjcyIDIxLjQ5OTcwMSAiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSI0MyIgc3Ryb2tlLW9wYWNpdHk9IjEiIHN0cm9rZS1taXRlcmxpbWl0PSI0Ii8+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjc1LCAtMC4wMDAwMDAwMDAwMDAwMDAxODYsIDAuMDAwMDAwMDAwMDAwMDAwMTg2LCAwLjc1LCAzNi4zNTIzMDQsIDE4Mi40MTgwMzQpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBkPSJNIDIxLjQ5OTAxMyAyMS40OTk5MTUgTCA0ODEuNTYxNTQ5IDIxLjQ5OTkxNSAiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSI0MyIgc3Ryb2tlLW9wYWNpdHk9IjEiIHN0cm9rZS1taXRlcmxpbWl0PSI0Ii8+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjc1LCAwLjAwMDAwMDAwMDAwMDAwMDQwNywgLTAuMDAwMDAwMDAwMDAwMDAwNDA3LCAwLjc1LCAzNi4zNTIzMDQsIDIzNS4zMzE5MzQpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBkPSJNIDIxLjQ5OTAxMyAyMS41MDAxMzIgTCAzOTcuMDc3MTY3IDIxLjUwMDEzMiAiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSI0MyIgc3Ryb2tlLW9wYWNpdHk9IjEiIHN0cm9rZS1taXRlcmxpbWl0PSI0Ii8+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjc1LCAwLCAwLCAwLjc1LCAzNTkuOTk4OTU1LCAyMzUuMzMxOTM0KSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgZD0iTSAyMS41MDEzOTUgMjEuNTAwMTMyIEwgNTAuMDMyNjQ3IDIxLjUwMDEzMiAiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSI0MyIgc3Ryb2tlLW9wYWNpdHk9IjEiIHN0cm9rZS1taXRlcmxpbWl0PSI0Ii8+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjc1LCAwLCAwLCAwLjc1LCAxODMuMDk2OTk1LCAyODguMjQ1ODA3KSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgZD0iTSAyMS41MDA4ODQgMjEuNTAwMzg0IEwgMjg0Ljk4MDA3MSAyMS41MDAzODQgIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iNDMiIHN0cm9rZS1vcGFjaXR5PSIxIiBzdHJva2UtbWl0ZXJsaW1pdD0iNCIvPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgdHJhbnNmb3JtPSJtYXRyaXgoMC43NSwgMCwgMCwgMC43NSwgMzYuMzUyMzA0LCAyODguMjQ1ODA3KSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgZD0iTSAyMS40OTkwMTMgMjEuNTAwMzg0IEwgMTU4Ljg4OTY0OSAyMS41MDAzODQgIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iNDMiIHN0cm9rZS1vcGFjaXR5PSIxIiBzdHJva2UtbWl0ZXJsaW1pdD0iNCIvPjwvc3ZnPg=="  alt="logo" style="width: 50px; height: auto;">
             <h2 style="color: #FFFFFF; font-size: 20px; margin: 0;">TurnoMaster</h2>
         </div>
 
@@ -149,9 +161,16 @@
             </p>
 
             <div class="info-box">
+                <p><strong>Nombre de la empresa:</strong> {{ $companyName }}</p>
                 <p><strong>Correo electrónico:</strong> {{ $email }}</p>
                 <p><strong>Contraseña:</strong> {{ $password }}</p>
             </div>
+
+            <p>No te preocupes si el nombre está mal escrito, puedes cambiarlo en el futuro.</p>
+
+            <p class="alert-message">
+                Esta cuenta es válida por {{ $days }} días. Luego, los datos serán <strong>eliminados</strong>. Si quieres seguir usando TurnoMaster, contáctanos para una cuenta de pago.
+            </p>
 
             <p>
                 Para probar TurnoMaster, haz clic en el siguiente botón:
@@ -168,8 +187,13 @@
 
         <div class="footer">
             <p><strong>TurnoMaster</strong> - Sistema de Gestión de Turnos</p>
-            <p>Creado por <a href="https://www.reyesandfriends.cl" style="color: #E3003D;">Reyes&Friends</a></p>
-            <p>Soporte: <a href="mailto:soporte@turnomaster.com" style="color: #E3003D;">soporte@turnomaster.com</a></p>
+            <p>
+                Creado por 
+                <a href="https://reyesandfriends.cl" target="_blank" style="color: #E3003D; display: inline-flex; align-items: center; text-decoration: none;">
+                    <img src="https://reyesandfriends.cl/img/reyesandfriends-logo.svg" alt="Reyes&Friends" style="height: 20px; width: auto; margin-right: 6px; vertical-align: middle;">
+                </a>
+            </p>
+            <p>Soporte: <a href="mailto:contacto@turnomaster.cl" style="color: #E3003D; text-decoration: none;">contacto@turnomaster.cl</a></p>
             <p class="disclaimer">
                 © {{ date('Y') }} TurnoMaster. Todos los derechos reservados.
             </p>
@@ -177,3 +201,4 @@
     </div>
 </body>
 </html>
+

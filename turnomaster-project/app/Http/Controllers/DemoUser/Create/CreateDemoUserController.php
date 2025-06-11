@@ -63,6 +63,8 @@ class CreateDemoUserController extends Controller
 
         $temporaryPassword = \Str::random(10);
 
+        $DemoCountDays = 7; // Demo
+
         $company = Companies::create([
             'name' => $request->input('company_name'),
             'subscription_id' => 1,
@@ -89,6 +91,8 @@ class CreateDemoUserController extends Controller
             'email' => $user->email,
             'password' => $temporaryPassword,
             'loginUrl' => $loginUrl,
+            'days' => $DemoCountDays,
+            'companyName' => $company->name,
         ], function ($message) use ($user) {
             $message->to($user->email)
                     ->subject('Credenciales cuenta de demostración | TurnoMaster');
