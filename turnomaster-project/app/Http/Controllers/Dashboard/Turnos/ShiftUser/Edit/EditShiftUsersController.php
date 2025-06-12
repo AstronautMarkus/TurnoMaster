@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Shift\ShiftUser;
 use App\Models\Users\DashboardUser;
 use App\Models\Turnos\Turnos;
+use App\Models\Shift\UserShiftAttendance;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
@@ -40,7 +41,7 @@ class EditShiftUsersController extends Controller
         $daysInput = $request->days;
         $invalidDays = [];
 
-        // Si days está vacío, no validar días inválidos
+        // If days empty do not validate
         if (!empty($daysInput)) {
             if (is_string($daysInput[0] ?? null)) {
                 foreach ($daysInput as $day) {
@@ -67,7 +68,6 @@ class EditShiftUsersController extends Controller
         }
 
         // Search ShiftUser by user_id and shift_id
-        
         $shiftUser = ShiftUser::where('user_id', $id)
             ->where('shift_id', $shiftUserId)
             ->first();
@@ -104,6 +104,17 @@ class EditShiftUsersController extends Controller
                     'shift_id' => ['El turno no pertenece a la empresa o no existe.']
                 ]
             ], 422);
+        }
+
+        // If days is empty, delete the shift user and its attendance records
+        if (empty($daysInput)) {
+            UserShiftAttendance::where('user_id', $shiftUser->user_id)
+                ->where('shift_id', $shiftUser->shift_id)
+                ->delete();
+            $shiftUser->delete();
+            return response()->json([
+                'message' => 'La asignación de turno fue eliminada porque no tiene días asignados.',
+            ], 200);
         }
 
         $newDays = $request->days;
