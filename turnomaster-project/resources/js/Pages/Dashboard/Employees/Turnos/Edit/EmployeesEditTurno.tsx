@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FiUsers } from "react-icons/fi";
-import { FaUserGear } from "react-icons/fa6";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+import AlertModifyDays from "./AlertModifyDays/AlertModifyDays";
 
 const weekDays = [
     "Lunes",
@@ -31,6 +31,8 @@ const EmployeesEditTurno = () => {
     } | null>(null);
     const [message, setMessage] = useState<string | null>(null);
     const [messageType, setMessageType] = useState<"success" | "error" | null>(null);
+    const [showAlert, setShowAlert] = useState(false);
+    const [prevDays, setPrevDays] = useState<string[] | null>(null);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -48,9 +50,12 @@ const EmployeesEditTurno = () => {
         ]).then(([shiftRes, empRes, turnoRes]) => {
             const shiftUser = shiftRes.data.shift_user;
             try {
-                setSelectedDays(JSON.parse(shiftUser.days));
+                const days = JSON.parse(shiftUser.days);
+                setSelectedDays(days);
+                setPrevDays(days);
             } catch {
                 setSelectedDays([]);
+                setPrevDays([]);
             }
             setActivateNow(!!shiftUser.is_active);
             setEmployee(empRes.data);
@@ -66,11 +71,18 @@ const EmployeesEditTurno = () => {
     };
 
     const handleSave = async () => {
-        setSaving(true);
         setMessage(null);
         setMessageType(null);
-        const token = localStorage.getItem("token");
+
+        
+        if (Array.isArray(prevDays) && prevDays.length > 0 && selectedDays.length === 0) {
+            setShowAlert(true);
+            return;
+        }
+
+        setSaving(true);
         try {
+            const token = localStorage.getItem("token");
             const res = await axios.put(
                 `/api/turnos/shift/${user_id}/${shift_id}`,
                 {
@@ -83,6 +95,7 @@ const EmployeesEditTurno = () => {
             );
             setMessage(res.data.message || "Actualización exitosa.");
             setMessageType("success");
+            setPrevDays(selectedDays);
         } catch (e: any) {
             setMessage(
                 e?.response?.data?.message ||
@@ -245,6 +258,41 @@ const EmployeesEditTurno = () => {
                     Salir
                 </Link>
             </div>
+
+            {showAlert && employee && turno && (
+                <AlertModifyDays
+                    turnoName={turno.name}
+                    employeeName={`${employee.first_name} ${employee.last_name}`}
+                    onConfirm={async () => {
+                        setShowAlert(false);
+                        setSaving(true);
+                        try {
+                            const token = localStorage.getItem("token");
+                            const res = await axios.put(
+                                `/api/turnos/shift/${user_id}/${shift_id}`,
+                                {
+                                    is_active: activateNow,
+                                    days: [],
+                                },
+                                {
+                                    headers: { Authorization: `Bearer ${token}` }
+                                }
+                            );
+                            setMessage(res.data.message || "Actualización exitosa.");
+                            setMessageType("success");
+                            setPrevDays([]);
+                        } catch (e: any) {
+                            setMessage(
+                                e?.response?.data?.message ||
+                                "Ocurrió un error al actualizar el turno."
+                            );
+                            setMessageType("error");
+                        }
+                        setSaving(false);
+                    }}
+                    onCancel={() => setShowAlert(false)}
+                />
+            )}
         </div>
     );
 };
