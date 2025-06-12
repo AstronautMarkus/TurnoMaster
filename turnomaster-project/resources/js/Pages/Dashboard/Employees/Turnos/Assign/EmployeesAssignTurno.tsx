@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import { FiUsers } from "react-icons/fi";
-import { FaXmark, FaPlus, FaUserGear } from "react-icons/fa6";
+import { FaXmark, FaUserGear } from "react-icons/fa6";
 import { FaSearch, FaUserShield, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useGetEmployeeData } from "./useGetEmployeeData";
 import { useGetTurnos, Turno } from "./useGetTurnos";
+import { FaUserPlus, FaX } from "react-icons/fa6";
+import useAssignTurnoToEmployee from "./useAssignTurnoToEmployee";
 
-const weekDays = [
-    "Lunes",
-    "Martes",
-    "Miércoles",
-    "Jueves",
-    "Viernes",
-    "Sábado",
-    "Domingo",
+
+const daysOfWeek = [
+    { key: "L", label: "Lunes" },
+    { key: "M", label: "Martes" },
+    { key: "X", label: "Miercoles" },
+    { key: "J", label: "Jueves" },
+    { key: "V", label: "Viernes" },
+    { key: "S", label: "Sabado" },
+    { key: "D", label: "Domingo" },
 ];
 
 const PAGE_SIZE = 10;
@@ -26,6 +29,7 @@ const EmployeesAssignTurno = () => {
 
     const { employee, assignedShifts, loading, error, pagination } = useGetEmployeeData(assignedPage, PAGE_SIZE);
     const { turnos, loading: turnosLoading, error: turnosError, pagination: turnosPagination } = useGetTurnos(page, PAGE_SIZE);
+    const assignModal = useAssignTurnoToEmployee();
 
     const [searchInput, setSearchInput] = useState("");
     const [searchName, setSearchName] = useState("");
@@ -42,8 +46,7 @@ const EmployeesAssignTurno = () => {
     const handleNext = () => { if (page < totalPages) setPage(page + 1); };
 
     const handleTurnoClick = (turno: Turno) => {
-        setSelectedTurno(turno);
-        setShowModal(true);
+        assignModal.openModal(turno.id);
     };
 
     const closeModal = () => {
@@ -144,7 +147,7 @@ const EmployeesAssignTurno = () => {
                                                 className="dashboard-button-secondary text-white px-4 py-2 text-sm transition-colors flex items-center"
                                                 onClick={() => handleTurnoClick(turno)}
                                             >
-                                                <FaPlus className="mr-2" />
+                                                <FaUserPlus className="mr-2" />
                                                 Asignar
                                             </button>
                                         </td>
@@ -295,32 +298,83 @@ const EmployeesAssignTurno = () => {
                 <Link to="/dashboard/employees" className="text-white px-4 py-2 dashboard-button transition-colors">Salir</Link>
             </div>
 
-            {showModal && (
-                <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
-                    <div className="bg-white shadow-lg p-8 w-full max-w-md relative">
+            {assignModal.showModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+                    <div className="bg-white shadow-lg w-full max-w-lg p-6 relative">
                         <button
                             className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-                            onClick={closeModal}
+                            onClick={assignModal.closeModal}
                         >
-                            ×
+                            <FaX size={24} />
                         </button>
-                        <h3 className="text-lg font-bold mb-4">
-                            Selecciona los días para: {selectedTurno?.name}
-                        </h3>
-                        <div className="flex flex-col gap-2">
-                            {weekDays.map((day) => (
-                                <label key={day} className="flex items-center gap-2">
-                                    <input type="checkbox" disabled />
-                                    {day}
-                                </label>
+                        <h2 className="text-xl font-bold mb-4 flex items-center">
+                            <FaUserPlus className="mr-2" />
+                            Asignar turno al empleado
+                        </h2>
+                        {(assignModal.lastAssignStatus && assignModal.lastAssignMessage) && (
+                            <div
+                                className={`mb-4 px-3 py-2 ${
+                                    assignModal.lastAssignStatus === "success"
+                                        ? "dashboard-success text-black font-semibold"
+                                        : "dashboard-error text-white font-semibold"
+                                }`}
+                            >
+                                <div className="font-semibold mb-1">{assignModal.lastAssignMessage}</div>
+                                {assignModal.lastAssignErrors && Array.isArray(assignModal.lastAssignErrors) && assignModal.lastAssignErrors.length > 0 && (
+                                    <ul className="list-disc pl-5">
+                                        {assignModal.lastAssignErrors.map((err, idx) => (
+                                            <li key={idx}>{err}</li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
+                        )}
+                        <div className="mb-4">
+                            <span className="font-semibold mr-2">Días:</span>
+                            {daysOfWeek.map(day => (
+                                <button
+                                    key={day.key}
+                                    className={`mx-1 px-3 py-1 border ${assignModal.selectedDays.includes(day.key) ? "dashboard-button text-white" : "bg-gray-200 hover:bg-gray-300 text-gray-700"}`}
+                                    onClick={() => assignModal.toggleDay(day.key)}
+                                    type="button"
+                                >
+                                    {day.key}
+                                </button>
                             ))}
+                        </div>
+                        <div className="mb-4 flex flex-col items-center justify-center">
+                            <span className="mt-2 font-semibold text-center">Activar turno inmediatamente</span>
+                            <div className="flex items-center">
+                                <span className="text-sm font-medium text-black mr-4">No</span>
+                                <div
+                                    onClick={assignModal.toggleIsActiveSwitch}
+                                    className={`relative inline-flex h-6 w-11 items-center cursor-pointer transition-colors duration-300 ${
+                                        assignModal.isActiveSwitch ? "dashboard-button-secondary" : "dashboard-button"
+                                    }`}
+                                >
+                                    <span
+                                        className={`inline-block h-4 w-4 transform bg-white transition-transform duration-300 ${
+                                            assignModal.isActiveSwitch ? "translate-x-6" : "translate-x-1"
+                                        }`}
+                                    />
+                                </div>
+                                <span className="text-sm font-medium text-black ml-4">Sí</span>
+                            </div>
                         </div>
                         <div className="mt-6 flex justify-end">
                             <button
-                                className="bg-blue-600 text-white px-4 py-2"
-                                disabled
+                                className="px-4 py-2 bg-gray-300 text-gray-700 hover:bg-gray-400 mr-2"
+                                onClick={assignModal.closeModal}
+                                disabled={assignModal.assignLoading}
                             >
-                                Asignar Turno
+                                Cancelar
+                            </button>
+                            <button
+                                className="px-4 py-2 dashboard-button text-white"
+                                onClick={assignModal.assignTurno}
+                                disabled={assignModal.assignLoading || assignModal.selectedDays.length === 0}
+                            >
+                                {assignModal.assignLoading ? "Asignando..." : "Asignar"}
                             </button>
                         </div>
                     </div>
