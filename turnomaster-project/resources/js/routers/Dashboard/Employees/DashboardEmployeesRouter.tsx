@@ -5,6 +5,7 @@ import CreateEmployee from '../../../Pages/Dashboard/Employees/Create/CreateEmpl
 import EditEmployee from '../../../Pages/Dashboard/Employees/Edit/EditEmployee';
 import EmployeesAssignTurno from '../../../Pages/Dashboard/Employees/Turnos/Assign/EmployeesAssignTurno';
 import EmployeesTurnosList from '../../../Pages/Dashboard/Employees/Turnos/List/EmployeesTurnosList';
+import EmployeesEditTurno from '../../../Pages/Dashboard/Employees/Turnos/Edit/EmployeesEditTurno';
 
 function DashboardEmployeesRouter() {
     const location = useLocation();
@@ -18,7 +19,7 @@ function DashboardEmployeesRouter() {
                     <Route path="/edit/:id" element={<EditEmployee />} />
                     <Route path="/:id/shifts" element={<EmployeesTurnosList />} />
                     <Route path="/:id/assign-shifts" element={<EmployeesAssignTurno />} />
-                    <Route path="/:id/shift/:shift/edit" element={<div>Editar el turno creado para el empleado</div>} />
+                    <Route path="/:id/shift/:shift/edit" element={<EmployeesEditTurno />} />
                 </Routes>
             </ProtectedRoute>
         </>
