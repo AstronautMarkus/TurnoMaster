@@ -8,17 +8,32 @@ import { FaUserGear } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
 import useTurnoListGraph from "./useTurnoListGraph";
+import DeleteEmployeeTurnoAlert from "./DeleteEmployeeTurnoAlert/DeleteEmployeeTurnoAlert";
 
 
 const EmployeesTurnosList = () => {
     const { id } = useParams<{ id: string }>();
     const employeeId = Number(id);
-    const { loading, shifts, user, error } = useGetEmployeesTurnosList(employeeId);
+
+    // State for the modal to delete employee shift
+
+    const [deleteModal, setDeleteModal] = useState<{
+        shiftId: number;
+        shiftName: string;
+    } | null>(null);
+
+    // Refresh list after deletion
+
+    const [refresh, setRefresh] = useState(0);
+
+    const { loading, shifts: initialShifts, user, error } = useGetEmployeesTurnosList(employeeId);
 
     const timelineRef = useRef<HTMLDivElement>(null);
 
     // Graph loading state
     const [visualizationLoading, setVisualizationLoading] = useState(true);
+
+    const [shifts, setShifts] = useState(initialShifts);
 
     // Call the custom hook to set up the graph visualization
     useTurnoListGraph(timelineRef, shifts);
@@ -29,6 +44,10 @@ const EmployeesTurnosList = () => {
         const timeout = setTimeout(() => setVisualizationLoading(false), 600);
         return () => clearTimeout(timeout);
     }, [shifts]);
+
+    useEffect(() => {
+        setShifts(initialShifts);
+    }, [initialShifts]);
 
     return (
         <div className="p-6">
@@ -125,7 +144,15 @@ const EmployeesTurnosList = () => {
                                                   <FaEdit className="mr-2" />
                                                     Editar
                                                 </Link>
-                                                <button className="text-white px-4 py-2 text-sm dashboard-button transition-colors flex items-center">
+                                                <button
+                                                    className="text-white px-4 py-2 text-sm dashboard-button transition-colors flex items-center"
+                                                    onClick={() =>
+                                                        setDeleteModal({
+                                                            shiftId: item.shift.id,
+                                                            shiftName: item.shift.name,
+                                                        })
+                                                    }
+                                                >
                                                   <FaMinus className="mr-2" />
                                                     Eliminar
                                                 </button>
@@ -163,6 +190,18 @@ const EmployeesTurnosList = () => {
             <div className="flex space-x-2 justify-end mt-4">
                 <Link to="/dashboard/employees" className="text-white px-4 py-2 dashboard-button transition-colors">Salir</Link>
             </div>
+            {deleteModal && user && (
+                <DeleteEmployeeTurnoAlert
+                    userId={user.id}
+                    shiftId={deleteModal.shiftId}
+                    shiftName={deleteModal.shiftName}
+                    onClose={() => setDeleteModal(null)}
+                    onDeleted={(deletedShiftId) => {
+                        setDeleteModal(null);
+                        setShifts(prev => prev.filter(item => item.shift.id !== deletedShiftId));
+                    }}
+                />
+            )}
         </div>
     );
 };
