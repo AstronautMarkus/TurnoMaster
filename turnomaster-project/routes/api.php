@@ -14,7 +14,8 @@ use App\Http\Controllers\Dashboard\Turnos\ShiftUser\Create\CreateShiftUsersContr
 // Update data controllers
 use App\Http\Controllers\Dashboard\Turnos\Edit\EditTurnosController;
 use App\Http\Controllers\Dashboard\Company\Edit\EditCompanyDataController;
-
+use App\Http\Controllers\Dashboard\Employees\Edit\EditEmployeeController;
+use App\Http\Controllers\Dashboard\Turnos\ShiftUser\Edit\EditShiftUsersController;
 // Contact forms and help controllers
 
 use App\Http\Controllers\Contact\ContactFormsController;
@@ -61,9 +62,7 @@ use App\Http\Controllers\Dashboard\Themes\GetThemesController;
 use App\Http\Controllers\Dashboard\Employees\Shifts\Get\GetEmployeesShiftsController;
 use App\Http\Controllers\Audit\ActivityLogController;
 
-// Edit controllers
 
-use App\Http\Controllers\Dashboard\Employees\Edit\EditEmployeeController;
 
 // Delete controllers
 
@@ -135,6 +134,7 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::put('/turnos/{id}', [EditTurnosController::class, 'updateTurnos']);
     Route::delete('/turnos/{id}', [DeleteTurnosController::class, 'deleteTurnos']);
     Route::get('/turnos/shift/{id}', [GetShiftUsersByIdController::class, 'getShiftUserById']);
+    Route::put('/turnos/shift/{id}/{shiftUserId}', [EditShiftUsersController::class, 'editShiftUser']);
     Route::post('/turnos/shift', [CreateShiftUsersController::class, 'createShiftUser']);
     Route::get('/roles', [GetRolesDataController::class, 'getRoles']);
     Route::get('/activity-logs', [ActivityLogController::class, 'getActivityLog']);
