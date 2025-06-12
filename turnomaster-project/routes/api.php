@@ -58,6 +58,7 @@ use App\Http\Controllers\Dashboard\Employees\Get\GetEmployeeByIdController;
 use App\Http\Controllers\Dashboard\Turnos\Get\GetTurnosController;
 use App\Http\Controllers\Dashboard\Turnos\Get\GetTurnosByIdController;
 use App\Http\Controllers\Dashboard\Turnos\ShiftUser\Get\GetShiftUsersByIdController;
+use App\Http\Controllers\Dashboard\Turnos\ShiftUser\Get\Personal\GetPersonalShiftIdByIdController;
 use App\Http\Controllers\Dashboard\Themes\GetThemesController;
 use App\Http\Controllers\Dashboard\Employees\Shifts\Get\GetEmployeesShiftsController;
 use App\Http\Controllers\Audit\ActivityLogController;
@@ -134,6 +135,7 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::put('/turnos/{id}', [EditTurnosController::class, 'updateTurnos']);
     Route::delete('/turnos/{id}', [DeleteTurnosController::class, 'deleteTurnos']);
     Route::get('/turnos/shift/{id}', [GetShiftUsersByIdController::class, 'getShiftUserById']);
+    Route::get('/turnos/shift/{userId}/{shiftId}', [GetPersonalShiftIdByIdController::class, 'getPersonalShiftById']);
     Route::put('/turnos/shift/{id}/{shiftUserId}', [EditShiftUsersController::class, 'editShiftUser']);
     Route::post('/turnos/shift', [CreateShiftUsersController::class, 'createShiftUser']);
     Route::get('/roles', [GetRolesDataController::class, 'getRoles']);
