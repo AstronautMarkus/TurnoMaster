@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FiUsers } from "react-icons/fi";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import AlertModifyDays from "./AlertModifyDays/AlertModifyDays";
 
@@ -16,6 +16,7 @@ const weekDays = [
 
 const EmployeesEditTurno = () => {
     const { id: user_id, shift: shift_id } = useParams<{ id: string; shift: string }>();
+    const navigate = useNavigate();
 
     const [employee, setEmployee] = useState<{ first_name: string; last_name: string } | null>(null);
     const [loading, setLoading] = useState(true);
@@ -32,6 +33,7 @@ const EmployeesEditTurno = () => {
     const [message, setMessage] = useState<string | null>(null);
     const [messageType, setMessageType] = useState<"success" | "error" | null>(null);
     const [showAlert, setShowAlert] = useState(false);
+    const [showRemoveSomeAlert, setShowRemoveSomeAlert] = useState(false);
     const [prevDays, setPrevDays] = useState<string[] | null>(null);
 
     useEffect(() => {
@@ -64,6 +66,18 @@ const EmployeesEditTurno = () => {
         });
     }, [user_id, shift_id]);
 
+    useEffect(() => {
+        if (
+            message &&
+            message.toLowerCase().includes("eliminada porque no tiene días asignados")
+        ) {
+            const timeout = setTimeout(() => {
+                navigate(`/dashboard/employees/${user_id}/shifts`);
+            }, 2500);
+            return () => clearTimeout(timeout);
+        }
+    }, [message, navigate, user_id]);
+
     const handleDayChange = (day: string) => {
         setSelectedDays((prev) =>
             prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]
@@ -74,9 +88,19 @@ const EmployeesEditTurno = () => {
         setMessage(null);
         setMessageType(null);
 
-        
         if (Array.isArray(prevDays) && prevDays.length > 0 && selectedDays.length === 0) {
             setShowAlert(true);
+            return;
+        }
+
+        if (
+            Array.isArray(prevDays) &&
+            prevDays.length > 0 &&
+            selectedDays.length > 0 &&
+            selectedDays.length < prevDays.length &&
+            prevDays.some((d) => !selectedDays.includes(d))
+        ) {
+            setShowRemoveSomeAlert(true);
             return;
         }
 
@@ -259,10 +283,48 @@ const EmployeesEditTurno = () => {
                 </Link>
             </div>
 
+            {showRemoveSomeAlert && employee && turno && (
+                <AlertModifyDays
+                    turnoName={turno.name}
+                    employeeName={`${employee.first_name} ${employee.last_name}`}
+                    mode="remove-some"
+                    removedDays={prevDays?.filter((d) => !selectedDays.includes(d)) || []}
+                    onConfirm={async () => {
+                        setShowRemoveSomeAlert(false);
+                        setSaving(true);
+                        try {
+                            const token = localStorage.getItem("token");
+                            const res = await axios.put(
+                                `/api/turnos/shift/${user_id}/${shift_id}`,
+                                {
+                                    is_active: activateNow,
+                                    days: selectedDays,
+                                },
+                                {
+                                    headers: { Authorization: `Bearer ${token}` }
+                                }
+                            );
+                            setMessage(res.data.message || "Actualización exitosa.");
+                            setMessageType("success");
+                            setPrevDays(selectedDays);
+                        } catch (e: any) {
+                            setMessage(
+                                e?.response?.data?.message ||
+                                "Ocurrió un error al actualizar el turno."
+                            );
+                            setMessageType("error");
+                        }
+                        setSaving(false);
+                    }}
+                    onCancel={() => setShowRemoveSomeAlert(false)}
+                />
+            )}
+
             {showAlert && employee && turno && (
                 <AlertModifyDays
                     turnoName={turno.name}
                     employeeName={`${employee.first_name} ${employee.last_name}`}
+                    mode="remove-all"
                     onConfirm={async () => {
                         setShowAlert(false);
                         setSaving(true);
@@ -278,9 +340,20 @@ const EmployeesEditTurno = () => {
                                     headers: { Authorization: `Bearer ${token}` }
                                 }
                             );
-                            setMessage(res.data.message || "Actualización exitosa.");
-                            setMessageType("success");
-                            setPrevDays([]);
+                            if (
+                                res.data.message &&
+                                res.data.message.toLowerCase().includes("eliminada porque no tiene días asignados")
+                            ) {
+                                setMessage(res.data.message);
+                                setMessageType("success");
+                                setPrevDays([]);
+                                setTurno(null);
+                                setSelectedDays([]);
+                            } else {
+                                setMessage(res.data.message || "Actualización exitosa.");
+                                setMessageType("success");
+                                setPrevDays([]);
+                            }
                         } catch (e: any) {
                             setMessage(
                                 e?.response?.data?.message ||
