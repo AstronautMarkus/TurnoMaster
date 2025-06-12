@@ -69,6 +69,7 @@ use App\Http\Controllers\Audit\ActivityLogController;
 
 use App\Http\Controllers\Dashboard\Employees\Delete\DeleteEmployeeController;
 use App\Http\Controllers\Dashboard\Turnos\Delete\DeleteTurnosController;
+use App\Http\Controllers\Dashboard\Turnos\ShiftUser\Delete\Personal\DeletePersonalShiftIdByIdController;
 
 // Image controllers
 
@@ -137,6 +138,7 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::get('/turnos/shift/{id}', [GetShiftUsersByIdController::class, 'getShiftUserById']);
     Route::get('/turnos/shift/{userId}/{shiftId}', [GetPersonalShiftIdByIdController::class, 'getPersonalShiftById']);
     Route::put('/turnos/shift/{id}/{shiftUserId}', [EditShiftUsersController::class, 'editShiftUser']);
+    Route::delete('/turnos/shift/{userId}/{shiftId}', [DeletePersonalShiftIdByIdController::class, 'deletePersonalShiftById']);
     Route::post('/turnos/shift', [CreateShiftUsersController::class, 'createShiftUser']);
     Route::get('/roles', [GetRolesDataController::class, 'getRoles']);
     Route::get('/activity-logs', [ActivityLogController::class, 'getActivityLog']);
